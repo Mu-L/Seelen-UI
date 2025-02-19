@@ -1,4 +1,4 @@
-import { FancyToolbarSettings, Placeholder, Plugin, Settings } from '@seelen-ui/lib/types';
+import { FancyToolbarSettings, File, Placeholder, Plugin, Settings, User } from '@seelen-ui/lib/types';
 import { SoftOpaque } from 'readable-types';
 
 import { WlanBssEntry } from '../../network/domain';
@@ -15,6 +15,16 @@ export interface PowerStatus {
   systemStatusFlag: number;
   batteryLifeTime: number;
   batteryFullLifeTime: number;
+}
+
+export enum PowerPlan {
+  Balanced = 'Balanced',
+  BatterySaver = 'BatterySaver',
+  BetterBattery = 'BetterBattery',
+  GameMode = 'GameMode',
+  HighPerformance = 'HighPerformance',
+  MaxPerformance = 'MaxPerformance',
+  MixedReality = 'MixedReality',
 }
 
 export interface Battery {
@@ -45,8 +55,18 @@ export interface Battery {
 }
 
 export interface TrayInfo {
-  label: string | null;
-  icon: string | null;
+  label: string;
+  registry: {
+    key: string;
+    executablePath: string;
+    initialTooltip: string | null;
+    /** cached PNG buffer */
+    iconSnapshot: number[] | null;
+    iconGuid: string | null;
+    iconUid: number | null;
+    isPromoted: boolean;
+    isRunning: boolean;
+  };
 }
 
 export interface NetworkAdapter {
@@ -62,7 +82,7 @@ export interface NetworkAdapter {
 }
 
 export interface MediaChannelTransportData {
-  id: string;
+  umid: string;
   title: string;
   author: string;
   thumbnail: string | null;
@@ -70,8 +90,7 @@ export interface MediaChannelTransportData {
   default: boolean;
   owner: {
     name: string;
-    iconPath: string | null;
-  } | null;
+  };
 }
 
 export interface MediaDeviceChannel {
@@ -103,13 +122,22 @@ export interface Workspace {
 
 export interface RootState extends IRootState<FancyToolbarSettings>, Pick<Settings, 'dateFormat'> {
   version: number;
-  placeholder: Placeholder | null;
+  items: Placeholder;
   plugins: Plugin[];
 
   isOverlaped: boolean;
+  user: User | null;
+  userRecentFolder: File[];
+  userDesktopFolder: File[];
+  userDocumentsFolder: File[];
+  userDownloadsFolder: File[];
+  userPicturesFolder: File[];
+  userVideosFolder: File[];
+  userMusicFolder: File[];
   focused: FocusedApp | null;
   env: Record<string, string>;
   powerStatus: PowerStatus;
+  powerPlan: PowerPlan;
   batteries: Battery[];
   workspaces: Workspace[];
   activeWorkspace: WorkspaceId | null;

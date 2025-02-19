@@ -24,6 +24,11 @@ network:
   saved: সংরক্ষিত নেটওয়ার্ক
   scanning: নেটওয়ার্কের জন্য স্ক্যান করা হচ্ছে
   secured: এনক্রিপ্ট করা নেটওয়ার্ক
+notifications:
+  clear: সব পরিষ্কার
+  empty: কোন বিজ্ঞপ্তি
+  settings: আরও বিজ্ঞপ্তি সেটিংস
+  title: বিজ্ঞপ্তি
 placeholder:
   battery_remaining: '% অবশিষ্ট'
   bluetooth_devices: ব্লুটুথ এবং ডিভাইস
@@ -31,12 +36,13 @@ placeholder:
   ethernet_disconnected: কোনও ইন্টারনেট অ্যাক্সেস নেই
   notifications: বিজ্ঞপ্তি
   open_system_tray: ওপেন সিস্টেম ট্রে
-  open_user_folder: ব্যবহারকারী ফোল্ডারটি খুলুন
   settings: দ্রুত সেটিংস
   smart_charge: '- স্মার্ট চার্জ'
   volume: ভলিউম
 settings:
   app_settings: অ্যাপ সেটিংস
+  brightness: উজ্জ্বলতা
+  lock: লক
   log_out: প্রস্থান
   power: শক্তি
   restart: আবার শুরু
@@ -44,3 +50,24 @@ settings:
   sleep: ঘুম
   title: সেটিংস
 unlabelled_tray: লেবেলযুক্ত ট্রে আইকন
+userhome:
+  empty_list: কোনও আইটেম নেই
+  folders:
+    desktop: ডেস্কটপ
+    documents: নথি
+    downloads: ডাউনলোড
+    more_items: আরও দেখান ...
+    music: সংগীত
+    pictures: ছবি
+    recent: সম্প্রতি ব্যবহৃত
+    reduce_items: কম দেখান ...
+    title: ব্যবহারকারী ডিরেক্টরি
+    videos: ভিডিও
+  profile:
+    accounts: অ্যাকাউন্ট সেটিংস খুলুন
+    open_onedrive: ওয়ানড্রাইভ ডিরেক্টরি খুলুন
+    open_user_folder: ব্যবহারকারী ডিরেক্টরি খুলুন
+  seelen_options:
+    open_installation_folder: সিলেন সেটিংস ফোল্ডারটি খুলুন
+    open_log_folder: সিলেন লগ ফোল্ডারটি খুলুন
+    title: সিলেন ডিরেক্টরি

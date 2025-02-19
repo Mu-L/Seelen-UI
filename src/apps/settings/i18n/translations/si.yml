@@ -83,6 +83,10 @@ devtools:
   settings_file: සැකසුම් ගොනුව
   simulate_fullscreen: සම්පූර්ණ තිර සිදුවීම අනුකරණය කරන්න
 extras:
+  clear_icons: පැහැදිලි පද්ධති අයිකන හැඹිලිය
+  clear_icons_tooltip: >-
+    සියලුම විජට් සඳහා සම්පූර්ණයෙන්ම බලාත්මක වීමට නැවත ආරම්භ කිරීම අවශ්ය විය
+    හැකිය
   discord: අසමගිය
   exit: පිටවීම/පිටවීම
   github: GitHub
@@ -184,6 +188,16 @@ shortcuts:
     send_to_workspace_7: Workspace 7 වෙත යවන්න
     send_to_workspace_8: Workspace 8 වෙත යවන්න
     send_to_workspace_9: Workspace 9 වෙත යවන්න
+    start_weg_app_0: කාර්ය තීරුවේ 2 වන කාර්යබල් ස්ථානයේ අවධානය යොමු කිරීම හෝ ආරම්භ කිරීම
+    start_weg_app_1: කාර්ය තීරුවේ 2 වන කාර්යබල් 2 හි අවධානය යොමු කිරීම හෝ ආරම්භ කිරීම
+    start_weg_app_2: කාර්ය තීරු ස්ථානය 3 හි අවධානය යොමු කිරීම හෝ ආරම්භ කිරීම
+    start_weg_app_3: කාර්ය තීරු ස්ථාන 4 හි අවධානය යොමු කිරීම හෝ ආරම්භ කිරීම
+    start_weg_app_4: කාර්ය තීරු ස්ථානය 5 හි අවධානය යොමු කිරීම හෝ ආරම්භ කිරීම
+    start_weg_app_5: කාර්ය තීරු පිහිටීමේ ස්ථානය පිළිබඳ අවධානය යොමු කිරීම හෝ ආරම්භ කිරීම 6
+    start_weg_app_6: කාර්ය තීරු ස්ථාන 7 හි අවධානය යොමු කිරීම හෝ ආරම්භ කිරීම
+    start_weg_app_7: කාර්ය තීරු ස්ථානයේ 8 හි අවධානය යොමු කරන්න හෝ ආරම්භ කරන්න
+    start_weg_app_8: කාර්ය තීරුවේ 2 වන කාර්ය තීරුවේ අවධානය යොමු කරන්න හෝ ආරම්භ කරන්න
+    start_weg_app_9: කාර්ය තීරුවේ 10 වන කාර්යබල් ස්ථානයේ අවධානය යොමු කරන්න හෝ ආරම්භ කරන්න
     switch_workspace_0: වැඩබිම් 1 වෙත මාරු වන්න
     switch_workspace_1: වැඩබිම් 2 වෙත මාරු වන්න
     switch_workspace_2: කාර්ය ඉඩ 2 වෙත මාරු වන්න
@@ -221,10 +235,7 @@ toolbar:
     never: කවදාවත් නැහැ
     on_overlap: අතිච්ඡාදනය මත
   label: මෙවලම් තීරුව
-  placeholder:
-    author: කර්තෘ
-    description: විස්තර
-    select: මෙවලම් තීරු ව්යුහය
+  placeholder: {}
   use_multiple_monitor_overlap_logic: තනි නාභිගත තර්කය වෙනුවට සංදර්ශකය විශේෂිත භාවිතා කරන්න
 update:
   available: යාවත්කාලීන කිරීම!

@@ -84,6 +84,10 @@ devtools:
   settings_file: Sozlamalar fayli
   simulate_fullscreen: Toʻliq ekranli hodisani simulyatsiya qilish
 extras:
+  clear_icons: Tozalash tizimi piktogrammalari kesh
+  clear_icons_tooltip: >-
+    Barcha vidjetlarga to'liq ta'sir qilish uchun qayta boshlash talab qilinishi
+    mumkin
   discord: Kelishmovchilik
   exit: Chiqish / chiqish
   github: Gitul
@@ -187,6 +191,16 @@ shortcuts:
     send_to_workspace_7: Ish maydoni 7-ga yuboring
     send_to_workspace_8: Ish maydoni 8-ga yuboring
     send_to_workspace_9: Ish maydoni 9-ga yuboring
+    start_weg_app_0: FOYDALANISH yoki FOYDALANISh HUQUQIDA FAOLIYaTIDA 1
+    start_weg_app_1: Focond yoki ishga tushirishni boshchiligidagi vazifa 2 pozitsiyasida
+    start_weg_app_2: Joylashtirish yoki ishga tushirish paneli pozitsiyasida 3
+    start_weg_app_3: Maydoni paneli pozitsiyasida ishlash yoki ishga tushirish
+    start_weg_app_4: Focond yoki ishga tushirish panelidagi pozitsiyani ishga tushiring
+    start_weg_app_5: FOYDALANISh yoki FOYDALANISh HISOBI JAVOB BERISH 6
+    start_weg_app_6: Focond yoki App Vazifada joylashtiring
+    start_weg_app_7: Focond yoki ishga tushirishni boshchiligidagi ishga tushirish
+    start_weg_app_8: Focond yoki ishga tushirishni boshchiliging 9 holatiga qo'ying
+    start_weg_app_9: FOYDALANISH yoki FOYDALANISh HISOBOTI 10
     switch_workspace_0: Ish maydoni 1 ga o'tish
     switch_workspace_1: Ish maydoni 2-ga o'ting
     switch_workspace_2: Ish maydoni 2-ga o'ting
@@ -224,10 +238,7 @@ toolbar:
     never: Hech qachon
     on_overlap: Bir-biriga yopishgan holda
   label: Asboblar paneli
-  placeholder:
-    author: Muallif
-    description: Tavsif
-    select: Asboblar paneli tuzilishi
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Yagona fokusli mantiq oʻrniga maxsus displeydan foydalaning
 update:
   available: Yangilanish mavjud!

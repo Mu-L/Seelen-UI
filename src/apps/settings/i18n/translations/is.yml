@@ -84,6 +84,8 @@ devtools:
   settings_file: Stillingarskrá
   simulate_fullscreen: Líktu eftir atburði á öllum skjánum
 extras:
+  clear_icons: Hreinsa kerfistákn skyndiminni
+  clear_icons_tooltip: Endurræsing gæti verið nauðsynleg til að taka gildi að fullu á allar búnaðir
   discord: Ósamræmi
   exit: Hætta/hætta
   github: GitHub
@@ -185,6 +187,16 @@ shortcuts:
     send_to_workspace_7: Sendu á Workspace 7
     send_to_workspace_8: Sendu á Workspace 8
     send_to_workspace_9: Sendu á Workspace 9
+    start_weg_app_0: Einbeittu eða byrjaðu app á stöðu verkefna 1
+    start_weg_app_1: Einbeittu eða byrjaðu app á stöðu verkefna 2
+    start_weg_app_2: Einbeittu eða byrjaðu app á stöðu verkefna 3
+    start_weg_app_3: Einbeittu eða byrjaðu app á stöðu verkefna 4
+    start_weg_app_4: Einbeittu eða byrjaðu app á stöðu verkefna 5
+    start_weg_app_5: Einbeittu eða byrjaðu app á stöðu verkefna 6
+    start_weg_app_6: Einbeittu eða byrjaðu app á stöðu verkefna 7
+    start_weg_app_7: Einbeittu eða byrjaðu app á stöðu verkefna 8
+    start_weg_app_8: Einbeittu eða byrjaðu app á stöðu verkefna 9
+    start_weg_app_9: Einbeittu eða byrjaðu app á stöðu verkefna 10
     switch_workspace_0: Skiptu yfir í vinnusvæði 1
     switch_workspace_1: Skiptu yfir í vinnusvæði 2
     switch_workspace_2: Skiptu yfir í vinnusvæði 2
@@ -222,10 +234,7 @@ toolbar:
     never: Aldrei
     on_overlap: Á skörun
   label: Tækjastikur
-  placeholder:
-    author: Höfundur
-    description: Lýsing
-    select: Uppbygging tækjastiku
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Notaðu tiltekna skjá í staðinn fyrir stakan fókusrökfræði
 update:
   available: Uppfærsla í boði!

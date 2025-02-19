@@ -1,11 +1,12 @@
 use std::path::{Path, PathBuf};
+use std::sync::Arc;
 
 use arc_swap::ArcSwap;
 use lazy_static::lazy_static;
 use tauri::{path::BaseDirectory, Manager};
 
 use crate::{
-    error_handler::Result, seelen::get_app_handle, utils::constants::SEELEN_COMMON,
+    error_handler::Result, log_error, seelen::get_app_handle, utils::constants::SEELEN_COMMON,
     windows_api::WindowsApi,
 };
 
@@ -42,13 +43,19 @@ impl StartMenuManager {
     pub fn new() -> StartMenuManager {
         StartMenuManager {
             list: Vec::new(),
-            cache_path: SEELEN_COMMON.app_cache_dir().join("start_menu.json"),
+            cache_path: SEELEN_COMMON.app_cache_dir().join("start_menu_v2.json"),
         }
     }
 
     fn init(&mut self) -> Result<()> {
         if self.cache_path.exists() {
             self.load_cache()?;
+            std::thread::spawn(|| {
+                let mut menu = StartMenuManager::new();
+                log_error!(menu.read_start_menu_folders());
+                log_error!(menu.store_cache());
+                START_MENU_MANAGER.swap(Arc::new(menu));
+            });
         } else {
             self.read_start_menu_folders()?;
             self.store_cache()?;
@@ -56,11 +63,21 @@ impl StartMenuManager {
         Ok(())
     }
 
+    pub fn get_by_target(&self, target: &Path) -> Option<&StartMenuItem> {
+        self.list
+            .iter()
+            .find(|item| item.target.as_ref().is_some_and(|t| t == target))
+    }
+
     /// https://learn.microsoft.com/en-us/windows/win32/properties/props-system-appusermodel-relaunchiconresource
     pub fn search_shortcut_with_same_umid(&self, umid: &str) -> Option<PathBuf> {
         let item = self.list.iter().find(|item| {
             if let Some(item_umid) = &item.umid {
                 return item_umid == umid;
+            }
+            if let Some(target) = &item.target {
+                // some apps registered as media player as example use the process name as umid
+                return target.ends_with(umid);
             }
             false
         });
@@ -82,16 +99,18 @@ impl StartMenuManager {
     fn _get_items(dir: &Path) -> Result<Vec<StartMenuItem>> {
         let mut items = Vec::new();
         for entry in std::fs::read_dir(dir)?.flatten() {
-            let file_type = entry.file_type()?;
             let path = entry.path();
+            let file_type = entry.file_type()?;
             if file_type.is_dir() {
                 items.extend(Self::_get_items(&path)?);
                 continue;
             }
             if file_type.is_file() {
+                let target = WindowsApi::resolve_lnk_target(&path).ok().map(|(t, _)| t);
                 items.push(StartMenuItem {
                     umid: WindowsApi::get_file_umid(&path).ok(),
                     path,
+                    target,
                 })
             }
         }

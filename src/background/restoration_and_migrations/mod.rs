@@ -20,6 +20,20 @@ impl RestorationAndMigration {
         Ok(())
     }
 
+    // migration of user settings files below v2.1.0, will be removed in v3.0
+    pub fn migrate_old_toolbar_items() -> Result<()> {
+        let old_folder = SEELEN_COMMON.user_placeholders_path();
+        let old = old_folder.join("custom.yml");
+        if old.exists() {
+            std::fs::copy(old, SEELEN_COMMON.toolbar_items_path())?;
+            std::fs::rename(
+                old_folder,
+                old_folder.with_file_name("deprecated_placeholders"),
+            )?;
+        }
+        Ok(())
+    }
+
     pub fn recreate_user_folders() -> Result<()> {
         let path = get_app_handle().path();
         let data_path = path.app_data_dir()?;
@@ -48,8 +62,6 @@ impl RestorationAndMigration {
             Ok(())
         };
         create_if_needed("themes")?;
-        create_if_needed("layouts")?;
-        create_if_needed("placeholders")?;
         create_if_needed("icons")?;
         create_if_needed("wallpapers")?;
         create_if_needed("plugins")?;
@@ -61,6 +73,7 @@ impl RestorationAndMigration {
 
     pub fn run_full() -> Result<()> {
         Self::recreate_user_folders()?;
+        Self::migrate_old_toolbar_items()?;
         Ok(())
     }
 }

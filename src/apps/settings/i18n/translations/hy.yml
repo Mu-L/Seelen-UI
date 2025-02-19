@@ -84,6 +84,10 @@ devtools:
   settings_file: Կարգավորումներ ֆայլ
   simulate_fullscreen: Ամբողջաէկրան իրադարձությունների նմանակում
 extras:
+  clear_icons: Մաքրել համակարգի սրբապատկերների քեշը
+  clear_icons_tooltip: >-
+    Վերագործարկումը կարող է պահանջվել բոլոր վիդջեթների վրա լիարժեք ուժի մեջ
+    մտնելու համար
   discord: Տարաձայնություն
   exit: Հանգստացեք / Ելք
   github: Գյուտ
@@ -187,6 +191,16 @@ shortcuts:
     send_to_workspace_7: Ուղարկել Workspace 7-ին
     send_to_workspace_8: Ուղարկել Workspace 8-ին
     send_to_workspace_9: Ուղարկել Workspace 9-ին
+    start_weg_app_0: Կենտրոնացեք կամ սկսեք ծրագիրը TaskBar դիրքի 1-ին
+    start_weg_app_1: Կենտրոնացեք կամ սկսեք ծրագիրը TaskBar դիրքի վրա 2
+    start_weg_app_2: Կենտրոնացեք կամ սկսեք ծրագիրը Taskbar դիրքի վրա 3
+    start_weg_app_3: Կենտրոնացեք կամ սկսեք ծրագիրը Taskbar Position 4-ում
+    start_weg_app_4: Կենտրոնացեք կամ սկսեք ծրագիրը Taskbar Position 5-ում
+    start_weg_app_5: Կենտրոնացեք կամ սկսեք ծրագիրը Taskbar Position 6-ում
+    start_weg_app_6: Կենտրոնացեք կամ սկսեք ծրագիրը Taskbar Position 7-ում
+    start_weg_app_7: Կենտրոնացեք կամ սկսեք ծրագիրը Taskbar Position 8-ում
+    start_weg_app_8: Կենտրոնացեք կամ սկսեք ծրագիրը Taskbar դիրքի վրա 9
+    start_weg_app_9: Կենտրոնացեք կամ սկսեք ծրագիրը Taskbar դիրքի վրա 10
     switch_workspace_0: Անցեք աշխատանքային տարածքին 1
     switch_workspace_1: Անցեք Workspace- ին 2
     switch_workspace_2: Անցեք Workspace- ին 2
@@ -224,10 +238,7 @@ toolbar:
     never: Երբեք
     on_overlap: Համընկնման վրա
   label: Գործիքագոտու
-  placeholder:
-    author: Հեղինակ
-    description: Նկարագրություն
-    select: Գործիքադարակի կառուցվածքը
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Օգտագործեք հատուկ ցուցադրման՝ մեկ ֆոկուսային տրամաբանության փոխարեն
 update:
   available: 'Թարմացրեք մատչելի:'

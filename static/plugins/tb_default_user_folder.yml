@@ -1,10 +1,14 @@
 id: "@default/user-folder"
-icon: "TiUser"
+icon: FaRegCircleUser
 target: "@seelen/fancy-toolbar"
 plugin:
-  type: generic
-  template: concat("@", env.USERNAME)
-  onClickV2: open(env.USERPROFILE)
-  tooltip: t("placeholder.open_user_folder")
+  type: user
+  withUserFolder: true
+  template: |-
+    concat(
+      imgFromPath(user.profilePicturePath),
+      " ",
+      user.name
+    )
   style:
     flexShrink: 0

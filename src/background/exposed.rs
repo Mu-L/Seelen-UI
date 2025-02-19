@@ -4,6 +4,7 @@ use std::path::PathBuf;
 use seelen_core::command_handler_list;
 use tauri::{Builder, WebviewWindow, Wry};
 use tauri_plugin_shell::ShellExt;
+use windows::Win32::Foundation::HWND;
 
 use crate::error_handler::Result;
 use crate::hook::HookManager;
@@ -16,9 +17,7 @@ use crate::seelen_weg::icon_extractor::{
 };
 
 use crate::utils::pwsh::PwshScript;
-use crate::utils::{
-    is_running_as_appx_package, is_virtual_desktop_supported as virtual_desktop_supported,
-};
+use crate::utils::{is_running_as_appx, is_virtual_desktop_supported as virtual_desktop_supported};
 use crate::windows_api::WindowsApi;
 use crate::winevent::{SyntheticFullscreenData, WinEvent};
 use crate::{log_error, utils};
@@ -59,12 +58,13 @@ async fn run_as_admin(program: String, args: Vec<String>) -> Result<()> {
 }
 
 #[tauri::command(async)]
-async fn run(program: String, args: Vec<String>) -> Result<()> {
+async fn run(program: PathBuf, args: Vec<String>, working_dir: Option<PathBuf>) -> Result<()> {
     // we create a link file to trick with explorer into a separated process
     // and without elevation in case Seelen UI was running as admin
     // this could take some delay like is creating a file but just are some milliseconds
     // and this exposed funtion is intended to just run certain times
-    let lnk_file = WindowsApi::create_temp_shortcut(&program, &args.join(" "))?;
+    let lnk_file =
+        WindowsApi::create_temp_shortcut(&program, &args.join(" "), working_dir.as_deref())?;
     get_app_handle()
         .shell()
         .command("explorer")
@@ -82,7 +82,7 @@ fn is_dev_mode() -> bool {
 
 #[tauri::command(async)]
 fn is_appx_package() -> bool {
-    is_running_as_appx_package()
+    is_running_as_appx()
 }
 
 #[tauri::command(async)]
@@ -121,7 +121,7 @@ fn send_keys(keys: String) -> Result<()> {
 fn get_icon(path: Option<PathBuf>, umid: Option<String>) -> Option<PathBuf> {
     let mut icon = None;
     if let Some(umid) = umid {
-        icon = extract_and_save_icon_umid(&umid).ok();
+        icon = extract_and_save_icon_umid(&umid.into()).ok();
     }
     match path {
         Some(path) if icon.is_none() => extract_and_save_icon_from_file(&path).ok(),
@@ -136,7 +136,7 @@ fn is_virtual_desktop_supported() -> bool {
 
 #[tauri::command(async)]
 fn simulate_fullscreen(webview: WebviewWindow<tauri::Wry>, value: bool) -> Result<()> {
-    let handle = webview.hwnd()?;
+    let handle = HWND(webview.hwnd()?.0);
     let monitor = WindowsApi::monitor_from_window(handle);
     let event = if value {
         WinEvent::SyntheticFullscreenStart(SyntheticFullscreenData { handle, monitor })
@@ -178,6 +178,7 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
     use crate::modules::power::infrastructure::*;
     use crate::modules::system_settings::infrastructure::*;
     use crate::modules::tray::infrastructure::*;
+    use crate::modules::user::infrastructure::*;
 
     app_builder.invoke_handler(command_handler_list!())
 }

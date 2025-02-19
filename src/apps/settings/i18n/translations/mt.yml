@@ -84,6 +84,10 @@ devtools:
   settings_file: Settings Fajl
   simulate_fullscreen: Issimula avveniment fullscreen
 extras:
+  clear_icons: Ikoni tas-sistema ċara cache
+  clear_icons_tooltip: >-
+    Jista 'jkun meħtieġ li jerġa' jkun meħtieġ biex jidħol fis-seħħ fuq
+    il-widgets kollha
   discord: Diskordja
   exit: Nieqaf / ħruġ
   github: Github
@@ -185,6 +189,16 @@ shortcuts:
     send_to_workspace_7: Ibgħat lill-Ispazju tax-Xogħol 7
     send_to_workspace_8: Ibgħat lill-Ispazju tax-Xogħol 8
     send_to_workspace_9: Ibgħat lill-Ispazju tax-Xogħol 9
+    start_weg_app_0: Tiffoka jew ibda app fuq il-pożizzjoni tat-taskbar 1
+    start_weg_app_1: Tiffoka jew ibda app fuq il-pożizzjoni taskbar 2
+    start_weg_app_2: Iffoka jew ibda l-app fuq il-pożizzjoni tat-taskbar 3
+    start_weg_app_3: Iffoka jew ibda l-app fuq il-pożizzjoni ta 'taskbar 4
+    start_weg_app_4: Tiffoka jew ibda app fuq il-pożizzjoni tat-taskbar 5
+    start_weg_app_5: Iffoka jew ibda l-app fuq il-pożizzjoni taskbar 6
+    start_weg_app_6: Tiffoka jew ibda app fuq il-pożizzjoni taskbar 7
+    start_weg_app_7: Iffoka jew ibda l-app fuq il-pożizzjoni taskbar 8
+    start_weg_app_8: Iffoka jew ibda l-app fuq il-pożizzjoni tat-taskbar 9
+    start_weg_app_9: Iffoka jew ibda l-app fuq il-pożizzjoni tat-taskbar 10
     switch_workspace_0: Aqleb għall-Ispazju tax-Xogħol 1
     switch_workspace_1: Aqleb għall-Ispazju tax-Xogħol 2
     switch_workspace_2: Aqleb għall-Ispazju tax-Xogħol 2
@@ -222,10 +236,7 @@ toolbar:
     never: Qatt
     on_overlap: Fuq koinċidenza
   label: Toolbar
-  placeholder:
-    author: Awtur
-    description: Deskrizzjoni
-    select: Struttura tal-Toolbar
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Uża display speċifiku minflok loġika ta 'fokus wieħed
 update:
   available: Aġġornament disponibbli!

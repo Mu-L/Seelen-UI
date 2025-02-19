@@ -82,6 +82,8 @@ devtools:
   settings_file: የቅንብሮች ፋይል
   simulate_fullscreen: የሙሉ ስክሪን ክስተት አስመስለው
 extras:
+  clear_icons: የስርዓት አዶዎች መሸጎጫ
+  clear_icons_tooltip: ዳግም ማስጀመር በሁሉም ፍርግሞች ላይ ሙሉ በሙሉ እንዲተገበር ሊፈልግ ይችላል
   discord: አለመግባባት
   exit: ማቆም / መውጣት
   github: Github
@@ -183,6 +185,16 @@ shortcuts:
     send_to_workspace_7: ወደ የሥራ ቦታ 7 ይላኩ 7
     send_to_workspace_8: ወደ የሥራ ቦታ 8 ይላኩ 8
     send_to_workspace_9: ወደ የሥራ ቦታ 9 ይላኩ
+    start_weg_app_0: በተግባር አሞሌ አቀማመጥ 1 ላይ መተግበሪያን ያተኩሩ ወይም ይጀምሩ
+    start_weg_app_1: በተግባር አሞሌ አቀማመጥ 2 ላይ መተግበሪያን ያተኩሩ ወይም ይጀምሩ
+    start_weg_app_2: በተግባር አሞሌ አቀማመጥ 3 ላይ መተግበሪያን ያተኩሩ ወይም ይጀምሩ
+    start_weg_app_3: በተግባር አሞሌ አቀማመጥ 4 ላይ መተግበሪያን ያተኩሩ ወይም ይጀምሩ
+    start_weg_app_4: በተግባር አሞሌ አቀማመጥ 5 ላይ መተግበሪያን ያተኩሩ ወይም ይጀምሩ
+    start_weg_app_5: በትብብር አቀማመጥ 6 ላይ መተግበሪያን ያተኩሩ ወይም ይጀምሩ
+    start_weg_app_6: በተግባር አሞሌ አቀማመጥ 7 ላይ መተግበሪያን ያተኩሩ ወይም ይጀምሩ
+    start_weg_app_7: በተግባር አሞሌ አቀማመጥ 8 ላይ መተግበሪያን ያተኩሩ ወይም ይጀምሩ
+    start_weg_app_8: በተግባር አሞሌ አቀማመጥ 9 ላይ መተግበሪያን ያተኩሩ ወይም ይጀምሩ
+    start_weg_app_9: በተግባር አሞሌ አቀማመጥ 10 ላይ መተግበሪያን ያተኩሩ ወይም ይጀምሩ
     switch_workspace_0: ወደ የሥራ ቦታ 1 ቀይር
     switch_workspace_1: ወደ የሥራ ቦታ 2 ቀይር
     switch_workspace_2: ወደ የሥራ ቦታ 2 ቀይር
@@ -218,10 +230,7 @@ toolbar:
     never: በጭራሽ
     on_overlap: መደራረብ ላይ
   label: የመሣሪያ አሞሌ
-  placeholder:
-    author: ደራሲ ደራሲ
-    description: መግለጫ
-    select: የመሣሪያ አሞሌ መዋቅር
+  placeholder: {}
   use_multiple_monitor_overlap_logic: ከአንድ የትኩረት ሎጂክ ይልቅ ማሳያን ተጠቀም
 update:
   available: ዝመና ይገኛል!

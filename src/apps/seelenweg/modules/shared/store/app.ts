@@ -12,10 +12,12 @@ const initialState: RootState = {
   itemsOnLeft: [],
   itemsOnCenter: [],
   itemsOnRight: [],
+  reorderDisabled: false,
   focusedApp: null,
   isOverlaped: false,
   settings: (await Settings.default()).seelenweg,
   mediaSessions: [],
+  notifications: [],
   colors: UIColors.default().inner,
 };
 
@@ -73,6 +75,10 @@ export const RootSlice = createSlice({
           type: WegItemType.StartMenu,
         });
       }
+      savePinnedItems(current(state));
+    },
+    setWegReorderDisabled(state, isDisabled: PayloadAction<boolean>) {
+      state.reorderDisabled = isDisabled.payload;
       savePinnedItems(current(state));
     },
   },

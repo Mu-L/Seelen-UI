@@ -84,6 +84,8 @@ devtools:
   settings_file: Datoteka postavki
   simulate_fullscreen: Simulirajte događaj preko cijelog ekrana
 extras:
+  clear_icons: Clear System Icons predmemorija
+  clear_icons_tooltip: Može se ponovo pokrenuti za u potpunosti stupiti na snagu na svim widgetima
   discord: Nesklad
   exit: Prestanite / izlaz
   github: Github
@@ -187,6 +189,16 @@ shortcuts:
     send_to_workspace_7: Pošalji u radni prostor 7
     send_to_workspace_8: Pošalji u radni prostor 8
     send_to_workspace_9: Pošalji u radni prostor 9
+    start_weg_app_0: Fokus ili pokretanje aplikacije na položaju zadataka 1
+    start_weg_app_1: Fokus ili pokretanje aplikacije na traci zadataka 2
+    start_weg_app_2: Fokus ili pokretanje aplikacije na položaju na traci zadataka 3
+    start_weg_app_3: Fokus ili pokretanje aplikacije na položaju zadataka 4
+    start_weg_app_4: Fokus ili pokretanje aplikacije na položaju trake zadataka 5
+    start_weg_app_5: Fokus ili pokretanje aplikacije na položaju na traci zadataka 6
+    start_weg_app_6: Fokus ili pokretanje aplikacije na položaju zadataka 7
+    start_weg_app_7: Fokus ili pokretanje aplikacije na položaju zadataka 8
+    start_weg_app_8: Fokus ili pokretanje aplikacije na položaju zadataka 9
+    start_weg_app_9: Fokus ili pokretanje aplikacije na položaju zadataka 10
     switch_workspace_0: Prebacite se na radni prostor 1
     switch_workspace_1: Prebacite se na radni prostor 2
     switch_workspace_2: Prebacite se na radni prostor 2
@@ -224,10 +236,7 @@ toolbar:
     never: Nikad
     on_overlap: Na preklapanje
   label: Alatna traka
-  placeholder:
-    author: Autor
-    description: Opis
-    select: Struktura alatne trake
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Koristite specifičan prikaz umjesto logike jednog fokusa
 update:
   available: Ažuriraj dostupno!

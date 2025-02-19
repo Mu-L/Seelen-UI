@@ -10,7 +10,7 @@ import { RootActions } from '../shared/store/app';
 
 import { Icon } from '../../../shared/components/Icon';
 
-export function getSeelenWegMenu(t: TFunction, restrictedBar?: boolean): ItemType[] {
+export function getSeelenWegMenu(t: TFunction, restrictedBar?: boolean, isReorderDisabled?: boolean): ItemType[] {
   if (!!restrictedBar) {
     return [
       {
@@ -43,7 +43,7 @@ export function getSeelenWegMenu(t: TFunction, restrictedBar?: boolean): ItemTyp
       {
         key: 'add-start-module',
         label: t('taskbar_menu.start'),
-        icon: <Icon iconName="SiWindows" size={14} />,
+        icon: <Icon iconName="BsWindows" size={14} />,
         onClick() {
           store.dispatch(RootActions.addStartModule());
         },
@@ -85,6 +85,14 @@ export function getSeelenWegMenu(t: TFunction, restrictedBar?: boolean): ItemTyp
       },
       {
         type: 'divider',
+      },
+      {
+        key: 'reoder',
+        icon: <Icon iconName={!isReorderDisabled ? 'VscLock' : 'VscUnlock' } />,
+        label: t(!isReorderDisabled ? 'context_menu.reorder_disable' : 'context_menu.reorder_enable' ),
+        onClick() {
+          store.dispatch(RootActions.setWegReorderDisabled(!isReorderDisabled));
+        },
       },
       {
         key: 'task_manager',

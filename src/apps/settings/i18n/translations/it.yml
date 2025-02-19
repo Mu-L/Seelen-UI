@@ -84,6 +84,8 @@ devtools:
   settings_file: File delle Impostazioni
   simulate_fullscreen: Simula un evento a schermo intero
 extras:
+  clear_icons: Cancella la cache delle icone di sistema
+  clear_icons_tooltip: Potrebbe essere necessario un riavvio per avere effetto su tutti i widget.
   discord: Discord
   exit: Esci
   github: GitHub
@@ -185,6 +187,16 @@ shortcuts:
     send_to_workspace_7: Invia al Workspace 8
     send_to_workspace_8: Invia al Workspace 9
     send_to_workspace_9: Invia al Workspace 10
+    start_weg_app_0: Focus o Avvia l'app sulla posizione della barra delle applicazioni 1
+    start_weg_app_1: Focus o Avvia l'app sulla posizione della barra delle applicazioni 2
+    start_weg_app_2: Focus o Avvia l'app sulla posizione della barra delle applicazioni 3
+    start_weg_app_3: Focus o Avvia l'app sulla posizione della barra delle applicazioni 4
+    start_weg_app_4: Focus o Avvia l'app sulla posizione della barra delle applicazioni 5
+    start_weg_app_5: Focus o Avvia l'app sulla posizione della barra delle applicazioni 6
+    start_weg_app_6: Focus o Avvia l'app sulla posizione della barra delle applicazioni 7
+    start_weg_app_7: Focus o Avvia l'app sulla posizione della barra delle applicazioni 8
+    start_weg_app_8: Focus o Avvia l'app sulla posizione della barra delle applicazioni 9
+    start_weg_app_9: Focus o Avvia l'app sulla posizione della barra delle applicazioni 10
     switch_workspace_0: Passa al Workspace 1
     switch_workspace_1: Passa al Workspace 2
     switch_workspace_2: Passa al Workspace 3
@@ -222,10 +234,7 @@ toolbar:
     never: Mai
     on_overlap: Sulla sovrapposizione
   label: Barra
-  placeholder:
-    author: Autore
-    description: Descrizione
-    select: Struttura della Barra
+  placeholder: {}
   use_multiple_monitor_overlap_logic: >-
     Utilizza la logica di visualizzazione specifica anziché quella di focus
     singolo

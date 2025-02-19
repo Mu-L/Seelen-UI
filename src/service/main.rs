@@ -10,7 +10,7 @@ mod string_utils;
 mod task_scheduler;
 mod windows_api;
 
-use cli::{handle_cli, ServiceClient};
+use cli::{handle_console_client, TcpService};
 use crossbeam_channel::{Receiver, Sender};
 use enviroment::was_installed_using_msix;
 use error::Result;
@@ -20,7 +20,7 @@ use logger::SluServiceLogger;
 use std::process::Command;
 use string_utils::WindowsString;
 use task_scheduler::TaskSchedulerHelper;
-use windows::Win32::Security::SE_TCB_NAME;
+use windows::Win32::{Security::SE_TCB_NAME, UI::WindowsAndMessaging::SW_MINIMIZE};
 use windows_api::WindowsApi;
 
 lazy_static! {
@@ -52,15 +52,19 @@ fn is_seelen_ui_running() -> bool {
 }
 
 fn launch_seelen_ui() -> Result<()> {
-    let program = std::env::current_exe()
-        .unwrap()
+    if was_installed_using_msix() {
+        std::process::Command::new("explorer")
+            .arg(r"shell:AppsFolder\Seelen.SeelenUI_p6yyn03m1894e!App")
+            .status()?;
+        return Ok(());
+    }
+
+    let program = std::env::current_exe()?
         .with_file_name("seelen-ui.exe")
         .to_string_lossy()
         .to_string();
-    // we create a link file to trick with explorer into a separated process and without elevation
-    let lnk_file = WindowsApi::create_temp_shortcut(&program, "--silent")?;
-    Command::new("explorer").arg(&lnk_file).status()?;
-    std::fs::remove_file(&lnk_file)?;
+    // start it using explorer to spawn it as unelevated
+    Command::new("explorer").arg(&program).status()?;
     Ok(())
 }
 
@@ -91,8 +95,9 @@ fn stop_service_on_seelen_ui_closed() {
 }
 
 pub fn setup() -> Result<()> {
+    WindowsApi::set_process_dpi_aware()?;
     WindowsApi::enable_privilege(SE_TCB_NAME)?;
-    ServiceClient::listen_tcp()?;
+    TcpService::listen_tcp()?;
 
     if !is_seelen_ui_running() {
         launch_seelen_ui()?;
@@ -121,21 +126,20 @@ fn is_already_runnning() -> bool {
 }
 
 fn main() -> Result<()> {
-    if was_installed_using_msix() {
-        SluServiceLogger::install()?;
-        TaskSchedulerHelper::create_service_task()?;
+    if is_local_dev() {
+        WindowsApi::show_window(WindowsApi::get_console_window().0 as _, SW_MINIMIZE.0)?;
     }
-
-    SluServiceLogger::init()?;
-    handle_cli()?;
-
+    handle_console_client()?;
     if is_already_runnning() {
         return Ok(());
     }
 
+    SluServiceLogger::install()?;
+    SluServiceLogger::init()?;
+    TaskSchedulerHelper::create_service_task()?;
+
     log::info!("Starting Seelen UI Service");
     setup()?;
-
     STOP_CHANNEL.1.recv().unwrap();
     log::info!("Seelen UI Service stopped");
     Ok(())

@@ -81,6 +81,8 @@ devtools:
   settings_file: 설정 파일
   simulate_fullscreen: 전체 화면 이벤트 시뮬레이션
 extras:
+  clear_icons: 시스템 아이콘 캐시 지우기
+  clear_icons_tooltip: 모든 위젯에 완전히 적용하려면 다시 시작해야 할 수 있습니다.
   discord: 디스코드
   exit: 종료/나가기
   github: 깃허브
@@ -182,6 +184,16 @@ shortcuts:
     send_to_workspace_7: 작업 공간 8로 보내기
     send_to_workspace_8: 작업 공간 9로 보내기
     send_to_workspace_9: 작업 공간 10으로 보내기
+    start_weg_app_0: 작업 표시 줄 위치에서 초점 또는 시작 앱 1
+    start_weg_app_1: 작업 표시 줄 위치에서 초점 또는 시작 앱 2
+    start_weg_app_2: 작업 표시 줄 위치에서 초점 또는 시작 앱 3
+    start_weg_app_3: 작업 표시 줄 위치에서 초점 또는 시작 앱 4
+    start_weg_app_4: 작업 표시 줄 위치 5에서 초점 또는 시작 앱
+    start_weg_app_5: 작업 표시 줄 위치 6에서 초점 또는 시작 앱
+    start_weg_app_6: 작업 표시 줄 위치에서 초점 또는 시작 앱 7
+    start_weg_app_7: 작업 표시 줄 위치에서 초점 또는 시작 앱 8
+    start_weg_app_8: 작업 표시 줄 위치에서 초점 또는 시작 앱 9
+    start_weg_app_9: 작업 표시 줄 위치에서 초점 또는 시작 앱 10
     switch_workspace_0: 작업 공간 1로 전환
     switch_workspace_1: 작업 공간 2로 전환
     switch_workspace_2: 작업 공간 3으로 전환
@@ -217,10 +229,7 @@ toolbar:
     never: 절대
     on_overlap: 오버랩 시
   label: 도구 모음
-  placeholder:
-    author: 작성자
-    description: 설명
-    select: 툴바 형식
+  placeholder: {}
   use_multiple_monitor_overlap_logic: 단일 초점 대신 디스플레이별 로직 사용
 update:
   available: 사용 가능한 업데이트가 존재합니다

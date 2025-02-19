@@ -83,6 +83,8 @@ devtools:
   settings_file: Parametrlər faylı
   simulate_fullscreen: Tam ekran hadisəsini simulyasiya edin
 extras:
+  clear_icons: Sistem nişanlar önbelleği təmizləyin
+  clear_icons_tooltip: Bütün vidjetlərə tam təsir göstərmək üçün yenidən başlama tələb oluna bilər
   discord: Nifaq
   exit: Çıxmaq / çıxmaq
   github: Gitub
@@ -186,6 +188,16 @@ shortcuts:
     send_to_workspace_7: 7 iş sahəsinə göndərin
     send_to_workspace_8: İş sahəsinə göndərin 8
     send_to_workspace_9: İş sahəsinə göndərin 9
+    start_weg_app_0: Tapşırıq çubuğunda 1-də fokus və ya başlanğıc tətbiqinə başlayın
+    start_weg_app_1: Vəzifə çubuğu mövqeyindəki 2-də fokus və ya başlamaq
+    start_weg_app_2: Vəzifə çubuğu mövqeyində Focus və ya Tətbiqə başlayın 3
+    start_weg_app_3: Task çubuğu mövqeyindəki 4-də fokus və ya başlanğıc tətbiq edin
+    start_weg_app_4: Vəzifə çubuğu mövqeyində Focus və ya Başlat Tətbiqinə 5
+    start_weg_app_5: Tapşırıq çubuğunda 6-da fokus və ya başlanğıc tətbiqetməsidir
+    start_weg_app_6: Tapşırıq çubuğunda 7-də fokus və ya başlama tətbiqinə başlayın
+    start_weg_app_7: Vəzifə çubuğu mövqeyində Focus və ya Başlat Tətbiqinə 8
+    start_weg_app_8: Vəzifə çubuğu mövqeyi 9-da fokus və ya başlamaq
+    start_weg_app_9: Vəzifə çubuğu mövqeyində fokus və ya başlama tətbiqinə 10
     switch_workspace_0: İş sahəsinə 1 keçin
     switch_workspace_1: İş sahəsinə 2 keçin
     switch_workspace_2: İş sahəsinə 2 keçin
@@ -223,10 +235,7 @@ toolbar:
     never: Heç vaxt
     on_overlap: Üst-üstə düşür
   label: Alət çubuğu
-  placeholder:
-    author: Müəllif
-    description: Təsvir
-    select: Alətlər paneli quruluşu
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Tək fokus məntiqi əvəzinə xüsusi ekrandan istifadə edin
 update:
   available: YENİLƏNİB!

@@ -1,3 +1,13 @@
+:root {
+  --dock-item-hover-color: rgba(var(--config-accent-light-color-rgb), 0.2);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --dock-item-hover-color: rgba(var(--config-accent-color-rgb), 0.2);
+  }
+}
+
 .taskbar {
   .taskbar-bg-layer-1 {
     opacity: 0.3;
@@ -48,74 +58,6 @@
   margin: 0 calc(var(--config-padding) * 2);
 }
 
-/* This will act like a hitbox for items */
-.weg-item::before {
-  content: "";
-  position: absolute;
-  /* border: solid 1px red; */
-}
-
-.vertical .weg-item::before {
-  top: 50%;
-  transform: translateY(-50%);
-  width: calc(100% + var(--config-padding) + var(--config-margin));
-  height: calc(100% + var(--config-space-between-items));
-}
-
-.horizontal .weg-item::before {
-  left: 50%;
-  transform: translateX(-50%);
-  width: calc(100% + var(--config-space-between-items));
-  height: calc(100% + var(--config-padding) + var(--config-margin));
-}
-
-.bottom .weg-item::before {
-  top: 0;
-}
-
-.top .weg-item::before {
-  bottom: 0;
-}
-
-.left .weg-item::before {
-  right: 0;
-}
-
-.right .weg-item::before {
-  left: 0;
-}
-
-.weg-item-drag-container:not(.dragging) {
-  --item-size-diff: calc(var(--config-item-zoom-size) - var(--config-item-size));
-
-  &:has(+ .weg-item-drag-container + .weg-item-drag-container:hover) .weg-item {
-    width: calc(var(--config-item-zoom-size) - (var(--item-size-diff) * 0.7));
-    height: calc(var(--config-item-zoom-size) - (var(--item-size-diff) * 0.7));
-  }
-
-  &:has(+ .weg-item-drag-container:hover) .weg-item {
-    width: calc(var(--config-item-zoom-size) - (var(--item-size-diff) * 0.3));
-    height: calc(var(--config-item-zoom-size) - (var(--item-size-diff) * 0.3));
-  }
-
-  &:hover {
-    .weg-item {
-      width: var(--config-item-zoom-size);
-      height: var(--config-item-zoom-size);
-    }
-
-    + .weg-item-drag-container > .weg-item {
-      width: calc(var(--config-item-zoom-size) - (var(--item-size-diff) * 0.3));
-      height: calc(var(--config-item-zoom-size) - (var(--item-size-diff) * 0.3));
-    }
-
-    + .weg-item-drag-container + .weg-item-drag-container .weg-item {
-      width: calc(var(--config-item-zoom-size) - (var(--item-size-diff) * 0.7));
-      height: calc(var(--config-item-zoom-size) - (var(--item-size-diff) * 0.7));
-    }
-  }
-}
-
 .weg-item {
   position: relative;
   display: flex;
@@ -123,12 +65,31 @@
   align-items: center;
   width: var(--config-item-size);
   height: var(--config-item-size);
-  transition: width, height, 100ms cubic-bezier(0.25, 1, 0.5, 1);
 
   .bg-layer-1 {
     background-color: var(--color-gray-100);
     border-radius: 25%;
     box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.5);
+  }
+
+  .bg-layer-2 {
+    border-radius: 25%;
+    transition: background-color 0.2s ease-out;
+  }
+
+  &.media-session-container {
+    &.media-session-container-horizontal {
+      width: calc(var(--config-item-size) * 3 + var(--config-space-between-items) * 2);
+    }
+    &.media-session-container-vertical {
+      height: calc(var(--config-item-size) * 3 + var(--config-space-between-items) * 2);
+    }
+  }
+
+  &:hover {
+    .bg-layer-2 {
+      background-color: var(--dock-item-hover-color);
+    }
   }
 
   &:active {
@@ -151,6 +112,40 @@
     .weg-item-icon-start {
       transition: transform 0.2s linear;
     }
+  }
+
+  .weg-item-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(25%, -25%);
+    background-color: var(--config-accent-color);
+    color: #efefef;
+    height: 16px;
+    min-width: 16px;
+    font-size: 10px;
+    font-weight: 600;
+    border-radius: 8px;
+  }
+
+  .weg-item-instance-counter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    transform: translate(25%, 25%);
+    background-color: var(--color-gray-100);
+    color: var(--color-gray-900);
+    height: 16px;
+    min-width: 16px;
+    font-size: 10px;
+    font-weight: 600;
+    border-radius: 8px;
   }
 }
 
@@ -242,8 +237,6 @@
   }
 }
 
-
-
 .weg-item-preview-container {
   padding: 10px;
   border-radius: 10px;
@@ -251,6 +244,14 @@
   .preview-bg-layer-1 {
     background-color: var(--color-gray-100);
     border-radius: 10px;
+  }
+
+  .weg-item-preview-scrollbar {
+    &:has( .weg-item-preview-thumbnail-disabled) {
+     display: flex; 
+     flex-direction: column;
+     gap: 6px
+    }
   }
 }
 
@@ -263,16 +264,17 @@
   }
 }
 
-
-.weg-item-preview-container-open, .weg-context-menu-container-open,
-.weg-item-preview-container-close, .weg-context-menu-container-close {
-  animation: PreviewContainerAnimation 0.2s linear forwards; 
+.weg-item-preview-container-open,
+.weg-context-menu-container-open,
+.weg-item-preview-container-close,
+.weg-context-menu-container-close {
+  animation: PreviewContainerAnimation 0.2s linear forwards;
 }
 
-.weg-item-preview-container-close, .weg-context-menu-container-close {
+.weg-item-preview-container-close,
+.weg-context-menu-container-close {
   animation-direction: reverse;
 }
-
 
 .weg-item-preview {
   padding: 6px 10px 10px 10px;
@@ -281,6 +283,10 @@
 
 .weg-item-preview-topbar {
   margin: 0 0 8px 0;
+  
+  .weg-item-preview-thumbnail-disabled & {
+    margin: 0;
+  }
 }
 
 .weg-item-preview-title {

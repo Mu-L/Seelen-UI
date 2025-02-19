@@ -12,7 +12,6 @@ import { useDarkMode } from '../shared/styles';
 import { ErrorFallback } from './components/Error';
 
 export function App() {
-  const structure = useSelector(Selectors.placeholder);
   const colors = useSelector(Selectors.colors);
 
   const isDarkMode = useDarkMode();
@@ -20,10 +19,6 @@ export function App() {
   useEffect(() => {
     getCurrentWebviewWindow().show();
   }, []);
-
-  if (!structure) {
-    return <ErrorFallback msg="NO PLACEHOLDER FOUND. PLEASE TRY REINSTALL THE APP" />;
-  }
 
   return (
     <ConfigProvider
@@ -43,7 +38,7 @@ export function App() {
       }}
     >
       <ErrorBoundary fallback={<ErrorFallback />}>
-        <ToolBar structure={structure} />
+        <ToolBar />
       </ErrorBoundary>
     </ConfigProvider>
   );

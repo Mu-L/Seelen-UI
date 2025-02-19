@@ -84,6 +84,8 @@ devtools:
   settings_file: Nastavovací súbor
   simulate_fullscreen: Simulovať udalosť na celú obrazovku
 extras:
+  clear_icons: Vymazanie vyrovnávacej pamäte systémových ikon
+  clear_icons_tooltip: Aby sa všetky widgety plne prejavili, môže byť potrebný reštart.
   discord: Nesúhlas
   exit: Prestať
   github: Potápať sa
@@ -185,6 +187,16 @@ shortcuts:
     send_to_workspace_7: Pošlite do pracovného priestoru 7
     send_to_workspace_8: Pošlite do pracovného priestoru 8
     send_to_workspace_9: Pošlite do pracovného priestoru 9
+    start_weg_app_0: Zamerajte alebo spustite aplikáciu na pozíciu panela úloh 1
+    start_weg_app_1: Zamerajte alebo spustite aplikáciu na pozíciu panela úloh 2
+    start_weg_app_2: Zamerajte alebo spustiť aplikáciu na pozíciu panela úloh 3
+    start_weg_app_3: Zamerajte alebo spustite aplikáciu na pozíciu panela úloh 4
+    start_weg_app_4: Zamerajte alebo spustite aplikáciu na pozíciu panela úloh 5
+    start_weg_app_5: Zamerajte alebo spustite aplikáciu na pozíciu panela úloh 6
+    start_weg_app_6: Zamerajte alebo spustite aplikáciu na pozíciu panela úloh 7
+    start_weg_app_7: Zamerajte alebo spustiť aplikáciu na pozíciu panela úloh 8
+    start_weg_app_8: Zamerajte alebo spustite aplikáciu na pozíciu panela úloh 9
+    start_weg_app_9: Zamerajte alebo spustiť aplikáciu na pozíciu panela úloh 10
     switch_workspace_0: Prepnite na pracovný priestor 1
     switch_workspace_1: Prepnite na pracovný priestor 2
     switch_workspace_2: Prepnite na pracovný priestor 2
@@ -222,10 +234,7 @@ toolbar:
     never: Nikdy
     on_overlap: Na prekrytí
   label: Panel s nástrojmi
-  placeholder:
-    author: Autor
-    description: Opis
-    select: Štruktúra
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Namiesto logiky jedného zamerania použite špecifické zobrazenie
 update:
   available: Aktualizácia k dispozícii!

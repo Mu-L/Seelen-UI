@@ -84,6 +84,8 @@ devtools:
   settings_file: Ayarlar Dosyası
   simulate_fullscreen: Tam ekran etkinliğini simüle et
 extras:
+  clear_icons: Sistem Simgeleri Önbelleğini Temizle
+  clear_icons_tooltip: Tüm widget'larda tam olarak etkili olması için yeniden başlatma gerekebilir
   discord: Discord
   exit: Çık
   github: GitHub
@@ -187,6 +189,16 @@ shortcuts:
     send_to_workspace_7: Çalışma Alanı 8'e Gönder
     send_to_workspace_8: Çalışma Alanı 9'a Gönder
     send_to_workspace_9: Çalışma Alanı 9'a Gönder
+    start_weg_app_0: Odak veya Başlat Uygulamayı Görev Çubuğu Pozisyonu 1'e
+    start_weg_app_1: Odak veya Başlat Uygulamayı Görev Çubuğu Pozisyonu 2
+    start_weg_app_2: Odak veya Başlat Uygulamayı Görev Çubuğu Pozisyonuna 3
+    start_weg_app_3: Odak veya Başlat Uygulamayı Görev Çubuğu Pozisyonu 4
+    start_weg_app_4: Odak veya Başlat Uygulamayı Görev Çubuğu Konumu 5'e
+    start_weg_app_5: Odak veya Başlat Uygulamayı Görev Çubuğu Pozisyonu 6
+    start_weg_app_6: Odak veya Başlat Uygulamayı Görev Çubuğu Pozisyonu 7
+    start_weg_app_7: Odak veya Başlat Uygulamayı Görev Çubuğu Pozisyonu 8'e
+    start_weg_app_8: Odak veya Başlat Uygulamayı Görev Çubuğu Pozisyonu 9
+    start_weg_app_9: Odak veya Başlat Uygulamayı Görev Çubuğu Konumu 10
     switch_workspace_0: Çalışma Alanı 1'e Geç
     switch_workspace_1: Çalışma Alanı 2'ye Geç
     switch_workspace_2: Çalışma Alanı 3'e Geç
@@ -224,10 +236,7 @@ toolbar:
     never: Asla
     on_overlap: Üst üste binme durumunda
   label: Araç Çubuğu
-  placeholder:
-    author: Yazar
-    description: Açıklama
-    select: Araç Çubuğu Yapısı
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Tek odaklama mantığı yerine ekrana özel mantık kullanın
 update:
   available: Güncelleme Mevcut!

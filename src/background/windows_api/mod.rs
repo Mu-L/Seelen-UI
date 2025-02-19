@@ -4,6 +4,8 @@ mod iterator;
 pub mod monitor;
 pub mod process;
 pub mod string_utils;
+pub mod traits;
+pub mod types;
 pub mod window;
 
 pub use app_bar::*;
@@ -17,7 +19,7 @@ use windows_core::Interface;
 
 use std::{
     ffi::{c_void, OsString},
-    os::windows::ffi::OsStrExt,
+    os::windows::ffi::{OsStrExt, OsStringExt},
     path::{Path, PathBuf},
     thread::sleep,
     time::Duration,
@@ -39,8 +41,8 @@ use windows::{
             PHYSICAL_MONITOR,
         },
         Foundation::{
-            CloseHandle, FALSE, HANDLE, HMODULE, HWND, LPARAM, LUID, MAX_PATH, RECT,
-            STATUS_SUCCESS, WPARAM,
+            CloseHandle, HANDLE, HMODULE, HWND, LPARAM, LUID, MAX_PATH, RECT, STATUS_SUCCESS,
+            WPARAM,
         },
         Graphics::{
             Dwm::{
@@ -51,14 +53,16 @@ use windows::{
             Gdi::{
                 EnumDisplayDevicesW, EnumDisplayMonitors, EnumDisplaySettingsW, GetMonitorInfoW,
                 MonitorFromPoint, MonitorFromWindow, DEVMODEW, DISPLAY_DEVICEW,
-                ENUM_CURRENT_SETTINGS, HDC, HMONITOR, MONITORENUMPROC, MONITORINFOEXW,
+                ENUM_CURRENT_SETTINGS, HMONITOR, MONITORENUMPROC, MONITORINFOEXW,
                 MONITOR_DEFAULTTOPRIMARY,
             },
         },
         Security::{
-            AdjustTokenPrivileges, GetTokenInformation, LookupPrivilegeValueW, TokenElevation,
-            SE_PRIVILEGE_ENABLED, TOKEN_ADJUST_PRIVILEGES, TOKEN_ELEVATION, TOKEN_PRIVILEGES,
-            TOKEN_QUERY,
+            AdjustTokenPrivileges,
+            Authentication::Identity::{GetUserNameExW, EXTENDED_NAME_FORMAT},
+            GetTokenInformation, LookupPrivilegeValueW, TokenElevation, TokenLogonSid,
+            SE_PRIVILEGE_ENABLED, TOKEN_ADJUST_PRIVILEGES, TOKEN_ELEVATION, TOKEN_GROUPS,
+            TOKEN_PRIVILEGES, TOKEN_QUERY,
         },
         Storage::{
             EnhancedStorage::{
@@ -73,11 +77,12 @@ use windows::{
             LibraryLoader::GetModuleHandleW,
             Power::{GetSystemPowerStatus, SetSuspendState, SYSTEM_POWER_STATUS},
             RemoteDesktop::ProcessIdToSessionId,
-            Shutdown::{ExitWindowsEx, EXIT_WINDOWS_FLAGS, SHUTDOWN_REASON},
+            Shutdown::{ExitWindowsEx, LockWorkStation, EXIT_WINDOWS_FLAGS, SHUTDOWN_REASON},
+            SystemInformation::{GetComputerNameExW, COMPUTER_NAME_FORMAT},
             Threading::{
-                GetCurrentProcess, GetCurrentProcessId, OpenProcess, OpenProcessToken,
-                QueryFullProcessImageNameW, PROCESS_ACCESS_RIGHTS, PROCESS_NAME_WIN32,
-                PROCESS_QUERY_INFORMATION, PROCESS_QUERY_LIMITED_INFORMATION,
+                AttachThreadInput, GetCurrentProcess, GetCurrentProcessId, GetCurrentThreadId,
+                OpenProcess, OpenProcessToken, QueryFullProcessImageNameW, PROCESS_ACCESS_RIGHTS,
+                PROCESS_NAME_WIN32, PROCESS_QUERY_LIMITED_INFORMATION,
             },
         },
         UI::{
@@ -85,23 +90,22 @@ use windows::{
             Shell::{
                 IShellItem2, IShellLinkW, IVirtualDesktopManager,
                 PropertiesSystem::{IPropertyStore, SHGetPropertyStoreForWindow, GPS_DEFAULT},
-                SHCreateItemFromParsingName, SHLoadIndirectString, SHQueryUserNotificationState,
-                ShellLink, VirtualDesktopManager, QUERY_USER_NOTIFICATION_STATE,
-                QUNS_RUNNING_D3D_FULL_SCREEN, SIGDN_NORMALDISPLAY,
+                SHCreateItemFromParsingName, SHGetKnownFolderPath, SHLoadIndirectString,
+                SHQueryUserNotificationState, ShellLink, VirtualDesktopManager, KF_FLAG_DEFAULT,
+                QUERY_USER_NOTIFICATION_STATE, QUNS_RUNNING_D3D_FULL_SCREEN, SIGDN_NORMALDISPLAY,
             },
             WindowsAndMessaging::{
-                EnumWindows, GetClassNameW, GetDesktopWindow, GetForegroundWindow, GetParent,
-                GetSystemMetrics, GetWindow, GetWindowLongW, GetWindowRect, GetWindowTextW,
-                GetWindowThreadProcessId, IsIconic, IsWindow, IsWindowVisible, IsZoomed,
-                PostMessageW, SetForegroundWindow, SetWindowPos, ShowWindow, ShowWindowAsync,
+                BringWindowToTop, EnumWindows, GetClassNameW, GetDesktopWindow,
+                GetForegroundWindow, GetParent, GetSystemMetrics, GetWindowLongW, GetWindowRect,
+                GetWindowTextW, GetWindowThreadProcessId, IsIconic, IsWindow, IsWindowVisible,
+                IsZoomed, PostMessageW, SetWindowPos, ShowWindow, ShowWindowAsync,
                 SystemParametersInfoW, ANIMATIONINFO, EDD_GET_DEVICE_INTERFACE_NAME, GWL_EXSTYLE,
-                GWL_STYLE, GW_OWNER, HWND_TOP, MONITORINFOF_PRIMARY, SET_WINDOW_POS_FLAGS,
-                SHOW_WINDOW_CMD, SM_CXVIRTUALSCREEN, SM_CYVIRTUALSCREEN, SM_XVIRTUALSCREEN,
-                SM_YVIRTUALSCREEN, SPIF_SENDCHANGE, SPIF_UPDATEINIFILE, SPI_GETANIMATION,
-                SPI_GETDESKWALLPAPER, SPI_SETANIMATION, SPI_SETDESKWALLPAPER, SWP_ASYNCWINDOWPOS,
-                SWP_NOACTIVATE, SWP_NOMOVE, SWP_NOSIZE, SWP_NOZORDER, SW_FORCEMINIMIZE,
-                SW_MINIMIZE, SW_NORMAL, SW_RESTORE, SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS,
-                WINDOW_EX_STYLE, WINDOW_STYLE, WNDENUMPROC, WS_SIZEBOX, WS_THICKFRAME,
+                GWL_STYLE, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SM_CXVIRTUALSCREEN,
+                SM_CYVIRTUALSCREEN, SM_XVIRTUALSCREEN, SM_YVIRTUALSCREEN, SPIF_SENDCHANGE,
+                SPIF_UPDATEINIFILE, SPI_GETANIMATION, SPI_GETDESKWALLPAPER, SPI_SETANIMATION,
+                SPI_SETDESKWALLPAPER, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE, SWP_NOSIZE, SWP_NOZORDER,
+                SW_RESTORE, SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS, WINDOW_EX_STYLE, WINDOW_STYLE,
+                WNDENUMPROC, WS_SIZEBOX, WS_THICKFRAME,
             },
         },
     },
@@ -109,10 +113,8 @@ use windows::{
 
 use crate::{
     error_handler::{Result, WindowsResultExt},
-    hook::HookManager,
     modules::input::{domain::Point, Mouse},
     utils::{is_virtual_desktop_supported, is_windows_11},
-    winevent::WinEvent,
 };
 
 #[macro_export]
@@ -147,14 +149,9 @@ impl WindowsApi {
         callback_data_address: isize,
     ) -> Result<()> {
         unsafe {
-            EnumDisplayMonitors(
-                HDC::default(),
-                None,
-                callback,
-                LPARAM(callback_data_address),
-            )
-            .ok()
-            .filter_fake_error()?;
+            EnumDisplayMonitors(None, None, callback, LPARAM(callback_data_address))
+                .ok()
+                .filter_fake_error()?;
         }
         Ok(())
     }
@@ -165,7 +162,7 @@ impl WindowsApi {
     }
 
     pub fn post_message(hwnd: HWND, message: u32, wparam: usize, lparam: isize) -> Result<()> {
-        unsafe { PostMessageW(hwnd, message, WPARAM(wparam), LPARAM(lparam))? };
+        unsafe { PostMessageW(Some(hwnd), message, WPARAM(wparam), LPARAM(lparam))? };
         Ok(())
     }
 
@@ -197,6 +194,10 @@ impl WindowsApi {
         unsafe { GetCurrentProcessId() }
     }
 
+    pub fn current_thread_id() -> u32 {
+        unsafe { GetCurrentThreadId() }
+    }
+
     pub fn current_session_id() -> Result<u32> {
         let process_id = Self::current_process_id();
         let mut session_id = 0;
@@ -215,7 +216,7 @@ impl WindowsApi {
     }
 
     pub fn is_window(hwnd: HWND) -> bool {
-        unsafe { IsWindow(hwnd) }.into()
+        unsafe { IsWindow(Some(hwnd)) }.into()
     }
 
     pub fn is_window_visible(hwnd: HWND) -> bool {
@@ -256,6 +257,15 @@ impl WindowsApi {
         ))
     }
 
+    /// Sets the visibility state of a window created by the calling thread (could cause a deadlock)
+    ///
+    /// The deadlock occurs if show_window is called for a window created on a different thread but in same process.
+    /// Is safe to use for windows created by other processes
+    ///
+    /// Use this only if you need wait for the window to be visible, otherwise use show_window_async
+    ///
+    /// https://stackoverflow.com/questions/16881820/win32-api-deadlocks-while-using-different-threads
+    /// https://stackoverflow.com/questions/15637124/whats-the-difference-between-showwindow-and-showwindowasync
     pub fn show_window(hwnd: HWND, command: SHOW_WINDOW_CMD) -> Result<()> {
         // BOOL is returned but does not signify whether or not the operation was succesful
         // https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow
@@ -274,10 +284,6 @@ impl WindowsApi {
         Ok(())
     }
 
-    pub fn unmaximize_window(hwnd: HWND) -> Result<()> {
-        Self::show_window(hwnd, SW_NORMAL)
-    }
-
     pub fn get_styles(hwnd: HWND) -> WINDOW_STYLE {
         WINDOW_STYLE(unsafe { GetWindowLongW(hwnd, GWL_STYLE) } as u32)
     }
@@ -288,7 +294,7 @@ impl WindowsApi {
 
     fn _set_position(
         hwnd: HWND,
-        order: HWND,
+        order: Option<HWND>,
         rect: RECT,
         flags: SET_WINDOW_POS_FLAGS,
     ) -> Result<()> {
@@ -307,62 +313,50 @@ impl WindowsApi {
         Ok(())
     }
 
+    /// Similar to ShowWindow could cause a deadlock if the window is created on a different thread.
+    ///
+    /// Add the flag `SWP_ASYNCWINDOWPOS` to avoid that of if you don't need to wait for the window position to be set
     pub fn set_position(
         hwnd: HWND,
         order: Option<HWND>,
         rect: &RECT,
         flags: SET_WINDOW_POS_FLAGS,
     ) -> Result<()> {
-        let uflags = match order {
+        let flags = match order {
             Some(_) => flags,
             None => SWP_NOZORDER | flags,
-        };
-        Self::_set_position(hwnd, order.unwrap_or_default(), *rect, uflags)
+        } | SWP_NOACTIVATE;
+        Self::_set_position(hwnd, order, *rect, flags)
     }
 
     pub fn move_window(hwnd: HWND, rect: &RECT) -> Result<()> {
-        Self::set_position(hwnd, None, rect, SWP_NOSIZE | SWP_NOACTIVATE)
+        Self::set_position(hwnd, None, rect, SWP_NOSIZE | SWP_ASYNCWINDOWPOS)
     }
 
-    pub fn bring_to(hwnd: HWND, after: HWND) -> Result<()> {
-        Self::set_position(
-            hwnd,
-            Some(after),
-            &Default::default(),
-            SWP_ASYNCWINDOWPOS | SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE,
-        )?;
+    pub fn bring_to_top(hwnd: HWND) -> Result<()> {
+        unsafe { BringWindowToTop(hwnd)? };
         Ok(())
     }
 
-    pub fn minimize_window(hwnd: HWND) -> Result<()> {
-        Self::show_window(hwnd, SW_MINIMIZE)
-    }
-
-    pub fn restore_window(hwnd: HWND) -> Result<()> {
-        Self::show_window(hwnd, SW_RESTORE)
+    pub fn attach_thread_input(thread_id: u32, attach_to: u32, attach: bool) -> Result<()> {
+        unsafe { AttachThreadInput(thread_id, attach_to, attach).ok()? };
+        Ok(())
     }
 
     pub fn set_foreground(hwnd: HWND) -> Result<()> {
-        unsafe { SetForegroundWindow(hwnd).ok()? };
-        Ok(())
-    }
-
-    pub fn async_force_set_foreground(hwnd: HWND) {
-        let hwnd = hwnd.0 as isize;
-        HookManager::run_with_async(move |hook_manager| {
-            let hwnd = HWND(hwnd as _);
-
-            hook_manager.skip(WinEvent::SystemMinimizeStart, hwnd);
-            hook_manager.skip(WinEvent::SystemMinimizeEnd, hwnd);
-
-            Self::set_minimize_animation(false)?;
-            Self::show_window(hwnd, SW_FORCEMINIMIZE)?;
+        if Self::is_iconic(hwnd) {
             Self::show_window(hwnd, SW_RESTORE)?;
-            Self::set_minimize_animation(true)?;
-
-            Self::bring_to(hwnd, HWND_TOP)?;
-            Self::set_foreground(hwnd)
-        });
+        }
+        let (_, focused_thread) = Self::window_thread_process_id(Self::get_foreground_window());
+        let app_thread = Self::current_thread_id();
+        if focused_thread != app_thread {
+            Self::attach_thread_input(focused_thread, app_thread, true)?;
+            Self::bring_to_top(hwnd)?;
+            Self::attach_thread_input(focused_thread, app_thread, false)?;
+        } else {
+            Self::bring_to_top(hwnd)?;
+        }
+        Ok(())
     }
 
     fn open_process(
@@ -388,6 +382,23 @@ impl WindowsApi {
         Ok(token_handle)
     }
 
+    pub fn get_current_process_info() -> Result<()> {
+        let token_handle = Self::open_current_process_token()?;
+        let mut returnlength = 0;
+        unsafe {
+            let data = TOKEN_GROUPS::default();
+
+            GetTokenInformation(
+                token_handle,
+                TokenLogonSid,
+                Some(&data as *const _ as *mut _),
+                std::mem::size_of::<TOKEN_GROUPS>() as u32,
+                &mut returnlength,
+            )?;
+        }
+        Ok(())
+    }
+
     pub fn get_luid(system: PCWSTR, name: PCWSTR) -> Result<LUID> {
         let mut luid = LUID::default();
         unsafe { LookupPrivilegeValueW(system, name, &mut luid)? };
@@ -404,22 +415,12 @@ impl WindowsApi {
         tkp.Privileges[0].Luid = Self::get_luid(PCWSTR::null(), name)?;
         tkp.Privileges[0].Attributes = SE_PRIVILEGE_ENABLED;
 
-        unsafe { AdjustTokenPrivileges(token_handle, FALSE, Some(&tkp), 0, None, None)? };
+        unsafe { AdjustTokenPrivileges(token_handle, false, Some(&tkp), 0, None, None)? };
         Ok(())
     }
 
-    fn process_handle(process_id: u32) -> Result<HANDLE> {
-        Self::open_process(PROCESS_QUERY_INFORMATION, false, process_id)
-    }
-
-    pub fn get_parent(hwnd: HWND) -> HWND {
-        // TODO change unwrap_or_default and return a result instead
-        unsafe { GetParent(hwnd).unwrap_or_default() }
-    }
-
-    pub fn get_owner(hwnd: HWND) -> HWND {
-        // TODO change unwrap_or_default and return a result instead
-        unsafe { GetWindow(hwnd, GW_OWNER).unwrap_or_default() }
+    pub fn get_parent(hwnd: HWND) -> Result<HWND> {
+        Ok(unsafe { GetParent(hwnd)? })
     }
 
     pub fn get_desktop_window() -> HWND {
@@ -456,17 +457,11 @@ impl WindowsApi {
         let mut len = 512_u32;
         let mut path: Vec<u16> = vec![0; len as usize];
         let text_ptr = path.as_mut_ptr();
-
-        let handle = Self::process_handle(process_id)?;
+        let handle = Self::open_process(PROCESS_QUERY_LIMITED_INFORMATION, false, process_id)?;
         unsafe {
             QueryFullProcessImageNameW(handle, PROCESS_NAME_WIN32, PWSTR(text_ptr), &mut len)?;
         }
         Ok(String::from_utf16(&path[..len as usize])?)
-    }
-
-    pub fn exe_path(hwnd: HWND) -> Result<String> {
-        let (process_id, _) = Self::window_thread_process_id(hwnd);
-        Self::exe_path_by_process(process_id)
     }
 
     pub fn exe_path_v2(hwnd: HWND) -> Result<PathBuf> {
@@ -479,10 +474,10 @@ impl WindowsApi {
     }
 
     pub fn exe(hwnd: HWND) -> Result<String> {
-        Ok(Self::exe_path(hwnd)?
-            .split('\\')
-            .last()
-            .ok_or("there is no last element")?
+        Ok(Self::exe_path_v2(hwnd)?
+            .file_name()
+            .ok_or("there is no file name")?
+            .to_string_lossy()
             .to_string())
     }
 
@@ -561,15 +556,26 @@ impl WindowsApi {
         Ok(app_info)
     }
 
-    pub fn create_temp_shortcut(program: &str, args: &str) -> Result<PathBuf> {
+    pub fn create_temp_shortcut(
+        program: &Path,
+        args: &str,
+        working_dir: Option<&Path>,
+    ) -> Result<PathBuf> {
+        let working_dir = working_dir.or_else(|| program.parent());
+
         Com::run_with_context(|| unsafe {
             let shell_link: IShellLinkW = Com::create_instance(&ShellLink)?;
 
-            let program = WindowsString::from_str(program);
+            let program = WindowsString::from_os_string(program.as_os_str());
             shell_link.SetPath(program.as_pcwstr())?;
 
             let arguments = WindowsString::from_str(args);
             shell_link.SetArguments(arguments.as_pcwstr())?;
+
+            if let Some(working_dir) = working_dir {
+                let working_dir = WindowsString::from_os_string(working_dir.as_os_str());
+                shell_link.SetWorkingDirectory(working_dir.as_pcwstr())?;
+            }
 
             let temp_dir = std::env::temp_dir();
             let lnk_path = temp_dir.join(format!("{}.lnk", uuid::Uuid::new_v4()));
@@ -618,13 +624,10 @@ impl WindowsApi {
     pub fn get_executable_display_name(path: &Path) -> Result<String> {
         Com::run_with_context(|| unsafe {
             let shell_item = Self::get_shell_item(path)?;
-            match shell_item.GetString(&PKEY_FileDescription) {
-                Ok(description) => Ok(description.to_string()?),
-                Err(_) => Ok(shell_item
-                    .GetDisplayName(SIGDN_NORMALDISPLAY)?
-                    .to_string()?
-                    .replace(".exe", "")),
-            }
+            let text = shell_item
+                .GetString(&PKEY_FileDescription)
+                .or_else(|_| shell_item.GetDisplayName(SIGDN_NORMALDISPLAY))?;
+            Ok(text.to_string()?)
         })
     }
 
@@ -723,36 +726,40 @@ impl WindowsApi {
         unsafe { MonitorFromWindow(GetDesktopWindow(), MONITOR_DEFAULTTOPRIMARY) }
     }
 
-    pub fn physical_monitors(monitor: HMONITOR) -> Result<Vec<PHYSICAL_MONITOR>> {
+    pub fn get_physical_monitors(monitor: HMONITOR) -> Result<Vec<PHYSICAL_MONITOR>> {
         let mut c_physical_monitors: u32 = 0;
         let mut p_physical_monitors: Vec<PHYSICAL_MONITOR> = Vec::new();
-
         unsafe {
             GetNumberOfPhysicalMonitorsFromHMONITOR(monitor, &mut c_physical_monitors)?;
             p_physical_monitors.resize(c_physical_monitors as usize, std::mem::zeroed());
             GetPhysicalMonitorsFromHMONITOR(monitor, p_physical_monitors.as_mut())?;
         };
-
         Ok(p_physical_monitors)
     }
 
-    pub fn get_display_device(monitor: HMONITOR) -> Result<DISPLAY_DEVICEW> {
+    pub fn get_display_devices(monitor: HMONITOR) -> Result<Vec<DISPLAY_DEVICEW>> {
         let info = Self::monitor_info(monitor)?;
         let lpdevice = PCWSTR::from_raw(info.szDevice.as_ptr());
-        let mut display = DISPLAY_DEVICEW {
-            cb: std::mem::size_of::<DISPLAY_DEVICEW>() as u32,
-            ..Default::default()
-        };
-        unsafe {
-            EnumDisplayDevicesW(lpdevice, 0, &mut display, EDD_GET_DEVICE_INTERFACE_NAME).ok()?
-        };
-        Ok(display)
-    }
-
-    pub fn monitor_get_is_primary(hmonitor: HMONITOR) -> Result<bool> {
-        let ex_info = Self::monitor_info(hmonitor)?;
-
-        Ok(ex_info.monitorInfo.dwFlags == MONITORINFOF_PRIMARY)
+        let mut devices = Vec::new();
+        for device_idx in 0.. {
+            let mut device = DISPLAY_DEVICEW {
+                cb: std::mem::size_of::<DISPLAY_DEVICEW>() as u32,
+                ..Default::default()
+            };
+            if !unsafe {
+                EnumDisplayDevicesW(
+                    lpdevice,
+                    device_idx,
+                    &mut device,
+                    EDD_GET_DEVICE_INTERFACE_NAME,
+                )
+                .as_bool()
+            } {
+                break;
+            }
+            devices.push(device);
+        }
+        Ok(devices)
     }
 
     pub fn get_display_device_settings(monitor: HMONITOR) -> Result<DEVMODEW> {
@@ -766,18 +773,6 @@ impl WindowsApi {
             EnumDisplaySettingsW(lpdevice, ENUM_CURRENT_SETTINGS, &mut devmode).ok()?;
         }
         Ok(devmode)
-    }
-
-    /// handle of PHYSICAL_MONITOR is bugged and will be always 0
-    pub fn primary_physical_monitor() -> Result<PHYSICAL_MONITOR> {
-        Ok(Self::physical_monitors(Self::primary_monitor())?[0])
-    }
-
-    pub fn monitor_index(hmonitor: HMONITOR) -> Result<usize> {
-        Ok(MonitorEnumerator::get_all_v2()?
-            .into_iter()
-            .position(|m| m.handle() == hmonitor)
-            .ok_or("could not find monitor index")?)
     }
 
     /// https://learn.microsoft.com/en-us/windows/win32/gdi/the-virtual-screen
@@ -917,7 +912,7 @@ impl WindowsApi {
     }
 
     pub fn set_suspend_state() -> Result<()> {
-        let success = unsafe { SetSuspendState(false, true, false).as_bool() };
+        let success = unsafe { SetSuspendState(false, true, false) };
         if !success {
             return Err("Failed to set suspend state".into());
         }
@@ -980,5 +975,35 @@ impl WindowsApi {
 
     pub fn extract_thumbnail_from_ref(stream: IRandomAccessStreamReference) -> Result<PathBuf> {
         Self::extract_thumbnail_from_stream(stream.OpenReadAsync()?.get()?)
+    }
+
+    pub fn lock_machine() -> Result<()> {
+        unsafe { Ok(LockWorkStation()?) }
+    }
+
+    // get current thread owner username
+    pub fn get_username(format: EXTENDED_NAME_FORMAT) -> Result<String> {
+        let mut size = 0;
+        unsafe { GetUserNameExW(format, None, &mut size) };
+        let mut name = WindowsString::new_to_fill(size as usize);
+        let sucess = unsafe { GetUserNameExW(format, Some(name.as_pwstr()), &mut size) };
+        if !sucess {
+            return Err("Failed to get username".into());
+        }
+        Ok(name.to_string())
+    }
+
+    pub fn get_computer_name(format: COMPUTER_NAME_FORMAT) -> Result<String> {
+        let mut name = WindowsString::new_to_fill(1024);
+        unsafe { GetComputerNameExW(format, Some(name.as_pwstr()), &mut 1024)? };
+        Ok(name.to_string())
+    }
+
+    // change to some crate like dirs to allow multiple platforms
+    pub fn known_folder(folder_id: windows::core::GUID) -> Result<PathBuf> {
+        let path = unsafe { SHGetKnownFolderPath(&folder_id, KF_FLAG_DEFAULT, None)? };
+        Ok(PathBuf::from(OsString::from_wide(unsafe {
+            path.as_wide()
+        })))
     }
 }

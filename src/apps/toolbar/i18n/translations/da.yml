@@ -24,6 +24,11 @@ network:
   saved: Gemte netværk
   scanning: Scanning efter netværk
   secured: Krypteret netværk
+notifications:
+  clear: Ryd alle
+  empty: Ingen meddelelser
+  settings: Flere indstillinger for notifikationer
+  title: Meddelelser
 placeholder:
   battery_remaining: '% resterende'
   bluetooth_devices: Bluetooth & enheder
@@ -31,12 +36,13 @@ placeholder:
   ethernet_disconnected: Ingen internetadgang
   notifications: Underretninger
   open_system_tray: Åben systembakke
-  open_user_folder: Åben brugermappe
   settings: Hurtige indstillinger
   smart_charge: '- Smart opladning'
   volume: Bind
 settings:
   app_settings: Appindstillinger
+  brightness: Lysstyrke
+  lock: Lås
   log_out: Log ud
   power: Magt
   restart: Genstart
@@ -44,3 +50,24 @@ settings:
   sleep: Søvn
   title: Indstillinger
 unlabelled_tray: Umnæret bakkeikon
+userhome:
+  empty_list: Ingen genstande
+  folders:
+    desktop: Skrivebord
+    documents: Dokumenter
+    downloads: Downloads
+    more_items: Vis mere...
+    music: Musik
+    pictures: Billeder
+    recent: Brugt for nylig
+    reduce_items: Vis mindre...
+    title: Brugerkataloger
+    videos: Videoer
+  profile:
+    accounts: Åbn kontoindstillinger
+    open_onedrive: Åbn OneDrive-biblioteket
+    open_user_folder: Åbn brugerkatalog
+  seelen_options:
+    open_installation_folder: Åbn mappen med Seelen-indstillinger
+    open_log_folder: Åbn Seelen-logmappen
+    title: Seelen-biblioteker

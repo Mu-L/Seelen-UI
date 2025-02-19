@@ -6,7 +6,7 @@
 #Requires AutoHotkey v2.0
 #SingleInstance Force
 
-global seelen := "SEELEN_UI_EXE_PATH"
+global seelen := "`"SEELEN_UI_EXE_PATH`""
 
 /** Close the AHK if app is crashed or forced to close */
 CloseIfNotRunning() {
@@ -29,6 +29,12 @@ ToggleWinEventTracing() {
 
 ToggleMutexLockTracing() {
   RunWait(seelen " debugger toggle-trace-lock", , "Hide")
+}
+
+; ================= WEG =================
+
+ForegroundOrRun(idx) {
+  RunWait(seelen " weg foreground-or-run-app " idx, , "Hide")
 }
 
 ; ================= Virtual desktop =================

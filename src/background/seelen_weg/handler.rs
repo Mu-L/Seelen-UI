@@ -1,26 +1,27 @@
-use std::{ffi::OsStr, path::PathBuf, sync::atomic::Ordering};
+use std::{ffi::OsStr, path::PathBuf};
 
 use image::ImageFormat;
-use seelen_core::state::{PinnedWegItemData, WegItem, WegItems};
+use seelen_core::state::{PinnedWegItemData, WegItem, WegItemSubtype, WegItems};
 use tauri::Emitter;
 use tauri_plugin_shell::ShellExt;
 
 use crate::{
     error_handler::Result,
-    hook::LAST_ACTIVE_NOT_SEELEN,
     seelen::get_app_handle,
     seelen_weg::weg_items_impl::WEG_ITEMS_IMPL,
     state::application::FULL_STATE,
     trace_lock,
     windows_api::{window::Window, WindowsApi},
 };
-use windows::Win32::UI::WindowsAndMessaging::{SW_MINIMIZE, SW_RESTORE, WM_CLOSE};
+use windows::Win32::UI::WindowsAndMessaging::{SW_MINIMIZE, WM_CLOSE};
 
 use super::SeelenWeg;
 
 #[tauri::command(async)]
 pub fn weg_get_items_for_widget(window: tauri::Window) -> Result<WegItems> {
-    let device_id = Window::from(window.hwnd()?).monitor().device_id()?;
+    let device_id = Window::from(window.hwnd()?.0 as isize)
+        .monitor()
+        .device_id()?;
     let items = trace_lock!(WEG_ITEMS_IMPL).get_filtered_by_monitor()?;
 
     Ok(items[&device_id].clone())
@@ -90,25 +91,19 @@ pub fn weg_kill_app(hwnd: isize) -> Result<()> {
 }
 
 #[tauri::command(async)]
-pub fn weg_toggle_window_state(hwnd: isize) -> Result<()> {
+pub fn weg_toggle_window_state(hwnd: isize, was_focused: bool) -> Result<()> {
     let window = Window::from(hwnd);
     if !window.is_visible() {
         SeelenWeg::remove_hwnd(&window)?;
         return Ok(());
     }
-
-    if window.is_minimized() {
-        WindowsApi::show_window_async(window.hwnd(), SW_RESTORE)?;
-        return Ok(());
-    }
-
-    let last_active = LAST_ACTIVE_NOT_SEELEN.load(Ordering::Acquire);
-    if last_active == window.address() {
-        WindowsApi::show_window_async(window.hwnd(), SW_MINIMIZE)?;
+    // was_focused is intented to know if the window was focused before click on the dock item
+    // on click the items makes the dock being focused.
+    if was_focused {
+        window.show_window_async(SW_MINIMIZE)?;
     } else {
-        WindowsApi::set_foreground(window.hwnd())?;
+        window.focus()?;
     }
-
     Ok(())
 }
 
@@ -120,22 +115,40 @@ pub fn weg_pin_item(path: PathBuf) -> Result<()> {
         "Unknown".to_string()
     };
 
+    let subtype = if path.is_dir() {
+        WegItemSubtype::Folder
+    } else if path.ends_with(".exe") {
+        WegItemSubtype::App
+    } else {
+        WegItemSubtype::File
+    };
+
     // todo add support to UWP for seelen rofi
     let mut data = PinnedWegItemData {
         id: uuid::Uuid::new_v4().to_string(),
-        umid: WindowsApi::get_file_umid(&path).ok(),
+        subtype,
+        umid: None,
         display_name,
         path: path.clone(),
-        is_dir: path.is_dir(),
+        is_dir: false,
+        relaunch_in: None,
         relaunch_command: path.to_string_lossy().to_string(),
         windows: vec![],
         pin_disabled: false,
     };
 
     if path.extension() == Some(OsStr::new("lnk")) {
-        let (program, _arguments) = WindowsApi::resolve_lnk_target(&path)?;
+        data.umid = WindowsApi::get_file_umid(&path).ok();
+        let (program, arguments) = WindowsApi::resolve_lnk_target(&path)?;
         data.is_dir = program.is_dir();
-        data.relaunch_command = program.to_string_lossy().to_string();
+        data.relaunch_command = format!(
+            "\"{}\" {}",
+            program.to_string_lossy(),
+            arguments.to_string_lossy()
+        );
+        if program.extension() == Some(OsStr::new("exe")) {
+            data.subtype = WegItemSubtype::App;
+        }
     }
 
     let guard = FULL_STATE.load();

@@ -83,6 +83,8 @@ devtools:
   settings_file: Settings File
   simulate_fullscreen: Simulate fullscreen event
 extras:
+  clear_icons: Clear System Icons Cache
+  clear_icons_tooltip: A restart could be required to fully take effect on all widgets
   discord: Discord
   exit: Quit/Exit
   github: GitHub
@@ -184,6 +186,16 @@ shortcuts:
     send_to_workspace_7: Send to Workspace 8
     send_to_workspace_8: Send to Workspace 9
     send_to_workspace_9: Send to Workspace 10
+    start_weg_app_0: Focus or start app on taskbar position 1
+    start_weg_app_1: Focus or start app on taskbar position 2
+    start_weg_app_2: Focus or start app on taskbar position 3
+    start_weg_app_3: Focus or start app on taskbar position 4
+    start_weg_app_4: Focus or start app on taskbar position 5
+    start_weg_app_5: Focus or start app on taskbar position 6
+    start_weg_app_6: Focus or start app on taskbar position 7
+    start_weg_app_7: Focus or start app on taskbar position 8
+    start_weg_app_8: Focus or start app on taskbar position 9
+    start_weg_app_9: Focus or start app on taskbar position 10
     switch_workspace_0: Switch to Workspace 1
     switch_workspace_1: Switch to Workspace 2
     switch_workspace_2: Switch to Workspace 3
@@ -214,6 +226,7 @@ toolbar:
   auto_hide: Auto Hide
   delay_to_hide: Delay to hide
   delay_to_show: Delay to show
+  dock_side: Position
   enable: Enable Fancy Toolbar
   height: Height
   hide_mode:
@@ -221,10 +234,7 @@ toolbar:
     never: Never
     on_overlap: On overlap
   label: Toolbar
-  placeholder:
-    author: Author
-    description: Description
-    select: Toolbar Structure
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Use display specific instead of single focus logic
 update:
   available: Update Available!
@@ -264,10 +274,12 @@ weg:
       label: Pinned Items Visibility
       when_primary: When the monitor is primary
     size: Item Size
+    show_instance_counter: Show counter for open windows
     temporal_visibility:
       all: All
       label: Unpinned Items Visibility
       on_monitor: On Monitor
+    thumbnail_generation_enabled: Generate thumbnails on item hoover
     visible_separators: Visible Separators
     zoom_size: Zoomed Size (used for themes)
   label: Dock/Taskbar

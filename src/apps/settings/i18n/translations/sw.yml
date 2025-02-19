@@ -83,6 +83,8 @@ devtools:
   settings_file: Faili ya mipangilio
   simulate_fullscreen: Iga tukio la skrini nzima
 extras:
+  clear_icons: Kashe ya icons za mfumo wazi
+  clear_icons_tooltip: Kuanza tena kunaweza kuhitajika kuchukua kikamilifu kwa vilivyoandikwa vyote
   discord: Ugomvi
   exit: Acha/exit
   github: GitHub
@@ -184,6 +186,16 @@ shortcuts:
     send_to_workspace_7: Tuma kwa nafasi ya kazi 7
     send_to_workspace_8: Tuma kwa nafasi ya kazi 8
     send_to_workspace_9: Tuma kwa nafasi ya kazi 9
+    start_weg_app_0: Zingatia au anza programu kwenye nafasi ya kazi 1
+    start_weg_app_1: Zingatia au anza programu kwenye nafasi ya kazi 2
+    start_weg_app_2: Zingatia au anza programu kwenye nafasi ya kazi 3
+    start_weg_app_3: Zingatia au anza programu kwenye nafasi ya kazi 4
+    start_weg_app_4: Zingatia au anza programu kwenye nafasi ya kazi 5
+    start_weg_app_5: Zingatia au anza programu kwenye nafasi ya kazi 6
+    start_weg_app_6: Zingatia au anza programu kwenye nafasi ya kazi 7
+    start_weg_app_7: Zingatia au anza programu kwenye nafasi ya kazi 8
+    start_weg_app_8: Zingatia au anza programu kwenye nafasi ya kazi 9
+    start_weg_app_9: Zingatia au anza programu kwenye nafasi ya kazi 10
     switch_workspace_0: Badilika kwenye nafasi ya kazi 1
     switch_workspace_1: Badilika kwenye nafasi ya kazi 2
     switch_workspace_2: Badilika kwenye nafasi ya kazi 2
@@ -220,10 +232,7 @@ toolbar:
     never: Kamwe
     on_overlap: Juu ya mwingiliano
   label: Zana
-  placeholder:
-    author: Mwandishi
-    description: Maelezo
-    select: Muundo wa zana
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Tumia onyesho maalum badala ya mantiki ya kulenga moja
 update:
   available: Sasisha inapatikana!

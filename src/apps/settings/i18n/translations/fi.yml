@@ -84,6 +84,10 @@ devtools:
   settings_file: Asetustiedosto
   simulate_fullscreen: Simuloi koko näytön tapahtumaa
 extras:
+  clear_icons: Tyhjennä järjestelmän kuvakkeiden välimuisti
+  clear_icons_tooltip: >-
+    Uudelleenkäynnistystä saatetaan tarvita, jotta kaikki widgetit tulisivat
+    täysin voimaan.
   discord: Erimielisyys
   exit: Lopettaa/poistua
   github: Github
@@ -187,6 +191,16 @@ shortcuts:
     send_to_workspace_7: Lähetä työtilaan 7
     send_to_workspace_8: Lähetä työtilaan 8
     send_to_workspace_9: Lähetä työtilaan 9
+    start_weg_app_0: Keskittyä tai käynnistä sovellus tehtäväpalkin asentoon 1
+    start_weg_app_1: Keskittyä tai käynnistä sovellus tehtäväpalkin sijainnissa 2
+    start_weg_app_2: Keskittyä tai käynnistä sovellus tehtäväpalkin sijainnissa 3
+    start_weg_app_3: Keskittyä tai käynnistä sovellus tehtäväpalkin asentoon 4
+    start_weg_app_4: Keskittyä tai käynnistä sovellus tehtäväpalkin sijainnissa 5
+    start_weg_app_5: Keskittyä tai käynnistä sovellus tehtäväpalkin sijaintiin 6
+    start_weg_app_6: Keskittyä tai käynnistä sovellus tehtäväpalkin sijainnissa 7
+    start_weg_app_7: Keskittyä tai käynnistä sovellus tehtäväpalkin sijainnissa 8
+    start_weg_app_8: Keskittyä tai käynnistä sovellus tehtäväpalkin sijainnissa 9
+    start_weg_app_9: Keskittyä tai aloita sovellus tehtäväpalkin sijainnissa 10
     switch_workspace_0: Vaihda työtilaan 1
     switch_workspace_1: Vaihda työtilaan 2
     switch_workspace_2: Vaihda työtilaan 2
@@ -224,10 +238,7 @@ toolbar:
     never: Ei koskaan
     on_overlap: Päällekkäin
   label: Työkalurivi
-  placeholder:
-    author: Kirjoittaja
-    description: Kuvaus
-    select: Työkalurivin rakenne
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Käytä näyttökohtaista logiikkaa yhden kohdistuksen sijaan
 update:
   available: Päivitä saatavilla!

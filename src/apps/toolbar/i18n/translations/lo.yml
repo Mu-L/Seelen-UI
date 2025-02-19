@@ -24,6 +24,11 @@ network:
   saved: ເຄືອຂ່າຍທີ່ບັນທຶກໄວ້
   scanning: ກຳລັງສະແກນຫາເຄືອຂ່າຍ
   secured: ເຄືອຂ່າຍເຂົ້າລະຫັດ
+notifications:
+  clear: ລ້າງທັງຫມົດ
+  empty: ບໍ່ມີການແຈ້ງເຕືອນ
+  settings: ການຕັ້ງຄ່າການແຈ້ງເຕືອນເພີ່ມເຕີມ
+  title: ແຈ້ງການ
 placeholder:
   battery_remaining: ສ່ວນທີ່ເຫຼືອ
   bluetooth_devices: Bluetooth & ອຸປະກອນ
@@ -31,12 +36,13 @@ placeholder:
   ethernet_disconnected: ບໍ່ມີການເຂົ້າເຖິງອິນເຕີເນັດ
   notifications: ແຈ້ງການ
   open_system_tray: ເປີດຖາດລະບົບ
-  open_user_folder: ເປີດໂຟນເດີຜູ້ໃຊ້
   settings: ການຕັ້ງຄ່າດ່ວນ
   smart_charge: '- ຮັບຜິດຊອບສະຫຼາດ'
   volume: ປະລິມານ
 settings:
   app_settings: ການຕັ້ງຄ່າແອັບ app
+  brightness: ຄວາມສະຫວ່າງ
+  lock: ກະແຈ
   log_out: ອອກ​ຈາກ​ລະ​ບົບ
   power: ພະເດດ
   restart: ເລີ່ມ​ຕົ້ນ​ໃຫມ່
@@ -44,3 +50,24 @@ settings:
   sleep: ນອນ
   title: ການກໍານົດ
 unlabelled_tray: ໄອຄອນ Tray ທີ່ບໍ່ໄດ້ຮັບການຮັກສາ
+userhome:
+  empty_list: ບໍ່ມີສິນຄ້າຫຍັງ
+  folders:
+    desktop: ຂໍ້ທີ
+    documents: ເອກະສານ
+    downloads: ດາວໂຫລດ
+    more_items: ສະແດງໃຫ້ເຫັນຕື່ມ ...
+    music: ດົນຕີ
+    pictures: ຮູບພາບ
+    recent: ໃຊ້ໄດ້ບໍ່ດົນມານີ້
+    reduce_items: ສະແດງຫນ້ອຍ ...
+    title: ລາຍການຜູ້ໃຊ້
+    videos: ວິດີກ້າ
+  profile:
+    accounts: ເປີດການຕັ້ງຄ່າບັນຊີ
+    open_onedrive: ເປີດໄດເລກະທໍລີ signrive
+    open_user_folder: ເປີດໄດເລກະທໍລີຜູ້ໃຊ້
+  seelen_options:
+    open_installation_folder: ເປີດຮ້ານ Setten Settings
+    open_log_folder: ເປີດໂຟນເດີ LOGO STOEN
+    title: ລາຍການ SEELEN

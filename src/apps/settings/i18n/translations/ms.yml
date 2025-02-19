@@ -84,6 +84,8 @@ devtools:
   settings_file: Fail tetapan
   simulate_fullscreen: Simulasikan acara skrin penuh
 extras:
+  clear_icons: Cacon Ikon Sistem Jelas
+  clear_icons_tooltip: Restart boleh dikehendaki sepenuhnya pada semua widget
   discord: Perselisihan
   exit: Berhenti/keluar
   github: Github
@@ -187,6 +189,16 @@ shortcuts:
     send_to_workspace_7: Hantar ke Ruang Kerja 7
     send_to_workspace_8: Hantar ke Ruang Kerja 8
     send_to_workspace_9: Hantar ke Ruang Kerja 9
+    start_weg_app_0: Fokus atau Mula Aplikasi pada Posisi Taskbar 1
+    start_weg_app_1: Fokus atau Mula Aplikasi pada Posisi Taskbar 2
+    start_weg_app_2: Fokus atau Mula Aplikasi pada Posisi Taskbar 3
+    start_weg_app_3: Fokus atau Mulakan Aplikasi pada Posisi Taskbar 4
+    start_weg_app_4: Fokus atau Mulakan Aplikasi pada Posisi Taskbar 5
+    start_weg_app_5: Fokus atau Mula Aplikasi pada Posisi Taskbar 6
+    start_weg_app_6: Fokus atau Mula Aplikasi pada kedudukan bar tugas 7
+    start_weg_app_7: Fokus atau Mula Aplikasi pada kedudukan bar tugas 8
+    start_weg_app_8: Fokus atau Mula Aplikasi pada Posisi Taskbar 9
+    start_weg_app_9: Fokus atau Mula Aplikasi pada kedudukan bar tugas 10
     switch_workspace_0: Beralih ke ruang kerja 1
     switch_workspace_1: Beralih ke ruang kerja 2
     switch_workspace_2: Beralih ke ruang kerja 2
@@ -224,10 +236,7 @@ toolbar:
     never: tidak pernah
     on_overlap: Bertindih
   label: Bar alat
-  placeholder:
-    author: Pengarang
-    description: Penerangan
-    select: Struktur bar alat
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Gunakan paparan khusus dan bukannya logik fokus tunggal
 update:
   available: Kemas kini tersedia!

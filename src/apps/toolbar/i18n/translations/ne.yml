@@ -24,6 +24,11 @@ network:
   saved: सुरक्षित नेटवर्कहरू
   scanning: नेटवर्कहरूको लागि स्क्यान गर्दै
   secured: ईन्क्रिप्टेड नेटवर्क
+notifications:
+  clear: सबै खाली गर्नुहोस्
+  empty: NOSESTIONES
+  settings: अधिक सूचनाहरू सेटिंग्स
+  title: सूचना
 placeholder:
   battery_remaining: '% बाँकी'
   bluetooth_devices: ब्लुटुथ र उपकरणहरू
@@ -31,12 +36,13 @@ placeholder:
   ethernet_disconnected: कुनै इन्टर्नेट पहुँच छैन
   notifications: सूचना
   open_system_tray: खुला प्रणाली ट्रे
-  open_user_folder: प्रयोगकर्ता फोल्डर खोल्नुहोस्
   settings: द्रुत सेटिंग्स
   smart_charge: '- स्मार्ट शुल्क'
   volume: आवाज
 settings:
   app_settings: अनुप्रयोग सेटिंग्स
+  brightness: काठको जग
+  lock: ताला लगाउनु
   log_out: बाहिर निस्कनु
   power: बल
   restart: फेरि शुरु गर्नु
@@ -44,3 +50,24 @@ settings:
   sleep: निदाउनु
   title: बतंग
 unlabelled_tray: अनलिसर गरिएको ट्रे आइकन
+userhome:
+  empty_list: वस्तुहरू छैनन्
+  folders:
+    desktop: डेस्कटप
+    documents: कागजात
+    downloads: डाउनलोडहरू डाउनलोडहरू
+    more_items: अधिक देखाउनुहोस् ...
+    music: संगीत
+    pictures: तस्विरहरू
+    recent: भर्खर प्रयोग गरिएको
+    reduce_items: कम देखाउनुहोस् ...
+    title: प्रयोगकर्ता डाइरेक्टरीहरू
+    videos: भिडियोहरू
+  profile:
+    accounts: खुला खाता सेटिंग्स
+    open_onedrive: ओडारन निर्देशिका खोल्नुहोस्
+    open_user_folder: प्रयोगकर्ता डाइरेक्टरी खोल्नुहोस्
+  seelen_options:
+    open_installation_folder: खोल्ने सेटिंग्स फोल्डर खोल्नुहोस्
+    open_log_folder: खोल्नेदार लग फोल्डर खोल्नुहोस्
+    title: निर्देशकहरू

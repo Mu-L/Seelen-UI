@@ -84,6 +84,8 @@ devtools:
   settings_file: Datoteka postavki
   simulate_fullscreen: Simulirajte događaj preko cijelog zaslona
 extras:
+  clear_icons: Očistite predmemoriju ikona sustava
+  clear_icons_tooltip: Ponovno pokretanje moglo bi se u potpunosti stupiti na sve widgete
   discord: Nesklad
   exit: Prestati/izaći
   github: Ždrijeb
@@ -187,6 +189,16 @@ shortcuts:
     send_to_workspace_7: Pošaljite u radni prostor 7
     send_to_workspace_8: Pošaljite u radni prostor 8
     send_to_workspace_9: Pošaljite u radni prostor 9
+    start_weg_app_0: Usredotočite se ili pokrenite aplikaciju na poziciji zadataka 1
+    start_weg_app_1: Usredotočite se ili pokrenite aplikaciju na poziciji zadataka 2
+    start_weg_app_2: Usredotočite se ili pokrenite aplikaciju na poziciji zadataka 3
+    start_weg_app_3: Usredotočite se ili pokrenite aplikaciju na poziciji zadataka 4
+    start_weg_app_4: Usredotočite se ili pokrenite aplikaciju na poziciji zadataka 5
+    start_weg_app_5: Usredotočite se ili pokrenite aplikaciju na traci zadataka 6
+    start_weg_app_6: Usredotočite se ili pokrenite aplikaciju na poziciji zadataka 7
+    start_weg_app_7: Usredotočite se ili pokrenite aplikaciju na poziciji na zadaću 8
+    start_weg_app_8: Usredotočite se ili pokrenite aplikaciju na poziciji zadataka 9
+    start_weg_app_9: Usredotočite se ili pokrenite aplikaciju na poziciji zadataka 10
     switch_workspace_0: Prebacite se na radni prostor 1
     switch_workspace_1: Prebacite se na radni prostor 2
     switch_workspace_2: Prebacite se na radni prostor 2
@@ -224,10 +236,7 @@ toolbar:
     never: Nikada
     on_overlap: Na preklapanju
   label: Alatna traka
-  placeholder:
-    author: Autor
-    description: Opis
-    select: Struktura alatne trake
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Koristite specifičnu za prikaz umjesto logike jednog fokusa
 update:
   available: Ažuriranje dostupno!

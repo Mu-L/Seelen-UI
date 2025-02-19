@@ -1,12 +1,93 @@
 # Changelog
 
 ## [Unreleased]
+### features
+- add option to disable app thumbnail generation (dock).
+- allow lock the dock/toolbar items.
+- show instances counter of the same app on dock.
+- allow set the toolbar on different positions.
+
+### enhancements
+- settings shown each time on startup.
+- expand power module with power plan.
+
+### refactor
+- update windows-rs crate to 0.59.0.
+
+## [2.1.9]
+### fix
+- shortcuts not working on MSIX.
+- empty username for local accounts.
+
+## [2.1.8]
+### features
+- add button to clear the cached icons on settings.
+
+### enhancements
+- allow custom icons by extension on icon packs.
+
+### fix
+- error on file icons.
+- fix blue screen on toolbar when errors on template evaluation.
+
+## [2.1.7]
+### fix
+- power module not clickable on toolbar.
+- pinned items not working correctly for some apps.
+- electron apps without aumid.
+
+## [2.1.6]
+### fix
+- missing translations.
+- fullscreen match not beeing removed.
+
+## [2.1.5]
+### fix
+- devices and battery not clickables on toolbar.
+- missing icon on dock media module while not playing.
+- msix store not showing admin prompt.
+- links on settings not opening.
+
+## [2.1.4]
+### fix
+- crash on user module.
+- slow loading of toolbar.
+- no icons on PWA from edge browser.
+- icon packs not modifying icons on toolbar/dock media modules.
+- icon packs bad ordering, now the priority order is (umid > full-path > filename > extension).
+- bad dock execution path on apps with property store umid but no shortcut on start menu.
+
+## [2.1.3]
+### fix
+- bad user infomation on user module.
+
+## [2.1.2]
+### fix
+- style issue on toolbar user module.
+- showing unhandable tray icons (ex: nvidia old control panel).
+- installer being frozen on update.
+
+## [2.1.0]
+### features
+- allow custom animations on popups/dropdowns.
+- show open new window buttons on dock app items context menu.
+- toggle dock items using win + number.
+- notifications count on dock app items.
+- add brightness slider to quick settings on toolbar.
+- add user module on toolbar.
+
 ### refactor
 - create separated system service to handle elevated actions.
 
-###
-- fix ghost windows caused by a refactor donde on v2.0.13.
+### fix
+- ghost windows caused by a refactor donde on v2.0.13.
 - not showing save button after icon packs change.
+- app failing when powershell is not part of the $PATH enviroment.
+- dock items no updatings paths on store updates.
+- unremovable workspace module on toolbar.
+- missing system tray icons.
+- date not being inmediately updated on settings change.
+- ghost notification hitbox preventing mouse events on windows.
 
 ## [2.0.14]
 ### hotfix

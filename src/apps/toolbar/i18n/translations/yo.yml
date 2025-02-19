@@ -24,6 +24,11 @@ network:
   saved: Awọn nẹtiwọki ti a fipamọ
   scanning: Ṣiṣayẹwo fun awọn nẹtiwọki
   secured: Nẹtiwọọki ti paroko
+notifications:
+  clear: Pa gbogbo run
+  empty: Ko si awọn iwifunni
+  settings: Awọn ifiranṣẹ iwifunni diẹ sii
+  title: Awọn iwifunni
 placeholder:
   battery_remaining: '% ti o ku'
   bluetooth_devices: Bluetooth & awọn ẹrọ
@@ -31,12 +36,13 @@ placeholder:
   ethernet_disconnected: Ko si wiwọle intanẹẹti ko si
   notifications: Awọn iwifunni
   open_system_tray: Ṣii Tẹ Tẹ
-  open_user_folder: Ṣiṣi folda olumulo
   settings: Eto Awọn ọna
   smart_charge: '- Awọn iṣakoso Smart'
   volume: Iwọn didun
 settings:
   app_settings: Eto App
+  brightness: Didan
+  lock: Tiipa
   log_out: Wọle
   power: Agbara
   restart: Tun bẹrẹ
@@ -44,3 +50,24 @@ settings:
   sleep: Sun
   title: Ètò
 unlabelled_tray: Alailowaya ti ko ni ile-iwe
+userhome:
+  empty_list: Ko si awọn ohun kan
+  folders:
+    desktop: Tabili
+    documents: Awọn iwe aṣẹ
+    downloads: Igbasilẹ
+    more_items: Ṣe afihan diẹ sii ...
+    music: Orin
+    pictures: Awọn aworan
+    recent: Laipe lo
+    reduce_items: Fihan diẹ sii ...
+    title: Awọn ilana Olumulo
+    videos: Awọn fidio
+  profile:
+    accounts: Ṣii awọn eto iroyin
+    open_onedrive: Ṣii itọsọna ti odinẹ
+    open_user_folder: Ṣii itọsọna olumulo
+  seelen_options:
+    open_installation_folder: Ṣii folda Eto Sisen
+    open_log_folder: Ṣi sableber log
+    title: Awọn ilana nkan iwaju

@@ -193,6 +193,26 @@ export function Shortcuts() {
       </SettingsGroup>
 
       <SettingsGroup>
+        <SettingsSubGroup label={t('header.labels.seelen_weg')}>
+          <AhkOptions
+            variables={[
+              'startWegApp0',
+              'startWegApp1',
+              'startWegApp2',
+              'startWegApp3',
+              'startWegApp4',
+              'startWegApp5',
+              'startWegApp6',
+              'startWegApp7',
+              'startWegApp8',
+              'startWegApp9',
+            ]}
+            onChangeVar={onChangeVar}
+          />
+        </SettingsSubGroup>
+      </SettingsGroup>
+
+      <SettingsGroup>
         <SettingsSubGroup label={t('miscellaneous')}>
           <AhkOptions
             variables={['miscOpenSettings', 'miscToggleLockTracing', 'miscToggleWinEventTracing']}

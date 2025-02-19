@@ -83,6 +83,8 @@ devtools:
   settings_file: د امستنې دوتنه
   simulate_fullscreen: د بشپړ سکرین پیښې انډول کړئ
 extras:
+  clear_icons: د ایکسین عکس کې کیچ
+  clear_icons_tooltip: یو چالان ته اړتیا لیدل کیدی شي چې په بشپړ پوړ کې په بشپړ ډول پلي شي
   discord: ډارول
   exit: پریښودل / وتل
   github: ګیتوب
@@ -184,6 +186,16 @@ shortcuts:
     send_to_workspace_7: کارځای ته واستوئ
     send_to_workspace_8: کارځای ته واستوئ
     send_to_workspace_9: کارځای ته واستوئ
+    start_weg_app_0: د ټاسبر په موقعیت 1 کې فوکس یا پیل ایپ
+    start_weg_app_1: د ټاسبر په موقعیت 2 کې فوکس یا پیل ایپ
+    start_weg_app_2: د ټاسبر په موقعیت 3 کې فوکس یا پیل ایپ
+    start_weg_app_3: د ټاسبر په پوزیشن کې د ټیلک پاریز حالت کې تمرکز یا پیل ایپ
+    start_weg_app_4: په ټاسبر کې د سرلیک کولو ایپ یا پیل ایپ اپ
+    start_weg_app_5: د ټاسبر حالت 6 کې د سټراټ یا پیل ایپ
+    start_weg_app_6: د ټاسبر حالت کې د سټراټ یا پیل ایپ
+    start_weg_app_7: د ټاسبر موقعیت 8 باندې تمرکز یا پیل ایپ
+    start_weg_app_8: په ټاسبر کې د ټاسک بار کې د پیل غوښتنلیک
+    start_weg_app_9: د ټاسبر په موقعیت 10 د پیل ایپ اپ اپیل
     switch_workspace_0: د کارځای 1 ته لاړشئ
     switch_workspace_1: د کارځای 2 ته لاړشئ
     switch_workspace_2: د کارځای 2 ته لاړشئ
@@ -220,10 +232,7 @@ toolbar:
     never: هیڅکله نه
     on_overlap: پر اوورلیپ
   label: توکپټه
-  placeholder:
-    author: لیکوال
-    description: تفصیل
-    select: د توکپټې جوړښت
+  placeholder: {}
   use_multiple_monitor_overlap_logic: د واحد تمرکز منطق پرځای د ښودلو ځانګړي وکاروئ
 update:
   available: اوسمهالول شتون لري!

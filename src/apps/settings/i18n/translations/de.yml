@@ -84,6 +84,10 @@ devtools:
   settings_file: Einstellungsdatei
   simulate_fullscreen: Vollbildereignis simulieren
 extras:
+  clear_icons: System-Symbol-Cache löschen
+  clear_icons_tooltip: >-
+    Ein Neustart könnte erforderlich sein, um alle Widgets vollständig zu
+    aktivieren.
   discord: Discord
   exit: Beenden
   github: GitHub
@@ -187,6 +191,16 @@ shortcuts:
     send_to_workspace_7: Zum Arbeitsbereich 7 senden
     send_to_workspace_8: Zum Arbeitsbereich 8 senden
     send_to_workspace_9: Zum Arbeitsbereich 9 senden
+    start_weg_app_0: Fokus oder starten Sie die App in der Taskleistenposition 1
+    start_weg_app_1: Fokus oder starten Sie die App in der Taskleistenposition 2
+    start_weg_app_2: Fokus oder starten Sie die App in der Taskleistenposition 3
+    start_weg_app_3: Fokus oder starten Sie die App in der Taskleistenposition 4
+    start_weg_app_4: Fokus oder starten Sie die App in der Taskleistenposition 5
+    start_weg_app_5: Fokus oder starten Sie die App in der Taskleistenposition 6
+    start_weg_app_6: Fokus oder starten Sie die App in der Taskleistenposition 7
+    start_weg_app_7: Fokus oder starten Sie die App in der Taskleistenposition 8
+    start_weg_app_8: Fokus oder starten Sie die App in der Taskleistenposition 9
+    start_weg_app_9: Fokus oder starten Sie die App in der Taskleistenposition 10
     switch_workspace_0: Wechseln Sie zum Arbeitsbereich 1
     switch_workspace_1: Wechseln Sie zum Arbeitsbereich 2
     switch_workspace_2: Zum Arbeitsbereich 2 wechseln
@@ -224,10 +238,7 @@ toolbar:
     never: Niemals
     on_overlap: Auf Überlappung
   label: Symbolleiste
-  placeholder:
-    author: Autor
-    description: Beschreibung
-    select: Struktur der Werkzeugleiste
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Verwenden Sie eine anzeigespezifische statt einer einzelnen Fokuslogik
 update:
   available: Update verfügbar!

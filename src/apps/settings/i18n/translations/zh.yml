@@ -77,6 +77,8 @@ devtools:
   settings_file: 设置文件
   simulate_fullscreen: 模拟全屏事件
 extras:
+  clear_icons: 清除系统图标缓存
+  clear_icons_tooltip: 可能需要重新启动才能对所有部件完全生效
   discord: Discord
   exit: 退出 / 关闭
   github: GitHub
@@ -178,6 +180,16 @@ shortcuts:
     send_to_workspace_7: 发送至工作区 7
     send_to_workspace_8: 发送至工作区 8
     send_to_workspace_9: 发送至工作区 9
+    start_weg_app_0: 聚焦或启动应用程序位置1
+    start_weg_app_1: 将重点或启动应用程序启动在任务栏位置2
+    start_weg_app_2: 聚焦或启动应用程序在任务栏位置3
+    start_weg_app_3: 重点或启动应用程序在任务栏位置4
+    start_weg_app_4: 重点或启动应用在任务栏位置5
+    start_weg_app_5: 将重点或启动应用程序启动在任务栏位置6
+    start_weg_app_6: 重点或启动应用在任务栏位置7
+    start_weg_app_7: 将重点或启动应用程序启动在任务栏位置8
+    start_weg_app_8: 聚焦或启动应用程序位置9
+    start_weg_app_9: 将重点或启动应用程序启动在任务栏位置10
     switch_workspace_0: 切换至工作区 0
     switch_workspace_1: 切换至工作区 1
     switch_workspace_2: 切换至工作区 2
@@ -213,10 +225,7 @@ toolbar:
     never: 绝不
     on_overlap: 关于重叠
   label: 工具栏
-  placeholder:
-    author: 作者
-    description: 描述
-    select: 工具栏结构
+  placeholder: {}
   use_multiple_monitor_overlap_logic: 使用特定于显示的逻辑而不是单焦点逻辑
 update:
   available: 更新可用！

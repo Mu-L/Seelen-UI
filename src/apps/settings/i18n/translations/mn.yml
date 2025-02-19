@@ -83,6 +83,10 @@ devtools:
   settings_file: Тохиргооын нэр
   simulate_fullscreen: Бүтэн дэлгэцийн үйл явдлыг дуурайх
 extras:
+  clear_icons: Системийн дүрсийг цэвэрлэх
+  clear_icons_tooltip: >-
+    Бүх виджет дээр хүчин төгөлдөр болохын тулд дахин эхлүүлэх шаардлагатай байж
+    болно
   discord: Холор
   exit: Гарах / гарах
   github: Github
@@ -184,6 +188,16 @@ shortcuts:
     send_to_workspace_7: Ажлын талбар руу илгээх 7
     send_to_workspace_8: Ажлын талбар руу илгээх 8
     send_to_workspace_9: Ажлын талбарт 9-р илгээнэ үү
+    start_weg_app_0: Taskbar-ийн байрлалд анхаарлаа төвлөрүүлэх эсвэл эхлүүлэх
+    start_weg_app_1: Taskbar-ийн байрлал 2-т анхаарлаа төвлөрүүлэх эсвэл эхлүүлэх
+    start_weg_app_2: Taskbar-ийн байрлал дээр анхаарлаа төвлөрүүлэх эсвэл эхлүүлэх
+    start_weg_app_3: Taskbar-ийн байрлал дээр 4-р байранд анхаарлаа төвлөрүүлэх эсвэл эхлүүлэх
+    start_weg_app_4: Taskbar-ийн байрлал дахь 5-р байранд анхаарлаа төвлөрүүлэх эсвэл эхлүүлэх
+    start_weg_app_5: Taskbar-ийн TaskBar-ийн 6-р байранд анхаарлаа төвлөрүүлэх эсвэл эхлүүлэх
+    start_weg_app_6: Taskbar-ийн төв байрлалд анхаарлаа төвлөрүүлэх эсвэл эхлүүлэх
+    start_weg_app_7: Taskbar-ийн 8-р байранд анхаарлаа төвлөрүүлэх эсвэл эхлүүлэх
+    start_weg_app_8: Taskbar-ийн байрлал дээр анхаарлаа төвлөрүүлэх эсвэл эхлүүлэх 9
+    start_weg_app_9: Taskbar-ийн ажлын байрны төв дээр анхаарлаа төвлөрүүлэх эсвэл эхлүүлэх
     switch_workspace_0: Ажлын талбарт шилжих 1
     switch_workspace_1: Ажлын талбарт 2 руу шилжих
     switch_workspace_2: Ажлын талбарт 2 руу шилжих
@@ -220,10 +234,7 @@ toolbar:
     never: Хэзээ ч үгүй
     on_overlap: Давхардсан дээр
   label: Балтсний хайрцагны хэрэгсэл
-  placeholder:
-    author: Зохиолч
-    description: Тодорхойлолт / төрөл анги
-    select: Хэрэгслийн бүтэц
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Нэг фокусын логикийн оронд тусгай дэлгэцийг ашигла
 update:
   available: Шинэчлэх боломжтой!

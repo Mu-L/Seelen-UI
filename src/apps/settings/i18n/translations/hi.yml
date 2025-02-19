@@ -84,6 +84,10 @@ devtools:
   settings_file: सेटिंग संचिका
   simulate_fullscreen: फ़ुलस्क्रीन ईवेंट का अनुकरण करें
 extras:
+  clear_icons: स्पष्ट प्रणाली आइकन कैश
+  clear_icons_tooltip: >-
+    सभी विजेट पर पूरी तरह से प्रभावी होने के लिए एक पुनरारंभ की आवश्यकता हो सकती
+    है
   discord: कलह
   exit: छोड़ देना/बाहर निकलना
   github: GitHub
@@ -187,6 +191,16 @@ shortcuts:
     send_to_workspace_7: कार्यक्षेत्र 7 को भेजें
     send_to_workspace_8: कार्यक्षेत्र 8 पर भेजें
     send_to_workspace_9: कार्यक्षेत्र 9 को भेजें
+    start_weg_app_0: टास्कबार पोजिशन 1 पर फोकस या स्टार्ट ऐप
+    start_weg_app_1: टास्कबार पोजिशन 2 पर ऐप फोकस या स्टार्ट करें
+    start_weg_app_2: टास्कबार पोजिशन 3 पर ऐप फोकस या स्टार्ट करें
+    start_weg_app_3: टास्कबार पोजिशन 4 पर ऐप फोकस या स्टार्ट करें
+    start_weg_app_4: टास्कबार पोजिशन 5 पर ऐप फोकस या स्टार्ट करें
+    start_weg_app_5: टास्कबार पोजिशन 6 पर ऐप फोकस या स्टार्ट करें
+    start_weg_app_6: टास्कबार पोजिशन 7 पर फोकस या स्टार्ट ऐप
+    start_weg_app_7: टास्कबार पोजिशन 8 पर फोकस या स्टार्ट ऐप
+    start_weg_app_8: टास्कबार पोजिशन 9 पर ऐप फोकस या स्टार्ट करें
+    start_weg_app_9: टास्कबार पोजिशन 10 पर ऐप फोकस या स्टार्ट करें
     switch_workspace_0: कार्यक्षेत्र 1 पर स्विच करें
     switch_workspace_1: कार्यक्षेत्र 2 पर स्विच करें
     switch_workspace_2: कार्यक्षेत्र 2 पर स्विच करें
@@ -223,10 +237,7 @@ toolbar:
     never: कभी नहीं
     on_overlap: ओवरलैप पर
   label: उपकरण पट्टी
-  placeholder:
-    author: लेखक
-    description: विवरण
-    select: उपकरण -संरचना
+  placeholder: {}
   use_multiple_monitor_overlap_logic: एकल फोकस तर्क के बजाय प्रदर्शन विशिष्ट का उपयोग करें
 update:
   available: उपलब्ध अद्यतन!

@@ -43,9 +43,8 @@ use crate::{
 };
 
 lazy_static! {
-    static ref HOOK_MANAGER_SKIPPER: Arc<Mutex<HookManagerSkipper>> = Arc::new(Mutex::new(HookManagerSkipper::default()));
-    // Last active window omitting all the seelen overlays
-    pub static ref LAST_ACTIVE_NOT_SEELEN: AtomicIsize = AtomicIsize::new(WindowsApi::get_foreground_window().0 as _);
+    static ref HOOK_MANAGER_SKIPPER: Arc<Mutex<HookManagerSkipper>> =
+        Arc::new(Mutex::new(HookManagerSkipper::default()));
 }
 
 pub static LOG_WIN_EVENTS: AtomicBool = AtomicBool::new(false);
@@ -56,6 +55,7 @@ pub struct FocusedApp {
     title: String,
     name: String,
     exe: Option<PathBuf>,
+    umid: Option<String>,
 }
 
 #[derive(Debug)]
@@ -164,23 +164,22 @@ impl HookManager {
         }
 
         let window = Window::from(origin);
-        if event == WinEvent::SystemForeground && !window.is_seelen_overlay() {
-            LAST_ACTIVE_NOT_SEELEN.store(origin.0 as _, Ordering::Relaxed);
-        }
 
         if event == WinEvent::ObjectFocus || event == WinEvent::SystemForeground {
-            let title = window.title();
-            log_error!(get_app_handle().emit(
+            let process = window.process();
+            let result = get_app_handle().emit(
                 SeelenEvent::GlobalFocusChanged,
                 FocusedApp {
-                    title,
                     hwnd: origin.0 as _,
+                    title: window.title(),
                     name: window
                         .app_display_name()
                         .unwrap_or(String::from("Error on App Name")),
-                    exe: window.exe().ok(),
+                    exe: process.program_path().ok(),
+                    umid: window.app_user_model_id().map(|umid| umid.to_string()),
                 },
-            ));
+            );
+            log_error!(result);
         }
 
         let log_error_event = move |name: &str, result: Result<()>| {
@@ -369,7 +368,7 @@ pub fn register_win_hook() -> Result<()> {
         SetWinEventHook(EVENT_MIN, EVENT_MAX, None, Some(win_event_hook), 0, 0, 0);
         let mut msg: MSG = MSG::default();
         loop {
-            if !GetMessageW(&mut msg, HWND::default(), 0, 0).as_bool() {
+            if !GetMessageW(&mut msg, None, 0, 0).as_bool() {
                 break;
             };
             let _ = TranslateMessage(&msg);

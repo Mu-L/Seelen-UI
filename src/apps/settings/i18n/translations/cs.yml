@@ -84,6 +84,8 @@ devtools:
   settings_file: Nastavení souboru
   simulate_fullscreen: Simulovat událost na celou obrazovku
 extras:
+  clear_icons: Vymazání mezipaměti systémových ikon
+  clear_icons_tooltip: Aby se plně projevily všechny widgety, mohlo by být nutné restartování.
   discord: Svár
   exit: Ukončit/ukončit
   github: GitHub
@@ -185,6 +187,16 @@ shortcuts:
     send_to_workspace_7: Odeslat do pracovního prostoru 7
     send_to_workspace_8: Odeslat do pracovního prostoru 8
     send_to_workspace_9: Odeslat do pracovního prostoru 9
+    start_weg_app_0: Zaměřte nebo spusťte aplikaci na pozici na hlavním panelu 1
+    start_weg_app_1: Zaměřte nebo spusťte aplikaci na pozici na hlavním panelu 2
+    start_weg_app_2: Zaměřte nebo spusťte aplikaci na pozici na hlavním panelu 3
+    start_weg_app_3: Zaměřte nebo spusťte aplikaci na pozici na hlavním panelu 4
+    start_weg_app_4: Zaměřte nebo spusťte aplikaci na pozici na hlavním panelu 5
+    start_weg_app_5: Zaměřte nebo spusťte aplikaci na pozici na hlavním panelu 6
+    start_weg_app_6: Zaměřte nebo spusťte aplikaci na pozici na hlavním panelu 7
+    start_weg_app_7: Zaměřte nebo spusťte aplikaci na pozici na hlavním panelu 8
+    start_weg_app_8: Zaměřte nebo spusťte aplikaci na pozici na hlavním panelu 9
+    start_weg_app_9: Zaměřte nebo spusťte aplikaci na pozici na hlavním panelu 10
     switch_workspace_0: Přepněte do pracovního prostoru 1
     switch_workspace_1: Přepněte do pracovního prostoru 2
     switch_workspace_2: Přepněte do pracovního prostoru 2
@@ -222,10 +234,7 @@ toolbar:
     never: Nikdy
     on_overlap: Na překrytí
   label: Panel nástrojů
-  placeholder:
-    author: Autor
-    description: Popis
-    select: Struktura panelu nástrojů
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Místo logiky jednoho zaměření použijte specifickou obrazovku
 update:
   available: Aktualizace k dispozici!

@@ -20,13 +20,14 @@ interface Props {
 
 export const FileOrFolder = memo(({ item }: Props) => {
   const [iconSrc, setIconSrc] = useState<string>(
-    item.isDir ? convertFileSrc(LAZY_CONSTANTS.FOLDER_ICON_PATH) : '',
+    item.subtype === 'Folder' ? convertFileSrc(LAZY_CONSTANTS.FOLDER_ICON_PATH) : '',
   );
 
   const { t } = useTranslation();
 
   useEffect(() => {
-    if (item.path.endsWith('lnk') || !item.isDir) {
+    // we can improve this later to use the useIcon hook properly
+    if (item.path.endsWith('lnk')) {
       invoke<string | null>(SeelenCommand.GetIcon, { path: item.path }).then((icon) => {
         setIconSrc(convertFileSrc(icon || LAZY_CONSTANTS.MISSING_ICON_PATH));
       });
@@ -47,7 +48,7 @@ export const FileOrFolder = memo(({ item }: Props) => {
           {iconSrc.endsWith('.svg') ? (
             <InlineSVG className="weg-item-icon" src={iconSrc} />
           ) : (
-            <img className="weg-item-icon" src={iconSrc} draggable={false} />
+            <img className="weg-item-icon" src={iconSrc} />
           )}
         </div>
       </WithContextMenu>

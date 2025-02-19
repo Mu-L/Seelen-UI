@@ -82,6 +82,8 @@ devtools:
   settings_file: ໄຟລ໌ການຕັ້ງຄ່າ
   simulate_fullscreen: ຈຳລອງເຫດການເຕັມຈໍ
 extras:
+  clear_icons: ລະບົບໄອຄອນລະບົບໄອຄອນ
+  clear_icons_tooltip: ການເລີ່ມຕົ້ນໃຫມ່ອາດຈະມີຜົນບັງຄັບໃຊ້ຢ່າງເຕັມສ່ວນໃນທຸກໆ widget
   discord: ຄວາມຂັດແຍ້ງ
   exit: ອອກ/ອອກ
   github: GitHub
@@ -183,6 +185,16 @@ shortcuts:
     send_to_workspace_7: ສົ່ງໄປທີ່ບ່ອນເຮັດວຽກ 7
     send_to_workspace_8: ສົ່ງໄປທີ່ບ່ອນເຮັດວຽກ 8
     send_to_workspace_9: ສົ່ງໄປທີ່ບ່ອນເຮັດວຽກ 9
+    start_weg_app_0: ສຸມໃສ່ຫຼືເລີ່ມຕົ້ນແອັບ on ໃນຕໍາແຫນ່ງຂອງແຖບວຽກ 1
+    start_weg_app_1: ສຸມໃສ່ຫຼືເລີ່ມຕົ້ນແອັບ on ໃນຕໍາແຫນ່ງ Task -Breent Bad 2
+    start_weg_app_2: ສຸມໃສ່ຫຼືເລີ່ມຕົ້ນແອັບ on ໃນຕໍາແຫນ່ງຂອງແຖບວຽກ 3
+    start_weg_app_3: ສຸມໃສ່ຫຼືເລີ່ມຕົ້ນແອັບ on ໃນຕໍາແຫນ່ງຂອງແຖບວຽກ 4
+    start_weg_app_4: ສຸມໃສ່ຫຼືເລີ່ມຕົ້ນແອັບ on ໃນຕໍາແຫນ່ງຂອງແຖບວຽກ 5
+    start_weg_app_5: ສຸມໃສ່ຫຼືເລີ່ມຕົ້ນແອັບ on ໃນຕໍາແຫນ່ງຂອງແຖບວຽກ 6
+    start_weg_app_6: ສຸມໃສ່ຫຼືເລີ່ມຕົ້ນແອັບ on ໃນຕໍາແຫນ່ງຂອງແຖບວຽກ 7
+    start_weg_app_7: ສຸມໃສ່ຫຼືເລີ່ມຕົ້ນແອັບ on ໃນຕໍາແຫນ່ງຂອງແຖບວຽກ 8
+    start_weg_app_8: ສຸມໃສ່ຫຼືເລີ່ມຕົ້ນແອັບ on ໃນຕໍາແຫນ່ງຂອງແຖບວຽກ 9
+    start_weg_app_9: ສຸມໃສ່ຫຼືເລີ່ມຕົ້ນແອັບ on ໃນຕໍາແຫນ່ງຂອງແຖບວຽກ 10
     switch_workspace_0: ປ່ຽນໄປເຮັດວຽກ 1
     switch_workspace_1: ປ່ຽນໄປເຮັດ Workspace 2
     switch_workspace_2: ສະຫຼັບໄປບ່ອນເຮັດວຽກ 2
@@ -221,10 +233,7 @@ toolbar:
     never: ບໍ່ເຄີຍ
     on_overlap: ທັບຊ້ອນກັນ
   label: ແຖບເຄື່ອງມື
-  placeholder:
-    author: ຜູ້ຂຽນ
-    description: ລາຍລະອຽດ
-    select: ໂຄງສ້າງແຖບເຄື່ອງມື
+  placeholder: {}
   use_multiple_monitor_overlap_logic: ໃຊ້ການສະແດງຜົນສະເພາະແທນທີ່ຈະເປັນເຫດຜົນຈຸດສຸມດຽວ
 update:
   available: ປັບປຸງໃຫ້ທັນສະໄຫມ!

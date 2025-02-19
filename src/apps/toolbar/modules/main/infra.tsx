@@ -1,6 +1,6 @@
 import { HideMode } from '@seelen-ui/lib';
 import { ToolbarModuleType as ToolbarItemType } from '@seelen-ui/lib';
-import { Placeholder, Plugin, ToolbarItem } from '@seelen-ui/lib/types';
+import { Plugin, PluginId, ToolbarItem } from '@seelen-ui/lib/types';
 import { Reorder, useForceUpdate } from 'framer-motion';
 import { JSXElementConstructor, useCallback, useLayoutEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -14,9 +14,10 @@ import { NetworkModule } from '../network/infra/Module';
 import { NotificationsModule } from '../Notifications/infra/Module';
 import { PowerModule } from '../Power/infra';
 import { SettingsModule } from '../Settings/infra';
+import { UserModule } from '../user/infra/Module';
 
 import { RootActions, Selectors } from '../shared/store/app';
-import { SavePlaceholderAsCustom } from './application';
+import { SaveToolbarItems } from './application';
 
 import { AnimatedDropdown } from '../../../shared/components/AnimatedWrappers';
 import { useWindowFocusChange } from '../../../shared/hooks';
@@ -31,6 +32,7 @@ const modulesByType: Record<
 > = {
   [ToolbarItemType.Text]: Item,
   [ToolbarItemType.Generic]: GenericItem,
+  [ToolbarItemType.User]: UserModule,
   [ToolbarItemType.Date]: DateModule,
   [ToolbarItemType.Power]: PowerModule,
   [ToolbarItemType.Settings]: SettingsModule,
@@ -42,15 +44,11 @@ const modulesByType: Record<
   [ToolbarItemType.Notifications]: NotificationsModule,
 };
 
-interface Props {
-  structure: Placeholder;
-}
-
 const DividerStart = 'CenterStart';
 const DividerEnd = 'CenterEnd';
 
 // item can be a toolbar plugin id or a toolbar module
-function componentByModule(plugins: Plugin[], item: string | ToolbarItem) {
+function componentByModule(plugins: Plugin[], item: PluginId | ToolbarItem) {
   let module: ToolbarItem | undefined;
 
   if (typeof item === 'string') {
@@ -72,7 +70,9 @@ function componentByModule(plugins: Plugin[], item: string | ToolbarItem) {
   return <Component key={module.id} module={module} value={item} />;
 }
 
-export function ToolBar({ structure }: Props) {
+export function ToolBar() {
+  const structure = useSelector(Selectors.items);
+
   const [isAppFocused, setAppFocus] = useState(false);
   const [delayed, setDelayed] = useState(false);
   const [openContextMenu, setOpenContextMenu] = useState(false);
@@ -80,6 +80,7 @@ export function ToolBar({ structure }: Props) {
   const plugins = useSelector(Selectors.plugins);
   const isOverlaped = useSelector(Selectors.isOverlaped);
   const hideMode = useSelector(Selectors.settings.hideMode);
+  const position = useSelector(Selectors.settings.position);
 
   const dispatch = useDispatch();
   const [forceUpdate] = useForceUpdate();
@@ -129,7 +130,7 @@ export function ToolBar({ structure }: Props) {
     payload = apps.slice(dividerEnd + 1) as ToolbarItem[];
     dispatch(RootActions.setItemsOnRight(payload));
 
-    SavePlaceholderAsCustom()?.catch(console.error);
+    SaveToolbarItems()?.catch(console.error);
   }, []);
 
   const shouldBeHidden =
@@ -156,7 +157,7 @@ export function ToolBar({ structure }: Props) {
           ...structure.right,
         ]}
         onReorder={onReorderPinned}
-        className={cx('ft-bar', {
+        className={cx('ft-bar', position.toLowerCase(), {
           'ft-bar-hidden': shouldBeHidden,
           'ft-bar-delayed': delayed,
         })}

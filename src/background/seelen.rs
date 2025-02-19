@@ -16,7 +16,7 @@ use crate::{
     instance::SeelenInstanceContainer,
     log_error,
     modules::{
-        cli::ServiceClient,
+        cli::{ServiceClient, SvcAction},
         monitors::{MonitorManager, MonitorManagerEvent, MONITOR_MANAGER},
     },
     restoration_and_migrations::RestorationAndMigration,
@@ -256,19 +256,25 @@ impl Seelen {
     pub fn is_auto_start_enabled() -> Result<bool> {
         Com::run_with_context(|| unsafe {
             let task_service: ITaskService = Com::create_instance(&TaskScheduler)?;
-            task_service.Connect(None, None, None, None)?;
+            task_service.Connect(
+                &Default::default(),
+                &Default::default(),
+                &Default::default(),
+                &Default::default(),
+            )?;
             let is_task_enabled = task_service
                 .GetFolder(&"\\Seelen".into())
                 .and_then(|folder| folder.GetTask(&"Seelen UI Service".into()))
-                .and_then(|task| task.Enabled())
-                .map(|v| v.as_bool())
-                .unwrap_or(false);
+                .and_then(|task| task.Definition())
+                .and_then(|definition| definition.Triggers())
+                .and_then(|triggers| triggers.get_Item(1))
+                .is_ok();
             Ok(is_task_enabled)
         })
     }
 
     pub fn set_auto_start(enabled: bool) -> Result<()> {
-        ServiceClient::emit_set_startup(enabled)
+        ServiceClient::request(SvcAction::SetStartup(enabled))
     }
 
     // TODO: split ahk logic into another file/module
@@ -292,6 +298,12 @@ impl Seelen {
             AutoHotKey::from_template(include_str!("utils/ahk/mocks/seelen.vd.ahk"), &vars)
                 .name("seelen.vd.ahk")
                 .execute()?;
+
+            if state.is_weg_enabled() {
+                AutoHotKey::from_template(include_str!("utils/ahk/mocks/seelen.weg.ahk"), &vars)
+                    .name("seelen.weg.ahk")
+                    .execute()?;
+            }
 
             if state.is_window_manager_enabled() {
                 AutoHotKey::from_template(include_str!("utils/ahk/mocks/seelen.wm.ahk"), &vars)

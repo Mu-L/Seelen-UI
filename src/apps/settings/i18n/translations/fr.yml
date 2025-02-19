@@ -84,6 +84,10 @@ devtools:
   settings_file: Fichier de paramètres
   simulate_fullscreen: Simuler un événement en plein écran
 extras:
+  clear_icons: Effacer le cache des icônes du système
+  clear_icons_tooltip: >-
+    Un redémarrage pourrait être nécessaire pour que tous les widgets soient
+    pleinement pris en compte.
   discord: Discorde
   exit: Quitter/Quitter
   github: GitHub
@@ -187,6 +191,18 @@ shortcuts:
     send_to_workspace_7: Envoyer à Workspace 7
     send_to_workspace_8: Envoyer à l'espace de travail 8
     send_to_workspace_9: Envoyer à l'espace de travail 9
+    start_weg_app_0: >-
+      Focus ou démarrage de l'application sur la position de la barre des tâches
+      1
+    start_weg_app_1: Focus ou démarrez l'application sur la position de la barre des tâches 2
+    start_weg_app_2: Focus ou démarrez l'application sur la position de la barre des tâches 3
+    start_weg_app_3: Focus ou démarrez l'application sur la position de la barre des tâches 4
+    start_weg_app_4: Focus ou démarrez l'application sur la position de la barre des tâches 5
+    start_weg_app_5: Focus ou démarrez l'application sur la position de la barre des tâches 6
+    start_weg_app_6: Focus ou démarrez l'application sur la position de la barre des tâches 7
+    start_weg_app_7: Focus ou démarrez l'application sur la position de la barre des tâches 8
+    start_weg_app_8: Focus ou démarrez l'application sur la position de la barre des tâches 9
+    start_weg_app_9: Focus ou démarrez l'application sur la position de la barre des tâches 10
     switch_workspace_0: Passez à l'espace de travail 1
     switch_workspace_1: Passez à l'espace de travail 2
     switch_workspace_2: Passer à l'espace de travail 2
@@ -220,10 +236,7 @@ toolbar:
     never: Jamais
     on_overlap: Sur chevauchement
   label: Barre d'outils
-  placeholder:
-    author: Auteur
-    description: Description
-    select: Structure de la barre d'outils
+  placeholder: {}
   use_multiple_monitor_overlap_logic: >-
     Utiliser une logique d'affichage spécifique au lieu d'une logique de mise au
     point unique

@@ -84,6 +84,8 @@ devtools:
   settings_file: Nustatymų failas
   simulate_fullscreen: Imituoti viso ekrano įvykį
 extras:
+  clear_icons: Išvalyti sistemos piktogramų talpyklą
+  clear_icons_tooltip: Gali prireikti iš naujo paleisti, kad visi valdikliai visiškai įsigaliotų.
   discord: Nesantaika
   exit: Mesti/išeiti
   github: Github
@@ -185,6 +187,16 @@ shortcuts:
     send_to_workspace_7: Siųsti į „Workspace 7“
     send_to_workspace_8: Siųsti į „Workspace 8“
     send_to_workspace_9: Siųsti į „Workspace 9“
+    start_weg_app_0: Sutelkite arba paleiskite programą 1 užduočių juostoje
+    start_weg_app_1: Sutelkite arba paleiskite programą 2 užduočių juostoje
+    start_weg_app_2: Sutelkite arba paleiskite programą 3 užduoties juostoje
+    start_weg_app_3: Sutelkite arba paleiskite programą 4 užduoties juostoje
+    start_weg_app_4: Sutelkite arba paleiskite programą 5 užduoties juostoje
+    start_weg_app_5: Sutelkite arba paleiskite programą 6 užduoties juostoje
+    start_weg_app_6: Sutelkite arba paleiskite programą 7 užduoties juostoje
+    start_weg_app_7: Sutelkite arba paleiskite programą 8 užduočių juostoje
+    start_weg_app_8: Sutelkite arba paleiskite programą 9 užduočių juostoje
+    start_weg_app_9: Sutelkite arba paleiskite programą 10 užduočių juostoje
     switch_workspace_0: Perjunkite į 1 darbo vietą
     switch_workspace_1: Perjunkite į 2 darbo vietą
     switch_workspace_2: Perjunkite į 2 darbo vietą
@@ -222,10 +234,7 @@ toolbar:
     never: Niekada
     on_overlap: Ant persidengimo
   label: Įrankių juosta
-  placeholder:
-    author: Autorius
-    description: apibūdinimas
-    select: Įrankių juostos struktūra
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Naudokite konkretų ekraną, o ne vieno fokusavimo logiką
 update:
   available: Galima atnaujinti!

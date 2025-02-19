@@ -84,6 +84,8 @@ devtools:
   settings_file: Ezarpenak fitxategia
   simulate_fullscreen: Simulatu pantaila osoko gertaera
 extras:
+  clear_icons: Garbitu sistemaren ikonoak cachea
+  clear_icons_tooltip: Berrabiarazi behar da widget guztietan erabat indarrean egon dadin
   discord: Deskudun
   exit: Irten / irten
   github: Github
@@ -185,6 +187,16 @@ shortcuts:
     send_to_workspace_7: Bidali lantokira 7
     send_to_workspace_8: Bidali lantokira 8
     send_to_workspace_9: Bidali Workspace 9ra
+    start_weg_app_0: Fokatu edo abiarazi Aplikazioa TASSBAR 1. posizioan
+    start_weg_app_1: Fokatu edo abiarazi aplikazioa ataza barraren 2. postuan
+    start_weg_app_2: Fokua edo abiarazi aplikazioa 3 ataza-barra posizioan
+    start_weg_app_3: Fokatu edo abiarazi aplikazioa zeregin-barran 4. postuan
+    start_weg_app_4: Fokua edo abiarazi aplikazioa 5 ataza-barran
+    start_weg_app_5: Fokua edo abiarazi aplikazioa zeregin-barran 6. postuan
+    start_weg_app_6: Fokua edo abiarazi aplikazioa zeregin-barran 7. postuan
+    start_weg_app_7: Fokatu edo abiarazi aplikazioa zereginen barra 8. postuan
+    start_weg_app_8: Fokatu edo abiarazi aplikazioa zeregin-barran 9. postuan
+    start_weg_app_9: Fokatu edo abiarazi aplikazioa zeregin-barran 10. postuan
     switch_workspace_0: Aldatu lan-eremura 1
     switch_workspace_1: Aldatu Workspace 2ra
     switch_workspace_2: Aldatu Workspace 2ra
@@ -222,10 +234,7 @@ toolbar:
     never: Inoiz ez
     on_overlap: Gainjartzean
   label: Tresna barra
-  placeholder:
-    author: Idazle
-    description: Deskribapen
-    select: Tresna-barraren egitura
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Erabili pantaila espezifikoa foku bakarraren ordez
 update:
   available: Eguneratu eskuragarri!

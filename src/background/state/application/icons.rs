@@ -5,7 +5,7 @@ use std::{
 };
 
 use itertools::Itertools;
-use seelen_core::{handlers::SeelenEvent, state::IconPack};
+use seelen_core::{handlers::SeelenEvent, resource::ResourceText, state::IconPack};
 use tauri::Emitter;
 
 use crate::{
@@ -26,14 +26,40 @@ impl IconPacksManager {
         self.0.values().cloned().collect_vec()
     }
 
-    pub fn add_system_icon(&mut self, key: &str, icon: &Path) {
+    /// key could be path or user model id
+    pub fn add_system_app_icon(&mut self, key: &str, target_rel_path: &Path) {
         let system_pack = self.0.get_mut("system").unwrap();
         let key = key.trim_start_matches(r"\\?\").to_string();
-        system_pack.apps.insert(key, icon.to_owned());
+        system_pack.apps.insert(key, target_rel_path.to_owned());
+    }
+
+    pub fn add_system_file_icon(&mut self, origin: &Path, target_rel_path: &Path) {
+        let system_pack = self.0.get_mut("system").unwrap();
+        if let Some(ext) = origin.extension() {
+            system_pack.files.insert(
+                ext.to_string_lossy().to_lowercase(),
+                target_rel_path.to_owned(),
+            );
+        }
+    }
+
+    pub fn clear_system_icons(&mut self) -> Result<()> {
+        let system_pack = self.0.get_mut("system").unwrap();
+        system_pack.apps.clear();
+        system_pack.files.clear();
+        let meta = std::ffi::OsStr::new("metadata.yml");
+        for entry in std::fs::read_dir(SEELEN_COMMON.icons_path().join("system"))?.flatten() {
+            if entry.file_type()?.is_dir() {
+                std::fs::remove_dir_all(entry.path())?;
+            } else if entry.file_name() != meta {
+                std::fs::remove_file(entry.path())?;
+            }
+        }
+        Ok(())
     }
 
     /// Get icon pack by app user model id, filename or path
-    pub fn get_icon_by_key(&self, key: &str) -> Option<PathBuf> {
+    pub fn get_app_icon_by_key(&self, key: &str) -> Option<PathBuf> {
         let filename = PathBuf::from(key)
             .file_name()
             .map(|p| p.to_string_lossy().to_string());
@@ -48,7 +74,7 @@ impl IconPacksManager {
                 if let Some(icon) = maybe_icon {
                     let full_path = SEELEN_COMMON
                         .icons_path()
-                        .join(&icon_pack.info.filename)
+                        .join(&icon_pack.metadata.filename)
                         .join(icon);
                     if full_path.exists() {
                         return Some(full_path);
@@ -56,6 +82,31 @@ impl IconPacksManager {
                 }
             }
         }
+        None
+    }
+
+    pub fn get_file_icon(&self, path: &Path) -> Option<PathBuf> {
+        let extension = path.extension()?.to_string_lossy().to_lowercase();
+
+        let using = FULL_STATE.load().settings().icon_packs.clone();
+        for icon_pack in using.into_iter().rev() {
+            let icon_pack = match self.0.get(&icon_pack) {
+                Some(icon_pack) => icon_pack,
+                None => continue,
+            };
+
+            if let Some(sub_path) = icon_pack.files.get(extension.as_str()) {
+                let full_path = SEELEN_COMMON
+                    .icons_path()
+                    .join(&icon_pack.metadata.filename)
+                    .join(sub_path);
+
+                if full_path.exists() {
+                    return Some(full_path);
+                }
+            }
+        }
+
         None
     }
 
@@ -102,10 +153,11 @@ impl FullState {
                 let icon_pack = Self::load_icon_pack_from_dir(&path);
                 match icon_pack {
                     Ok(mut icon_pack) => {
-                        icon_pack.info.filename = entry.file_name().to_string_lossy().to_string();
+                        icon_pack.metadata.filename =
+                            entry.file_name().to_string_lossy().to_string();
                         icon_packs_manager
                             .0
-                            .insert(icon_pack.info.filename.clone(), icon_pack);
+                            .insert(icon_pack.metadata.filename.clone(), icon_pack);
                     }
                     Err(err) => {
                         log::error!("Failed to load icon pack ({:?}): {:?}", path, err)
@@ -116,15 +168,18 @@ impl FullState {
 
         // add default icon pack if not exists
         if !icon_packs_manager.0.contains_key("system") {
-            let mut icon_pack = IconPack::default();
-            icon_pack.info.display_name = "System".to_string();
-            icon_pack.info.author = "System".to_string();
-            icon_pack.info.description = "Icons from Windows and Program Files".to_string();
-            icon_pack.info.filename = "system".to_string();
+            let mut icon_pack = IconPack {
+                id: "@system/icon-pack".into(),
+                ..Default::default()
+            };
+            icon_pack.metadata.display_name = ResourceText::En("System".to_string());
+            icon_pack.metadata.description =
+                ResourceText::En("Icons from Windows and Program Files".to_string());
+            icon_pack.metadata.filename = "system".to_string();
 
             icon_packs_manager
                 .0
-                .insert(icon_pack.info.filename.clone(), icon_pack);
+                .insert(icon_pack.metadata.filename.clone(), icon_pack);
             icon_packs_manager.write_system_icon_pack()?;
         }
 

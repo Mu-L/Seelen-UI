@@ -1,3 +1,4 @@
+import { SeelenWegSide } from '@seelen-ui/lib';
 import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import { emit } from '@tauri-apps/api/event';
 import { Button } from 'antd';
@@ -13,7 +14,7 @@ import { cx } from 'src/apps/shared/styles';
 
 import { MediaWegItem } from '../../shared/store/domain';
 
-import { Icon } from '../../../../shared/components/Icon';
+import { FileIcon, Icon } from '../../../../shared/components/Icon';
 import { WithContextMenu } from '../../../components/WithContextMenu';
 import { DraggableItem } from './DraggableItem';
 import { getMenuForItem } from './Menu';
@@ -24,21 +25,22 @@ const MAX_LUMINANCE = 210;
 const MIN_LUMINANCE = 40;
 const BRIGHTNESS_MULTIPLIER = 1.5; // used in css
 
-export function MediaSession({ item }: { item: MediaWegItem }) {
+export function MediaSession({ item, drag }: { item: MediaWegItem; drag: boolean }) {
   const [luminance, setLuminance] = useState(0);
 
+  const dockPosition = useSelector(Selectors.settings.position);
   const sessions = useSelector(Selectors.mediaSessions);
   const session = sessions.find((s) => s.default);
 
-  let src = convertFileSrc(
+  let thumbnailSrc = convertFileSrc(
     session?.thumbnail ? session.thumbnail : LAZY_CONSTANTS.DEFAULT_THUMBNAIL,
   );
 
   const { t } = useTranslation();
 
   useEffect(() => {
-    calcLuminance(src).then(setLuminance).catch(console.error);
-  }, [src]);
+    calcLuminance(thumbnailSrc).then(setLuminance).catch(console.error);
+  }, [thumbnailSrc]);
 
   useEffect(() => {
     emit('register-media-events');
@@ -52,14 +54,22 @@ export function MediaSession({ item }: { item: MediaWegItem }) {
 
   const onClickBtn = (cmd: string) => {
     if (session) {
-      invoke(cmd, { id: session.id }).catch(console.error);
+      invoke(cmd, { id: session.umid }).catch(console.error);
     }
   };
 
+  const isHorizontal = dockPosition === SeelenWegSide.Bottom || dockPosition === SeelenWegSide.Top;
+
   return (
-    <DraggableItem item={item}>
+    <DraggableItem item={item} drag={drag}>
       <WithContextMenu items={getMenuForItem(t, item)}>
-        <div className="media-session-container" onContextMenu={(e) => e.stopPropagation()}>
+        <div
+          className={cx('weg-item media-session-container', {
+            'media-session-container-horizontal': isHorizontal,
+            'media-session-container-vertical': !isHorizontal,
+          })}
+          onContextMenu={(e) => e.stopPropagation()}
+        >
           <div
             className="media-session"
             style={{
@@ -67,20 +77,10 @@ export function MediaSession({ item }: { item: MediaWegItem }) {
             }}
           >
             <div className="media-session-thumbnail-container">
-              {session?.owner && (
-                <img
-                  className="media-session-app-icon"
-                  src={convertFileSrc(
-                    session.owner.iconPath
-                      ? session.owner.iconPath
-                      : LAZY_CONSTANTS.MISSING_ICON_PATH,
-                  )}
-                  draggable={false}
-                />
-              )}
-              <img className="media-session-thumbnail" src={src} draggable={false} />
+              <FileIcon className="media-session-app-icon" umid={session?.umid} noFallback />
+              <img className="media-session-thumbnail" src={thumbnailSrc} />
             </div>
-            <img className="media-session-blurred-thumbnail" src={src} draggable={false} />
+            <img className="media-session-blurred-thumbnail" src={thumbnailSrc} />
 
             <div className="media-session-info">
               <span

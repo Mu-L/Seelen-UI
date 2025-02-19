@@ -84,6 +84,8 @@ devtools:
   settings_file: Settytout-Datei
   simulate_fullscreen: Simuléiert Vollbild Event
 extras:
+  clear_icons: Kloer System Symboler Cache
+  clear_icons_tooltip: E Restart konnt noutwendeg sinn fir ganz wéi all Widgets ze maachen
   discord: Diskord
   exit: Ophalen / erausfannen
   github: Github
@@ -185,6 +187,16 @@ shortcuts:
     send_to_workspace_7: Schéckt op Aarbechtsberäich 7
     send_to_workspace_8: Schéckt e Aarbechtsberäich 8
     send_to_workspace_9: Schéckt an Aarbechtsbereedung 9
+    start_weg_app_0: Fokusséieren oder ufänken App op Taskbar Positioun 1
+    start_weg_app_1: Fokusséieren oder ufänken App op Taskbar Positioun 2
+    start_weg_app_2: Fokusséieren oder ufänken App op Taskbar Positioun 3
+    start_weg_app_3: Fokusséieren oder ufänken App op Taskbar Positioun 4
+    start_weg_app_4: Fokusséieren oder ufänken App op Taskbar Positioun 5
+    start_weg_app_5: Fokusséieren oder ufänken App op Taskbar Positioun 6
+    start_weg_app_6: Fokusséieren oder ufänken App op Taskbar Positioun 7
+    start_weg_app_7: Fokusséieren oder ufänken App op Taskbar Positioun 8
+    start_weg_app_8: Fokusséieren oder ufänken App op Taskbar Positioun 9
+    start_weg_app_9: Fokusséieren oder ufänken App op Taskbar Positioun 10
     switch_workspace_0: Schalt op Aarbechtsberäich 1
     switch_workspace_1: Schalt op Aarbechtsberäich 2
     switch_workspace_2: Schalt op Aarbechtsberäich 2
@@ -222,10 +234,7 @@ toolbar:
     never: Ni
     on_overlap: Op Iwwerlappung
   label: TO-tcstar
-  placeholder:
-    author: Auteur
-    description: Broessdatsch
-    select: Toolbar Struktur
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Benotzt Displayspezifesch amplaz vun enger eenzeger Fokuslogik
 update:
   available: Update verfügbar!

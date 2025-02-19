@@ -1,22 +1,41 @@
-import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Settings, UIColors } from '@seelen-ui/lib';
+import { createSlice, Dispatch, PayloadAction } from '@reduxjs/toolkit';
+import {
+  DesktopFolder,
+  DocumentsFolder,
+  DownloadsFolder,
+  invoke,
+  MusicFolder,
+  PicturesFolder,
+  RecentFolder,
+  SeelenCommand,
+  Settings,
+  UIColors,
+  UserDetails,
+  VideosFolder,
+} from '@seelen-ui/lib';
 import { Placeholder, ToolbarItem } from '@seelen-ui/lib/types';
 
-import { RootState } from './domain';
+import { PowerPlan, RootState } from './domain';
 
 import { StateBuilder } from '../../../../shared/StateBuilder';
 
-const settings = await Settings.default();
-
 const initialState: RootState = {
   version: 0,
-  placeholder: null,
+  items: await invoke(SeelenCommand.StateGetToolbarItems),
   plugins: [],
   dateFormat: '',
   isOverlaped: false,
+  user: (await UserDetails.getAsync()).user,
+  userRecentFolder: [],
+  userDesktopFolder: [],
+  userDocumentsFolder: [],
+  userDownloadsFolder: [],
+  userPicturesFolder: [],
+  userVideosFolder: [],
+  userMusicFolder: [],
   focused: null,
-  settings: settings.fancyToolbar,
-  env: {},
+  settings: (await Settings.default()).fancyToolbar,
+  env: (await invoke(SeelenCommand.GetUserEnvs)) as Record<string, string>,
   // default values of https://learn.microsoft.com/en-us/windows/win32/api/winbase/ns-winbase-system_power_status
   powerStatus: {
     acLineStatus: 255,
@@ -26,6 +45,7 @@ const initialState: RootState = {
     batteryLifeTime: -1,
     batteryFullLifeTime: -1,
   },
+  powerPlan: PowerPlan.Balanced,
   batteries: [],
   workspaces: [],
   activeWorkspace: null,
@@ -46,44 +66,50 @@ export const RootSlice = createSlice({
   initialState,
   reducers: {
     ...StateBuilder.reducersFor(initialState),
-    setPlaceholder(state, action: PayloadAction<Placeholder | null>) {
-      state.placeholder = action.payload;
+    setPlaceholder(state, action: PayloadAction<Placeholder>) {
+      state.items = action.payload;
       state.version++;
     },
     setItemsOnLeft(state, action: PayloadAction<ToolbarItem[]>) {
-      if (state.placeholder) {
-        state.placeholder.left = action.payload;
+      if (state.items) {
+        state.items.left = action.payload;
       }
     },
     setItemsOnCenter(state, action: PayloadAction<ToolbarItem[]>) {
-      if (state.placeholder) {
-        state.placeholder.center = action.payload;
+      if (state.items) {
+        state.items.center = action.payload;
       }
     },
     setItemsOnRight(state, action: PayloadAction<ToolbarItem[]>) {
-      if (state.placeholder) {
-        state.placeholder.right = action.payload;
+      if (state.items) {
+        state.items.right = action.payload;
       }
     },
     addItem(state, action: PayloadAction<string>) {
-      if (!state.placeholder) {
+      if (!state.items) {
         return;
       }
       const alreadyExists =
-        state.placeholder.left.includes(action.payload) ||
-        state.placeholder.right.includes(action.payload) ||
-        state.placeholder.center.includes(action.payload);
+        state.items.left.includes(action.payload) ||
+        state.items.right.includes(action.payload) ||
+        state.items.center.includes(action.payload);
       if (!alreadyExists) {
-        state.placeholder.right.push(action.payload);
+        state.items.right.push(action.payload);
       }
     },
     removeItem(state, action: PayloadAction<string>) {
       let id = action.payload;
-      if (state.placeholder) {
+      if (state.items) {
         let filter = (d: any) => d !== id && d.id !== id;
-        state.placeholder.left = state.placeholder.left.filter(filter);
-        state.placeholder.center = state.placeholder.center.filter(filter);
-        state.placeholder.right = state.placeholder.right.filter(filter);
+        state.items.left = state.items.left.filter(filter);
+        state.items.center = state.items.center.filter(filter);
+        state.items.right = state.items.right.filter(filter);
+      }
+    },
+    setToolbarReorderDisabled(state, action: PayloadAction<boolean>) {
+      let enabled = action.payload;
+      if (state.items) {
+        state.items.isReorderDisabled = enabled;
       }
     },
   },
@@ -92,6 +118,22 @@ export const RootSlice = createSlice({
 export const RootActions = RootSlice.actions;
 export const Selectors = StateBuilder.compositeSelector(initialState);
 
-export const selectDefaultOutput = createSelector(Selectors.mediaOutputs, (mediaOutputs) =>
-  mediaOutputs.find((d) => d.is_default_multimedia),
-);
+// no core things that can be lazy loaded to improve performance
+export async function lazySlice(d: Dispatch) {
+  const obj = {
+    userRecentFolder: (await RecentFolder.getAsync()).asArray(),
+    userDesktopFolder: (await DesktopFolder.getAsync()).asArray(),
+    userDocumentsFolder: (await DocumentsFolder.getAsync()).asArray(),
+    userDownloadsFolder: (await DownloadsFolder.getAsync()).asArray(),
+    userPicturesFolder: (await PicturesFolder.getAsync()).asArray(),
+    userVideosFolder: (await VideosFolder.getAsync()).asArray(),
+    userMusicFolder: (await MusicFolder.getAsync()).asArray(),
+  };
+  d(RootActions.setUserRecentFolder(obj.userRecentFolder));
+  d(RootActions.setUserDesktopFolder(obj.userDesktopFolder));
+  d(RootActions.setUserDocumentsFolder(obj.userDocumentsFolder));
+  d(RootActions.setUserDownloadsFolder(obj.userDownloadsFolder));
+  d(RootActions.setUserPicturesFolder(obj.userPicturesFolder));
+  d(RootActions.setUserVideosFolder(obj.userVideosFolder));
+  d(RootActions.setUserMusicFolder(obj.userMusicFolder));
+}

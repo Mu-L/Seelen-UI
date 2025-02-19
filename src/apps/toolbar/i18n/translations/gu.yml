@@ -24,6 +24,11 @@ network:
   saved: સાચવેલા નેટવર્ક્સ
   scanning: નેટવર્ક્સ માટે સ્કેનિંગ
   secured: એન્ક્રિપ્ટેડ નેટવર્ક
+notifications:
+  clear: બધુ સાફ કરવું
+  empty: કોઈ સૂચનાઓ
+  settings: વધુ સૂચનાઓ સેટિંગ્સ
+  title: સૂચના
 placeholder:
   battery_remaining: બાકી %
   bluetooth_devices: બ્લૂટૂથ અને ઉપકરણો
@@ -31,12 +36,13 @@ placeholder:
   ethernet_disconnected: કોઈ ઇન્ટરનેટ એક્સેસ નથી
   notifications: સૂચના
   open_system_tray: ખુલ્લી સિસ્ટમ ટ્રે
-  open_user_folder: વપરાશકર્તા ફોલ્ડર ખોલો
   settings: ઝડપી સેટિંગ્સ
   smart_charge: '- સ્માર્ટ ચાર્જ'
   volume: જથ્થો
 settings:
   app_settings: એપ્લિકેશન સેટિંગ્સ
+  brightness: ઉદ્ધતાઈ
+  lock: તાળ
   log_out: લૉગ આઉટ
   power: શક્તિ
   restart: પુનઃપ્રારંભ
@@ -44,3 +50,24 @@ settings:
   sleep: ઊંઘ
   title: પતાવટ
 unlabelled_tray: અનન્ય ટ્રે ચિહ્ન
+userhome:
+  empty_list: કોઈ વસ્તુ
+  folders:
+    desktop: ડેસ્કટ .પ
+    documents: દસ્તાવેજી
+    downloads: નિવેદનો
+    more_items: વધુ બતાવો ...
+    music: સંગીત
+    pictures: ચિત્રો
+    recent: તાજેતરનો ઉપયોગ
+    reduce_items: ઓછું બતાવો ...
+    title: વપરાશકર્તા નિયામક
+    videos: વિડિઓઝ
+  profile:
+    accounts: એકાઉન્ટ સેટિંગ્સ ખોલો
+    open_onedrive: ખુલ્લી વનડ્રાઇવ ડિરેક્ટરી
+    open_user_folder: વપરાશકર્તા ડિરેક્ટરી ખોલો
+  seelen_options:
+    open_installation_folder: સીલેન સેટિંગ્સ ફોલ્ડર ખોલો
+    open_log_folder: સીલેન લોગ ફોલ્ડર ખોલો
+    title: સીલેન ડિજચરીઓ

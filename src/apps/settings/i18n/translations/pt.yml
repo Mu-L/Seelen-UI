@@ -84,6 +84,8 @@ devtools:
   settings_file: Arquivo de configurações
   simulate_fullscreen: Simular evento em tela cheia
 extras:
+  clear_icons: Ícones do sistema limpo cache
+  clear_icons_tooltip: Pode ser necessário reinício para entrar em vigor em todos os widgets
   discord: Discord
   exit: Sair/Sair
   github: GitHub
@@ -185,6 +187,16 @@ shortcuts:
     send_to_workspace_7: Enviar para o espaço de trabalho 7
     send_to_workspace_8: Enviar para o espaço de trabalho 8
     send_to_workspace_9: Enviar para o espaço de trabalho 9
+    start_weg_app_0: Concentre ou inicie o aplicativo na barra de tarefas 1
+    start_weg_app_1: Concentre ou inicie o aplicativo na barra de tarefas 2
+    start_weg_app_2: Concentre ou inicie o aplicativo na barra de tarefas 3
+    start_weg_app_3: Concentre ou inicie o aplicativo na barra de tarefas 4
+    start_weg_app_4: Concentre ou inicie o aplicativo na barra de tarefas 5
+    start_weg_app_5: Concentre ou inicie o aplicativo na barra de tarefas 6
+    start_weg_app_6: Concentre ou inicie o aplicativo na Posição da Barra de Tarefa 7
+    start_weg_app_7: Concentre ou inicie o aplicativo na barra de tarefas 8
+    start_weg_app_8: Concentre ou inicie o aplicativo na barra de tarefas 9
+    start_weg_app_9: Concentre ou inicie o aplicativo na barra de tarefas 10
     switch_workspace_0: Mudar para o espaço de trabalho 1
     switch_workspace_1: Mudar para o espaço de trabalho 2
     switch_workspace_2: Mudar para o espaço de trabalho 2
@@ -222,10 +234,7 @@ toolbar:
     never: Nunca
     on_overlap: Na sobreposição
   label: Barra de ferramentas
-  placeholder:
-    author: Autor
-    description: Descrição
-    select: Estrutura da barra de ferramentas
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Use exibição específica em vez de lógica de foco único
 update:
   available: Atualização disponível!

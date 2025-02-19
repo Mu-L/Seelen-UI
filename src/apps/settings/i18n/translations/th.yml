@@ -81,6 +81,8 @@ devtools:
   settings_file: ไฟล์การตั้งค่า
   simulate_fullscreen: จำลองเหตุการณ์แบบเต็มหน้าจอ
 extras:
+  clear_icons: ล้างไอคอนระบบแคช
+  clear_icons_tooltip: การรีสตาร์ทอาจจำเป็นต้องมีผลอย่างเต็มที่กับวิดเจ็ตทั้งหมด
   discord: ความไม่ลงรอยกัน
   exit: ออก/ออก
   github: คนอื่น ๆ
@@ -182,6 +184,16 @@ shortcuts:
     send_to_workspace_7: ส่งไปยังเวิร์กสเปซ 7
     send_to_workspace_8: ส่งไปยังเวิร์กสเปซ 8
     send_to_workspace_9: ส่งไปยังเวิร์กสเปซ 9
+    start_weg_app_0: โฟกัสหรือเริ่มแอพในตำแหน่งแถบงาน 1
+    start_weg_app_1: โฟกัสหรือเริ่มแอพในตำแหน่งแถบงาน 2
+    start_weg_app_2: โฟกัสหรือเริ่มแอพในตำแหน่งแถบงาน 3
+    start_weg_app_3: โฟกัสหรือเริ่มแอพในตำแหน่งแถบงาน 4
+    start_weg_app_4: โฟกัสหรือเริ่มแอพในตำแหน่งแถบงาน 5
+    start_weg_app_5: โฟกัสหรือเริ่มแอพในตำแหน่งแถบงาน 6
+    start_weg_app_6: โฟกัสหรือเริ่มแอพในตำแหน่งแถบงาน 7
+    start_weg_app_7: โฟกัสหรือเริ่มแอพในตำแหน่งแถบงาน 8
+    start_weg_app_8: โฟกัสหรือเริ่มแอพในตำแหน่งแถบงาน 9
+    start_weg_app_9: โฟกัสหรือเริ่มแอพในตำแหน่งแถบงาน 10
     switch_workspace_0: เปลี่ยนไปใช้พื้นที่ทำงาน 1
     switch_workspace_1: สลับไปที่ Workspace 2
     switch_workspace_2: เปลี่ยนเป็น Workspace 2
@@ -218,10 +230,7 @@ toolbar:
     never: ไม่เคย
     on_overlap: เมื่อทับซ้อนกัน
   label: แถบเครื่องมือ
-  placeholder:
-    author: ผู้เขียน
-    description: คำอธิบาย
-    select: โครงสร้างแถบเครื่องมือ
+  placeholder: {}
   use_multiple_monitor_overlap_logic: ใช้จอแสดงผลเฉพาะแทนตรรกะโฟกัสเดียว
 update:
   available: อัปเดตพร้อมใช้งาน!

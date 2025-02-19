@@ -82,6 +82,10 @@ devtools:
   settings_file: Pelê Mîhengan
   simulate_fullscreen: Bûyera tevahî ekranê simule bikin
 extras:
+  clear_icons: Îkonên pergala zelal cache
+  clear_icons_tooltip: >-
+    Pêdivî ye ku ji nû ve destpêkirinê were xwestin ku bi tevahî li ser hemî
+    widgetan bandor bike
   discord: Nakemala
   exit: Qut / derketin
   github: Github
@@ -185,6 +189,16 @@ shortcuts:
     send_to_workspace_7: Ji bo Workspace 7 bişînin
     send_to_workspace_8: Ji bo Workspace 8 bişînin
     send_to_workspace_9: Ji Workspace 9 re bişînin
+    start_weg_app_0: Focus an Destpêka App li ser pozîsyona Taskbar 1
+    start_weg_app_1: Focus an Destpêka App li ser pozîsyona Taskbar 2
+    start_weg_app_2: Li ser pozîsyona peywirê 3 dest pê bikin an dest pê bikin
+    start_weg_app_3: Focus an Destpêka Serîlêdanê li ser pozîsyona Karê 4
+    start_weg_app_4: Focus an Destpêka Serîlêdanê li ser pozîsyona Taskbar 5
+    start_weg_app_5: Focus an Destpêka Serîlêdanê li ser pozîsyona 6-ê ya Destpêkê
+    start_weg_app_6: Li ser pozîsyona 7-ê ya Destpêkê bisekinin an dest pê bikin
+    start_weg_app_7: Focus an Destpêka Serîlêdanê li ser pozîsyona 8-ê ya Destpêkê
+    start_weg_app_8: Focus an Destpêka Serîlêdanê li ser pozîsyona Taskbar 9
+    start_weg_app_9: Focus an Destpêka App li ser pozîsyona Taskbar 10
     switch_workspace_0: Switch to Workspace 1
     switch_workspace_1: Switch to Workspace 2
     switch_workspace_2: Switch to Workspace 2
@@ -221,10 +235,7 @@ toolbar:
     never: Qet
     on_overlap: Li ser hevgirtinê
   label: Toolbar
-  placeholder:
-    author: Nivîskar
-    description: Terîf
-    select: Struktura Toolbar
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Li şûna mantiqa yekane ya fokusê, pêşandana taybetî bikar bînin
 update:
   available: Nûvekirin!

@@ -3,7 +3,6 @@ use std::path::PathBuf;
 use itertools::Itertools;
 use seelen_core::state::{
     IconPack, MonitorConfiguration, Plugin, Profile, WegItems, WegPinnedItemsVisibility, Widget,
-    WindowManagerLayout,
 };
 
 use crate::{
@@ -30,18 +29,8 @@ pub fn state_get_themes() -> Vec<Theme> {
 }
 
 #[tauri::command(async)]
-pub fn state_get_placeholders() -> Vec<Placeholder> {
-    FULL_STATE
-        .load()
-        .placeholders()
-        .values()
-        .cloned()
-        .collect_vec()
-}
-
-#[tauri::command(async)]
-pub fn state_get_layouts() -> Vec<WindowManagerLayout> {
-    FULL_STATE.load().layouts().values().cloned().collect_vec()
+pub fn state_get_toolbar_items() -> Placeholder {
+    FULL_STATE.load().toolbar_items().clone()
 }
 
 #[tauri::command(async)]
@@ -54,10 +43,10 @@ pub fn state_write_weg_items(window: tauri::Window, mut items: WegItems) -> Resu
     items.sanitize();
     let guard = FULL_STATE.load();
 
-    let monitor = Window::from(window.hwnd()?).monitor();
+    let monitor = Window::from(window.hwnd()?.0 as isize).monitor();
     let device_id = monitor.device_id()?;
     if guard.get_weg_pinned_item_visibility(&device_id) == WegPinnedItemsVisibility::WhenPrimary
-        && !monitor.is_primary()?
+        && !monitor.is_primary()
         || items == guard.weg_items
     {
         return Ok(());
@@ -136,4 +125,13 @@ pub fn state_get_widgets() -> Vec<Widget> {
 #[tauri::command(async)]
 pub fn state_get_profiles() -> Vec<Profile> {
     FULL_STATE.load().profiles.clone()
+}
+
+#[tauri::command(async)]
+pub fn state_delete_cached_icons() -> Result<()> {
+    let mutex = FULL_STATE.load().icon_packs().clone();
+    let mut icon_manager = trace_lock!(mutex);
+    icon_manager.clear_system_icons()?;
+    icon_manager.write_system_icon_pack()?;
+    Ok(())
 }

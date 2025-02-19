@@ -12,6 +12,7 @@ import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { debounce } from 'lodash';
 
 import { RootActions, RootSlice } from './app';
+import { AppNotification } from 'src/apps/toolbar/modules/Notifications/domain';
 
 import { MediaSession } from './domain';
 
@@ -51,6 +52,10 @@ export async function registerStoreEvents() {
 
   await listenGlobal<MediaSession[]>(SeelenEvent.MediaSessions, (event) => {
     store.dispatch(RootActions.setMediaSessions(event.payload));
+  });
+
+  await listenGlobal<AppNotification[]>(SeelenEvent.Notifications, (event) => {
+    store.dispatch(RootActions.setNotifications(event.payload.sort((a, b) => b.date - a.date)));
   });
 
   await Settings.onChange(loadSettingsToStore);
@@ -107,6 +112,7 @@ function loadSettingsToStore(settings: Settings) {
 }
 
 function loadWegItemsToStore(items: WegItems) {
+  store.dispatch(RootActions.setReorderDisabled(items.inner.isReorderDisabled));
   store.dispatch(RootActions.setItemsOnLeft(items.inner.left));
   store.dispatch(RootActions.setItemsOnCenter(items.inner.center));
   store.dispatch(RootActions.setItemsOnRight(items.inner.right));

@@ -10,7 +10,8 @@ use lazy_static::lazy_static;
 use parking_lot::Mutex;
 use serde::Serialize;
 use windows::{
-    Foundation::{EventRegistrationToken, TypedEventHandler},
+    Foundation::TypedEventHandler,
+    Win32::System::WinRT::EventRegistrationToken,
     UI::Notifications::{
         KnownNotificationBindings,
         Management::{UserNotificationListener, UserNotificationListenerAccessStatus},
@@ -30,7 +31,7 @@ lazy_static! {
 }
 
 #[derive(Debug, Serialize)]
-#[allow(dead_code)]
+#[serde(rename_all = "camelCase")]
 pub struct AppNotification {
     pub id: u32,
     app_umid: String,
@@ -129,7 +130,7 @@ impl NotificationManager {
 
     pub fn release(&mut self) -> Result<()> {
         if let Some(token) = self.event_token.take() {
-            self.listener.RemoveNotificationChanged(token)?;
+            self.listener.RemoveNotificationChanged(token.value)?;
         }
         RELEASED.store(true, Ordering::Release);
         Ok(())
@@ -211,10 +212,9 @@ impl NotificationManager {
             body.push(text.Text()?.to_string());
         }
 
-        let umid = app_info.AppUserModelId()?.to_string_lossy();
-        if extract_and_save_icon_umid(umid.clone()).is_err() {
-            log::error!("Failed to extract notification icon for {}", umid);
-        }
+        let umid = app_info.AppUserModelId()?.to_string();
+        // pre-extraction to avoid flickering on the ui
+        let _ = extract_and_save_icon_umid(&umid.clone().into());
 
         self.notifications.push(AppNotification {
             id: u_notification.Id()?,

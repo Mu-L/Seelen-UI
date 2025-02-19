@@ -24,6 +24,11 @@ network:
   saved: Сохраненные сети
   scanning: Сканирование сетей
   secured: Зашифрованная сеть
+notifications:
+  clear: Очистить все
+  empty: Нет уведомлений
+  settings: Другие настройки уведомлений
+  title: Уведомления
 placeholder:
   battery_remaining: Осталось %
   bluetooth_devices: Bluetooth и устройства
@@ -31,12 +36,13 @@ placeholder:
   ethernet_disconnected: Нет сети
   notifications: Уведомления
   open_system_tray: Открыть системный трей
-  open_user_folder: Открыть папку пользователя
   settings: Быстрые настройки
   smart_charge: '- Умная зарядка'
   volume: Громкость
 settings:
   app_settings: Настройки приложения
+  brightness: Яркость
+  lock: Замок
   log_out: Выход из системы
   power: Питание
   restart: Перезагрузка
@@ -44,3 +50,24 @@ settings:
   sleep: Спящий режим
   title: Настройки
 unlabelled_tray: Иконка трея без надписи
+userhome:
+  empty_list: Нет предметов
+  folders:
+    desktop: Рабочий стол
+    documents: Документы
+    downloads: Загрузки
+    more_items: Показать еще...
+    music: Музыка
+    pictures: Изображения
+    recent: Недавно использованные
+    reduce_items: Показать меньше...
+    title: Папки пользователей
+    videos: Видео
+  profile:
+    accounts: Настройки учетной записи
+    open_onedrive: Открыть папку OneDrive
+    open_user_folder: Откройте папку пользователя
+  seelen_options:
+    open_installation_folder: Откройте папку настроек Seelen
+    open_log_folder: Откройте папку журнала Seelen
+    title: Каталоги Seelen

@@ -84,6 +84,10 @@ devtools:
   settings_file: Fișier de setări
   simulate_fullscreen: Simulați un eveniment pe ecran complet
 extras:
+  clear_icons: Ștergeți memoria cache a pictogramelor de sistem
+  clear_icons_tooltip: >-
+    Ar putea fi necesară o repornire pentru ca toate widget-urile să intre în
+    vigoare
   discord: Discordie
   exit: Renunță/ieșire
   github: Github
@@ -187,6 +191,16 @@ shortcuts:
     send_to_workspace_7: Trimiteți la Workspace 7
     send_to_workspace_8: Trimiteți la spațiul de lucru 8
     send_to_workspace_9: Trimiteți la spațiul de lucru 9
+    start_weg_app_0: Concentrați -vă sau porniți aplicația pe poziția 1 a barei de activități
+    start_weg_app_1: Concentrați -vă sau porniți aplicația pe poziția 2 a barei de activități
+    start_weg_app_2: Concentrați -vă sau porniți aplicația pe poziția 3 a barei de activități
+    start_weg_app_3: Concentrați -vă sau porniți aplicația pe poziția barei de activități 4
+    start_weg_app_4: Concentrați -vă sau porniți aplicația pe poziția 5 a barei de activități
+    start_weg_app_5: Concentrați -vă sau porniți aplicația pe poziția barei de activități 6
+    start_weg_app_6: Concentrați -vă sau porniți aplicația pe poziția barei de lucru 7
+    start_weg_app_7: Concentrați -vă sau porniți aplicația pe poziția barei de activități 8
+    start_weg_app_8: Concentrați -vă sau porniți aplicația pe poziția 9 a barei de activități
+    start_weg_app_9: Concentrați -vă sau porniți aplicația pe poziția 10 a barei de activități
     switch_workspace_0: Treceți la spațiul de lucru 1
     switch_workspace_1: Treceți la spațiul de lucru 2
     switch_workspace_2: Treceți la spațiul de lucru 2
@@ -224,10 +238,7 @@ toolbar:
     never: Nu
     on_overlap: Pe suprapunere
   label: Bara de instrumente
-  placeholder:
-    author: Autor
-    description: Descriere
-    select: Structura barei de instrumente
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Utilizați logica specifică afișajului în loc de logica de focalizare unică
 update:
   available: Actualizare disponibilă!

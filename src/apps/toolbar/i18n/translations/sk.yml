@@ -24,6 +24,11 @@ network:
   saved: Uložené siete
   scanning: Skenovanie sietí
   secured: Šifrovaná sieť
+notifications:
+  clear: Vymazať všetko
+  empty: Žiadne oznámenia
+  settings: Ďalšie nastavenia oznámení
+  title: Oznámenia
 placeholder:
   battery_remaining: zostávajúci % %
   bluetooth_devices: Bluetooth a zariadenia
@@ -31,12 +36,13 @@ placeholder:
   ethernet_disconnected: Žiadny prístup na internet
   notifications: Oznámenia
   open_system_tray: Podnos otvorených systémov
-  open_user_folder: Otvorte priečinok používateľa
   settings: Rýchle nastavenia
   smart_charge: '- Inteligentný poplatok'
   volume: Zväzok
 settings:
   app_settings: Nastavenia aplikácií
+  brightness: Jas
+  lock: Zámok
   log_out: Odhlásiť sa
   power: Moc
   restart: Reštart
@@ -44,3 +50,24 @@ settings:
   sleep: Spať
   title: nastavenie
 unlabelled_tray: Ikona neznačeného podnosu
+userhome:
+  empty_list: Žiadne položky
+  folders:
+    desktop: Stolný počítač
+    documents: Dokumenty
+    downloads: Na stiahnutie
+    more_items: Zobraziť viac...
+    music: Hudba
+    pictures: Obrázky
+    recent: Nedávno použité
+    reduce_items: Zobraziť menej...
+    title: Adresáre používateľov
+    videos: Videá
+  profile:
+    accounts: Nastavenia otvoreného účtu
+    open_onedrive: Otvorenie adresára OneDrive
+    open_user_folder: Otvorenie používateľského adresára
+  seelen_options:
+    open_installation_folder: Otvorte priečinok s nastaveniami Seelen
+    open_log_folder: Otvorte priečinok denníka Seelen
+    title: Adresáre Seelen

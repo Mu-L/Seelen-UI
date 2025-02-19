@@ -5,13 +5,19 @@ use std::{
 };
 
 use windows::Win32::{
-    Foundation::HWND,
-    UI::WindowsAndMessaging::{WS_EX_APPWINDOW, WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW},
+    Foundation::{HWND, RECT},
+    UI::WindowsAndMessaging::{
+        SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, WS_EX_APPWINDOW, WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW,
+    },
 };
 
 use crate::{
     error_handler::Result,
-    modules::virtual_desk::{get_vd_manager, VirtualDesktop},
+    modules::{
+        cli::{ServiceClient, SvcAction},
+        start::application::START_MENU_MANAGER,
+        virtual_desk::{get_vd_manager, VirtualDesktop},
+    },
     seelen_bar::FancyToolbar,
     seelen_rofi::SeelenRofi,
     seelen_wall::SeelenWall,
@@ -19,7 +25,9 @@ use crate::{
     seelen_wm_v2::instance::WindowManagerV2,
 };
 
-use super::{monitor::Monitor, process::Process, WindowEnumerator, WindowsApi};
+use super::{
+    monitor::Monitor, process::Process, types::AppUserModelId, WindowEnumerator, WindowsApi,
+};
 
 #[derive(Clone, Copy, PartialEq, Eq)]
 pub struct Window(HWND);
@@ -44,7 +52,7 @@ impl Debug for Window {
             .field("handle", &self.0 .0)
             .field("title", &self.title())
             .field("class", &self.class())
-            .field("exe", &self.exe())
+            .field("exe", &self.process().program_exe_name())
             .finish()
     }
 }
@@ -65,12 +73,34 @@ impl Window {
         self.0 .0 as isize
     }
 
-    /// App user model id asigned to the window via property-store
-    /// To get UWP app user model id use `self.process().package_app_user_model_id()`
+    pub fn is_electron(&self) -> bool {
+        self.class() == "Chrome_WidgetWin_1"
+    }
+
+    /// Application user model id asigned to the window via property-store or inherited from the process
     ///
     /// https://learn.microsoft.com/en-us/windows/win32/properties/props-system-appusermodel-id
-    pub fn app_user_model_id(&self) -> Option<String> {
-        WindowsApi::get_window_app_user_model_id(self.0).ok()
+    pub fn app_user_model_id(&self) -> Option<AppUserModelId> {
+        if let Ok(umid) = WindowsApi::get_window_app_user_model_id(self.0) {
+            return match WindowsApi::is_uwp_package_id(&umid) {
+                true => Some(AppUserModelId::Appx(umid)),
+                false => Some(AppUserModelId::PropertyStore(umid)),
+            };
+        }
+
+        let process = self.process();
+        if let Ok(umid) = process.package_app_user_model_id() {
+            return Some(umid);
+        }
+
+        if self.is_electron() {
+            let path = process.program_path().ok()?;
+            let guard = START_MENU_MANAGER.load();
+            let item = guard.get_by_target(&path)?;
+            Some(AppUserModelId::PropertyStore(item.umid.clone()?))
+        } else {
+            None
+        }
     }
 
     /// https://learn.microsoft.com/en-us/windows/win32/properties/props-system-appusermodel-preventpinning
@@ -111,11 +141,6 @@ impl Window {
         Process::from_window(self)
     }
 
-    /// will fail if process is restricted and the invoker is not running as admin
-    pub fn exe(&self) -> Result<PathBuf> {
-        WindowsApi::exe_path_v2(self.0)
-    }
-
     pub fn app_display_name(&self) -> Result<String> {
         if let Ok(info) = self.process().package_app_info() {
             return Ok(info.DisplayInfo()?.DisplayName()?.to_string_lossy());
@@ -124,19 +149,29 @@ impl Window {
     }
 
     pub fn outer_rect(&self) -> Result<Rect> {
-        Ok(WindowsApi::get_outer_window_rect(self.hwnd())?.into())
+        let rect = WindowsApi::get_outer_window_rect(self.hwnd())?;
+        Ok(Rect {
+            left: rect.left,
+            top: rect.top,
+            right: rect.right,
+            bottom: rect.bottom,
+        })
     }
 
     pub fn inner_rect(&self) -> Result<Rect> {
-        Ok(WindowsApi::get_inner_window_rect(self.hwnd())?.into())
+        let rect = WindowsApi::get_inner_window_rect(self.hwnd())?;
+        Ok(Rect {
+            left: rect.left,
+            top: rect.top,
+            right: rect.right,
+            bottom: rect.bottom,
+        })
     }
 
     pub fn parent(&self) -> Option<Window> {
-        let parent = WindowsApi::get_parent(self.0);
-        if !parent.is_invalid() {
-            Some(Window(parent))
-        } else {
-            None
+        match WindowsApi::get_parent(self.0) {
+            Ok(parent) => Some(Window::from(parent)),
+            Err(_) => None,
         }
     }
 
@@ -174,7 +209,7 @@ impl Window {
         WindowsApi::is_cloaked(self.0).unwrap_or(false)
     }
 
-    pub fn is_foreground(&self) -> bool {
+    pub fn is_focused(&self) -> bool {
         WindowsApi::get_foreground_window() == self.0
     }
 
@@ -184,7 +219,7 @@ impl Window {
 
     /// is the window an Application Frame Host
     pub fn is_frame(&self) -> Result<bool> {
-        Ok(self.exe()? == PathBuf::from(APP_FRAME_HOST_PATH))
+        Ok(self.process().program_path()? == PathBuf::from(APP_FRAME_HOST_PATH))
     }
 
     /// will fail if the window is not a frame
@@ -214,7 +249,7 @@ impl Window {
     }
 
     pub fn is_seelen_overlay(&self) -> bool {
-        if let Ok(exe) = self.exe() {
+        if let Ok(exe) = self.process().program_path() {
             return exe.ends_with("seelen-ui.exe")
                 && [
                     FancyToolbar::TITLE,
@@ -269,5 +304,50 @@ impl Window {
         }
 
         true
+    }
+
+    pub fn show_window(&self, command: SHOW_WINDOW_CMD) -> Result<()> {
+        if self.process().open_handle().is_ok() {
+            WindowsApi::show_window(self.hwnd(), command)
+        } else {
+            ServiceClient::request(SvcAction::ShowWindow {
+                hwnd: self.address(),
+                command: command.0,
+            })
+        }
+    }
+
+    pub fn show_window_async(&self, command: SHOW_WINDOW_CMD) -> Result<()> {
+        if self.process().open_handle().is_ok() {
+            WindowsApi::show_window_async(self.hwnd(), command)
+        } else {
+            ServiceClient::request(SvcAction::ShowWindowAsync {
+                hwnd: self.address(),
+                command: command.0,
+            })
+        }
+    }
+
+    pub fn set_position(&self, rect: &RECT, flags: SET_WINDOW_POS_FLAGS) -> Result<()> {
+        if self.process().open_handle().is_ok() {
+            WindowsApi::set_position(self.hwnd(), None, rect, flags)
+        } else {
+            ServiceClient::request(SvcAction::SetWindowPosition {
+                hwnd: self.address(),
+                x: rect.left,
+                y: rect.top,
+                width: (rect.right - rect.left).abs(),
+                height: (rect.bottom - rect.top).abs(),
+                flags: flags.0,
+            })
+        }
+    }
+
+    pub fn focus(&self) -> Result<()> {
+        if self.process().open_handle().is_ok() {
+            WindowsApi::set_foreground(self.hwnd())
+        } else {
+            ServiceClient::request(SvcAction::SetForeground(self.address()))
+        }
     }
 }

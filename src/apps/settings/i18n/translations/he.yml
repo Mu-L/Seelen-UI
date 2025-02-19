@@ -82,6 +82,8 @@ devtools:
   settings_file: קובץ הגדרות
   simulate_fullscreen: הדמיית אירוע במסך מלא
 extras:
+  clear_icons: מטמון סמלי מערכת נקה
+  clear_icons_tooltip: ניתן להידרש להפעלה מחדש כדי להיכנס לתוקף באופן מלא על כל הווידג'טים
   discord: מַחֲלוֹקֶת
   exit: יצא/יציאה
   github: Github
@@ -183,6 +185,16 @@ shortcuts:
     send_to_workspace_7: שלח לסביבת עבודה 7
     send_to_workspace_8: שלח לסביבת עבודה 8
     send_to_workspace_9: שלח לסביבת העבודה 9
+    start_weg_app_0: מיקוד או התחל אפליקציה בתפקיד שורת המשימות 1
+    start_weg_app_1: מיקוד או התחל אפליקציה במיקום שורת המשימות 2
+    start_weg_app_2: מיקוד או התחל אפליקציה במיקום שורת המשימות 3
+    start_weg_app_3: מיקוד או התחל אפליקציה במיקום שורת המשימות 4
+    start_weg_app_4: מיקוד או התחל אפליקציה במיקום שורת המשימות 5
+    start_weg_app_5: מיקוד או התחל אפליקציה במיקום שורת המשימות 6
+    start_weg_app_6: מיקוד או התחל אפליקציה בתפקיד שורת המשימות 7
+    start_weg_app_7: מיקוד או התחל אפליקציה במיקום שורת המשימות 8
+    start_weg_app_8: מיקוד או התחל אפליקציה במיקום שורת המשימות 9
+    start_weg_app_9: מיקוד או התחל אפליקציה במיקום שורת המשימות 10
     switch_workspace_0: עבור לסביבת העבודה 1
     switch_workspace_1: עבור לסביבת העבודה 2
     switch_workspace_2: עבור לסביבת העבודה 2
@@ -219,10 +231,7 @@ toolbar:
     never: לְעוֹלָם לֹא
     on_overlap: על חפיפה
   label: סרגל כלים
-  placeholder:
-    author: מְחַבֵּר
-    description: תיאור
-    select: מבנה סרגל הכלים
+  placeholder: {}
   use_multiple_monitor_overlap_logic: השתמש בתצוגה ספציפית במקום בלוגיקה של מיקוד יחיד
 update:
   available: עדכון זמין!
