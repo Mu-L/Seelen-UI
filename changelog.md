@@ -2,6 +2,10 @@
 
 ## [2.6.3-dev]
 
+### fix
+
+- toolbar and dock crashing on some resolutions.
+
 ## [2.6.2]
 
 ### fix

@@ -36,7 +36,7 @@ effect(() => {
 
 export const $widget_rect = computed(() => {
   const { itemSize, margin, padding } = $settings.value;
-  const height = (itemSize + padding * 2 + margin * 2) * $current_monitor.value.scaleFactor;
+  const height = Math.round((itemSize + padding * 2 + margin * 2) * $current_monitor.value.scaleFactor);
   const rect = { ...$current_monitor.value.rect };
 
   if ($settings.value.position === FancyToolbarSide.Top) {

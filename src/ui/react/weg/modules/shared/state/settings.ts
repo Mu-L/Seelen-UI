@@ -63,8 +63,10 @@ const $work_area = computed(() => {
     return workArea;
   }
 
-  const tbSize = (tbConfig.itemSize + tbConfig.padding * 2 + tbConfig.margin * 2) *
-    $current_monitor.value.scaleFactor;
+  const tbSize = Math.round(
+    (tbConfig.itemSize + tbConfig.padding * 2 + tbConfig.margin * 2) *
+      $current_monitor.value.scaleFactor,
+  );
 
   switch (tbConfig.position) {
     case FancyToolbarSide.Top:
@@ -88,25 +90,27 @@ export const $widget_rect = computed(() => {
   const hitboxRect = { ...$work_area.value };
   const webviewRect = { ...$work_area.value };
 
-  const size = ($settings.value.size + $settings.value.padding * 2 + $settings.value.margin * 2) *
-    $current_monitor.value.scaleFactor;
+  const size = Math.round(
+    ($settings.value.size + $settings.value.padding * 2 + $settings.value.margin * 2) *
+      $current_monitor.value.scaleFactor,
+  );
 
   switch ($settings.value.position) {
     case SeelenWegSide.Left:
       hitboxRect.right = hitboxRect.left + size;
-      webviewRect.right = workArea.right - (workArea.right - workArea.left) / 2;
+      webviewRect.right = workArea.right - Math.round((workArea.right - workArea.left) / 2);
       break;
     case SeelenWegSide.Right:
       hitboxRect.left = hitboxRect.right - size;
-      webviewRect.left = workArea.left + (workArea.right - workArea.left) / 2;
+      webviewRect.left = workArea.left + Math.round((workArea.right - workArea.left) / 2);
       break;
     case SeelenWegSide.Top:
       hitboxRect.bottom = hitboxRect.top + size;
-      webviewRect.bottom = workArea.top + (workArea.bottom - workArea.top) / 2;
+      webviewRect.bottom = workArea.top + Math.round((workArea.bottom - workArea.top) / 2);
       break;
     case SeelenWegSide.Bottom:
       hitboxRect.top = hitboxRect.bottom - size;
-      webviewRect.top = workArea.bottom - (workArea.bottom - workArea.top) / 2;
+      webviewRect.top = workArea.bottom - Math.round((workArea.bottom - workArea.top) / 2);
       break;
   }
 
