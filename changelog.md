@@ -2,6 +2,10 @@
 
 ## [2.6.4-dev]
 
+### enhancements
+
+- features like accent color by wallpaper, and supend widgets on game mode are now disabled by default.
+
 ## [2.6.3]
 
 ### fix

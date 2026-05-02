@@ -382,7 +382,7 @@ impl Default for SeelenWallSettings {
             randomize: false,
             default_collection: None,
             multimonitor_behaviour: MultimonitorBehaviour::PerMonitor,
-            use_accent_color: true,
+            use_accent_color: false,
             deprecated_bgs: None,
         }
     }
@@ -513,7 +513,7 @@ impl Default for Settings {
             polling_interval: 3,
             streaming_mode: false,
             backup_sync_enabled: true,
-            suspend_on_game_mode: true,
+            suspend_on_game_mode: false,
         }
     }
 }
