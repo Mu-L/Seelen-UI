@@ -7,6 +7,8 @@ use seelen_core::{
     system_state::MonitorId,
 };
 
+use tauri::Manager;
+
 use crate::{
     app::get_app_handle,
     error::{Result, ResultLogExt},
@@ -101,7 +103,14 @@ impl WidgetWebview {
 
 impl Drop for WidgetWebview {
     fn drop(&mut self) {
-        let _ = self.0.destroy();
+        // Only destroy if Tauri's manager still holds the window. When
+        // WindowEvent::Destroyed fires, Tauri has already removed it from the
+        // manager (get_webview_window returns None), so calling destroy() again
+        // would cause re-entrant ZwUserDestroyWindow → FATAL_USER_CALLBACK_EXCEPTION.
+        let label = self.0.label().to_owned();
+        if get_app_handle().get_webview_window(&label).is_some() {
+            let _ = self.0.destroy();
+        }
     }
 }
 
