@@ -61,7 +61,14 @@ pub fn process_uri(uri: &str) -> Result<()> {
             .clone();
 
         get_tokio_handle().spawn(async move {
-            log_error!(SessionManager::handle_auth_callback(code, state).await);
+            if let Err(err) = SessionManager::handle_auth_callback(code, state).await {
+                log::error!("Auth callback failed: {err:?}");
+                if let Ok(id) = POPUPS_MANAGER.lock().create(SluPopupConfig::default()) {
+                    log_error!(POPUPS_MANAGER
+                        .lock()
+                        .update(&id, auth_error_popup_config(&format!("{err:?}"))));
+                }
+            }
         });
         return Ok(());
     }
@@ -356,6 +363,43 @@ fn resource_to_popup_config(resource: &Resource) -> Result<SluPopupConfig> {
     }];
 
     Ok(popup)
+}
+
+fn auth_error_popup_config(err: &str) -> SluPopupConfig {
+    SluPopupConfig {
+        title: vec![SluPopupContent::Group {
+            items: vec![
+                SluPopupContent::Icon {
+                    name: "BiSolidError".to_string(),
+                    styles: Some(
+                        CssStyles::new()
+                            .add("color", "var(--color-red-800)")
+                            .add("height", "1.2rem"),
+                    ),
+                },
+                SluPopupContent::Text {
+                    value: t!("auth.login_failed_title").to_string(),
+                    styles: None,
+                },
+            ],
+            styles: Some(CssStyles::new().add("alignItems", "center")),
+        }],
+        content: vec![
+            SluPopupContent::Text {
+                value: t!("auth.login_failed_body").to_string(),
+                styles: None,
+            },
+            SluPopupContent::Text {
+                value: "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=".to_string(),
+                styles: Some(CssStyles::new().add("color", "var(--color-gray-400)")),
+            },
+            SluPopupContent::Text {
+                value: format!("Error: {err}"),
+                styles: None,
+            },
+        ],
+        ..Default::default()
+    }
 }
 
 fn error_popup_config(err: &str) -> SluPopupConfig {

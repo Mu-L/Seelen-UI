@@ -1,3 +1,9 @@
+auth:
+  login_failed_body: >-
+    Hiba történt a bejelentkezés során. Ha ez továbbra is fennáll, győződjön meg
+    arról, hogy a Windows „Credential Manager” szolgáltatása (VaultSvc)
+    engedélyezve van és fut, majd próbálkozzon újra.
+  login_failed_title: Sikertelen bejelentkezés
 cancel: Töröl
 done: Kész
 elevated:

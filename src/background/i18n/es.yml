@@ -1,3 +1,9 @@
+auth:
+  login_failed_body: >-
+    Algo salió mal durante el inicio de sesión. Si esto persiste, asegúrese de
+    que el servicio 'Administrador de credenciales' de Windows (VaultSvc) esté
+    habilitado y ejecutándose, luego inténtelo nuevamente.
+  login_failed_title: error de inicio de sesion
 cancel: Cancelar
 done: Hecho
 elevated:

@@ -1,3 +1,9 @@
+auth:
+  login_failed_body: >-
+    Arazoren bat izan da saioa hastean. Honek jarraitzen badu, ziurtatu Windows
+    'Credential Manager' zerbitzua (VaultSvc) gaituta eta martxan dagoela, eta
+    saiatu berriro.
+  login_failed_title: Ezin izan da saioa hasi
 cancel: Indargabetu
 done: Egin
 elevated:

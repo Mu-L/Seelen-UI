@@ -1,3 +1,9 @@
+auth:
+  login_failed_body: >-
+    S'ha produït un error durant l'inici de sessió. Si això continua,
+    assegureu-vos que el servei "Gestor de credencials" de Windows (VaultSvc)
+    estigui habilitat i en funcionament i, a continuació, torneu-ho a provar.
+  login_failed_title: No s'ha pogut iniciar la sessió
 cancel: Cancel·lar
 done: Fer
 elevated:

@@ -1,3 +1,9 @@
+auth:
+  login_failed_body: >-
+    Ceva a mers prost la conectare. Dacă acest lucru persistă, asigurați-vă că
+    serviciul Windows „Credential Manager” (VaultSvc) este activat și rulează,
+    apoi încercați din nou.
+  login_failed_title: Autentificare eșuată
 cancel: Anula
 done: Făcut
 elevated:

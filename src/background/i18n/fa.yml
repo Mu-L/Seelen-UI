@@ -1,3 +1,9 @@
+auth:
+  login_failed_body: >-
+    هنگام ورود مشکلی پیش آمد. اگر این مشکل ادامه داشت، مطمئن شوید که سرویس
+    «Credential Manager» ویندوز (VaultSvc) فعال و در حال اجرا است، سپس دوباره
+    امتحان کنید.
+  login_failed_title: ورود ناموفق بود
 cancel: لغو کردن
 done: انجام شده
 elevated:

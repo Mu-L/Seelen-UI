@@ -1,3 +1,9 @@
+auth:
+  login_failed_body: >-
+    Nešto nije u redu tijekom prijave. Ako se ovo nastavi, provjerite je li
+    usluga Windows 'Credential Manager' (VaultSvc) omogućena i pokrenuta, a
+    zatim pokušajte ponovno.
+  login_failed_title: Prijava nije uspjela
 cancel: Otkazati
 done: Završen
 elevated:

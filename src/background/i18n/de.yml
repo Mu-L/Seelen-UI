@@ -1,3 +1,10 @@
+auth:
+  login_failed_body: >-
+    Beim Anmelden ist ein Fehler aufgetreten. Wenn das Problem weiterhin
+    besteht, stellen Sie sicher, dass der Windows-Dienst „Credential Manager“
+    (VaultSvc) aktiviert ist und ausgeführt wird, und versuchen Sie es dann
+    erneut.
+  login_failed_title: Fehler bei der Anmeldung
 cancel: Stornieren
 done: Erledigt
 elevated:

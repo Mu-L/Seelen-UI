@@ -1,3 +1,9 @@
+auth:
+  login_failed_body: >-
+    Une erreur s'est produite lors de la connexion. Si cela persiste,
+    assurez-vous que le service Windows « Credential Manager » (VaultSvc) est
+    activé et en cours d'exécution, puis réessayez.
+  login_failed_title: La connexion a échoué
 cancel: Annuler
 done: Fait
 elevated:

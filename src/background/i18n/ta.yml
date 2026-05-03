@@ -1,3 +1,9 @@
+auth:
+  login_failed_body: >-
+    உள்நுழைவின் போது ஏதோ தவறு ஏற்பட்டது. இது தொடர்ந்தால், Windows 'Credential
+    Manager' சேவை (VaultSvc) இயக்கப்பட்டு இயங்குவதை உறுதிசெய்து, மீண்டும்
+    முயற்சிக்கவும்.
+  login_failed_title: உள்நுழைவு தோல்வியடைந்தது
 cancel: ரத்துசெய்
 done: முடிந்தது
 elevated:

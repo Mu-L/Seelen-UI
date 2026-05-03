@@ -1,3 +1,9 @@
+auth:
+  login_failed_body: >-
+    Oturum açma sırasında bir şeyler ters gitti. Bu durum devam ederse Windows
+    'Kimlik Bilgisi Yöneticisi' hizmetinin (VaultSvc) etkinleştirildiğinden ve
+    çalıştığından emin olun ve tekrar deneyin.
+  login_failed_title: giriş başarısız oldu
 cancel: İptal etmek
 done: Tamamlamak
 elevated:

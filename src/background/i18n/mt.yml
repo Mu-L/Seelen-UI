@@ -1,3 +1,9 @@
+auth:
+  login_failed_body: >-
+    Xi ħaġa marret ħażin waqt il-login. Jekk dan jippersisti, kun żgur li
+    s-servizz tal-'Credential Manager' tal-Windows (VaultSvc) huwa attivat u qed
+    jaħdem, imbagħad erġa' pprova.
+  login_failed_title: Il-login falla
 cancel: Ikkanċella
 done: Magħmul
 elevated:

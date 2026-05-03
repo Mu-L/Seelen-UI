@@ -1,3 +1,8 @@
+auth:
+  login_failed_body: >-
+    משהו השתבש במהלך הכניסה. אם זה נמשך, ודא ששירות Windows 'Credential Manager'
+    (VaultSvc) מופעל ופועל, ולאחר מכן נסה שוב.
+  login_failed_title: הכניסה נכשלה
 cancel: לְבַטֵל
 done: נַעֲשָׂה
 elevated:

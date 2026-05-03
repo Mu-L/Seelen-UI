@@ -1,3 +1,9 @@
+auth:
+  login_failed_body: >-
+    Pieteikšanās laikā radās kļūda. Ja tas atkārtojas, pārbaudiet, vai Windows
+    Credential Manager pakalpojums (VaultSvc) ir iespējots un darbojas, un pēc
+    tam mēģiniet vēlreiz.
+  login_failed_title: Pieteikšanās neizdevās
 cancel: Atcelt
 done: Darīts
 elevated:

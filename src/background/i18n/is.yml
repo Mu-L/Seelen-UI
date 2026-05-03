@@ -1,3 +1,9 @@
+auth:
+  login_failed_body: >-
+    Eitthvað fór úrskeiðis við innskráningu. Ef þetta er viðvarandi skaltu ganga
+    úr skugga um að Windows 'Credential Manager' þjónustan (VaultSvc) sé virkjuð
+    og í gangi, reyndu svo aftur.
+  login_failed_title: Innskráning mistókst
 cancel: Hætta við
 done: Gert
 elevated:

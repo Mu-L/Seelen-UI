@@ -1,3 +1,9 @@
+auth:
+  login_failed_body: >-
+    Tizimga kirishda nimadir xato ketdi. Agar bu davom etsa, Windows “Credential
+    Manager” xizmati (VaultSvc) yoqilgan va ishlayotganligiga ishonch hosil
+    qiling, keyin qayta urinib koʻring.
+  login_failed_title: tizimga kirishda xatolik yuz berdi
 cancel: Bekor qilmoq
 done: Bajarildi
 elevated:

@@ -1,3 +1,9 @@
+auth:
+  login_failed_body: >-
+    Đã xảy ra lỗi trong quá trình đăng nhập. Nếu tình trạng này vẫn tiếp diễn,
+    hãy đảm bảo dịch vụ 'Trình quản lý thông tin xác thực' của Windows
+    (VaultSvc) đã được bật và đang chạy, sau đó thử lại.
+  login_failed_title: Đăng nhập không thành công
 cancel: Hủy bỏ
 done: Xong
 elevated:

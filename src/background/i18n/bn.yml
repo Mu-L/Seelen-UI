@@ -1,3 +1,9 @@
+auth:
+  login_failed_body: >-
+    লগইন করার সময় কিছু ভুল হয়েছে। যদি এটি অব্যাহত থাকে, নিশ্চিত করুন যে
+    Windows 'Credential Manager' পরিষেবা (VaultSvc) সক্রিয় এবং চলমান আছে, তারপর
+    আবার চেষ্টা করুন৷
+  login_failed_title: লগইন ব্যর্থ হয়েছে
 cancel: বাতিল
 done: সম্পন্ন
 elevated:

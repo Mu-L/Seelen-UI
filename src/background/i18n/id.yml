@@ -1,3 +1,9 @@
+auth:
+  login_failed_body: >-
+    Ada yang tidak beres saat login. Jika masalah ini terus berlanjut, pastikan
+    layanan 'Credential Manager' Windows (VaultSvc) diaktifkan dan berjalan,
+    lalu coba lagi.
+  login_failed_title: Gagal masuk
 cancel: Membatalkan
 done: Selesai
 elevated:

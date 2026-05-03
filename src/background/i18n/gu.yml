@@ -1,3 +1,9 @@
+auth:
+  login_failed_body: >-
+    લોગિન દરમિયાન કંઈક ખોટું થયું. જો આ ચાલુ રહે, તો ખાતરી કરો કે Windows
+    'Credential Manager' સેવા (VaultSvc) સક્ષમ અને ચાલી રહી છે, પછી ફરી પ્રયાસ
+    કરો.
+  login_failed_title: લૉગિન નિષ્ફળ થયું
 cancel: રદ કરવું
 done: કામ
 elevated:

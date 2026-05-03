@@ -1,3 +1,8 @@
+auth:
+  login_failed_body: >-
+    በመግቢያ ጊዜ የሆነ ችግር ተፈጥሯል። ይህ ከቀጠለ የWindows 'Credential Manager' አገልግሎት
+    (VaultSvc) መንቃቱን እና እየሰራ መሆኑን ያረጋግጡ፣ ከዚያ እንደገና ይሞክሩ።
+  login_failed_title: መግባት አልተሳካም።
 cancel: ይቅር
 done: ተከናውኗል
 elevated:

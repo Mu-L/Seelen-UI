@@ -1,3 +1,9 @@
+auth:
+  login_failed_body: >-
+    Iets het verkeerd geloop tydens aanmelding. As dit voortduur, maak seker dat
+    die Windows 'Credential Manager'-diens (VaultSvc) geaktiveer is en aan die
+    gang is, en probeer dan weer.
+  login_failed_title: Kon nie aanmeld nie
 cancel: Kanselleer
 done: Gedoen
 elevated:

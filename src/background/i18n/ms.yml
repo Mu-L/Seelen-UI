@@ -1,3 +1,9 @@
+auth:
+  login_failed_body: >-
+    Sesuatu telah berlaku semasa log masuk. Jika ini berterusan, pastikan
+    perkhidmatan Windows 'Credential Manager' (VaultSvc) didayakan dan berjalan,
+    kemudian cuba lagi.
+  login_failed_title: Log masuk gagal
 cancel: Batalkan
 done: Selesai
 elevated:

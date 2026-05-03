@@ -5,6 +5,7 @@
 ### enhancements
 
 - features like accent color by wallpaper, and supend widgets on game mode are now disabled by default.
+- show popup dialog on login failure.
 
 ## [2.6.3]
 

@@ -127,11 +127,22 @@ impl SessionManager {
 
     // ─── Windows Credential Manager ───────────────────────────────────────────
 
+    fn open_vault() -> Result<PasswordVault> {
+        PasswordVault::new().map_err(|e| {
+            format!(
+                "Windows Credential Manager is unavailable (VaultSvc may be stopped or disabled). \
+                 Enable the 'Credential Manager' service and try again. \
+                 Original error: {e}"
+            )
+            .into()
+        })
+    }
+
     fn store_credential(key: &str, value: &str) -> Result<()> {
         let resource = HSTRING::from(CREDENTIAL_RESOURCE);
         let user_name = HSTRING::from(key);
         let password = HSTRING::from(value);
-        let vault = PasswordVault::new()?;
+        let vault = Self::open_vault()?;
         // Remove stale entry first so Add always succeeds.
         if let Ok(existing) = vault.Retrieve(&resource, &user_name) {
             vault.Remove(&existing).ok();
@@ -144,14 +155,14 @@ impl SessionManager {
     pub fn read_credential(key: &str) -> Result<String> {
         let resource = HSTRING::from(CREDENTIAL_RESOURCE);
         let user_name = HSTRING::from(key);
-        let vault = PasswordVault::new()?;
+        let vault = Self::open_vault()?;
         let cred = vault.Retrieve(&resource, &user_name)?;
         cred.RetrievePassword()?;
         Ok(cred.Password()?.to_string())
     }
 
     fn delete_all_credentials() {
-        let Ok(vault) = PasswordVault::new() else {
+        let Ok(vault) = Self::open_vault() else {
             return;
         };
         let resource = HSTRING::from(CREDENTIAL_RESOURCE);

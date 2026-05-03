@@ -1,3 +1,9 @@
+auth:
+  login_failed_body: >-
+    Jotain meni vikaan kirjautumisen aikana. Jos tämä jatkuu, varmista, että
+    Windowsin Credential Manager -palvelu (VaultSvc) on käytössä ja käynnissä,
+    ja yritä sitten uudelleen.
+  login_failed_title: Kirjautuminen epäonnistui
 cancel: Peruuttaa
 done: Tehty
 elevated:

@@ -1,3 +1,9 @@
+auth:
+  login_failed_body: >-
+    Di dema têketinê de tiştek xelet derket. Ger ev berdewam bike, pê ewle bine
+    ku karûbarê 'Rêveberê Pêbawerî' ya Windows (VaultSvc) çalak e û dixebite,
+    paşê dîsa biceribîne.
+  login_failed_title: Têketin têk çû
 cancel: Bişûndekirin
 done: Dank
 elevated:

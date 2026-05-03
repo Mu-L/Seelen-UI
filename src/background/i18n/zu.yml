@@ -1,3 +1,9 @@
+auth:
+  login_failed_body: >-
+    Kukhona okungahambanga kahle ngesikhathi sokungena ngemvume. Uma lokhu
+    kuqhubeka, qiniseka ukuthi isevisi ye-Windows 'Credential Manager'
+    (VaultSvc) ivuliwe futhi iyasebenza, bese uyazama futhi.
+  login_failed_title: ukungena kokuyimfihlo ayiphumelelanga
 cancel: Hlikihla
 done: Usulile
 elevated:

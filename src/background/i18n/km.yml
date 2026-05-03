@@ -1,3 +1,9 @@
+auth:
+  login_failed_body: >-
+    មានអ្វីមួយខុសប្រក្រតីអំឡុងពេលចូល។ ប្រសិនបើវានៅតែកើតមាន ត្រូវប្រាកដថាសេវាកម្ម
+    Windows 'Creddential Manager' (VaultSvc) ត្រូវបានបើក និងដំណើរការ
+    បន្ទាប់មកព្យាយាមម្តងទៀត។
+  login_failed_title: ការចូលបានបរាជ័យ
 cancel: លប់ចោល
 done: រ្យេឱដេនោ
 elevated:

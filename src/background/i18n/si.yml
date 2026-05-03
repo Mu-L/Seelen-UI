@@ -1,3 +1,9 @@
+auth:
+  login_failed_body: >-
+    පුරනය වීමේදී යම් දෙයක් වැරදී ඇත. මෙය දිගටම පවතී නම්, Windows 'Credential
+    Manager' සේවාව (VaultSvc) සක්‍රීය කර ක්‍රියාත්මක වන බවට වග බලා ගන්න, ඉන්පසු
+    නැවත උත්සාහ කරන්න.
+  login_failed_title: ඇතුළු වීම අසාර්ථක විය
 cancel: අවලංගු කරන්න
 done: කළා
 elevated:

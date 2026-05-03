@@ -1,3 +1,9 @@
+auth:
+  login_failed_body: >-
+    Hitilafu fulani imetokea wakati wa kuingia. Hili likiendelea, hakikisha kuwa
+    huduma ya Windows 'Credential Manager' (VaultSvc) imewashwa na inaendeshwa,
+    kisha ujaribu tena.
+  login_failed_title: Kuingia kumeshindwa
 cancel: Ghairi
 done: Imekamilika
 elevated:

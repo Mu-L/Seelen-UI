@@ -1,3 +1,9 @@
+auth:
+  login_failed_body: >-
+    ມີບາງຢ່າງຜິດພາດໃນລະຫວ່າງການເຂົ້າສູ່ລະບົບ. ຖ້າອັນນີ້ຍັງຄົງຢູ່,
+    ໃຫ້ແນ່ໃຈວ່າການບໍລິການ Windows 'Credential Manager' (VaultSvc) ຖືກເປີດໃຊ້
+    ແລະເຮັດວຽກຢູ່, ຈາກນັ້ນລອງອີກຄັ້ງ.
+  login_failed_title: ເຂົ້າສູ່ລະບົບລົ້ມເຫລວ
 cancel: ຍົກເລີກ
 done: ແລ້ວ? ແລ້ວ
 elevated:

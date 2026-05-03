@@ -1,3 +1,9 @@
+auth:
+  login_failed_body: >-
+    Något gick fel under inloggningen. Om detta kvarstår, se till att Windows
+    'Credential Manager'-tjänsten (VaultSvc) är aktiverad och körs, försök sedan
+    igen.
+  login_failed_title: Inloggningen misslyckades
 cancel: Avboka
 done: Gjort
 elevated:

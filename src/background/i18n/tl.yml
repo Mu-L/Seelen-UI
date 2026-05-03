@@ -1,3 +1,9 @@
+auth:
+  login_failed_body: >-
+    Nagkaproblema habang nag-log in. Kung magpapatuloy ito, tiyaking naka-enable
+    at tumatakbo ang serbisyo ng Windows 'Credential Manager' (VaultSvc),
+    pagkatapos ay subukang muli.
+  login_failed_title: Nabigo ang pag-login
 cancel: Kanselahin
 done: Tapos na
 elevated:

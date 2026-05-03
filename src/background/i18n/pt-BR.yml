@@ -1,3 +1,9 @@
+auth:
+  login_failed_body: >-
+    Algo deu errado durante o login. Se isso persistir, certifique-se de que o
+    serviço ‘Gerenciador de credenciais’ do Windows (VaultSvc) esteja ativado e
+    em execução e tente novamente.
+  login_failed_title: falha no login
 cancel: Cancelar
 done: Feita
 elevated:

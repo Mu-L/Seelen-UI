@@ -1,3 +1,9 @@
+auth:
+  login_failed_body: >-
+    Prisijungimo metu kažkas nutiko. Jei tai išlieka, įsitikinkite, kad
+    „Windows“ kredencialų tvarkyklės paslauga (VaultSvc) įjungta ir veikia, tada
+    bandykite dar kartą.
+  login_failed_title: Prisijungti nepavyko
 cancel: Atšaukti
 done: Padaryta
 elevated:

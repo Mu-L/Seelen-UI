@@ -1,3 +1,9 @@
+auth:
+  login_failed_body: >-
+    Ohun kan ti ko tọ nigba wiwọle. Ti eyi ba tẹsiwaju, rii daju pe iṣẹ Windows
+    'Credential Manager' (VaultSvc) ti ṣiṣẹ ati ṣiṣiṣẹ, lẹhinna gbiyanju
+    lẹẹkansi.
+  login_failed_title: Wọle kuna
 cancel: Fagilee
 done: Ṣe
 elevated:

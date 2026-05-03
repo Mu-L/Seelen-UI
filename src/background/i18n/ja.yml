@@ -1,3 +1,8 @@
+auth:
+  login_failed_body: >-
+    ログイン中に問題が発生しました。 この問題が解決しない場合は、Windows の「資格情報マネージャー」サービス (VaultSvc)
+    が有効で実行中であることを確認してから、再試行してください。
+  login_failed_title: ログインに失敗しました
 cancel: キャンセル
 done: 完了
 elevated:

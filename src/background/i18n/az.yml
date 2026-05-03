@@ -1,3 +1,9 @@
+auth:
+  login_failed_body: >-
+    Giriş zamanı xəta baş verdi. Bu davam edərsə, Windows 'Etibarnamə Meneceri'
+    xidmətinin (VaultSvc) aktiv və işlək olduğundan əmin olun, sonra yenidən
+    cəhd edin.
+  login_failed_title: Giriş uğursuz oldu
 cancel: Ləğv etmək
 done: Tamamlandı
 elevated:

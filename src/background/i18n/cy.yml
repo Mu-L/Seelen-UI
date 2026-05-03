@@ -1,3 +1,9 @@
+auth:
+  login_failed_body: >-
+    Aeth rhywbeth o'i le wrth fewngofnodi. Os bydd hyn yn parhau, gwnewch yn
+    siŵr bod gwasanaeth 'Rheolwr Credadwy' Windows (VaultSvc) wedi'i alluogi ac
+    yn rhedeg, yna ceisiwch eto.
+  login_failed_title: Methodd mewngofnodi
 cancel: Chansliff
 done: Wedi gwneud
 elevated:

@@ -1,3 +1,9 @@
+auth:
+  login_failed_body: >-
+    Er is iets misgegaan tijdens het inloggen. Als dit aanhoudt, controleer dan
+    of de Windows 'Credential Manager'-service (VaultSvc) is ingeschakeld en
+    actief is en probeer het vervolgens opnieuw.
+  login_failed_title: Inloggen mislukt
 cancel: Annuleren
 done: Klaar
 elevated:

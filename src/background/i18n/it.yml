@@ -1,3 +1,9 @@
+auth:
+  login_failed_body: >-
+    Qualcosa è andato storto durante il login. Se il problema persiste,
+    assicurati che il servizio Windows "Credential Manager" (VaultSvc) sia
+    abilitato e in esecuzione, quindi riprova.
+  login_failed_title: Accesso non riuscito
 cancel: Cancellare
 done: Fatto
 elevated:

@@ -1,3 +1,9 @@
+auth:
+  login_failed_body: >-
+    Midagi läks sisselogimisel valesti. Kui see püsib, veenduge, et Windowsi
+    teenus „Credential Manager” (VaultSvc) on lubatud ja töötab, seejärel
+    proovige uuesti.
+  login_failed_title: Sisselogimine ebaõnnestus
 cancel: Tühistama
 done: Tehtud
 elevated:

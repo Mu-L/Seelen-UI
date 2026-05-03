@@ -1,3 +1,9 @@
+auth:
+  login_failed_body: >-
+    Нещо се обърка по време на влизане. Ако това продължава, уверете се, че
+    услугата „Credential Manager“ на Windows (VaultSvc) е активирана и работи,
+    след което опитайте отново.
+  login_failed_title: Неуспешно влизане
 cancel: Отказ
 done: Готово
 elevated:

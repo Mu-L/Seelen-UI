@@ -1,3 +1,8 @@
+auth:
+  login_failed_body: >-
+    로그인하는 동안 문제가 발생했습니다. 이 문제가 지속되면 Windows 'Credential Manager' 서비스(VaultSvc)가
+    활성화되어 실행되고 있는지 확인한 후 다시 시도하십시오.
+  login_failed_title: 로그인 실패
 cancel: 취소
 done: 완료
 elevated:

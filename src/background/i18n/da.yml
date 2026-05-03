@@ -1,3 +1,9 @@
+auth:
+  login_failed_body: >-
+    Noget gik galt under login. Hvis dette fortsætter, skal du sørge for, at
+    Windows 'Credential Manager'-tjenesten (VaultSvc) er aktiveret og kører, og
+    prøv derefter igen.
+  login_failed_title: Login mislykkedes
 cancel: Ophæve
 done: Færdig
 elevated:

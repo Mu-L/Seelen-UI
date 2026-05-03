@@ -1,3 +1,9 @@
+auth:
+  login_failed_body: >-
+    Beim Login ass eppes falsch gaangen. Wann dëst bestoe bleift, gitt sécher
+    datt de Windows 'Credential Manager' Service (VaultSvc) aktivéiert ass a
+    leeft, probéiert dann nach eng Kéier.
+  login_failed_title: Login gescheitert
 cancel: Ofbriechen
 done: Verdataktioun
 elevated:

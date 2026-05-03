@@ -1,3 +1,9 @@
+auth:
+  login_failed_body: >-
+    มีข้อผิดพลาดเกิดขึ้นระหว่างการเข้าสู่ระบบ หากยังคงอยู่
+    โปรดตรวจสอบให้แน่ใจว่าบริการ 'Credential Manager' (VaultSvc) ของ Windows
+    เปิดใช้งานและทำงานอยู่ จากนั้นลองอีกครั้ง
+  login_failed_title: การเข้าสู่ระบบล้มเหลว
 cancel: ยกเลิก
 done: เสร็จแล้ว
 elevated:

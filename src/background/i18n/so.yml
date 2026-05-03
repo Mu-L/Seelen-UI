@@ -1,3 +1,9 @@
+auth:
+  login_failed_body: >-
+    Wax baa khaldamay markii la soo galayay Haddii ay tani sii socoto, hubi in
+    adeegga 'Maareeyaha Aqoonsiga' ee Windows (VaultSvc) uu shaqaynayo oo uu
+    socdo, ka dibna isku day mar kale.
+  login_failed_title: Gelitaanku wuu fashilmay
 cancel: Burin
 done: Sameeyey
 elevated:

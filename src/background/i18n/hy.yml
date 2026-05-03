@@ -1,3 +1,9 @@
+auth:
+  login_failed_body: >-
+    Մուտք գործելու ընթացքում սխալ առաջացավ: Եթե ​​դա շարունակվի, համոզվեք, որ
+    Windows «Credential Manager» ծառայությունը (VaultSvc) միացված է և աշխատում
+    է, ապա նորից փորձեք:
+  login_failed_title: Մուտքը ձախողվեց
 cancel: Չեղարկել
 done: Արված
 elevated:

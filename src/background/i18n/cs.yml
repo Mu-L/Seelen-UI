@@ -1,3 +1,9 @@
+auth:
+  login_failed_body: >-
+    Při přihlašování se něco pokazilo. Pokud to přetrvává, ujistěte se, že je
+    služba Windows 'Credential Manager' (VaultSvc) povolena a spuštěna, a zkuste
+    to znovu.
+  login_failed_title: Přihlášení se nezdařilo
 cancel: Zrušit
 done: Hotovo
 elevated:
