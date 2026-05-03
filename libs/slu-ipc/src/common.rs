@@ -37,14 +37,21 @@ pub trait IPC {
         Ok(pid)
     }
 
-    fn test_connection() -> Result<()> {
-        let stream = DuplexPipeStream::connect_by_path(Self::path())?;
-        let response = send_to_ipc_stream_blocking(&stream, &[])?;
-        response.ok()
-    }
-
     fn can_stablish_connection() -> bool {
-        Self::test_connection().is_ok()
+        // Run the blocking IPC probe in a dedicated thread with a hard timeout so
+        // the caller never hangs if the server accepts the connection but stops
+        // responding (which would leave `read_until` blocked forever).
+        let path = Self::path();
+        let (tx, rx) = std::sync::mpsc::channel();
+        std::thread::spawn(move || {
+            let ok = (|| -> crate::error::Result<()> {
+                let stream = DuplexPipeStream::<Bytes>::connect_by_path(path)?;
+                send_to_ipc_stream_blocking(&stream, &[])?.ok()
+            })()
+            .is_ok();
+            let _ = tx.send(ok);
+        });
+        rx.recv_timeout(IPC_TIMEOUT).unwrap_or(false)
     }
 }
 
