@@ -123,3 +123,18 @@ impl From<&[u16]> for WindowsString {
         Self::from_slice(value)
     }
 }
+
+impl From<PCWSTR> for WindowsString {
+    fn from(value: PCWSTR) -> Self {
+        if value.is_null() {
+            return Self { inner: vec![0] };
+        }
+        Self::from_slice(unsafe { value.as_wide() })
+    }
+}
+
+impl From<PWSTR> for WindowsString {
+    fn from(value: PWSTR) -> Self {
+        Self::from(PCWSTR(value.0))
+    }
+}

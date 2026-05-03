@@ -26,7 +26,7 @@ use windows::{
     Win32::UI::Shell::{SHGetKnownFolderPath, KF_FLAG_DEFAULT},
 };
 
-use crate::error::Result;
+use crate::{error::Result, windows_api::string_utils::WindowsString};
 
 /// Writes `content` to `path` atomically: writes to a sibling `.tmp` file first,
 /// syncs to disk, then renames into place. This guarantees the target file is
@@ -65,8 +65,10 @@ pub fn resolve_guid_path<S: AsRef<str>>(path: S) -> Result<PathBuf> {
         if part.starts_with("{") && part.ends_with("}") {
             let guid = part.trim_start_matches('{').trim_end_matches('}');
             let rfid = GUID::try_from(guid)?;
-            let string_path =
-                unsafe { SHGetKnownFolderPath(&rfid as _, KF_FLAG_DEFAULT, None)?.to_string()? };
+            let string_path = WindowsString::from(unsafe {
+                SHGetKnownFolderPath(&rfid as _, KF_FLAG_DEFAULT, None)?
+            })
+            .to_string();
 
             path_buf.push(string_path);
         } else if idx == 0 {

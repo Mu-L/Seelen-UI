@@ -21,7 +21,7 @@ use crate::{
     error::{ErrorMap, Result, ResultLogExt},
     event_manager,
     utils::{lock_free::SyncHashMap, pcwstr},
-    windows_api::{process::Process, Com},
+    windows_api::{process::Process, string_utils::WindowsString, Com},
 };
 
 use super::domain::{MediaDevice, MediaDeviceSession, MediaDeviceType};
@@ -314,7 +314,7 @@ type SessionManagerData = (
 
 impl MediaDevice {
     pub unsafe fn load(raw_device: &IMMDevice) -> Result<Self> {
-        let device_id = raw_device.GetId()?.to_string()?;
+        let device_id = WindowsString::from(raw_device.GetId()?).to_string();
         let volume_endpoint: IAudioEndpointVolume = raw_device.Activate(CLSCTX_ALL, None)?;
         let (sessions, session_manager, session_created_callback) =
             Self::load_sessions(raw_device, &device_id);
@@ -389,7 +389,7 @@ impl MediaDevice {
 
 impl MediaDeviceSession {
     pub unsafe fn load(session: IAudioSessionControl2, device_id: &str) -> Result<Self> {
-        let session_id = session.GetSessionIdentifier()?.to_string()?;
+        let session_id = WindowsString::from(session.GetSessionIdentifier()?).to_string();
         let volume: ISimpleAudioVolume = session.cast()?;
         let proccess = Process::from_id(session.GetProcessId()?);
 
@@ -400,7 +400,7 @@ impl MediaDeviceSession {
 
         let session = MediaDeviceSession {
             id: session_id,
-            instance_id: session.GetSessionInstanceIdentifier()?.to_string()?,
+            instance_id: WindowsString::from(session.GetSessionInstanceIdentifier()?).to_string(),
             process_id: proccess.id(),
             name: proccess
                 .program_display_name()
@@ -445,20 +445,22 @@ impl IMMNotificationClient_Impl for DevicesManagerEvents_Impl {
         DevicesManager::send(DevicesEvent::DefaultDeviceChanged {
             flow,
             role,
-            device_id: unsafe { device_id.to_string()? },
+            device_id: WindowsString::from(*device_id).to_string(),
         });
         Ok(())
     }
 
     fn OnDeviceAdded(&self, device_id: &windows_core::PCWSTR) -> windows_core::Result<()> {
-        DevicesManager::send(DevicesEvent::DeviceAdded(unsafe { device_id.to_string()? }));
+        DevicesManager::send(DevicesEvent::DeviceAdded(
+            WindowsString::from(*device_id).to_string(),
+        ));
         Ok(())
     }
 
     fn OnDeviceRemoved(&self, device_id: &windows_core::PCWSTR) -> windows_core::Result<()> {
-        DevicesManager::send(DevicesEvent::DeviceRemoved(unsafe {
-            device_id.to_string()?
-        }));
+        DevicesManager::send(DevicesEvent::DeviceRemoved(
+            WindowsString::from(*device_id).to_string(),
+        ));
         Ok(())
     }
 
@@ -467,7 +469,7 @@ impl IMMNotificationClient_Impl for DevicesManagerEvents_Impl {
         device_id: &windows_core::PCWSTR,
         new_device_state: windows::Win32::Media::Audio::DEVICE_STATE,
     ) -> windows_core::Result<()> {
-        let device_id = unsafe { device_id.to_string()? };
+        let device_id = WindowsString::from(*device_id).to_string();
         let tx = DevicesManager::event_tx();
         match new_device_state {
             DEVICE_STATE_ACTIVE => tx.send(DevicesEvent::DeviceAdded(device_id)),

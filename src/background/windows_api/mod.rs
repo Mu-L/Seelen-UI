@@ -645,7 +645,7 @@ impl WindowsApi {
             let text = shell_item
                 .GetString(&PKEY_FileDescription)
                 .or_else(|_| shell_item.GetDisplayName(SIGDN_NORMALDISPLAY))?;
-            Ok(text.to_string()?)
+            Ok(WindowsString::from(text).to_string())
         })
     }
 

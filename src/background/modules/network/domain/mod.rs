@@ -12,7 +12,7 @@ use windows::{
     },
 };
 
-use crate::error::Result;
+use crate::{error::Result, windows_api::string_utils::WindowsString};
 
 #[derive(PartialEq, Eq)]
 enum Address {
@@ -108,9 +108,9 @@ pub fn adapter_to_slu_net_adapter(adapter: &IP_ADAPTER_ADDRESSES_LH) -> Result<N
         };
 
         Ok(NetworkAdapter {
-            dns_suffix: adapter.DnsSuffix.to_string()?,
-            name: adapter.FriendlyName.to_string()?,
-            description: adapter.Description.to_string()?,
+            dns_suffix: WindowsString::from(adapter.DnsSuffix).to_string(),
+            name: WindowsString::from(adapter.FriendlyName).to_string(),
+            description: WindowsString::from(adapter.Description).to_string(),
             mac: mac_address,
             status,
             ipv4: get_address(adapter, Address::Ipv4),

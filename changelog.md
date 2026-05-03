@@ -7,6 +7,10 @@
 - features like accent color by wallpaper, and supend widgets on game mode are now disabled by default.
 - show popup dialog on login failure.
 
+### fix
+
+- crash on audio device null pointers.
+
 ## [2.6.3]
 
 ### fix
