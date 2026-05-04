@@ -22,6 +22,8 @@ use crate::{
 const LIVENESS_PROVE_INTERVAL: Duration = Duration::from_secs(5);
 const LIVENESS_PROVE_WAIT_TIMEOUT: Duration = Duration::from_secs(3);
 const LIVENESS_PROVE_MAX_RETRIES: u8 = 5;
+// Grace period after session resume or soft_restart to let the webview finish reloading.
+const LIVENESS_RELOAD_GRACE_PERIOD: Duration = Duration::from_secs(10);
 
 pub struct WidgetDeployment {
     pub definition: Arc<Widget>,
@@ -233,10 +235,20 @@ impl WidgetPod {
 
         let handle = get_tokio_handle().spawn(async move {
             let app = get_app_handle();
+            let mut was_suspended = false;
 
             loop {
                 tokio::time::sleep(LIVENESS_PROVE_INTERVAL).await;
                 if !IS_INTERACTIVE_SESSION.load(std::sync::atomic::Ordering::Acquire) {
+                    was_suspended = true;
+                    continue;
+                }
+
+                // After session resume, reset state and wait for webview to finish reloading.
+                if was_suspended {
+                    was_suspended = false;
+                    retries.store(0, std::sync::atomic::Ordering::SeqCst);
+                    tokio::time::sleep(LIVENESS_RELOAD_GRACE_PERIOD).await;
                     continue;
                 }
 
@@ -244,12 +256,13 @@ impl WidgetPod {
 
                 tokio::select! {
                     _ = live.notified() => {
-                        // log::trace!("Liveness prove succeeded for {label}");
+                        // Widget is healthy: reset consecutive failure counter.
+                        retries.store(0, std::sync::atomic::Ordering::SeqCst);
                     }
                     _ = tokio::time::sleep(LIVENESS_PROVE_WAIT_TIMEOUT) => {
-                        log::warn!("Liveness prove failed for {label}, reloading webview.");
-
                         let attempt = retries.fetch_add(1, std::sync::atomic::Ordering::SeqCst);
+                        log::warn!("Liveness prove failed for {label} (attempt {}/{LIVENESS_PROVE_MAX_RETRIES}), reloading webview.", attempt + 1);
+
                         if attempt < LIVENESS_PROVE_MAX_RETRIES {
                             WIDGET_MANAGER.deployments.get(&label.widget_id, |deployment| {
                                 deployment.pods.get(&label, |pod| {

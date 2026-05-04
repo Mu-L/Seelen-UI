@@ -10,6 +10,7 @@
 ### fix
 
 - crash on audio device null pointers.
+- widgets showing not responding message after session resume.
 
 ## [2.6.3]
 
