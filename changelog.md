@@ -11,6 +11,7 @@
 
 - crash on audio device null pointers.
 - widgets showing not responding message after session resume.
+- style artifacts on dock previews.
 
 ## [2.6.3]
 

@@ -275,16 +275,17 @@
 .weg-item-preview {
   padding: 6px 10px 10px 10px;
   border-radius: 10px;
+  color: var(--color-gray-900);
 }
 
 .weg-item-preview-topbar {
   margin: 0 0 8px 0;
-}
 
-.weg-item-preview-title {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--color-gray-900);
+  .weg-item-preview-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-gray-900);
+  }
 }
 
 .weg-item-preview-image-container {

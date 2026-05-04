@@ -34,12 +34,14 @@ body {
     bottom: 0;
   }
 
-  &:has(.ft-bar-hidden.top:not(:hover)) {
-    transform: translate3d(0, calc(var(--config-height) * -1), 0);
-  }
+  &:not(:hover) {
+    &:has(.ft-bar-hidden.top) {
+      transform: translate3d(0, calc(var(--config-height) * -1), 0);
+    }
 
-  &:has(.ft-bar-hidden.bottom:not(:hover)) {
-    transform: translate3d(0, calc(var(--config-height)), 0);
+    &:has(.ft-bar-hidden.bottom) {
+      transform: translate3d(0, calc(var(--config-height)), 0);
+    }
   }
 }
 
