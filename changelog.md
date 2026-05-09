@@ -2,14 +2,15 @@
 
 ## [2.6.5-dev]
 
+### enhancements
+
+- use webp for system extracted icons and media player thumbnails.
+- twm reset of workspaces on reset size shortcut.
+
 ### refactor
 
 - tiling window manager.
 - capture window system.
-
-### enhancements
-
-- use webp for system extracted icons and media player thumbnails.
 
 ## [2.6.4]
 

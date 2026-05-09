@@ -154,14 +154,16 @@ impl WmCommand {
             }
             WmCommand::ResetWorkspaceSize => {
                 let window_id = foreground.address();
-                let is_floating = WM_STATE
-                    .lock()
-                    .state
-                    .workspaces
-                    .values()
-                    .any(|t| t.is_floating(&window_id));
-                if is_floating {
-                    set_rect_to_float_initial_size(&foreground)?;
+                let mut guard = WM_STATE.lock();
+                if guard.state.contains(&window_id) {
+                    if guard.state.is_tiled(&window_id) {
+                        if let Some((_, tree)) = guard.get_tree_for_window_mut(&foreground) {
+                            tree.reset_sizes();
+                            TwmState::send(TwmStateEvent::Changed);
+                        }
+                    } else {
+                        set_rect_to_float_initial_size(&foreground)?;
+                    }
                 }
             }
             WmCommand::ToggleFloat => {

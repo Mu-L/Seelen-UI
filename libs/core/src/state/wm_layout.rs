@@ -20,6 +20,26 @@ pub struct TwmGlobalRuntimeTree {
     pub workspaces: HashMap<WorkspaceId, TwmRuntimeTree>,
 }
 
+impl TwmGlobalRuntimeTree {
+    pub fn contains(&self, window_id: &WindowId) -> bool {
+        self.workspaces
+            .iter()
+            .any(|(_, tree)| tree.contains(window_id))
+    }
+
+    pub fn is_tiled(&self, window_id: &WindowId) -> bool {
+        self.workspaces
+            .iter()
+            .any(|(_, tree)| tree.is_tiled(window_id))
+    }
+
+    pub fn is_floating(&self, window_id: &WindowId) -> bool {
+        self.workspaces
+            .iter()
+            .any(|(_, tree)| tree.is_floating(window_id))
+    }
+}
+
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(rename_all = "camelCase")]
 pub struct TwmRuntimeTree {
@@ -44,6 +64,7 @@ pub struct TwmRuntimeNode {
     pub kind: TwmNodeKind,
     pub lifetime: TwmNodeLifetime,
     pub priority: u32,
+    pub initial_grow_factor: f32,
     pub grow_factor: f32,
     pub condition: Option<TwmCondition>,
     pub max_stack_size: Option<usize>,
@@ -58,6 +79,60 @@ pub struct TwmRuntimeNode {
 impl Default for TwmRuntimeTree {
     fn default() -> Self {
         Self::new()
+    }
+}
+
+// block for iterators
+impl TwmRuntimeTree {
+    /// traverse sorts nodes by priority, so tree order ≠ processing order
+    pub fn traverse<F>(&self, node_id: NodeId, callback: &mut F)
+    where
+        F: FnMut(&TwmRuntimeNode),
+    {
+        let node = self.nodes.get(&node_id).unwrap();
+        callback(node);
+
+        let mut children = node.children.clone();
+        children.sort_by_key(|id| self.nodes.get(id).unwrap().priority);
+
+        for child in children {
+            self.traverse(child, callback);
+        }
+    }
+
+    /// traverse sorts nodes by priority, so tree order ≠ processing order
+    pub fn traverse_mut<F>(&mut self, node_id: NodeId, callback: &mut F)
+    where
+        F: FnMut(&mut TwmRuntimeNode),
+    {
+        let node = self.nodes.get_mut(&node_id).unwrap();
+        callback(node);
+
+        let mut children = node.children.clone();
+        children.sort_by_key(|id| self.nodes.get(id).unwrap().priority);
+
+        for child in children {
+            self.traverse_mut(child, callback);
+        }
+    }
+
+    pub fn find<F>(&self, node_id: NodeId, predicate: &mut F) -> Option<NodeId>
+    where
+        F: FnMut(&TwmRuntimeNode) -> bool,
+    {
+        let node = self.nodes.get(&node_id)?;
+        if predicate(node) {
+            return Some(node_id);
+        }
+
+        let mut children = node.children.clone();
+        children.sort_by_key(|id| self.nodes.get(id).unwrap().priority);
+        for child in children {
+            if let Some(found) = self.find(child, predicate) {
+                return Some(found);
+            }
+        }
+        None
     }
 }
 
@@ -114,55 +189,11 @@ impl TwmRuntimeTree {
         matches!(self.window_map.get(id), Some(WindowLocation::Floating))
     }
 
-    /// traverse sorts nodes by priority, so tree order ≠ processing order
-    pub fn traverse<F>(&self, node_id: NodeId, callback: &mut F)
-    where
-        F: FnMut(&TwmRuntimeNode),
-    {
-        let node = self.nodes.get(&node_id).unwrap();
-        callback(node);
-
-        let mut children = node.children.clone();
-        children.sort_by_key(|id| self.nodes.get(id).unwrap().priority);
-
-        for child in children {
-            self.traverse(child, callback);
-        }
-    }
-
-    /// traverse sorts nodes by priority, so tree order ≠ processing order
-    pub fn traverse_mut<F>(&mut self, node_id: NodeId, callback: &mut F)
-    where
-        F: FnMut(&mut TwmRuntimeNode),
-    {
-        let node = self.nodes.get_mut(&node_id).unwrap();
-        callback(node);
-
-        let mut children = node.children.clone();
-        children.sort_by_key(|id| self.nodes.get(id).unwrap().priority);
-
-        for child in children {
-            self.traverse_mut(child, callback);
-        }
-    }
-
-    pub fn find<F>(&self, node_id: NodeId, predicate: &mut F) -> Option<NodeId>
-    where
-        F: FnMut(&TwmRuntimeNode) -> bool,
-    {
-        let node = self.nodes.get(&node_id)?;
-        if predicate(node) {
-            return Some(node_id);
-        }
-
-        let mut children = node.children.clone();
-        children.sort_by_key(|id| self.nodes.get(id).unwrap().priority);
-        for child in children {
-            if let Some(found) = self.find(child, predicate) {
-                return Some(found);
-            }
-        }
-        None
+    pub fn reset_sizes(&mut self) {
+        self.traverse_mut(self.root, &mut |node| {
+            node.rect = None;
+            node.grow_factor = node.initial_grow_factor;
+        });
     }
 
     // TODO: consider cached counters if condition eval becomes hot path
@@ -406,6 +437,7 @@ impl TwmRuntimeNode {
             kind: node.kind,
             lifetime: node.lifetime,
             priority: node.priority,
+            initial_grow_factor: node.grow_factor,
             grow_factor: node.grow_factor,
             condition: node.condition.clone(),
             max_stack_size: node.max_stack_size,
