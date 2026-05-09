@@ -23,7 +23,7 @@ use crate::{
         handler::{schedule_window_position, set_app_windows_positions},
         instance::WindowManagerV2,
     },
-    windows_api::window::Window,
+    windows_api::{monitor::Monitor, window::Window},
 };
 
 pub static WM_STATE: LazyLock<Arc<TracedMutex<TwmState>>> = LazyLock::new(|| {
@@ -46,34 +46,6 @@ pub enum TwmStateEvent {
 }
 
 event_manager!(TwmState, TwmStateEvent);
-
-pub fn set_rect_to_float_initial_size(window: &Window) -> Result<()> {
-    let guard = FULL_STATE.load();
-    let config = &guard.settings.by_widget.wm.floating;
-
-    let monitor = window.monitor();
-    let monitor_dpi = monitor.scale_factor()?;
-    let monitor_rect = monitor.rect()?;
-    let monitor_width = monitor_rect.right - monitor_rect.left;
-    let monitor_height = monitor_rect.bottom - monitor_rect.top;
-
-    let window_width = (config.width * monitor_dpi) as i32;
-    let window_height = (config.height * monitor_dpi) as i32;
-
-    let x = monitor_rect.left + (monitor_width - window_width) / 2;
-    let y = monitor_rect.top + (monitor_height - window_height) / 2;
-
-    schedule_window_position(
-        window.address(),
-        Rect {
-            left: x,
-            top: y,
-            right: x + window_width,
-            bottom: y + window_height,
-        },
-    );
-    Ok(())
-}
 
 impl TwmState {
     fn initialize(&mut self) {
@@ -437,4 +409,31 @@ impl TwmState {
         Self::send(TwmStateEvent::Changed);
         Ok(())
     }
+}
+
+pub fn set_rect_to_float_initial_size(window: &Window, monitor: &Monitor) -> Result<()> {
+    let guard = FULL_STATE.load();
+    let config = &guard.settings.by_widget.wm.floating;
+
+    let monitor_dpi = monitor.scale_factor()?;
+    let monitor_rect = monitor.rect()?;
+    let monitor_width = monitor_rect.right - monitor_rect.left;
+    let monitor_height = monitor_rect.bottom - monitor_rect.top;
+
+    let window_width = (config.width * monitor_dpi) as i32;
+    let window_height = (config.height * monitor_dpi) as i32;
+
+    let x = monitor_rect.left + (monitor_width - window_width) / 2;
+    let y = monitor_rect.top + (monitor_height - window_height) / 2;
+
+    schedule_window_position(
+        window.address(),
+        Rect {
+            left: x,
+            top: y,
+            right: x + window_width,
+            bottom: y + window_height,
+        },
+    );
+    Ok(())
 }

@@ -1,16 +1,18 @@
 use clap::ValueEnum;
 use serde::{Deserialize, Serialize};
 
-use crate::error::Result;
+use crate::error::{Result, ResultLogExt};
 use crate::state::application::FULL_STATE;
 use crate::trace_lock;
 use crate::virtual_desktops::SluWorkspacesManager2;
 use crate::widgets::window_manager::state_v2::{
     set_rect_to_float_initial_size, TwmState, TwmStateEvent, WM_STATE,
 };
+use crate::windows_api::monitor::Monitor;
 use crate::windows_api::window::Window;
+use crate::windows_api::MonitorEnumerator;
 
-#[derive(Debug, Clone, Serialize, Deserialize, ValueEnum)]
+#[derive(Debug, Clone, Copy, Serialize, Deserialize, ValueEnum)]
 pub enum AllowedReservations {
     Left,
     Right,
@@ -20,7 +22,7 @@ pub enum AllowedReservations {
     Float,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, ValueEnum)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, ValueEnum)]
 pub enum NodeSiblingSide {
     Left,
     Right,
@@ -28,19 +30,19 @@ pub enum NodeSiblingSide {
     Down,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, ValueEnum)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, ValueEnum)]
 pub enum Sizing {
     Increase,
     Decrease,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, ValueEnum)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, ValueEnum)]
 pub enum StepWay {
     Next,
     Prev,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, ValueEnum)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, ValueEnum)]
 pub enum Axis {
     Horizontal,
     Vertical,
@@ -58,7 +60,7 @@ pub struct WindowManagerCli {
     pub subcommand: WmCommand,
 }
 
-#[derive(Debug, Serialize, Deserialize, clap::Subcommand)]
+#[derive(Debug, Clone, Serialize, Deserialize, clap::Subcommand)]
 pub enum WmCommand {
     /// Open Dev Tools (only works if the app is running in dev mode)
     Debug,
@@ -87,13 +89,21 @@ pub enum WmCommand {
     ToggleFloat,
     /// Toggles workspace layout mode to monocle (single stack)
     ToggleMonocle,
-    /// Moves the window to the specified position
-    Move { side: NodeSiblingSide },
     /// Cycles the foregrounf node if it is a stack
     CycleStack { way: StepWay },
     /// Focuses the window in the specified position.
     Focus {
         /// The position of the window to focus.
+        side: NodeSiblingSide,
+    },
+    /// Moves the window to the specified position
+    Move {
+        /// Direction to move
+        side: NodeSiblingSide,
+    },
+    /// Moves the window to another monitor in the specified side
+    MoveToMonitor {
+        /// Direction to move
         side: NodeSiblingSide,
     },
 }
@@ -107,6 +117,7 @@ impl WindowManagerCli {
 impl WmCommand {
     pub fn process(self) -> Result<()> {
         let foreground = Window::get_foregrounded();
+        let is_moving = matches!(&self, WmCommand::Move { .. });
 
         match self {
             WmCommand::Toggle => {
@@ -162,7 +173,7 @@ impl WmCommand {
                             TwmState::send(TwmStateEvent::Changed);
                         }
                     } else {
-                        set_rect_to_float_initial_size(&foreground)?;
+                        set_rect_to_float_initial_size(&foreground, &foreground.monitor())?;
                     }
                 }
             }
@@ -181,7 +192,7 @@ impl WmCommand {
                             tree.add_to_floating(w);
                         }
                         tree.add_to_floating(window_id);
-                        set_rect_to_float_initial_size(&foreground)?;
+                        set_rect_to_float_initial_size(&foreground, &foreground.monitor())?;
                     }
 
                     TwmState::send(TwmStateEvent::Changed);
@@ -195,38 +206,111 @@ impl WmCommand {
                     .ok_or("Monitor not found")?;
                 WM_STATE.lock().toggle_monocle(&workspace_id);
             }
-            WmCommand::Focus { side } => {
-                let mut state = WM_STATE.lock();
+            WmCommand::Focus { side } | WmCommand::Move { side } => {
                 let window_id = foreground.address();
-                if let Some((_ws_id, tree)) = state.get_tree_for_window_mut(&foreground) {
-                    let (match_h, want_before) = side_to_flags(&side);
-                    let siblings = tree.siblings_at_side(&window_id, match_h, want_before);
-                    match siblings.first().and_then(|&nid| tree.face_of_node(nid)) {
-                        Some(target_id) => Window::from(target_id).focus()?,
-                        None => log::warn!("There is no node at {side:?} to be focused"),
+
+                let mut guard = WM_STATE.lock();
+                let Some((_ws_id, tree)) = guard.get_tree_for_window_mut(&foreground) else {
+                    return Ok(());
+                };
+
+                let (match_h, want_before) = side_to_flags(&side);
+                let siblings = tree.siblings_at_side(&window_id, match_h, want_before);
+
+                let Some(direct_sibling) = siblings.first().and_then(|&nid| tree.face_of_node(nid))
+                else {
+                    log::warn!("There is no direct node at {side:?}");
+                    drop(guard);
+                    if is_moving {
+                        Self::process_move_to_monitor(&foreground, side)?;
+                    } else {
+                        Self::process_focus_to_monitor(&foreground, side)?;
                     }
+                    return Ok(());
+                };
+
+                if is_moving {
+                    tree.swap_windows(window_id, direct_sibling);
+                    TwmState::send(TwmStateEvent::Changed);
+                } else {
+                    Window::from(direct_sibling).focus()?;
                 }
             }
-            WmCommand::Move { side } => {
-                let mut state = WM_STATE.lock();
-                let window_id = foreground.address();
-                if let Some((_ws_id, tree)) = state.get_tree_for_window_mut(&foreground) {
-                    let (match_h, want_before) = side_to_flags(&side);
-                    let siblings = tree.siblings_at_side(&window_id, match_h, want_before);
-                    match siblings.first().and_then(|&nid| tree.face_of_node(nid)) {
-                        Some(target_id) => {
-                            tree.swap_windows(window_id, target_id);
-                            TwmState::send(TwmStateEvent::Changed);
-                        }
-                        None => log::warn!("There is no node at {side:?} to be swapped"),
-                    }
-                }
+            WmCommand::MoveToMonitor { side } => {
+                Self::process_move_to_monitor(&foreground, side)?;
             }
             WmCommand::CycleStack { way } => {
                 WM_STATE.lock().cycle_stack(&foreground, way)?;
             }
         };
 
+        Ok(())
+    }
+
+    fn process_focus_to_monitor(foreground: &Window, side: NodeSiblingSide) -> Result<()> {
+        let source_monitor = foreground.monitor();
+
+        let Some(target_monitor) = get_neartest_monitor_at_side(&source_monitor, side)? else {
+            log::warn!("There is no monitor at {side:?}");
+            return Ok(());
+        };
+
+        let Some(target_workspace_id) = SluWorkspacesManager2::instance()
+            .monitors
+            .get(&target_monitor.stable_id()?, |m| {
+                m.active_workspace_id().clone()
+            })
+        else {
+            return Ok(());
+        };
+
+        let fg_rect = foreground.inner_rect()?;
+        let guard = WM_STATE.lock();
+        if let Some(target_window_id) =
+            guard.get_nearest_tiled_window_to_rect(&fg_rect, &target_workspace_id)
+        {
+            Window::from(target_window_id).focus()?;
+        }
+        Ok(())
+    }
+
+    fn process_move_to_monitor(foreground: &Window, side: NodeSiblingSide) -> Result<()> {
+        let source_monitor = foreground.monitor();
+        let source_workspace_id = foreground.workspace_id()?;
+
+        let Some(target_monitor) = get_neartest_monitor_at_side(&source_monitor, side)? else {
+            log::warn!("There is no monitor at {side:?}");
+            return Ok(());
+        };
+
+        if let Some(target_workspace_id) = SluWorkspacesManager2::instance()
+            .monitors
+            .get(&target_monitor.stable_id()?, |m| {
+                m.active_workspace_id().clone()
+            })
+        {
+            let mut guard = WM_STATE.lock();
+            let target_tree = guard
+                .state
+                .workspaces
+                .get_mut(&target_workspace_id)
+                .ok_or("Workspace not found")?;
+
+            let residual = target_tree.add_to_tiled(foreground.address());
+            for w in residual {
+                target_tree.add_to_floating(w);
+                set_rect_to_float_initial_size(&Window::from(w), &target_monitor).log_error();
+            }
+
+            guard
+                .state
+                .workspaces
+                .get_mut(&source_workspace_id)
+                .ok_or("Workspace not found")?
+                .remove_window(&foreground.address());
+
+            TwmState::send(TwmStateEvent::Changed);
+        }
         Ok(())
     }
 }
@@ -238,4 +322,53 @@ fn side_to_flags(side: &NodeSiblingSide) -> (bool, bool) {
         NodeSiblingSide::Up => (false, true),
         NodeSiblingSide::Down => (false, false),
     }
+}
+
+pub fn get_neartest_monitor_at_side(
+    monitor: &Monitor,
+    side: NodeSiblingSide,
+) -> Result<Option<Monitor>> {
+    let monitors = MonitorEnumerator::enumerate_win32()?;
+    let center = monitor.rect()?.center();
+
+    let mut best: Option<(Monitor, i32)> = None;
+
+    for current in monitors {
+        if &current == monitor {
+            continue;
+        }
+
+        let current_center = current.rect()?.center();
+
+        match side {
+            NodeSiblingSide::Left => {
+                if current_center.x > center.x {
+                    continue;
+                }
+            }
+            NodeSiblingSide::Right => {
+                if current_center.x < center.x {
+                    continue;
+                }
+            }
+            NodeSiblingSide::Up => {
+                if current_center.y > center.y {
+                    continue;
+                }
+            }
+            NodeSiblingSide::Down => {
+                if current_center.y < center.y {
+                    continue;
+                }
+            }
+        }
+
+        let distance = current_center.distance_squared(&center);
+
+        if best.is_none() || distance < best.unwrap().1 {
+            best = Some((current, distance));
+        }
+    }
+
+    Ok(best.map(|(m, _)| m))
 }

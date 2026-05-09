@@ -6,6 +6,8 @@
 
 - use webp for system extracted icons and media player thumbnails.
 - twm reset of workspaces on reset size shortcut.
+- twm focus side monitor when theres no more nodes at the specified side in the current workspace.
+- twm allow move windows between monitors via shortcuts.
 
 ### refactor
 
