@@ -5,6 +5,7 @@
 ### refactor
 
 - tiling window manager.
+- capture window system.
 
 ## [2.6.4]
 

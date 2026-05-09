@@ -102,12 +102,6 @@ pub fn wm_get_render_tree() -> TwmGlobalRuntimeTree {
     static TAURI_EVENT_REGISTRATION: Once = Once::new();
     TAURI_EVENT_REGISTRATION.call_once(|| {
         TwmState::subscribe(|_event| {
-            std::fs::write(
-                "wm_tree.yaml",
-                serde_yaml::to_string(&WM_STATE.lock().state).unwrap(),
-            )
-            .unwrap();
-
             emit_to_webviews(SeelenEvent::WMTreeChanged, &WM_STATE.lock().state);
         });
     });

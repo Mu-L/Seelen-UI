@@ -67,7 +67,6 @@ impl WindowManagerV2 {
         .additional_browser_args(&args.to_string())
         .build()?;
 
-        window.open_devtools();
         window.set_ignore_cursor_events(true)?;
 
         Ok(window)

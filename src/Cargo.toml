@@ -55,6 +55,7 @@ windows-core = { workspace = true } # windows-rs already depends and reexports t
 windows-future = { workspace = true }
 win-screenshot = { workspace = true }
 base64 = { workspace = true }
+webp = { workspace = true }
 arc-swap = { workspace = true }
 notify-debouncer-full = { workspace = true }
 encoding_rs = { workspace = true }

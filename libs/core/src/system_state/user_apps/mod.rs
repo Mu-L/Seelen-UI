@@ -49,7 +49,7 @@ pub struct ProcessInformation {
 #[serde(rename_all = "camelCase")]
 pub struct UserAppWindowPreview {
     pub hash: String,
-    pub path: PathBuf,
+    pub data: String,
     pub width: u32,
     pub height: u32,
 }
