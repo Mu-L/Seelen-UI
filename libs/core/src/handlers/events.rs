@@ -79,7 +79,7 @@ slu_events_declaration! {
 
     WMSetReservation as "wm::set-reservation",
     WMForceRetiling as "wm::force-retiling",
-    WMTreeChanged(WmRenderTree) as "wm::tree-changed",
+    WMTreeChanged(TwmGlobalRuntimeTree) as "wm::tree-changed",
 
     PopupContentChanged(SluPopupConfig) as "popup-content-changed",
 

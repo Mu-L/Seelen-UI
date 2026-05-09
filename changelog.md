@@ -2,6 +2,10 @@
 
 ## [2.6.5-dev]
 
+### refactor
+
+- tiling window manager.
+
 ## [2.6.4]
 
 ### enhancements

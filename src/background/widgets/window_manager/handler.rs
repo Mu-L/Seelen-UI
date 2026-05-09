@@ -11,13 +11,13 @@ use crate::{
     cli::ServicePipe,
     error::Result,
     state::application::{performance::PERFORMANCE_MODE, FULL_STATE},
-    widgets::window_manager::state::{WmState, WM_LAYOUT_RECTS, WM_STATE},
+    widgets::window_manager::state_v2::{TwmState, WM_STATE},
     windows_api::{window::Window, WindowsApi},
 };
 use seelen_core::{
     handlers::SeelenEvent,
     rect::Rect,
-    state::{PerformanceMode, WmRenderTree},
+    state::{PerformanceMode, TwmGlobalRuntimeTree},
 };
 
 static SCHEDULED_POSITIONS: LazyLock<scc::HashMap<isize, Rect>> = LazyLock::new(scc::HashMap::new);
@@ -38,7 +38,6 @@ pub fn set_app_windows_positions(positions: HashMap<isize, Rect>) -> Result<()> 
             continue;
         }
 
-        WM_LAYOUT_RECTS.upsert(hwnd, rect.clone());
         // avoid to move window while dragging
         if window.is_dragging() {
             continue;
@@ -71,6 +70,14 @@ pub fn set_app_windows_positions(positions: HashMap<isize, Rect>) -> Result<()> 
     let place_animated =
         state.settings.by_widget.wm.animations.enabled && **perf_mode == PerformanceMode::Disabled;
 
+    // Update node.rect for tiled windows based on the computed layout positions.
+    {
+        let mut state = WM_STATE.lock();
+        for (hwnd, rect) in &list {
+            state.set_cached_node_rect(*hwnd, rect.clone());
+        }
+    }
+
     ServicePipe::request(SvcAction::DeferWindowPositions {
         list,
         animated: place_animated,
@@ -91,16 +98,19 @@ pub fn request_focus(hwnd: isize) -> Result<()> {
 }
 
 #[tauri::command(async)]
-pub fn wm_get_render_tree() -> WmRenderTree {
+pub fn wm_get_render_tree() -> TwmGlobalRuntimeTree {
     static TAURI_EVENT_REGISTRATION: Once = Once::new();
     TAURI_EVENT_REGISTRATION.call_once(|| {
-        WmState::subscribe(|_event| {
-            emit_to_webviews(
-                SeelenEvent::WMTreeChanged,
-                &WM_STATE.lock().get_render_tree(),
-            );
+        TwmState::subscribe(|_event| {
+            std::fs::write(
+                "wm_tree.yaml",
+                serde_yaml::to_string(&WM_STATE.lock().state).unwrap(),
+            )
+            .unwrap();
+
+            emit_to_webviews(SeelenEvent::WMTreeChanged, &WM_STATE.lock().state);
         });
     });
 
-    WM_STATE.lock().get_render_tree()
+    WM_STATE.lock().state.clone()
 }

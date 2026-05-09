@@ -1,4 +1,6 @@
-import type { WmNode } from "@seelen-ui/lib/types";
+import type { TwmRuntimeNode, TwmRuntimeTree } from "@seelen-ui/lib/types";
+
+export { TwmNodeKind } from "@seelen-ui/lib/types";
 
 export enum Reservation {
   Left = "Left",
@@ -14,13 +16,7 @@ export enum Sizing {
   Decrease = "Decrease",
 }
 
-export type WmFallbackNode = Extract<WmNode, { type: "Fallback" }>;
-export type WmHorizontalNode = Extract<WmNode, { type: "Horizontal" }>;
-export type WmVerticalNode = Extract<WmNode, { type: "Vertical" }>;
-export type WmLeafNode = Extract<WmNode, { type: "Leaf" }>;
-export type WmStackNode = Extract<WmNode, { type: "Stack" }>;
+export type Node = TwmRuntimeNode;
+export type Tree = TwmRuntimeTree;
 
-export type BranchNode = WmVerticalNode | WmHorizontalNode;
-export type Node = WmNode;
-
-export const MAX_ALLOWED_ELEMENTS_PER_ROW = 10;
+export const TREE_CONTEXT_KEY = "wm-tree";

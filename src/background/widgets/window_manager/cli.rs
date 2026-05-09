@@ -5,11 +5,10 @@ use crate::error::Result;
 use crate::state::application::FULL_STATE;
 use crate::trace_lock;
 use crate::virtual_desktops::SluWorkspacesManager2;
-use crate::widgets::window_manager::state::node_ext::WmNodeExt;
-use crate::widgets::window_manager::state::{WmState, WmStateEvent, WmWorkspaceState};
+use crate::widgets::window_manager::state_v2::{
+    set_rect_to_float_initial_size, TwmState, TwmStateEvent, WM_STATE,
+};
 use crate::windows_api::window::Window;
-
-use super::state::WM_STATE;
 
 #[derive(Debug, Clone, Serialize, Deserialize, ValueEnum)]
 pub enum AllowedReservations {
@@ -134,18 +133,18 @@ impl WmCommand {
                     Sizing::Increase => FULL_STATE.load().settings.by_widget.wm.resize_delta,
                     Sizing::Decrease => -FULL_STATE.load().settings.by_widget.wm.resize_delta,
                 };
-
-                let state = trace_lock!(WM_STATE);
-                state.update_size(&foreground, Axis::Horizontal, percentage, false)?;
+                WM_STATE
+                    .lock()
+                    .update_size(&foreground, Axis::Horizontal, percentage, false)?;
             }
             WmCommand::Height { action } => {
                 let percentage = match action {
                     Sizing::Increase => FULL_STATE.load().settings.by_widget.wm.resize_delta,
                     Sizing::Decrease => -FULL_STATE.load().settings.by_widget.wm.resize_delta,
                 };
-
-                let state = trace_lock!(WM_STATE);
-                state.update_size(&foreground, Axis::Vertical, percentage, false)?;
+                WM_STATE
+                    .lock()
+                    .update_size(&foreground, Axis::Vertical, percentage, false)?;
             }
             WmCommand::Reserve { .. } => {
                 // self.reserve(side)?;
@@ -154,99 +153,87 @@ impl WmCommand {
                 // self.discard_reservation()?;
             }
             WmCommand::ResetWorkspaceSize => {
-                let mut state = trace_lock!(WM_STATE);
-                if let Some(workspace) = state.get_workspace_state_for_window(&foreground) {
-                    if workspace.is_floating(&foreground.address()) {
-                        WmWorkspaceState::set_rect_to_float_initial_size(&foreground)?;
-                    }
+                let window_id = foreground.address();
+                let is_floating = WM_STATE
+                    .lock()
+                    .state
+                    .workspaces
+                    .values()
+                    .any(|t| t.is_floating(&window_id));
+                if is_floating {
+                    set_rect_to_float_initial_size(&foreground)?;
                 }
             }
             WmCommand::ToggleFloat => {
-                let mut state = trace_lock!(WM_STATE);
-                if let Some(workspace) = state.get_workspace_state_for_window(&foreground) {
-                    if workspace.is_floating(&foreground.address()) {
-                        workspace.add_to_tiles(&foreground);
-                    } else if workspace.is_tiled(&foreground) {
-                        workspace.unmanage(&foreground);
-                        workspace.add_to_floats(&foreground)?;
+                let mut state = WM_STATE.lock();
+                let window_id = foreground.address();
+                if let Some((_ws_id, tree)) = state.get_tree_for_window_mut(&foreground) {
+                    if tree.is_floating(&window_id) {
+                        let residual = tree.add_to_tiled(window_id);
+                        for w in residual {
+                            tree.add_to_floating(w);
+                        }
+                    } else if tree.is_tiled(&window_id) {
+                        let residual = tree.remove_window(&window_id);
+                        for w in residual {
+                            tree.add_to_floating(w);
+                        }
+                        tree.add_to_floating(window_id);
+                        set_rect_to_float_initial_size(&foreground)?;
                     }
+
+                    TwmState::send(TwmStateEvent::Changed);
                 }
             }
             WmCommand::ToggleMonocle => {
                 let monitor_id = foreground.monitor_id();
-                let workspace = SluWorkspacesManager2::instance()
+                let workspace_id = SluWorkspacesManager2::instance()
                     .monitors
                     .get(&monitor_id, |m| m.active_workspace_id().clone())
                     .ok_or("Monitor not found")?;
-
-                let mut state = trace_lock!(WM_STATE);
-                let workspace = state.get_workspace_state(&workspace);
-                workspace.toggle_monocle();
+                WM_STATE.lock().toggle_monocle(&workspace_id);
             }
             WmCommand::Focus { side } => {
-                let mut state = trace_lock!(WM_STATE);
-                if let Some(workspace) = state.get_workspace_state_for_window(&foreground) {
-                    let siblings = workspace
-                        .layout
-                        .structure
-                        .get_siblings_at_side(&foreground, &side);
-                    match siblings.first().and_then(|sibling| sibling.face()) {
-                        Some(sibling) => {
-                            sibling.focus()?;
-                        }
-                        None => {
-                            log::warn!("There is no node at {side:?} to be focused");
-                        }
+                let mut state = WM_STATE.lock();
+                let window_id = foreground.address();
+                if let Some((_ws_id, tree)) = state.get_tree_for_window_mut(&foreground) {
+                    let (match_h, want_before) = side_to_flags(&side);
+                    let siblings = tree.siblings_at_side(&window_id, match_h, want_before);
+                    match siblings.first().and_then(|&nid| tree.face_of_node(nid)) {
+                        Some(target_id) => Window::from(target_id).focus()?,
+                        None => log::warn!("There is no node at {side:?} to be focused"),
                     }
                 }
             }
             WmCommand::Move { side } => {
-                let mut state = trace_lock!(WM_STATE);
-                if let Some(workspace) = state.get_workspace_state_for_window(&foreground) {
-                    let siblings = workspace
-                        .layout
-                        .structure
-                        .get_siblings_at_side(&foreground, &side);
-
-                    match siblings.first().and_then(|sibling| sibling.face()) {
-                        Some(sibling) => {
-                            workspace.swap_nodes_containing_window(&foreground, &sibling)?;
+                let mut state = WM_STATE.lock();
+                let window_id = foreground.address();
+                if let Some((_ws_id, tree)) = state.get_tree_for_window_mut(&foreground) {
+                    let (match_h, want_before) = side_to_flags(&side);
+                    let siblings = tree.siblings_at_side(&window_id, match_h, want_before);
+                    match siblings.first().and_then(|&nid| tree.face_of_node(nid)) {
+                        Some(target_id) => {
+                            tree.swap_windows(window_id, target_id);
+                            TwmState::send(TwmStateEvent::Changed);
                         }
-                        None => {
-                            log::warn!("There is no node at {side:?} to be swapped");
-                        }
+                        None => log::warn!("There is no node at {side:?} to be swapped"),
                     }
                 }
             }
             WmCommand::CycleStack { way } => {
-                let mut state = trace_lock!(WM_STATE);
-                let Some(workspace) = state.get_workspace_state_for_window(&foreground) else {
-                    return Ok(());
-                };
-                let Some(node) = workspace.layout.structure.leaf_containing_mut(&foreground) else {
-                    return Ok(());
-                };
-
-                let active = node.active.ok_or("No active window")?;
-                let idx = node
-                    .windows
-                    .iter()
-                    .position(|w| *w == active)
-                    .ok_or("No active window")?;
-
-                let len = node.windows.len();
-                let next_idx = if way == StepWay::Next {
-                    (idx + 1) % len // next and cycle
-                } else {
-                    (idx + (len - 1)) % len // prev and cycle
-                };
-
-                node.active = Some(node.windows[next_idx]);
-                node.process_stacks()?;
-                WmState::send(WmStateEvent::Changed);
+                WM_STATE.lock().cycle_stack(&foreground, way)?;
             }
         };
 
         Ok(())
+    }
+}
+
+fn side_to_flags(side: &NodeSiblingSide) -> (bool, bool) {
+    match side {
+        NodeSiblingSide::Left => (true, true),
+        NodeSiblingSide::Right => (true, false),
+        NodeSiblingSide::Up => (false, true),
+        NodeSiblingSide::Down => (false, false),
     }
 }

@@ -38,8 +38,6 @@ pub static WM_STATE: LazyLock<Arc<Mutex<WmState>>> = LazyLock::new(|| {
     }))
 });
 
-pub static WM_LAYOUT_RECTS: LazyLock<SyncHashMap<isize, Rect>> = LazyLock::new(SyncHashMap::new);
-
 #[derive(Debug, Default)]
 pub struct WmState {
     pub layouts: HashMap<WorkspaceId, WmWorkspaceState>,
@@ -82,7 +80,7 @@ impl WmState {
         });
 
         SluWorkspacesManager2::subscribe(|event| {
-            trace_lock!(WM_STATE).process_vd_event(&event).log_error();
+            WM_STATE.lock().process_vd_event(&event).log_error();
         });
     }
 
