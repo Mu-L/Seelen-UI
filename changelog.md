@@ -7,6 +7,10 @@
 - tiling window manager.
 - capture window system.
 
+### enhancements
+
+- use webp for system extracted icons and media player thumbnails.
+
 ## [2.6.4]
 
 ### enhancements
