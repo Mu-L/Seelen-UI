@@ -120,9 +120,9 @@ general:
   date_format_how_to: Ako napísať formát dátumu?
   hardware_acceleration: Hardvérová akcelerácia
   hardware_acceleration_description: >-
-    Vypnutie hardvérovej akcelerácie zníži využitie pamäte, ale môže spôsobiť
-    problémy s výkonom. Je bezpečné ho zakázať, ak nebudete používať živé
-    tapety.
+    Vypnutím hardvérovej akcelerácie sa zníži využitie pamäte. Ak nepoužívate
+    ťažké animácie, môžete ho bezpečne zakázať, hoci jednotlivé miniaplikácie
+    môžu stále vynútiť použitie GPU bez ohľadu na toto nastavenie.
   icon_pack:
     available: Dostupné balíčky ikon
     selected: Balíky aktívnych ikon

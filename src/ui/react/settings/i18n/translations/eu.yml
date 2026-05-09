@@ -119,9 +119,10 @@ general:
   date_format_how_to: Nola idatzi data-formatua?
   hardware_acceleration: Hardwarearen azelerazioa
   hardware_acceleration_description: >-
-    Hardwarearen azelerazioa desgaitzeak memoriaren erabilera murriztuko du,
-    baina errendimendu arazoak sor ditzake. Zuzeneko horma-irudiak erabiltzen ez
-    badituzu desgaitzea segurua da.
+    Hardwarearen azelerazioa desgaituz gero, memoriaren erabilera murriztuko da.
+    Seguru desgaitzea da animazio astunak erabiltzen ari ez bazara, nahiz eta
+    widget indibidualek GPU erabilera behartu dezaketen ezarpen hau edozein dela
+    ere.
   icon_pack:
     available: Eskuragarri dauden ikono paketeak
     selected: Ikono pakete aktiboak

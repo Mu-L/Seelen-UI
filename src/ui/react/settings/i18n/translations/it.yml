@@ -123,8 +123,9 @@ general:
   hardware_acceleration: Accelerazione hardware
   hardware_acceleration_description: >-
     La disabilitazione dell'accelerazione hardware ridurrà l'utilizzo della
-    memoria, ma può causare problemi di prestazioni. È sicuro disabilitarlo se
-    non utilizzerai sfondi live.
+    memoria. È sicuro disabilitarlo se non stai utilizzando animazioni pesanti,
+    anche se i singoli widget potrebbero comunque forzare l'utilizzo della GPU
+    indipendentemente da questa impostazione.
   icon_pack:
     available: Pacchetti di icone disponibili
     selected: Pacchetti di icone attivi

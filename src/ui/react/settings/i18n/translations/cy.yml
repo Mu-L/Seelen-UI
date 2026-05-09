@@ -119,9 +119,9 @@ general:
   date_format_how_to: Sut i ysgrifennu fformat dyddiad?
   hardware_acceleration: Cyflymiad Caledwedd
   hardware_acceleration_description: >-
-    Bydd analluogi cyflymiad caledwedd yn lleihau'r defnydd o gof, ond gall
-    achosi problemau perfformiad. Yn ddiogel i'w analluogi os na fyddwch yn
-    defnyddio papurau wal byw.
+    Bydd analluogi cyflymiad caledwedd yn lleihau'r defnydd o gof. Mae'n ddiogel
+    analluogi os nad ydych chi'n defnyddio animeiddiadau trwm, er y gall
+    teclynnau unigol orfodi defnydd GPU o hyd waeth beth fo'r gosodiad hwn.
   icon_pack:
     available: Pecynnau Eicon Ar Gael
     selected: Pecynnau Eicon Actif

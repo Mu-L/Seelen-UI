@@ -121,9 +121,9 @@ general:
   date_format_how_to: Kā uzrakstīt datuma formātu?
   hardware_acceleration: Aparatūras paātrinājums
   hardware_acceleration_description: >-
-    Aparatūras paātrinājuma atspējošana samazinās atmiņas lietojumu, taču var
-    izraisīt veiktspējas problēmas. To ir droši atspējot, ja neizmantojat dzīvās
-    tapetes.
+    Aparatūras paātrinājuma atspējošana samazinās atmiņas lietojumu. To var
+    droši atspējot, ja neizmantojat smagas animācijas, lai gan atsevišķi logrīki
+    joprojām var piespiest GPU izmantošanu neatkarīgi no šī iestatījuma.
   icon_pack:
     available: Pieejamie ikonu komplekti
     selected: Aktīvās ikonu pakotnes

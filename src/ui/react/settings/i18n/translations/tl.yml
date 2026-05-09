@@ -127,8 +127,9 @@ general:
   hardware_acceleration: Pagpapabilis ng Hardware
   hardware_acceleration_description: >-
     Ang hindi pagpapagana ng hardware acceleration ay makakabawas sa paggamit ng
-    memory, ngunit maaaring magdulot ng mga isyu sa performance. Ligtas na hindi
-    paganahin kung hindi ka gagamit ng mga live na wallpaper.
+    memorya. Ligtas itong i-disable kung hindi ka gumagamit ng mabibigat na
+    animation, kahit na ang mga indibidwal na widget ay maaari pa ring pilitin
+    ang paggamit ng GPU anuman ang setting na ito.
   icon_pack:
     available: Magagamit na Mga Icon Pack
     selected: Mga Aktibong Icon Pack

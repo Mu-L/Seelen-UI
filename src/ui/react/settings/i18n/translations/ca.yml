@@ -123,9 +123,10 @@ general:
   date_format_how_to: Com escriure un format de data?
   hardware_acceleration: Acceleració de maquinari
   hardware_acceleration_description: >-
-    Desactivar l'acceleració de maquinari reduirà l'ús de memòria, però pot
-    provocar problemes de rendiment. És segur desactivar-lo si no feu servir
-    fons de pantalla en viu.
+    Desactivar l'acceleració de maquinari reduirà l'ús de memòria. És segur
+    desactivar-lo si no feu servir animacions pesades, tot i que els ginys
+    individuals encara poden forçar l'ús de la GPU independentment d'aquesta
+    configuració.
   icon_pack:
     available: Paquets d'icones disponibles
     selected: Paquets d'icones actius

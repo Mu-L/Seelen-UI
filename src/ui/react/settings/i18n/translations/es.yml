@@ -124,9 +124,10 @@ general:
   date_format_how_to: ¿Cómo escribir un formato de fecha?
   hardware_acceleration: Aceleración de hardware
   hardware_acceleration_description: >-
-    Deshabilitar la aceleración de hardware reducirá el uso de memoria, pero
-    puede causar problemas de rendimiento. Es seguro desactivarlo si no vas a
-    utilizar fondos de pantalla animados.
+    Deshabilitar la aceleración de hardware reducirá el uso de memoria. Es
+    seguro deshabilitarlo si no estás usando animaciones pesadas, aunque los
+    widgets individuales aún pueden forzar el uso de la GPU independientemente
+    de esta configuración.
   icon_pack:
     available: Paquetes de iconos disponibles
     selected: Packs de iconos activos

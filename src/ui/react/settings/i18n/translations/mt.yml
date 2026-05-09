@@ -123,9 +123,10 @@ general:
   date_format_how_to: Kif tikteb format tad-data?
   hardware_acceleration: Aċċelerazzjoni tal-Hardware
   hardware_acceleration_description: >-
-    Id-diżattivazzjoni tal-aċċelerazzjoni tal-ħardwer tnaqqas l-użu tal-memorja,
-    iżda tista 'tikkawża problemi ta' prestazzjoni. Huwa sikur li tiddiżattiva
-    jekk mhux se tuża wallpapers ħajjin.
+    Id-diżattivazzjoni tal-aċċelerazzjoni tal-ħardwer tnaqqas l-użu tal-memorja.
+    Huwa sikur li tiddiżattiva jekk ma tkunx qed tuża animazzjonijiet tqal,
+    għalkemm widgets individwali xorta jistgħu jġiegħlu l-użu tal-GPU
+    irrispettivament minn dan is-setting.
   icon_pack:
     available: Pakketti ta' Ikoni Disponibbli
     selected: Pakketti tal-Ikoni Attivi

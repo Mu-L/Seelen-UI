@@ -121,9 +121,10 @@ general:
   date_format_how_to: Bagaimana cara menulis format tanggal?
   hardware_acceleration: Akselerasi Perangkat Keras
   hardware_acceleration_description: >-
-    Menonaktifkan akselerasi perangkat keras akan mengurangi penggunaan memori,
-    namun dapat menyebabkan masalah kinerja. Aman untuk dinonaktifkan jika Anda
-    tidak akan menggunakan wallpaper hidup.
+    Menonaktifkan akselerasi perangkat keras akan mengurangi penggunaan memori.
+    Aman untuk menonaktifkannya jika Anda tidak menggunakan animasi berat,
+    meskipun masing-masing widget mungkin masih memaksa penggunaan GPU terlepas
+    dari pengaturan ini.
   icon_pack:
     available: Paket Ikon yang Tersedia
     selected: Paket Ikon Aktif

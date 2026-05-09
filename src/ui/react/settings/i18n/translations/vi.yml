@@ -120,9 +120,9 @@ general:
   date_format_how_to: Làm thế nào để viết một định dạng ngày?
   hardware_acceleration: Tăng tốc phần cứng
   hardware_acceleration_description: >-
-    Việc tắt tính năng tăng tốc phần cứng sẽ giảm mức sử dụng bộ nhớ nhưng có
-    thể gây ra các vấn đề về hiệu suất. Có thể tắt an toàn nếu bạn không sử dụng
-    hình nền động.
+    Vô hiệu hóa khả năng tăng tốc phần cứng sẽ giảm mức sử dụng bộ nhớ. Việc tắt
+    tính năng này là an toàn nếu bạn không sử dụng các hình ảnh động nặng, mặc
+    dù các tiện ích riêng lẻ vẫn có thể buộc sử dụng GPU bất kể cài đặt này.
   icon_pack:
     available: Gói biểu tượng có sẵn
     selected: Gói biểu tượng hoạt động

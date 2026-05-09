@@ -120,8 +120,9 @@ general:
   hardware_acceleration: Accélération matérielle
   hardware_acceleration_description: >-
     La désactivation de l'accélération matérielle réduira l'utilisation de la
-    mémoire, mais peut entraîner des problèmes de performances. Peut être
-    désactivé en toute sécurité si vous n'utilisez pas de fonds d'écran animés.
+    mémoire. Vous pouvez le désactiver en toute sécurité si vous n'utilisez pas
+    d'animations lourdes, bien que des widgets individuels puissent toujours
+    forcer l'utilisation du GPU quel que soit ce paramètre.
   icon_pack:
     available: Packs d'icônes disponibles
     selected: Packs d'icônes actifs

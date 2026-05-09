@@ -119,9 +119,10 @@ general:
   date_format_how_to: Wéi schreiwen ech en Datumformat
   hardware_acceleration: Hardware Beschleunegung
   hardware_acceleration_description: >-
-    Desaktivéiere vun Hardware Beschleunegung reduzéiert d'Erënnerungsverbrauch,
-    awer kann Performanceprobleemer verursaachen. Ass sécher ze deaktivéieren
-    wann Dir keng Live Wallpaper benotzt.
+    Hardware Beschleunegung auszeschalten wäert d'Erënnerungsverbrauch
+    reduzéieren. Et ass sécher auszeschalten wann Dir keng schwéier Animatiounen
+    benotzt, obwuel eenzel Widgets nach ëmmer d'GPU Benotzung forcéieren
+    onofhängeg vun dëser Astellung.
   icon_pack:
     available: Verfügbar Ikon Packs
     selected: Aktiv Ikon Packs

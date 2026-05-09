@@ -122,9 +122,10 @@ general:
   date_format_how_to: Sidee loo qoraa qaabka taariikhda?
   hardware_acceleration: Dardargelinta Qalabka
   hardware_acceleration_description: >-
-    Deminta dardargelinta qalabku waxay yarayn doontaa isticmaalka xusuusta,
-    laakiin waxay sababi kartaa arrimo waxqabadka. Waa badbaado in la joojiyo
-    haddii aadan isticmaali doonin gidaarada tooska ah.
+    Deminta dardargelinta qalabka waxay yarayn doontaa isticmaalka xusuusta. Waa
+    ammaan in la damiyo haddii aadan isticmaalin animations culus, in kasta oo
+    widget-yada gaarka ah ay wali ku qasbi karaan adeegsiga GPU iyadoon loo
+    eegin goobtan.
   icon_pack:
     available: Xirmooyinka Icon ee la heli karo
     selected: Xirmooyinka Astaanta Firfircoon

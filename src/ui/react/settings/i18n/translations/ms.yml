@@ -119,9 +119,10 @@ general:
   date_format_how_to: Bagaimana untuk menulis format tarikh?
   hardware_acceleration: Pecutan Perkakasan
   hardware_acceleration_description: >-
-    Melumpuhkan pecutan perkakasan akan mengurangkan penggunaan memori, tetapi
-    boleh menyebabkan masalah prestasi. Selamat untuk dilumpuhkan jika anda
-    tidak akan menggunakan kertas dinding langsung.
+    Melumpuhkan pecutan perkakasan akan mengurangkan penggunaan memori. Ia
+    selamat untuk dilumpuhkan jika anda tidak menggunakan animasi berat,
+    walaupun widget individu masih boleh memaksa penggunaan GPU tanpa mengira
+    tetapan ini.
   icon_pack:
     available: Pek Ikon Tersedia
     selected: Pek Ikon Aktif

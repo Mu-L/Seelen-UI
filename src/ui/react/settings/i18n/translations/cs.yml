@@ -120,9 +120,9 @@ general:
   date_format_how_to: Jak napsat formát data?
   hardware_acceleration: Hardwarová akcelerace
   hardware_acceleration_description: >-
-    Zakázání hardwarové akcelerace sníží využití paměti, ale může způsobit
-    problémy s výkonem. Je bezpečné zakázat, pokud nebudete používat živé
-    tapety.
+    Vypnutí hardwarové akcelerace sníží využití paměti. Pokud nepoužíváte těžké
+    animace, je bezpečné zakázat, i když jednotlivé widgety mohou stále vynutit
+    použití GPU bez ohledu na toto nastavení.
   icon_pack:
     available: Dostupné balíčky ikon
     selected: Aktivní balíčky ikon

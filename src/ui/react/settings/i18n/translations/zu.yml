@@ -123,9 +123,10 @@ general:
   date_format_how_to: Ibhalwa kanjani ifomethi yedethi?
   hardware_acceleration: I-Hardware Acceleration
   hardware_acceleration_description: >-
-    Ukukhubaza ukusheshisa kwehadiwe kuzonciphisa ukusetshenziswa kwememori,
-    kodwa kungabangela izinkinga zokusebenza. Kuphephile ukukhubaza uma ungeke
-    usebenzise amaphephadonga abukhoma.
+    Ukukhubaza ukusheshisa kwehadiwe kuzonciphisa ukusetshenziswa kwememori.
+    Kuphephile ukukhubaza uma ungasebenzisi ukugqwayiza okusindayo, noma
+    amawijethi angawodwana asengaphoqa ukusetshenziswa kwe-GPU ngaphandle
+    kwalokhu kulungiselelwa.
   icon_pack:
     available: Amaphekhi esithonjana atholakalayo
     selected: Amaphekhi Wesithonjana Asebenzayo

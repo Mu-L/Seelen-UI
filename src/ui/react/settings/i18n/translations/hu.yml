@@ -123,9 +123,10 @@ general:
   date_format_how_to: Hogyan írjunk dátumformátumot?
   hardware_acceleration: Hardveres gyorsítás
   hardware_acceleration_description: >-
-    A hardveres gyorsítás letiltása csökkenti a memóriahasználatot, de
-    teljesítménybeli problémákat okozhat. Biztonságosan letiltható, ha nem
-    használ élő háttérképeket.
+    A hardveres gyorsítás letiltása csökkenti a memóriahasználatot. Ha nem
+    használ nehéz animációkat, biztonságos a letiltása, bár az egyes widgetek
+    ettől a beállítástól függetlenül továbbra is kényszeríthetik a
+    GPU-használatot.
   icon_pack:
     available: Elérhető ikoncsomagok
     selected: Aktív ikoncsomagok

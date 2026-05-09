@@ -119,8 +119,9 @@ general:
   date_format_how_to: Hvernig á að skrifa dagsetningarsnið?
   hardware_acceleration: Vélbúnaðarhröðun
   hardware_acceleration_description: >-
-    Slökkt er á vélbúnaðarhröðun mun draga úr minnisnotkun en getur valdið
-    afköstum. Er óhætt að slökkva á því ef þú notar ekki lifandi veggfóður.
+    Að slökkva á vélbúnaðarhröðun mun draga úr minnisnotkun. Það er óhætt að
+    slökkva á því ef þú ert ekki að nota þungar hreyfimyndir, þó að einstakar
+    græjur gætu samt þvingað GPU-notkun óháð þessari stillingu.
   icon_pack:
     available: Lausir táknpakkar
     selected: Virkir táknpakkar

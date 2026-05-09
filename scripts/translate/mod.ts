@@ -13,7 +13,9 @@ async function completeTranslationsFor(localesDir: string) {
 
   let cachedHashTable: any = undefined;
   if (existsSync(enHashesPath)) {
-    cachedHashTable = yaml.load(readFileSync(enHashesPath, "utf8"));
+    cachedHashTable = new Map(
+      Object.entries(yaml.load(readFileSync(enHashesPath, "utf8")) as object),
+    );
   }
 
   const strYaml = readFileSync(enPath, "utf8");
@@ -38,7 +40,7 @@ async function completeTranslationsFor(localesDir: string) {
   const { obj, hashTable } = fileTranslator.source();
 
   writeFileSync(enPath, yaml.dump(obj)); // overwrite sorted
-  writeFileSync(`${localesDir}/hash.yml`, yaml.dump(hashTable));
+  writeFileSync(`${localesDir}/hash.yml`, yaml.dump(Object.fromEntries(hashTable)));
 }
 
 await completeTranslationsFor("src/ui/react/fancy-toolbar/i18n/translations");
