@@ -18,6 +18,7 @@
 
 - tiling window manager.
 - capture window system.
+- GUI and CLI splited into different executables.
 
 ## [2.6.4]
 

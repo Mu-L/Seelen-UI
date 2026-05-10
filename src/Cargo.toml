@@ -14,6 +14,10 @@ name = "seelen-ui"
 path = "background/main.rs"
 
 [[bin]]
+name = "slu"
+path = "slu/main.rs"
+
+[[bin]]
 name = "slu-service"
 path = "service/main.rs"
 
