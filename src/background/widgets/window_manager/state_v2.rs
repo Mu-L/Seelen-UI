@@ -6,15 +6,15 @@ use std::{
 use seelen_core::{
     rect::Rect,
     state::{
-        twm::{TwmNodeKind, TwmPlugin},
-        TwmGlobalRuntimeTree, TwmRuntimeTree, WorkspaceId,
+        twm::{TwmNodeKind, TwmPlugin, TwmStackPolicy},
+        TwmGlobalRuntimeTree, TwmRuntimeTree, WindowLocation, WorkspaceId,
     },
 };
-use windows::Win32::UI::WindowsAndMessaging::{SW_FORCEMINIMIZE, SW_RESTORE};
+use windows::Win32::UI::WindowsAndMessaging::SW_FORCEMINIMIZE;
 
 use crate::{
     error::{Result, ResultLogExt},
-    event_manager, log_error,
+    event_manager,
     state::application::FULL_STATE,
     utils::lock_free::TracedMutex,
     virtual_desktops::{events::VirtualDesktopEvent, SluWorkspacesManager2},
@@ -82,23 +82,26 @@ impl TwmState {
             VirtualDesktopEvent::DesktopChanged { .. } => {
                 Self::send(TwmStateEvent::Changed);
             }
-            VirtualDesktopEvent::WindowAdded { window, desktop: _ } => {
+            VirtualDesktopEvent::WindowAdded { window, desktop } => {
                 let window = &Window::from(*window);
                 if !self.is_managed(window) && WindowManagerV2::should_be_managed(window.hwnd()) {
-                    self.add(window)?;
+                    self.add_to_layout(window, desktop);
+                    Self::send(TwmStateEvent::Changed);
                 }
             }
-            VirtualDesktopEvent::WindowMoved { window, .. } => {
+            VirtualDesktopEvent::WindowMoved { window, desktop } => {
                 let window = &Window::from(*window);
                 if self.is_managed(window) {
-                    self.remove(window)?;
-                    self.add(window)?;
+                    self.remove(window);
+                    self.add_to_layout(window, desktop);
+                    Self::send(TwmStateEvent::Changed);
                 }
             }
             VirtualDesktopEvent::WindowRemoved { window } => {
                 let window = &Window::from(*window);
                 if self.is_managed(window) {
-                    self.remove(window)?;
+                    self.remove(window);
+                    Self::send(TwmStateEvent::Changed);
                 }
             }
             _ => {}
@@ -113,30 +116,49 @@ impl TwmState {
             .or_insert_with(|| Self::create_tree(workspace_id))
     }
 
-    pub fn add(&mut self, window: &Window) -> Result<()> {
-        let workspace_id = window.workspace_id()?;
-        let tree = self.get_or_insert_tree_mut(&workspace_id);
-        let residual = tree.add_to_tiled(window.address());
-        for w in residual {
-            tree.add_to_floating(w);
+    fn try_add_to_layout_categorized(window: &Window, tree: &mut TwmRuntimeTree) -> bool {
+        if !FULL_STATE
+            .load()
+            .settings
+            .by_widget
+            .wm
+            .auto_stacking_by_category
+        {
+            return false;
         }
-        Self::send(TwmStateEvent::Changed);
-        Ok(())
-    }
 
-    pub fn remove(&mut self, window: &Window) -> Result<()> {
-        let window_id = window.address();
-        for tree in self.state.workspaces.values_mut() {
-            if tree.contains(&window_id) {
-                let residual = tree.remove_window(&window_id);
-                for w in residual {
-                    tree.add_to_floating(w);
-                }
-                break;
-            }
+        let Some(searching) = window.slu_category() else {
+            return false;
+        };
+
+        let Some(found_node_id) = tree
+            .iter()
+            .find(|node| {
+                matches!(node.kind, TwmNodeKind::Leaf | TwmNodeKind::Stack)
+                    && node.windows.iter().any(|w| {
+                        Window::from(*w)
+                            .slu_category()
+                            .is_some_and(|c| c == searching)
+                    })
+            })
+            .map(|n| n.id)
+        else {
+            return false;
+        };
+
+        let node = tree.nodes.get_mut(&found_node_id).unwrap();
+
+        if node.kind != TwmNodeKind::Stack {
+            node.kind = TwmNodeKind::Stack;
+            node.stack_policy = TwmStackPolicy::Manual;
         }
-        Self::send(TwmStateEvent::Changed);
-        Ok(())
+
+        node.windows.push(window.address());
+        node.active_window = Some(window.address());
+        tree.window_map
+            .insert(window.address(), WindowLocation::Tiled(found_node_id));
+
+        true
     }
 
     pub fn is_managed(&self, window: &Window) -> bool {
@@ -147,6 +169,39 @@ impl TwmState {
     pub fn is_tiled(&self, window: &Window) -> bool {
         let id = window.address();
         self.state.workspaces.values().any(|t| t.is_tiled(&id))
+    }
+
+    pub fn add_to_floating(&mut self, window: &Window, workspace_id: &WorkspaceId) {
+        let tree = self.get_or_insert_tree_mut(workspace_id);
+        tree.add_to_floating(window.address());
+    }
+
+    pub fn add_to_layout(&mut self, window: &Window, workspace_id: &WorkspaceId) {
+        let tree = self.get_or_insert_tree_mut(workspace_id);
+
+        if Self::try_add_to_layout_categorized(window, tree) {
+            return;
+        }
+
+        let residual = tree.add_to_tiled(window.address());
+        for w in residual {
+            tree.add_to_floating(w);
+            set_rect_to_float_initial_size(window, &window.monitor()).log_error();
+        }
+    }
+
+    pub fn remove(&mut self, window: &Window) {
+        let window_id = window.address();
+        for tree in self.state.workspaces.values_mut() {
+            if tree.contains(&window_id) {
+                let residual = tree.remove_window(&window_id);
+                for w in residual {
+                    tree.add_to_floating(w);
+                    set_rect_to_float_initial_size(window, &window.monitor()).log_error();
+                }
+                break;
+            }
+        }
     }
 
     pub fn get_tree_for_window_mut(
@@ -350,7 +405,7 @@ impl TwmState {
             .workspaces
             .get_mut(workspace_id)
             .ok_or("Workspace not found")?;
-        tree.swap_windows(a.address(), b.address());
+        tree.swap_nodes_by_windows(a.address(), b.address());
         Self::send(TwmStateEvent::Changed);
         Ok(())
     }
@@ -363,6 +418,36 @@ impl TwmState {
         let tree = self.state.workspaces.get(workspace_id)?;
         let node_id = tree.get_nearest_leaf_to_rect(rect)?;
         tree.face_of_node(node_id)
+    }
+
+    pub fn restore_stacks(&self) {
+        let mut active_ids = std::collections::HashSet::new();
+        SluWorkspacesManager2::instance()
+            .monitors
+            .for_each(|(_, monitor)| {
+                active_ids.insert(monitor.active_workspace_id().clone());
+            });
+
+        for (workspace_id, tree) in &self.state.workspaces {
+            if !active_ids.contains(workspace_id) {
+                continue;
+            }
+
+            for node in tree {
+                if node.kind != TwmNodeKind::Stack {
+                    continue;
+                }
+
+                if let Some(active) = node.active_window {
+                    Window::from(active).unminimize().log_error();
+                    for w in &node.windows {
+                        if *w != active {
+                            Window::from(*w).show_window(SW_FORCEMINIMIZE).log_error();
+                        }
+                    }
+                }
+            }
+        }
     }
 
     pub fn cycle_stack(&mut self, window: &Window, way: StepWay) -> Result<()> {
@@ -392,19 +477,6 @@ impl TwmState {
             (idx + len - 1) % len
         };
         node.active_window = Some(node.windows[next_idx]);
-
-        let windows_snapshot = node.windows.clone();
-        let new_active = node.active_window.unwrap();
-        for w in windows_snapshot {
-            let win = Window::from(w);
-            if w == new_active {
-                if win.is_minimized() {
-                    log_error!(win.show_window(SW_RESTORE));
-                }
-            } else if !win.is_minimized() {
-                log_error!(win.show_window(SW_FORCEMINIMIZE));
-            }
-        }
 
         Self::send(TwmStateEvent::Changed);
         Ok(())

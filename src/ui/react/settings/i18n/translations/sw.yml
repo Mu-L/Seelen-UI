@@ -386,6 +386,7 @@ wm:
     ease_function: Uhuishaji wa Kuongeza Uhuishaji
     enable: Wezesha michoro za Window
   author: Mwandishi
+  auto_stack: Rafu kiotomatiki kulingana na kitengo cha programu
   border:
     enable: Wezesha mpaka wa dirisha
     offset: Kukabiliana na mpaka

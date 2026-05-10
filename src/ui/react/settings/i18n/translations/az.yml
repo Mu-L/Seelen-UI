@@ -388,6 +388,7 @@ wm:
     ease_function: Animasiya asanlaşdırma funksiyası
     enable: Pəncərənin animasiyalarını aktivləşdirin
   author: Müəllif
+  auto_stack: Proqram kateqoriyasına görə avtomatik yığın
   border:
     enable: Pəncərənin sərhədini aktivləşdirin
     offset: Sərhəd əvəzinə

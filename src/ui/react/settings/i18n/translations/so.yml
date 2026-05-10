@@ -398,6 +398,7 @@ wm:
     ease_function: Animation fududeynta shaqada
     enable: Karti animations daaqadaha
   author: Qoraa
+  auto_stack: Si otomaatig ah ugu xidho qaybta abka
   border:
     enable: Karti xadka daaqadaha
     offset: Xudduud xadka

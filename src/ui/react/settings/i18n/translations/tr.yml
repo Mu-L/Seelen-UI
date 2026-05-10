@@ -393,6 +393,7 @@ wm:
     ease_function: Animasyon kolaylaştırma işlevi
     enable: Pencerenin animasyonlarını etkinleştirin
   author: Yazar
+  auto_stack: Uygulama kategorisine göre otomatik yığın
   border:
     enable: Pencere Kenarlığını Etkinleştir
     offset: Kenar Ofseti

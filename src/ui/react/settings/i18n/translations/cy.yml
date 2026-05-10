@@ -389,6 +389,7 @@ wm:
     ease_function: Swyddogaeth lleddfu animeiddiad
     enable: Galluogi animeiddiadau ffenestr
   author: Awduron
+  auto_stack: Pentwr awtomatig yn ôl categori ap
   border:
     enable: Galluogi ffin ffenestr
     offset: Gwrthbwyso ar y ffin

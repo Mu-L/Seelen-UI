@@ -4,7 +4,7 @@ use crate::{
     error::Result,
     state::application::FULL_STATE,
     virtual_desktops::MINIMIZED_BY_WORKSPACES,
-    widgets::window_manager::state_v2::WM_STATE,
+    widgets::window_manager::state_v2::{TwmState, TwmStateEvent, WM_STATE},
     windows_api::window::{event::WinEvent, Window},
 };
 
@@ -116,13 +116,15 @@ impl WindowManagerV2 {
                         .unwrap_or(false)
                 };
                 if should_remove {
-                    WM_STATE.lock().remove(window)?;
+                    WM_STATE.lock().remove(window);
+                    TwmState::send(TwmStateEvent::Changed);
                 }
             }
             WinEvent::SystemMinimizeEnd => {
                 let mut state = WM_STATE.lock();
                 if !state.is_managed(window) && Self::should_be_managed(window.hwnd()) {
-                    state.add(window)?;
+                    state.add_to_layout(window, &window.workspace_id()?);
+                    TwmState::send(TwmStateEvent::Changed);
                 }
             }
             _ => {}

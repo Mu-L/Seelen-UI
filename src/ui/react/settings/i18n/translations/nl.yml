@@ -393,6 +393,7 @@ wm:
     ease_function: Animatie -versoepelingsfunctie
     enable: Schakel Window's animaties in
   author: Auteur
+  auto_stack: Automatische stapeling per app-categorie
   border:
     enable: Schakel Window's Border in
     offset: Grens offset

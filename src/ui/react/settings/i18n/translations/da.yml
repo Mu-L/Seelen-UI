@@ -388,6 +388,7 @@ wm:
     ease_function: Animationsaflastningsfunktion
     enable: Aktivér vindues animationer
   author: Forfatter
+  auto_stack: Automatisk stak efter appkategori
   border:
     enable: Aktivér vindues grænse
     offset: Border Offset

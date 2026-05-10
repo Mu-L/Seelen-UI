@@ -389,6 +389,7 @@ wm:
     ease_function: Animacijos palengvinimo funkcija
     enable: Įgalinkite lango animacijas
   author: Autorius
+  auto_stack: Automatinis kaupimas pagal programos kategoriją
   border:
     enable: Įgalinti lango sieną
     offset: Sienos poslinkis

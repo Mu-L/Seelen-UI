@@ -356,6 +356,7 @@ wm:
     ease_function: 動畫放鬆功能
     enable: 啟用Window的動畫
   author: 作者
+  auto_stack: 按應用程式類別自動堆疊
   border:
     enable: 啟用Window的邊框
     offset: 邊界偏移

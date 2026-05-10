@@ -394,6 +394,7 @@ wm:
     ease_function: Funkcja łagodzenia animacji
     enable: Włącz animacje okna
   author: Autor
+  auto_stack: Automatyczne układanie według kategorii aplikacji
   border:
     enable: Włącz granicę okna
     offset: Przesunięcie granic

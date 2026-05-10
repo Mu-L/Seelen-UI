@@ -391,6 +391,7 @@ wm:
     ease_function: Fungsi pelonggaran animasi
     enable: Dayakan animasi tetingkap
   author: Pengarang
+  auto_stack: Auto tindanan mengikut kategori apl
   border:
     enable: Dayakan sempadan tetingkap
     offset: Mengimbangi sempadan

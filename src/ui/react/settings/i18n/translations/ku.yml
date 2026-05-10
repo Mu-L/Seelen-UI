@@ -392,6 +392,7 @@ wm:
     ease_function: Fonksiyona hêsankirina anîmasyonê
     enable: Animasyonên Pencereyê çalak bikin
   author: Nivîskar
+  auto_stack: Li gorî kategoriya sepanê stûna otomatîkî
   border:
     enable: Sînorê pencereyê çalak bike
     offset: Berdewamiya sînor

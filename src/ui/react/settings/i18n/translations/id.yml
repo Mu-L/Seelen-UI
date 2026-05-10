@@ -393,6 +393,7 @@ wm:
     ease_function: Fungsi pelonggaran animasi
     enable: Aktifkan animasi Window
   author: Pengarang
+  auto_stack: Tumpukan otomatis berdasarkan kategori aplikasi
   border:
     enable: Aktifkan Perbatasan Jendela
     offset: Offset perbatasan

@@ -385,6 +385,7 @@ wm:
     ease_function: Animation Easing Function
     enable: Enable Window's Animations
   author: Author
+  auto_stack: Auto stack by app category
   border:
     enable: Enable Window's Border
     offset: Border Offset

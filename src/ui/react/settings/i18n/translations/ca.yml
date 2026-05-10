@@ -397,6 +397,7 @@ wm:
     ease_function: Funció d'alleujament d'animació
     enable: Activa les animacions de la finestra
   author: Autora
+  auto_stack: Apilament automàtic per categoria d'aplicació
   border:
     enable: Activa la vora de la finestra
     offset: Compensació fronterera

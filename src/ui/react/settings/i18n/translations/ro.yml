@@ -394,6 +394,7 @@ wm:
     ease_function: Funcția de ușurare a animației
     enable: Activați animațiile Window
   author: Autor
+  auto_stack: Stack automat în funcție de categoria de aplicație
   border:
     enable: Activați granița ferestrei
     offset: Offset de frontieră

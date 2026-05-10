@@ -392,6 +392,7 @@ wm:
     ease_function: Funkce uvolňování animace
     enable: Povolit animace okna
   author: Autor
+  auto_stack: Automatické skládání podle kategorie aplikací
   border:
     enable: Povolte hranici okna
     offset: Posun hranice

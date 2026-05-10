@@ -1,7 +1,7 @@
 use clap::ValueEnum;
 use serde::{Deserialize, Serialize};
 
-use crate::error::{Result, ResultLogExt};
+use crate::error::Result;
 use crate::state::application::FULL_STATE;
 use crate::trace_lock;
 use crate::virtual_desktops::SluWorkspacesManager2;
@@ -179,24 +179,19 @@ impl WmCommand {
             }
             WmCommand::ToggleFloat => {
                 let mut state = WM_STATE.lock();
-                let window_id = foreground.address();
-                if let Some((_ws_id, tree)) = state.get_tree_for_window_mut(&foreground) {
-                    if tree.is_floating(&window_id) {
-                        let residual = tree.add_to_tiled(window_id);
-                        for w in residual {
-                            tree.add_to_floating(w);
-                        }
-                    } else if tree.is_tiled(&window_id) {
-                        let residual = tree.remove_window(&window_id);
-                        for w in residual {
-                            tree.add_to_floating(w);
-                        }
-                        tree.add_to_floating(window_id);
-                        set_rect_to_float_initial_size(&foreground, &foreground.monitor())?;
-                    }
-
-                    TwmState::send(TwmStateEvent::Changed);
+                if !state.is_managed(&foreground) {
+                    return Ok(());
                 }
+                let workspace_id = foreground.workspace_id()?;
+                if state.is_tiled(&foreground) {
+                    state.remove(&foreground);
+                    state.add_to_floating(&foreground, &workspace_id);
+                    set_rect_to_float_initial_size(&foreground, &foreground.monitor())?;
+                } else {
+                    state.remove(&foreground);
+                    state.add_to_layout(&foreground, &workspace_id);
+                }
+                TwmState::send(TwmStateEvent::Changed);
             }
             WmCommand::ToggleMonocle => {
                 let monitor_id = foreground.monitor_id();
@@ -230,7 +225,7 @@ impl WmCommand {
                 };
 
                 if is_moving {
-                    tree.swap_windows(window_id, direct_sibling);
+                    tree.swap_nodes_by_windows(window_id, direct_sibling);
                     TwmState::send(TwmStateEvent::Changed);
                 } else {
                     Window::from(direct_sibling).focus()?;
@@ -276,7 +271,6 @@ impl WmCommand {
 
     fn process_move_to_monitor(foreground: &Window, side: NodeSiblingSide) -> Result<()> {
         let source_monitor = foreground.monitor();
-        let source_workspace_id = foreground.workspace_id()?;
 
         let Some(target_monitor) = get_neartest_monitor_at_side(&source_monitor, side)? else {
             log::warn!("There is no monitor at {side:?}");
@@ -290,25 +284,9 @@ impl WmCommand {
             })
         {
             let mut guard = WM_STATE.lock();
-            let target_tree = guard
-                .state
-                .workspaces
-                .get_mut(&target_workspace_id)
-                .ok_or("Workspace not found")?;
 
-            let residual = target_tree.add_to_tiled(foreground.address());
-            for w in residual {
-                target_tree.add_to_floating(w);
-                set_rect_to_float_initial_size(&Window::from(w), &target_monitor).log_error();
-            }
-
-            guard
-                .state
-                .workspaces
-                .get_mut(&source_workspace_id)
-                .ok_or("Workspace not found")?
-                .remove_window(&foreground.address());
-
+            guard.remove(foreground);
+            guard.add_to_layout(foreground, &target_workspace_id);
             TwmState::send(TwmStateEvent::Changed);
         }
         Ok(())

@@ -394,6 +394,7 @@ wm:
     ease_function: Funzjoni li tittaffa l-animazzjoni
     enable: Ippermetti l-animazzjonijiet tat-tieqa
   author: Awtur
+  auto_stack: Munzell awtomatiku skont il-kategorija tal-app
   border:
     enable: Ippermetti l-fruntiera tat-tieqa
     offset: Offset tal-fruntiera

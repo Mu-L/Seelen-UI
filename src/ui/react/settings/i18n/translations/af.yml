@@ -388,6 +388,7 @@ wm:
     ease_function: Animasie -verligingsfunksie
     enable: Aktiveer venster se animasies
   author: Outeur
+  auto_stack: Outomatiese stapel volgens toepassingkategorie
   border:
     enable: Aktiveer venster se grens
     offset: Grens offset

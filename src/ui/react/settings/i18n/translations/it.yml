@@ -398,6 +398,7 @@ wm:
     ease_function: Funzione di allentamento dell'animazione
     enable: Abilita le animazioni di Window
   author: Autore
+  auto_stack: Stack automatico per categoria di app
   border:
     enable: Abilita Bordo delle Finestre
     offset: Offset Bordo

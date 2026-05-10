@@ -395,6 +395,7 @@ wm:
     ease_function: Animáció enyhítő funkciója
     enable: Engedélyezze az ablak animációit
   author: Szerző
+  auto_stack: Automatikus halmozás alkalmazáskategória szerint
   border:
     enable: Engedélyezze az ablak szegélyét
     offset: Határ eltolás

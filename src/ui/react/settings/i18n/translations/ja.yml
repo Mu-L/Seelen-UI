@@ -368,6 +368,7 @@ wm:
     ease_function: アニメーション緩和機能
     enable: ウィンドウのアニメーションを有効にします
   author: 製作者
+  auto_stack: アプリカテゴリごとの自動スタック
   border:
     enable: ウィンドウの境界線を描画する
     offset: 境界線の余白

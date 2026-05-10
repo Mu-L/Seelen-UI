@@ -383,6 +383,7 @@ wm:
     ease_function: د انیمیشن ډیک فعالیت
     enable: د کړکۍ انکار کول فعال کړئ
   author: لیکوال
+  auto_stack: د اپلیکیشن کټګورۍ لخوا اتوماتیک سټیک
   border:
     enable: د کړکۍ پوله فعال کړئ
     offset: پوله

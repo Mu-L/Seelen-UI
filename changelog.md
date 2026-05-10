@@ -2,6 +2,10 @@
 
 ## [2.6.5-dev]
 
+### features
+
+- twm auto stack by application categories.
+
 ### enhancements
 
 - use webp for system extracted icons and media player thumbnails.

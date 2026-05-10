@@ -389,6 +389,7 @@ wm:
     ease_function: Animationslättningsfunktion
     enable: Aktivera Windows animationer
   author: Författare
+  auto_stack: Autostack efter appkategori
   border:
     enable: Aktivera fönstergränsen
     offset: Gränsförskjutning

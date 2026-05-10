@@ -390,6 +390,7 @@ wm:
     ease_function: Animatioun ausserhalb Funktioun
     enable: Aktivéiert Fenster Animatiounen
   author: Auteur
+  auto_stack: Auto Stack no App Kategorie
   border:
     enable: Aktivéiert Fenster Grenz
     offset: Grenz Offäll

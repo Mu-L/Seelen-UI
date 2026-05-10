@@ -388,6 +388,7 @@ wm:
     ease_function: Funkcija olakšavanja animacije
     enable: Omogući animacije prozora
   author: Autor
+  auto_stack: Automatsko slaganje po kategoriji aplikacije
   border:
     enable: Omogući granicu prozora
     offset: Offset granice

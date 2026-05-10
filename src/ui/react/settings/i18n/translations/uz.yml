@@ -397,6 +397,7 @@ wm:
     ease_function: Animatsiya engillashtirish funktsiyasi
     enable: Oyna animatsiyalarini yoqing
   author: Muallif
+  auto_stack: Ilovalar toifasi boʻyicha avtomatik toʻplam
   border:
     enable: Oynaning chegarasini yoqing
     offset: Chegara ofset

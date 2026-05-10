@@ -20,6 +20,20 @@ use seelen_core::{
     state::{PerformanceMode, TwmGlobalRuntimeTree},
 };
 
+#[tauri::command(async)]
+pub fn wm_get_render_tree() -> TwmGlobalRuntimeTree {
+    static TAURI_EVENT_REGISTRATION: Once = Once::new();
+    TAURI_EVENT_REGISTRATION.call_once(|| {
+        TwmState::subscribe(|_event| {
+            let guard = WM_STATE.lock();
+            guard.restore_stacks();
+            emit_to_webviews(SeelenEvent::WMTreeChanged, &guard.state);
+        });
+    });
+
+    WM_STATE.lock().state.clone()
+}
+
 static SCHEDULED_POSITIONS: LazyLock<scc::HashMap<isize, Rect>> = LazyLock::new(scc::HashMap::new);
 
 /// will schedule the position to be sent in a batch on the next window manager update
@@ -87,6 +101,7 @@ pub fn set_app_windows_positions(positions: HashMap<isize, Rect>) -> Result<()> 
     Ok(())
 }
 
+/// TODO delete this is used only by webview, but this should use self_focus command.
 #[tauri::command(async)]
 pub fn request_focus(hwnd: isize) -> Result<()> {
     let window = Window::from(hwnd);
@@ -95,16 +110,4 @@ pub fn request_focus(hwnd: isize) -> Result<()> {
     }
     window.focus()?;
     Ok(())
-}
-
-#[tauri::command(async)]
-pub fn wm_get_render_tree() -> TwmGlobalRuntimeTree {
-    static TAURI_EVENT_REGISTRATION: Once = Once::new();
-    TAURI_EVENT_REGISTRATION.call_once(|| {
-        TwmState::subscribe(|_event| {
-            emit_to_webviews(SeelenEvent::WMTreeChanged, &WM_STATE.lock().state);
-        });
-    });
-
-    WM_STATE.lock().state.clone()
 }

@@ -376,6 +376,7 @@ wm:
     ease_function: አኒሜሽን ኢኮኖሚ ተግባር
     enable: የመስኮት እነማዎችን አንቃ
   author: ደራሲ ደራሲ
+  auto_stack: በመተግበሪያ ምድብ በራስ-ሰር ቁልል
   border:
     enable: የመስኮት ድንበር አንቃ
     offset: ድንበር ማካካሻ

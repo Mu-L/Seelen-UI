@@ -306,6 +306,7 @@ wm.animations.duration: cc3b9684
 wm.animations.ease_function: ad6da672
 wm.animations.enable: 1e3a1731
 wm.author: 9a7f06cc
+wm.auto_stack: aef3bbf4
 wm.border.enable: 682d0848
 wm.border.offset: c3355db0
 wm.border.width: 994760bc

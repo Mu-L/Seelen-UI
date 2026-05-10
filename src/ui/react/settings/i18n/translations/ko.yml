@@ -366,6 +366,7 @@ wm:
     ease_function: 애니메이션 완화 기능
     enable: 창의 애니메이션을 활성화합니다
   author: 작성자
+  auto_stack: 앱 카테고리별 자동 스택
   border:
     enable: 창 테두리 활성화
     offset: 테두리 여백

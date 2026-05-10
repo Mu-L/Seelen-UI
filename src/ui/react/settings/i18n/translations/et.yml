@@ -388,6 +388,7 @@ wm:
     ease_function: Animatsiooni leevendusfunktsioon
     enable: Luba akna animatsioonid
   author: Autor
+  auto_stack: Automaatne virnastamine rakenduse kategooria järgi
   border:
     enable: Luba akna piir
     offset: Piiride nihke

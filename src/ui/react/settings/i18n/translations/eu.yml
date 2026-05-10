@@ -391,6 +391,7 @@ wm:
     ease_function: Animazioaren arakuntzaren funtzioa
     enable: Gaitu leihoen animazioak
   author: Idazle
+  auto_stack: Aplikazio kategoriaren arabera pilatu automatikoki
   border:
     enable: Gaitu leihoen ertza
     offset: Ertzaren desplazamendua

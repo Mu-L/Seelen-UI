@@ -383,6 +383,7 @@ wm:
     ease_function: ຫນ້າທີ່ການທ່ອງທ່ຽວແບບເຄື່ອນໄຫວ
     enable: ເປີດໃຊ້ພາບເຄື່ອນໄຫວຂອງ window
   author: ຜູ້ຂຽນ
+  auto_stack: stack ອັດຕະໂນມັດຕາມປະເພດ app
   border:
     enable: ເປີດໃຊ້ຂອບຂອງປ່ອງຢ້ຽມ
     offset: Border Offset

@@ -391,6 +391,7 @@ wm:
     ease_function: Animasjon lettelsesfunksjon
     enable: Aktiver vinduets animasjoner
   author: Forfatter
+  auto_stack: Automatisk stabel etter appkategori
   border:
     enable: Aktiver vinduets grense
     offset: Grenseforskyvning

@@ -382,6 +382,7 @@ wm:
     ease_function: Iṣẹ to dara pupọ
     enable: Jeki awọn ohun idanilaraya window
   author: Onkọwe ọkunrin
+  auto_stack: Iṣakojọpọ aifọwọyi nipasẹ ẹka app
   border:
     enable: Jeki aala window
     offset: Iparun aala

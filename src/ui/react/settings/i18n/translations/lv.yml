@@ -389,6 +389,7 @@ wm:
     ease_function: Animācijas atvieglošanas funkcija
     enable: Iespējot loga animācijas
   author: Autors
+  auto_stack: Automātiska sakraušana pēc lietotņu kategorijas
   border:
     enable: Iespējot loga robežu
     offset: Robežas kompensācija

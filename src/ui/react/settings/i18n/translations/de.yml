@@ -400,6 +400,7 @@ wm:
     ease_function: Animation Lockering -Funktion
     enable: Aktivieren Sie die Animationen von Windows
   author: Autor
+  auto_stack: Automatisches Stapeln nach App-Kategorie
   border:
     enable: Fensterrand aktivieren
     offset: Randversatz

@@ -387,6 +387,7 @@ wm:
     ease_function: Leiðandi aðgerð
     enable: Virkja teiknimyndir Window
   author: Höfundur
+  auto_stack: Sjálfvirk stafla eftir forritaflokki
   border:
     enable: Virkja landamæri glugga
     offset: Landamæri offset

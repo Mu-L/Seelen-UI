@@ -354,6 +354,7 @@ wm:
     ease_function: 动画缓动函数
     enable: 启用窗口动画
   author: 作者
+  auto_stack: 按应用类别自动堆叠
   border:
     enable: 启用窗口边框
     offset: 边框偏移

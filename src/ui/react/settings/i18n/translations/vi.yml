@@ -390,6 +390,7 @@ wm:
     ease_function: Hoạt hình nới lỏng chức năng
     enable: Bật hình ảnh động của Window
   author: Tác giả
+  auto_stack: Tự động xếp chồng theo danh mục ứng dụng
   border:
     enable: Bật biên giới của cửa sổ
     offset: Biên giới bù đắp

@@ -398,6 +398,7 @@ wm:
     ease_function: Ukugqwayiza kwe-animation function
     enable: Nika amandla izithombe zewindi
   author: Umlobi
+  auto_stack: Isitaki esizenzakalelayo ngesigaba sohlelo lokusebenza
   border:
     enable: Nika amandla umngcele wewindi
     offset: Umngcele we-Offset

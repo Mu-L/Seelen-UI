@@ -393,6 +393,7 @@ wm:
     ease_function: Animaation helpotustoiminto
     enable: Ota ikkunan animaatiot käyttöön
   author: Kirjoittaja
+  auto_stack: Automaattinen pinoaminen sovellusluokan mukaan
   border:
     enable: Ota ikkunan reuna käyttöön
     offset: Rajan siirtyminen

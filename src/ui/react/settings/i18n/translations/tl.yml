@@ -401,6 +401,7 @@ wm:
     ease_function: Pag -andar ng pag -easing ng animation
     enable: Paganahin ang mga animation ng window
   author: May -akda
+  auto_stack: Auto stack ayon sa kategorya ng app
   border:
     enable: Paganahin ang hangganan ng window
     offset: Border Offset

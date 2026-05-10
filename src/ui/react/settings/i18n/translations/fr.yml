@@ -395,6 +395,7 @@ wm:
     ease_function: Fonction d'assouplissement de l'animation
     enable: Activer les animations de Window
   author: Auteur
+  auto_stack: Pile automatique par catégorie d'application
   border:
     enable: Activer la bordure de fenêtre
     offset: Décalage de bordure

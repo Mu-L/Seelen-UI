@@ -55,87 +55,6 @@ pub enum WindowLocation {
     Floating,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
-#[serde(rename_all = "camelCase")]
-pub struct TwmRuntimeNode {
-    pub id: NodeId,
-    pub parent: Option<NodeId>,
-    pub children: Vec<NodeId>,
-    pub kind: TwmNodeKind,
-    pub lifetime: TwmNodeLifetime,
-    pub priority: u32,
-    pub initial_grow_factor: f32,
-    pub grow_factor: f32,
-    pub condition: Option<TwmCondition>,
-    pub max_stack_size: Option<usize>,
-    pub stack_policy: TwmStackPolicy,
-
-    // Runtime-only
-    pub windows: Vec<WindowId>,
-    pub active_window: Option<WindowId>,
-    pub rect: Option<Rect>,
-}
-
-impl Default for TwmRuntimeTree {
-    fn default() -> Self {
-        Self::new()
-    }
-}
-
-// block for iterators
-impl TwmRuntimeTree {
-    /// traverse sorts nodes by priority, so tree order ≠ processing order
-    pub fn traverse<F>(&self, node_id: NodeId, callback: &mut F)
-    where
-        F: FnMut(&TwmRuntimeNode),
-    {
-        let node = self.nodes.get(&node_id).unwrap();
-        callback(node);
-
-        let mut children = node.children.clone();
-        children.sort_by_key(|id| self.nodes.get(id).unwrap().priority);
-
-        for child in children {
-            self.traverse(child, callback);
-        }
-    }
-
-    /// traverse sorts nodes by priority, so tree order ≠ processing order
-    pub fn traverse_mut<F>(&mut self, node_id: NodeId, callback: &mut F)
-    where
-        F: FnMut(&mut TwmRuntimeNode),
-    {
-        let node = self.nodes.get_mut(&node_id).unwrap();
-        callback(node);
-
-        let mut children = node.children.clone();
-        children.sort_by_key(|id| self.nodes.get(id).unwrap().priority);
-
-        for child in children {
-            self.traverse_mut(child, callback);
-        }
-    }
-
-    pub fn find<F>(&self, node_id: NodeId, predicate: &mut F) -> Option<NodeId>
-    where
-        F: FnMut(&TwmRuntimeNode) -> bool,
-    {
-        let node = self.nodes.get(&node_id)?;
-        if predicate(node) {
-            return Some(node_id);
-        }
-
-        let mut children = node.children.clone();
-        children.sort_by_key(|id| self.nodes.get(id).unwrap().priority);
-        for child in children {
-            if let Some(found) = self.find(child, predicate) {
-                return Some(found);
-            }
-        }
-        None
-    }
-}
-
 impl TwmRuntimeTree {
     pub fn new() -> Self {
         Self {
@@ -144,6 +63,14 @@ impl TwmRuntimeTree {
             nodes: HashMap::new(),
             window_map: HashMap::new(),
         }
+    }
+
+    pub fn iter(&self) -> TwmTreeIter<'_> {
+        self.into_iter()
+    }
+
+    pub fn iter_mut(&mut self) -> TwmTreeIterMut<'_> {
+        self.into_iter()
     }
 
     pub fn generate_id(&mut self) -> NodeId {
@@ -190,10 +117,10 @@ impl TwmRuntimeTree {
     }
 
     pub fn reset_sizes(&mut self) {
-        self.traverse_mut(self.root, &mut |node| {
+        for node in self {
             node.rect = None;
             node.grow_factor = node.initial_grow_factor;
-        });
+        }
     }
 
     // TODO: consider cached counters if condition eval becomes hot path
@@ -219,7 +146,7 @@ impl TwmRuntimeTree {
 
     /// returns true if the window was added, false in case of overflow
     fn try_add_window(&mut self, window_id: WindowId, ctx: &TwmConditionContext) -> bool {
-        if let Some(node_id) = self.find(self.root, &mut |n| n.accepts_windows(ctx)) {
+        if let Some(node_id) = self.iter().find(|n| n.accepts_windows(ctx)).map(|n| n.id) {
             let node = self.nodes.get_mut(&node_id).unwrap();
             node.windows.push(window_id);
             node.active_window = Some(window_id);
@@ -228,7 +155,11 @@ impl TwmRuntimeTree {
             return true;
         }
 
-        if let Some(node_id) = self.find(self.root, &mut |n| n.accepts_windows_on_overflow(ctx)) {
+        if let Some(node_id) = self
+            .iter()
+            .find(|n| n.accepts_windows_on_overflow(ctx))
+            .map(|n| n.id)
+        {
             let node = self.nodes.get_mut(&node_id).unwrap();
             node.windows.push(window_id);
             node.active_window = Some(window_id);
@@ -242,10 +173,10 @@ impl TwmRuntimeTree {
 
     pub fn drain_tiled(&mut self) -> Vec<WindowId> {
         let mut drained = Vec::new();
-        self.traverse_mut(self.root, &mut |node| {
+        for node in self.iter_mut() {
             drained.append(&mut node.windows);
             node.active_window = None;
-        });
+        }
         self.window_map
             .retain(|_, location| matches!(location, WindowLocation::Floating));
         drained
@@ -255,14 +186,39 @@ impl TwmRuntimeTree {
     pub fn reindex_windows(&mut self) -> Vec<WindowId> {
         let ctx = self.get_context();
 
-        let windows = self.drain_tiled();
-        let mut residual = Vec::new();
-        for window in windows {
+        // Drain only Leaf nodes and single-window stacks.
+        // Multi-window stacks (≥2 windows) are skipped — they stay where they are.
+        let mut drained: Vec<isize> = Vec::new();
+        for node in self.iter_mut() {
+            if node.kind == TwmNodeKind::Stack && node.windows.len() >= 2 {
+                continue;
+            }
+            drained.append(&mut node.windows);
+            node.active_window = None;
+        }
+
+        for window in &drained {
+            self.window_map.remove(window);
+        }
+
+        let mut overflow = Vec::new();
+        for window in drained {
             if !self.try_add_window(window, &ctx) {
-                residual.push(window);
+                overflow.push(window);
             }
         }
-        residual
+
+        // Collapse Manual stacks that are now no longer needed
+        for node in self.nodes.values_mut() {
+            if node.kind == TwmNodeKind::Stack
+                && node.stack_policy == TwmStackPolicy::Manual
+                && node.windows.len() <= 1
+            {
+                node.kind = TwmNodeKind::Leaf;
+            }
+        }
+
+        overflow
     }
 
     /// returns residual windows that should be added to floating
@@ -282,6 +238,7 @@ impl TwmRuntimeTree {
         let Some(location) = self.window_map.remove(window_id) else {
             return Vec::new();
         };
+
         match location {
             WindowLocation::Tiled(node_id) => {
                 let node = self.nodes.get_mut(&node_id).unwrap();
@@ -331,7 +288,7 @@ impl TwmRuntimeTree {
             .unwrap_or(false)
     }
 
-    pub fn swap_windows(&mut self, a: WindowId, b: WindowId) {
+    pub fn swap_nodes_by_windows(&mut self, a: WindowId, b: WindowId) {
         let node_a = match self.window_map.get(&a) {
             Some(WindowLocation::Tiled(id)) => *id,
             _ => return,
@@ -348,6 +305,8 @@ impl TwmRuntimeTree {
         let ptr = &mut self.nodes as *mut HashMap<NodeId, TwmRuntimeNode>;
         let na = unsafe { &mut *ptr }.get_mut(&node_a).unwrap();
         let nb = unsafe { &mut *ptr }.get_mut(&node_b).unwrap();
+
+        std::mem::swap(&mut na.kind, &mut nb.kind);
         std::mem::swap(&mut na.windows, &mut nb.windows);
         std::mem::swap(&mut na.active_window, &mut nb.active_window);
 
@@ -363,20 +322,15 @@ impl TwmRuntimeTree {
 
     pub fn get_nearest_leaf_to_rect(&self, rect: &Rect) -> Option<NodeId> {
         let target = rect.center();
-        let mut best: Option<(NodeId, i32)> = None;
-        self.traverse(self.root, &mut |node| {
-            if !matches!(node.kind, TwmNodeKind::Leaf | TwmNodeKind::Stack) {
-                return;
-            }
-            let Some(node_rect) = &node.rect else {
-                return;
-            };
-            let distance = target.distance_squared(&node_rect.center());
-            if best.is_none() || distance < best.unwrap().1 {
-                best = Some((node.id, distance));
-            }
-        });
-        best.map(|(id, _)| id)
+        self.iter()
+            .filter(|n| matches!(n.kind, TwmNodeKind::Leaf | TwmNodeKind::Stack))
+            .filter_map(|n| {
+                n.rect
+                    .as_ref()
+                    .map(|r| (n.id, target.distance_squared(&r.center())))
+            })
+            .min_by_key(|&(_, d)| d)
+            .map(|(id, _)| id)
     }
 
     pub fn siblings_at_side(
@@ -426,6 +380,115 @@ impl TwmRuntimeTree {
             current_id = parent_id;
         }
     }
+}
+
+impl Default for TwmRuntimeTree {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
+impl<'a> IntoIterator for &'a TwmRuntimeTree {
+    type Item = &'a TwmRuntimeNode;
+    type IntoIter = TwmTreeIter<'a>;
+
+    fn into_iter(self) -> Self::IntoIter {
+        TwmTreeIter {
+            tree: self,
+            stack: vec![self.root],
+        }
+    }
+}
+
+impl<'a> IntoIterator for &'a mut TwmRuntimeTree {
+    type Item = &'a mut TwmRuntimeNode;
+    type IntoIter = TwmTreeIterMut<'a>;
+
+    fn into_iter(self) -> Self::IntoIter {
+        let root = self.root;
+        TwmTreeIterMut {
+            tree: self,
+            stack: vec![root],
+        }
+    }
+}
+
+pub struct TwmTreeIter<'a> {
+    tree: &'a TwmRuntimeTree,
+    stack: Vec<NodeId>,
+}
+
+impl<'a> Iterator for TwmTreeIter<'a> {
+    type Item = &'a TwmRuntimeNode;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        let node_id = self.stack.pop()?;
+        let node = self.tree.nodes.get(&node_id)?;
+
+        let mut children = node.children.clone();
+        children.sort_by_key(|id| self.tree.nodes.get(id).unwrap().priority);
+
+        for child in children.into_iter().rev() {
+            self.stack.push(child);
+        }
+
+        Some(node)
+    }
+}
+
+pub struct TwmTreeIterMut<'a> {
+    tree: &'a mut TwmRuntimeTree,
+    stack: Vec<NodeId>,
+}
+
+impl<'a> Iterator for TwmTreeIterMut<'a> {
+    type Item = &'a mut TwmRuntimeNode;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        let node_id = self.stack.pop()?;
+
+        // Collect and sort children via shared borrows before taking the mutable ref.
+        let children = {
+            let node = self.tree.nodes.get(&node_id)?;
+            let mut children = node.children.clone();
+            children.sort_by_key(|id| self.tree.nodes.get(id).map_or(0, |n| n.priority));
+            children
+        };
+        for child in children.into_iter().rev() {
+            self.stack.push(child);
+        }
+
+        // SAFETY: each NodeId appears at most once in the stack (tree has no cycles),
+        // so we never hand out two &mut refs to the same node. We extend the lifetime
+        // to 'a after all shared borrows of `self.tree` above are dropped.
+        let node = unsafe {
+            let ptr = self.tree.nodes.get_mut(&node_id)? as *mut TwmRuntimeNode;
+            &mut *ptr
+        };
+
+        Some(node)
+    }
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[serde(rename_all = "camelCase")]
+pub struct TwmRuntimeNode {
+    pub id: NodeId,
+    pub parent: Option<NodeId>,
+    pub children: Vec<NodeId>,
+    pub kind: TwmNodeKind,
+    pub lifetime: TwmNodeLifetime,
+    pub priority: u32,
+    pub initial_grow_factor: f32,
+    pub condition: Option<TwmCondition>,
+    pub max_stack_size: Option<usize>,
+    pub stack_policy: TwmStackPolicy,
+
+    // Runtime-only
+    pub grow_factor: f32,
+    pub windows: Vec<WindowId>,
+    pub active_window: Option<WindowId>,
+    pub rect: Option<Rect>,
 }
 
 impl TwmRuntimeNode {

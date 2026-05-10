@@ -395,6 +395,7 @@ wm:
     ease_function: Função de flexibilização da animação
     enable: Ativar animações da Window
   author: Autora
+  auto_stack: Pilha automática por categoria de aplicação
   border:
     enable: Ativar a fronteira da janela
     offset: Offset de borda
