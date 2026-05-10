@@ -12,6 +12,7 @@
 - twm reset of workspaces on reset size shortcut.
 - twm focus side monitor when theres no more nodes at the specified side in the current workspace.
 - twm allow move windows between monitors via shortcuts.
+- add variables system on extended yaml syntax.
 
 ### refactor
 

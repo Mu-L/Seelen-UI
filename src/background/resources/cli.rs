@@ -122,27 +122,27 @@ impl ResourceManagerCli {
 
                 match kind {
                     ClapResourceKind::Theme => {
-                        let mut theme = Theme::load(&path)?;
+                        let mut theme = Theme::load_ext(&path, false)?;
                         theme.metadata.internal.path = to_store_path.clone();
                         theme.save()?
                     }
                     ClapResourceKind::Plugin => {
-                        let mut plugin = Plugin::load(&path)?;
+                        let mut plugin = Plugin::load_ext(&path, false)?;
                         plugin.metadata.internal.path = to_store_path.clone();
                         plugin.save()?
                     }
                     ClapResourceKind::Widget => {
-                        let mut widget = Widget::load(&path)?;
+                        let mut widget = Widget::load_ext(&path, false)?;
                         widget.metadata.internal.path = to_store_path.clone();
                         widget.save()?
                     }
                     ClapResourceKind::IconPack => {
-                        let mut icon_pack = IconPack::load(&path)?;
+                        let mut icon_pack = IconPack::load_ext(&path, false)?;
                         icon_pack.metadata.internal.path = to_store_path.clone();
                         icon_pack.save()?
                     }
                     ClapResourceKind::Wallpaper => {
-                        let mut wallpaper = Wallpaper::load(&path)?;
+                        let mut wallpaper = Wallpaper::load_ext(&path, false)?;
                         wallpaper.metadata.internal.path = to_store_path.clone();
                         wallpaper.save()?
                     }
