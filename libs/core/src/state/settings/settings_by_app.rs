@@ -93,7 +93,7 @@ impl AppIdentifier {
         }
         if matches!(self.kind, AppIdentifierType::Path | AppIdentifierType::Exe) {
             // Normalize path separators to backslash and uppercase for Windows paths
-            let normalized = self.id.replace('\\', "/");
+            let normalized = self.id.replace("\\", "/");
             self.cache.lower_id = Some(normalized.to_lowercase());
         }
 
@@ -101,45 +101,34 @@ impl AppIdentifier {
         self.or.iter_mut().for_each(|i| i.prepare());
     }
 
+    #[inline]
     fn lower_id(&self) -> &str {
         self.cache.lower_id.as_deref().unwrap()
     }
 
-    /// path and filenames on Windows System should be uppercased before be passed to this function
     /// Safety: will panic if cache was not performed before
     fn validate(&self, title: &str, class: &str, exe: &str, path: &str) -> bool {
+        let rule_value = match self.kind {
+            AppIdentifierType::Title => self.id.as_str(),
+            AppIdentifierType::Class => self.id.as_str(),
+            AppIdentifierType::Exe => self.lower_id(),
+            AppIdentifierType::Path => self.lower_id(),
+        };
+
+        let win_value = match self.kind {
+            AppIdentifierType::Title => title,
+            AppIdentifierType::Class => class,
+            AppIdentifierType::Exe => exe,
+            AppIdentifierType::Path => path,
+        };
+
         let mut self_result = match self.matching_strategy {
-            MatchingStrategy::Equals => match self.kind {
-                AppIdentifierType::Title => title.eq(&self.id),
-                AppIdentifierType::Class => class.eq(&self.id),
-                AppIdentifierType::Exe => exe.eq(self.lower_id()),
-                AppIdentifierType::Path => path.eq(self.lower_id()),
-            },
-            MatchingStrategy::StartsWith => match self.kind {
-                AppIdentifierType::Title => title.starts_with(&self.id),
-                AppIdentifierType::Class => class.starts_with(&self.id),
-                AppIdentifierType::Exe => exe.starts_with(self.lower_id()),
-                AppIdentifierType::Path => path.starts_with(self.lower_id()),
-            },
-            MatchingStrategy::EndsWith => match self.kind {
-                AppIdentifierType::Title => title.ends_with(&self.id),
-                AppIdentifierType::Class => class.ends_with(&self.id),
-                AppIdentifierType::Exe => exe.ends_with(self.lower_id()),
-                AppIdentifierType::Path => path.ends_with(self.lower_id()),
-            },
-            MatchingStrategy::Contains => match self.kind {
-                AppIdentifierType::Title => title.contains(&self.id),
-                AppIdentifierType::Class => class.contains(&self.id),
-                AppIdentifierType::Exe => exe.contains(self.lower_id()),
-                AppIdentifierType::Path => path.contains(self.lower_id()),
-            },
+            MatchingStrategy::Equals => rule_value == win_value,
+            MatchingStrategy::StartsWith => win_value.starts_with(rule_value),
+            MatchingStrategy::EndsWith => win_value.ends_with(rule_value),
+            MatchingStrategy::Contains => win_value.contains(rule_value),
             MatchingStrategy::Regex => match &self.cache.regex {
-                Some(regex) => match self.kind {
-                    AppIdentifierType::Title => regex.is_match(title),
-                    AppIdentifierType::Class => regex.is_match(class),
-                    AppIdentifierType::Exe => regex.is_match(exe),
-                    AppIdentifierType::Path => regex.is_match(path),
-                },
+                Some(regex) => regex.is_match(win_value),
                 None => false,
             },
         };

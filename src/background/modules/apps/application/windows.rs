@@ -29,7 +29,7 @@ impl UserAppsManager {
         HookManager::subscribe(|(event, window)| Self::on_win_event(event, window));
 
         spawn_named_thread("InteractableWindowsRevalidator", || loop {
-            std::thread::sleep(std::time::Duration::from_millis(2000));
+            std::thread::sleep(std::time::Duration::from_millis(5000));
 
             // Pause when session is not interactive to reduce CPU usage
             if !IS_INTERACTIVE_SESSION.load(Ordering::Acquire) {
@@ -43,6 +43,15 @@ impl UserAppsManager {
                 } else {
                     Self::send(UserAppWinEvent::Removed(window.address()));
                     false
+                }
+            });
+
+            // Scan for windows that now qualify but were never tracked (e.g. style/frame
+            // state was not settled at creation time).
+            let _ = WindowEnumerator::new().for_each(|window| {
+                if is_interactable_window(&window) && !USER_APPS_MANAGER.contains_win(&window) {
+                    USER_APPS_MANAGER.add_win(&window);
+                    Self::send(UserAppWinEvent::Added(window.address()));
                 }
             });
         });
@@ -75,7 +84,10 @@ impl UserAppsManager {
                     Self::send(UserAppWinEvent::Added(window.address()));
                 }
             }
-            WinEvent::ObjectNameChange | WinEvent::ObjectParentChange => {
+            WinEvent::ObjectNameChange
+            | WinEvent::ObjectParentChange
+            | WinEvent::ObjectUncloaked
+            | WinEvent::ObjectStateChange => {
                 let was_interactable = is_interactable;
                 is_interactable = is_interactable_window(&window);
                 match (was_interactable, is_interactable) {
