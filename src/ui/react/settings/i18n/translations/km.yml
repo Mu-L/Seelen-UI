@@ -275,6 +275,7 @@ wall:
   collections: បណ្តុំ
   contrast: ធេវីអាេយមានផាបផ្ទុយក្នា
   corrupted_wallpapers_message: ផ្ទាំងរូបភាពខូច សូមពិចារណាលុបទាំងនេះ៖
+  coverage_pause_threshold: ផ្អាកកម្រិតកំណត់ (ការគ្របដណ្តប់បង្អួច)
   create: បង្កើត
   create_collection: បង្កើតបណ្តុំ
   default_collection: ការប្រមូលលំនាំដើម

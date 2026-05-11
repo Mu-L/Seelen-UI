@@ -274,6 +274,7 @@ wall:
   collections: Söfn
   contrast: Andstæður
   corrupted_wallpapers_message: 'Skemmt veggfóður, íhugaðu að eyða þessum:'
+  coverage_pause_threshold: Þröskuldur fyrir hlé (gluggaþekju)
   create: Búa til
   create_collection: Búðu til safn
   default_collection: Sjálfgefið safn

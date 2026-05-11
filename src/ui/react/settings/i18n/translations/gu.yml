@@ -274,6 +274,7 @@ wall:
   collections: સંગ્રહો
   contrast: વિપરીત
   corrupted_wallpapers_message: 'દૂષિત વૉલપેપર્સ, આને કાઢી નાખવાનું વિચારો:'
+  coverage_pause_threshold: થોભો થ્રેશોલ્ડ (વિન્ડો કવરેજ)
   create: બનાવો
   create_collection: સંગ્રહ બનાવો
   default_collection: ડિફૉલ્ટ કલેક્શન

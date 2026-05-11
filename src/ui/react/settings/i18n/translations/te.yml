@@ -278,6 +278,7 @@ wall:
   collections: సేకరణలు
   contrast: దీనికి విరుద్ధంగా
   corrupted_wallpapers_message: 'పాడైన వాల్‌పేపర్‌లు, వీటిని తొలగించడాన్ని పరిగణించండి:'
+  coverage_pause_threshold: పాజ్ థ్రెషోల్డ్ (విండో కవరేజ్)
   create: సృష్టించు
   create_collection: సేకరణను సృష్టించండి
   default_collection: డిఫాల్ట్ సేకరణ

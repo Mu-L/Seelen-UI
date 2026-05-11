@@ -285,6 +285,7 @@ wall:
   collections: Sammlungen
   contrast: Kontrast
   corrupted_wallpapers_message: 'Beschädigte Hintergrundbilder. Löschen Sie diese:'
+  coverage_pause_threshold: Pausenschwelle (Fensterabdeckung)
   create: Erstellen
   create_collection: Sammlung erstellen
   default_collection: Standardsammlung

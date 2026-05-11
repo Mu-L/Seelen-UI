@@ -280,6 +280,7 @@ wall:
   collections: Zbirke
   contrast: Kontrast
   corrupted_wallpapers_message: 'Oštećene pozadine, razmislite o brisanju ovih:'
+  coverage_pause_threshold: Prag pauze (pokrivenost prozora)
   create: Stvoriti
   create_collection: Stvori zbirku
   default_collection: Zadana zbirka

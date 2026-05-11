@@ -280,6 +280,7 @@ wall:
   collections: Collections
   contrast: Contraste
   corrupted_wallpapers_message: "Fonds d'écran corrompus, pensez à les supprimer\_:"
+  coverage_pause_threshold: Seuil de pause (couverture de la fenêtre)
   create: Créer
   create_collection: Créer une collection
   default_collection: Collection par défaut

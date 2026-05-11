@@ -277,6 +277,7 @@ wall:
   collections: مجموعے
   contrast: اس کے برعکس
   corrupted_wallpapers_message: 'خراب وال پیپرز ، ان کو حذف کرنے پر غور کریں:'
+  coverage_pause_threshold: توقف کی حد (ونڈو کوریج)
   create: تخلیق کریں
   create_collection: مجموعہ بنائیں
   default_collection: پہلے سے طے شدہ مجموعہ

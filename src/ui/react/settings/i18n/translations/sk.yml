@@ -279,6 +279,7 @@ wall:
   collections: zbierky
   contrast: Kontrast
   corrupted_wallpapers_message: 'Poškodené tapety, zvážte ich odstránenie:'
+  coverage_pause_threshold: Hranica pozastavenia (pokrytie okna)
   create: Vytvorte
   create_collection: Vytvoriť zbierku
   default_collection: Predvolená kolekcia

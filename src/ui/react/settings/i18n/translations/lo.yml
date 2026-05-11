@@ -270,6 +270,7 @@ wall:
   collections: ຄໍເລັກຊັນ
   contrast: ຄວາມແຕກຕ່າງ
   corrupted_wallpapers_message: 'ຮູບວໍເປເປີທີ່ເສຍຫາຍ, ພິຈາລະນາການລຶບສິ່ງເຫຼົ່ານີ້:'
+  coverage_pause_threshold: ຢຸດເກນຊົ່ວຄາວ (ການປົກຫຸ້ມຂອງປ່ອງຢ້ຽມ)
   create: ສ້າງ
   create_collection: ສ້າງຄໍເລັກຊັນ
   default_collection: ການເກັບຄ່າເລີ່ມຕົ້ນ

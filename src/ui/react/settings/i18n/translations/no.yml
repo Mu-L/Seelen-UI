@@ -277,6 +277,7 @@ wall:
   collections: Samlinger
   contrast: Kontrast
   corrupted_wallpapers_message: 'Ødelagte bakgrunnsbilder, vurder å slette disse:'
+  coverage_pause_threshold: Pauseterskel (vindusdekning)
   create: Skape
   create_collection: Opprett samling
   default_collection: Standard samling

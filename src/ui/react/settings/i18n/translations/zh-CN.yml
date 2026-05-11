@@ -245,6 +245,7 @@ wall:
   collections: 收藏
   contrast: 对比度
   corrupted_wallpapers_message: 已损坏的壁纸，请考虑删除这些：
+  coverage_pause_threshold: 暂停阈值（窗口覆盖率）
   create: 创建
   create_collection: 创建集合
   default_collection: 默认集合

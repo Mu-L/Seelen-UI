@@ -280,6 +280,7 @@ wall:
   collections: Koleksi
   contrast: Kontras
   corrupted_wallpapers_message: 'Wallpaper rusak, pertimbangkan untuk menghapus ini:'
+  coverage_pause_threshold: Ambang batas jeda (cakupan jendela)
   create: Membuat
   create_collection: Buat Koleksi
   default_collection: Koleksi Bawaan

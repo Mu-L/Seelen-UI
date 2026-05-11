@@ -270,6 +270,7 @@ wall:
   collections: Awọn akojọpọ
   contrast: Ifiwera
   corrupted_wallpapers_message: 'Awọn iṣẹṣọ ogiri ti bajẹ, ronu piparẹ awọn wọnyi:'
+  coverage_pause_threshold: Duro ẹnu-ọna (agbegbe ferese)
   create: Ṣẹda
   create_collection: Ṣẹda Gbigba
   default_collection: Gbigba aiyipada

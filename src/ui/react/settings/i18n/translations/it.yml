@@ -284,6 +284,7 @@ wall:
   collections: Collezioni
   contrast: Contrasto
   corrupted_wallpapers_message: 'Sfondi danneggiati, valuta la possibilità di eliminarli:'
+  coverage_pause_threshold: Soglia di pausa (copertura finestra)
   create: Creare
   create_collection: Crea raccolta
   default_collection: Raccolta predefinita

@@ -277,6 +277,7 @@ wall:
   collections: Samlingar
   contrast: Kontrast
   corrupted_wallpapers_message: 'Skadade bakgrundsbilder, överväg att ta bort dessa:'
+  coverage_pause_threshold: Pausgräns (fönstertäckning)
   create: Skapa
   create_collection: Skapa samling
   default_collection: Standardsamling

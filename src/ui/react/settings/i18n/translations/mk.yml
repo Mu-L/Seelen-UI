@@ -280,6 +280,7 @@ wall:
   collections: Колекции
   contrast: Контраст
   corrupted_wallpapers_message: 'Оштетени позадини, размислете да ги избришете овие:'
+  coverage_pause_threshold: Праг на пауза (покриеност на прозорецот)
   create: Креирај
   create_collection: Креирај колекција
   default_collection: Стандардна колекција

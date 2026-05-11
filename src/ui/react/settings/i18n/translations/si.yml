@@ -275,6 +275,7 @@ wall:
   collections: එකතු කිරීම්
   contrast: වෙනස
   corrupted_wallpapers_message: 'දූෂිත බිතුපත්, මේවා මකා දැමීමට සලකා බලන්න:'
+  coverage_pause_threshold: විරාම එළිපත්ත (කවුළු ආවරණය)
   create: නිර්මාණය කරන්න
   create_collection: එකතුවක් සාදන්න
   default_collection: පෙරනිමි එකතුව

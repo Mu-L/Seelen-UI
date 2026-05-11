@@ -278,6 +278,7 @@ wall:
   collections: Collections
   contrast: Dijîtî
   corrupted_wallpapers_message: 'Dîwarên xerabûyî, bifikire ku van jêbirin:'
+  coverage_pause_threshold: Bendavê rawestanê (vegirtina pencereyê)
   create: Xûliqandin
   create_collection: Koleksiyonê çêbikin
   default_collection: Berhevoka Bingehîn

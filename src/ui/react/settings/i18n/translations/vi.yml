@@ -277,6 +277,7 @@ wall:
   collections: Bộ sưu tập
   contrast: Sự tương phản
   corrupted_wallpapers_message: 'Hình nền bị hỏng, hãy cân nhắc việc xóa những hình nền này:'
+  coverage_pause_threshold: Ngưỡng tạm dừng (phạm vi bao phủ cửa sổ)
   create: Tạo nên
   create_collection: Tạo bộ sưu tập
   default_collection: Bộ sưu tập mặc định

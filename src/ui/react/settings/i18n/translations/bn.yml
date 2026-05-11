@@ -280,6 +280,7 @@ wall:
   collections: সংগ্রহ
   contrast: বিপরীতে
   corrupted_wallpapers_message: 'দূষিত ওয়ালপেপার, এগুলি মুছে ফেলার কথা বিবেচনা করুন:'
+  coverage_pause_threshold: পজ থ্রেশহোল্ড (উইন্ডো কভারেজ)
   create: তৈরি করুন
   create_collection: সংগ্রহ তৈরি করুন
   default_collection: ডিফল্ট সংগ্রহ

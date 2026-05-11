@@ -280,6 +280,7 @@ wall:
   collections: Gyűjtemények
   contrast: Kontraszt
   corrupted_wallpapers_message: 'Sérült háttérképek, fontolja meg ezek törlését:'
+  coverage_pause_threshold: Szünet küszöbértéke (ablak lefedettsége)
   create: Teremt
   create_collection: Gyűjtemény létrehozása
   default_collection: Alapértelmezett gyűjtemény

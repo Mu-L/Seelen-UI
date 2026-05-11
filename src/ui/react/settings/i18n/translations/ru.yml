@@ -279,6 +279,7 @@ wall:
   collections: Коллекции
   contrast: Контраст
   corrupted_wallpapers_message: 'Поврежденные обои, рассмотрите возможность их удаления:'
+  coverage_pause_threshold: Порог паузы (охват окна)
   create: Создавать
   create_collection: Создать коллекцию
   default_collection: Коллекция по умолчанию

@@ -276,6 +276,7 @@ wall:
   collections: Samlinger
   contrast: Kontrast
   corrupted_wallpapers_message: 'Ødelagte tapeter, overvej at slette disse:'
+  coverage_pause_threshold: Pausegrænse (vinduesdækning)
   create: Skabe
   create_collection: Opret samling
   default_collection: Standard samling

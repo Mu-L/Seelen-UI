@@ -281,6 +281,7 @@ wall:
   collections: To'plamlar
   contrast: Qarama-qarshilik
   corrupted_wallpapers_message: 'Buzilgan fon rasmlari, ularni o''chirishni o''ylab ko''ring:'
+  coverage_pause_threshold: Pauza chegarasi (deraza qoplami)
   create: Yaratish
   create_collection: To'plam yaratish
   default_collection: Birlamchi toʻplam

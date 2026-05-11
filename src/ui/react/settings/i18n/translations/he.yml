@@ -264,6 +264,7 @@ wall:
   collections: אוספים
   contrast: לְהַשְׁווֹת
   corrupted_wallpapers_message: 'רקעים פגומים, שקול למחוק את אלה:'
+  coverage_pause_threshold: סף השהייה (כיסוי חלון)
   create: לִיצוֹר
   create_collection: צור אוסף
   default_collection: אוסף ברירת מחדל

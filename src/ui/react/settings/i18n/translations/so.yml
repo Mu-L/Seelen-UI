@@ -284,6 +284,7 @@ wall:
   collections: Ururinta
   contrast: Is barbar dhigidda
   corrupted_wallpapers_message: 'Warqadaha gidaarka ah ee jaban, tixgeli inaad tirtirto kuwan:'
+  coverage_pause_threshold: Jooji xadka (daaqadda daboolida)
   create: Abuur
   create_collection: Abuur Ururinta
   default_collection: Ururinta asalka ah

@@ -278,6 +278,7 @@ wall:
   collections: Bildumak
   contrast: Kontraste
   corrupted_wallpapers_message: 'Hondatutako horma-paperak, kontuan hartu hauek ezabatzea:'
+  coverage_pause_threshold: Pausatu atalasea (leihoaren estaldura)
   create: Sortu
   create_collection: Sortu bilduma
   default_collection: Bilduma lehenetsia

@@ -280,6 +280,7 @@ wall:
   collections: Kokoelmat
   contrast: Kontrasti
   corrupted_wallpapers_message: 'Vioittuneet taustakuvat, harkitse näiden poistamista:'
+  coverage_pause_threshold: Taukokynnys (ikkunan peitto)
   create: Luoda
   create_collection: Luo kokoelma
   default_collection: Oletuskokoelma

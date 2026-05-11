@@ -277,6 +277,7 @@ wall:
   collections: კოლექციები
   contrast: წინააღმდეგობა
   corrupted_wallpapers_message: 'დაზიანებული ფონები, განიხილეთ მათი წაშლა:'
+  coverage_pause_threshold: პაუზის ზღვარი (ფანჯრის დაფარვა)
   create: შექმნა
   create_collection: შექმენით კოლექცია
   default_collection: ნაგულისხმევი კოლექცია

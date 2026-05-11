@@ -280,6 +280,7 @@ wall:
   collections: Colecții
   contrast: Contrast
   corrupted_wallpapers_message: 'Imagini de fundal corupte, luați în considerare ștergerea acestora:'
+  coverage_pause_threshold: Pragul de pauză (acoperire fereastră)
   create: Crea
   create_collection: Creați o colecție
   default_collection: Colecție implicită

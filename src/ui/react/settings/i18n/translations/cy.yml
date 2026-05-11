@@ -276,6 +276,7 @@ wall:
   collections: Casgliadau
   contrast: Gyferbynnwch
   corrupted_wallpapers_message: 'Papurau wal llygredig, ystyriwch ddileu''r rhain:'
+  coverage_pause_threshold: Trothwy seibio (gorchudd ffenestr)
   create: Creu
   create_collection: Creu Casgliad
   default_collection: Casgliad Diofyn

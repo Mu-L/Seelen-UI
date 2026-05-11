@@ -280,6 +280,7 @@ wall:
   collections: Колекции
   contrast: Контраст
   corrupted_wallpapers_message: 'Повредени тапети, помислете за изтриване на тези:'
+  coverage_pause_threshold: Праг на пауза (покритие на прозорец)
   create: Създавайте
   create_collection: Създаване на колекция
   default_collection: Колекция по подразбиране

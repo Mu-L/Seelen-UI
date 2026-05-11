@@ -278,6 +278,7 @@ wall:
   collections: Маҷмӯаҳо
   contrast: Зиддият
   corrupted_wallpapers_message: 'Обои вайроншуда, тоза кардани инҳоро баррасӣ кунед:'
+  coverage_pause_threshold: Ҳадди таваққуф (фарогирии тиреза)
   create: Эҷод кунед
   create_collection: Маҷмӯа эҷод кунед
   default_collection: Коллексияи пешфарз

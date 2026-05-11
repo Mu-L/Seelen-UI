@@ -278,6 +278,7 @@ wall:
   collections: Колекції
   contrast: Контраст
   corrupted_wallpapers_message: 'Пошкоджені шпалери, видаліть ці:'
+  coverage_pause_threshold: Поріг паузи (покриття вікна)
   create: Створити
   create_collection: Створити колекцію
   default_collection: Колекція за замовчуванням

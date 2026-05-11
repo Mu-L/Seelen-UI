@@ -257,6 +257,7 @@ wall:
   collections: コレクション
   contrast: コントラスト
   corrupted_wallpapers_message: 壁紙が破損している場合は、削除することを検討してください。
+  coverage_pause_threshold: 一時停止しきい値 (ウィンドウ カバレッジ)
   create: 作成する
   create_collection: コレクションを作成
   default_collection: デフォルトのコレクション

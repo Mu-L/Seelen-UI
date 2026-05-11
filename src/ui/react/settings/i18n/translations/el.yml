@@ -285,6 +285,7 @@ wall:
   collections: Συλλογές
   contrast: Αντίθεση
   corrupted_wallpapers_message: 'Κατεστραμμένες ταπετσαρίες, σκεφτείτε να τις διαγράψετε:'
+  coverage_pause_threshold: Όριο παύσης (κάλυψη παραθύρου)
   create: Δημιουργώ
   create_collection: Δημιουργία συλλογής
   default_collection: Προεπιλεγμένη συλλογή

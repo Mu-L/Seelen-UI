@@ -277,6 +277,7 @@ wall:
   collections: Koleksiyonlar
   contrast: Kontrast
   corrupted_wallpapers_message: 'Bozuk duvar kağıtları, şunları silmeyi düşünün:'
+  coverage_pause_threshold: Duraklatma eşiği (pencere kapsamı)
   create: Yaratmak
   create_collection: Koleksiyon Oluştur
   default_collection: Varsayılan Koleksiyon

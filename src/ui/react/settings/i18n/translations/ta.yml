@@ -280,6 +280,7 @@ wall:
   collections: தொகுப்புகள்
   contrast: மாறுபாடு
   corrupted_wallpapers_message: 'சிதைந்த வால்பேப்பர்கள், இவற்றை நீக்குவதைக் கவனியுங்கள்:'
+  coverage_pause_threshold: இடைநிறுத்த வாசல் (சாளர கவரேஜ்)
   create: உருவாக்கு
   create_collection: சேகரிப்பை உருவாக்கவும்
   default_collection: இயல்புநிலை சேகரிப்பு

@@ -275,6 +275,7 @@ wall:
   collections: Kollektsioonid
   contrast: Kontrast
   corrupted_wallpapers_message: 'Rikutud taustapildid, kaaluge nende kustutamist:'
+  coverage_pause_threshold: Peatamise lävi (akna katvus)
   create: Loo
   create_collection: Loo kollektsioon
   default_collection: Vaikekogu

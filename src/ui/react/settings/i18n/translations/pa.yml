@@ -271,6 +271,7 @@ wall:
   collections: ਸੰਗ੍ਰਹਿ
   contrast: ਇਸ ਦੇ ਉਲਟ
   corrupted_wallpapers_message: 'ਖਰਾਬ ਵਾਲਪੇਪਰ, ਇਹਨਾਂ ਨੂੰ ਮਿਟਾਉਣ ''ਤੇ ਵਿਚਾਰ ਕਰੋ:'
+  coverage_pause_threshold: ਥ੍ਰੈਸ਼ਹੋਲਡ ਨੂੰ ਰੋਕੋ (ਵਿੰਡੋ ਕਵਰੇਜ)
   create: ਬਣਾਓ
   create_collection: ਸੰਗ੍ਰਹਿ ਬਣਾਓ
   default_collection: ਪੂਰਵ-ਨਿਰਧਾਰਤ ਸੰਗ੍ਰਹਿ

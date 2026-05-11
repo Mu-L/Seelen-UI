@@ -271,6 +271,7 @@ wall:
   collections: راټولونه
   contrast: برعکس
   corrupted_wallpapers_message: 'فاسد وال پیپرونه، د دې حذف کولو په اړه غور وکړئ:'
+  coverage_pause_threshold: د وقفې حد (د کړکۍ پوښښ)
   create: جوړ کړئ
   create_collection: ټولګه جوړه کړئ
   default_collection: ډیفالټ ټولګه

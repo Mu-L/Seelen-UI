@@ -276,6 +276,7 @@ wall:
   collections: Збирке
   contrast: Контраст
   corrupted_wallpapers_message: 'Оштећене позадине, размислите о брисању ових:'
+  coverage_pause_threshold: Праг за паузу (покривање прозора)
   create: Креирај
   create_collection: Направите колекцију
   default_collection: Подразумевана колекција

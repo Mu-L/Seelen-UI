@@ -282,6 +282,7 @@ wall:
   collections: Kolekcje
   contrast: Kontrast
   corrupted_wallpapers_message: 'Uszkodzone tapety. Rozważ ich usunięcie:'
+  coverage_pause_threshold: Próg pauzy (zasłonięcie okna)
   create: Tworzyć
   create_collection: Utwórz kolekcję
   default_collection: Kolekcja domyślna

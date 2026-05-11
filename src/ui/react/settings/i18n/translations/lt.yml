@@ -276,6 +276,7 @@ wall:
   collections: Kolekcijos
   contrast: Kontrastas
   corrupted_wallpapers_message: 'Sugadinti fono paveikslėliai, apsvarstykite galimybę ištrinti šiuos:'
+  coverage_pause_threshold: Pristabdymo slenkstis (lango aprėptis)
   create: Sukurti
   create_collection: Sukurti kolekciją
   default_collection: Numatytoji kolekcija

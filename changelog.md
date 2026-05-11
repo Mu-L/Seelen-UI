@@ -6,6 +6,7 @@
 
 - twm auto stack by application categories.
 - twm node splitting implementation.
+- pause wallpaper by monitor overlap threshold.
 
 ### enhancements
 

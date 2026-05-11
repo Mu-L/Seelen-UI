@@ -267,6 +267,7 @@ wall:
   collections: คอลเลกชัน
   contrast: ตัดกัน
   corrupted_wallpapers_message: 'วอลเปเปอร์ที่เสียหาย โปรดพิจารณาลบสิ่งเหล่านี้:'
+  coverage_pause_threshold: เกณฑ์การหยุดชั่วคราว (ความครอบคลุมของกรอบเวลา)
   create: สร้าง
   create_collection: สร้างคอลเลกชัน
   default_collection: คอลเลกชันเริ่มต้น

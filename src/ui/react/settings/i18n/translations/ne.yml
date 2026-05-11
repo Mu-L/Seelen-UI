@@ -279,6 +279,7 @@ wall:
   collections: सङ्ग्रहहरू
   contrast: विषमता
   corrupted_wallpapers_message: 'भ्रष्ट वालपेपरहरू, यी मेटाउने विचार गर्नुहोस्:'
+  coverage_pause_threshold: पज थ्रेसहोल्ड (विन्डो कभरेज)
   create: सिर्जना गर्नुहोस्
   create_collection: संग्रह सिर्जना गर्नुहोस्
   default_collection: पूर्वनिर्धारित संग्रह

@@ -267,6 +267,7 @@ wall:
   collections: المجموعات
   contrast: التباين
   corrupted_wallpapers_message: 'الخلفيات التالفة، فكر في حذفها:'
+  coverage_pause_threshold: عتبة الإيقاف المؤقت (تغطية النافذة)
   create: يخلق
   create_collection: إنشاء مجموعة
   default_collection: المجموعة الافتراضية

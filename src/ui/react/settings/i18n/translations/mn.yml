@@ -276,6 +276,7 @@ wall:
   collections: Цуглуулга
   contrast: Эрс ялгаа
   corrupted_wallpapers_message: 'Гэмтсэн ханын зураг, эдгээрийг устгана уу:'
+  coverage_pause_threshold: Түр зогсоох босго (цонхны хамрах хүрээ)
   create: Үүсгэх
   create_collection: Цуглуулга үүсгэх
   default_collection: Өгөгдмөл цуглуулга

@@ -273,6 +273,7 @@ wall:
   collections: Collections
   contrast: Contrast
   corrupted_wallpapers_message: 'Corrupted wallpapers, consider deleting these:'
+  coverage_pause_threshold: Pause threshold (window coverage)
   create: Create
   create_collection: Create Collection
   default_collection: Default Collection

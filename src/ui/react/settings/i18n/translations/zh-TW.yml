@@ -247,6 +247,7 @@ wall:
   collections: 收藏
   contrast: 對比
   corrupted_wallpapers_message: 損壞的壁紙，請考慮刪除這些：
+  coverage_pause_threshold: 暫停閾值（視窗覆蓋率）
   create: 創造
   create_collection: 創建收藏
   default_collection: 默認集合

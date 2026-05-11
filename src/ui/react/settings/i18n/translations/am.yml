@@ -264,6 +264,7 @@ wall:
   collections: ስብስቦች
   contrast: ንፅፅር
   corrupted_wallpapers_message: የተበላሹ የግድግዳ ወረቀቶች፣ እነዚህን መሰረዝ ያስቡበት፡-
+  coverage_pause_threshold: ገደብ ባለበት አቁም (የመስኮት ሽፋን)
   create: ፍጠር
   create_collection: ስብስብ ይፍጠሩ
   default_collection: ነባሪ ስብስብ

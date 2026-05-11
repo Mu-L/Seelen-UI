@@ -257,6 +257,7 @@ wall:
   collections: 컬렉션
   contrast: 대비
   corrupted_wallpapers_message: '손상된 배경화면은 삭제하는 것이 좋습니다:'
+  coverage_pause_threshold: 일시중지 임계값(창 적용 범위)
   create: 만들다
   create_collection: 컬렉션 만들기
   default_collection: 기본 컬렉션

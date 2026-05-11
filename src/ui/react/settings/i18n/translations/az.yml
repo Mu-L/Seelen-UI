@@ -276,6 +276,7 @@ wall:
   collections: Kolleksiyalar
   contrast: Əksinə
   corrupted_wallpapers_message: 'Zədələnmiş divar kağızları, bunları silməyi düşünün:'
+  coverage_pause_threshold: Pauza həddi (pəncərə əhatəsi)
   create: Yaradın
   create_collection: Kolleksiya yaradın
   default_collection: Defolt Kolleksiya

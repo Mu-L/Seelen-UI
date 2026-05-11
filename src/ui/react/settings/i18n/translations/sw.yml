@@ -273,6 +273,7 @@ wall:
   collections: Mikusanyiko
   contrast: Tofauti
   corrupted_wallpapers_message: 'Mandhari zilizoharibika, zingatia kufuta hizi:'
+  coverage_pause_threshold: Sitisha kiwango cha juu (ufunikaji wa dirisha)
   create: Unda
   create_collection: Unda Mkusanyiko
   default_collection: Mkusanyiko Chaguomsingi

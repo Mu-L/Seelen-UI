@@ -284,6 +284,7 @@ wall:
   collections: Col·leccions
   contrast: Contrast
   corrupted_wallpapers_message: 'Fons de pantalla danyats, penseu a suprimir-los:'
+  coverage_pause_threshold: Llindar de pausa (cobertura de la finestra)
   create: Crear
   create_collection: Crea col·lecció
   default_collection: Col·lecció per defecte

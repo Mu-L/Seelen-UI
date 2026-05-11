@@ -37,6 +37,8 @@ pub struct UserAppWindow {
     pub prevent_pinning: bool,
     /// custom method to create start this application
     pub relaunch: Option<Relaunch>,
+    /// rect of the window without shadow, in screen coordinates
+    pub rect: Option<Rect>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]

@@ -276,6 +276,7 @@ wall:
   collections: Versamelings
   contrast: Kontras
   corrupted_wallpapers_message: 'Korrupte agtergronde, oorweeg dit om hierdie uit te vee:'
+  coverage_pause_threshold: Pouse drempel (venster dekking)
   create: Skep
   create_collection: Skep versameling
   default_collection: Verstekversameling

@@ -276,6 +276,7 @@ wall:
   collections: Collecties
   contrast: Contrast
   corrupted_wallpapers_message: 'Beschadigde achtergronden, overweeg deze te verwijderen:'
+  coverage_pause_threshold: Pauzedrempel (vensterdekking)
   create: Creëren
   create_collection: Verzameling maken
   default_collection: Standaardcollectie

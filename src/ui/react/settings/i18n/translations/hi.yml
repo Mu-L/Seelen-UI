@@ -281,6 +281,7 @@ wall:
   collections: संग्रह
   contrast: अंतर
   corrupted_wallpapers_message: 'दूषित वॉलपेपर, इन्हें हटाने पर विचार करें:'
+  coverage_pause_threshold: सीमा रोकें (विंडो कवरेज)
   create: बनाएं
   create_collection: संग्रह बनाएँ
   default_collection: डिफ़ॉल्ट संग्रह

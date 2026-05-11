@@ -275,6 +275,7 @@ wall:
   collections: Kollektiounen
   contrast: Kontrad
   corrupted_wallpapers_message: 'Korrupt Tapeten, betruecht dës ze läschen:'
+  coverage_pause_threshold: Pause-Schwell (Fënsterofdeckung)
   create: Schafen
   create_collection: Schafen Kollektioun
   default_collection: Standard Kollektioun

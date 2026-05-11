@@ -276,6 +276,7 @@ wall:
   collections: مجموعه ها
   contrast: کنتراست
   corrupted_wallpapers_message: 'والپیپرهای خراب، این موارد را حذف کنید:'
+  coverage_pause_threshold: آستانه مکث (پوشش پنجره)
   create: ایجاد کنید
   create_collection: ایجاد مجموعه
   default_collection: مجموعه پیش‌فرض

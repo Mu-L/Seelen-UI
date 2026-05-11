@@ -278,6 +278,7 @@ wall:
   collections: Հավաքածուներ
   contrast: Հակադրություն
   corrupted_wallpapers_message: Կոռումպացված պաստառներ, մտածեք ջնջել դրանք.
+  coverage_pause_threshold: Դադարի շեմ (պատուհանի ծածկույթ)
   create: Ստեղծել
   create_collection: Ստեղծել Հավաքածու
   default_collection: Կանխադրված հավաքածու

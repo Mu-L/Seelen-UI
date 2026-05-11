@@ -276,6 +276,7 @@ wall:
   collections: Kolekcijas
   contrast: Kontrasts
   corrupted_wallpapers_message: 'Bojātas tapetes, apsveriet iespēju dzēst šīs tapetes:'
+  coverage_pause_threshold: Pauzes slieksnis (loga pārklājums)
   create: Izveidot
   create_collection: Izveidot kolekciju
   default_collection: Noklusējuma kolekcija

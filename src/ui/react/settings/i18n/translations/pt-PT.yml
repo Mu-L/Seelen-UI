@@ -282,6 +282,7 @@ wall:
   collections: Coleções
   contrast: Contraste
   corrupted_wallpapers_message: 'Papéis de parede corrompidos, considere excluí-los:'
+  coverage_pause_threshold: Limite de pausa (cobertura da janela)
   create: Criar
   create_collection: Criar coleção
   default_collection: Coleção padrão

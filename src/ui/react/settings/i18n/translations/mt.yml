@@ -281,6 +281,7 @@ wall:
   collections: Kollezzjonijiet
   contrast: Kuntrast
   corrupted_wallpapers_message: 'Wallpapers korrotta, ikkunsidra li tħassar dawn:'
+  coverage_pause_threshold: Pawża limitu (kopertura tat-tieqa)
   create: Oħloq
   create_collection: Oħloq Ġbir
   default_collection: Ġbir Default
