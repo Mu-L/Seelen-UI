@@ -1,4 +1,6 @@
 all: 417444d0
+app_settings: 3b0240d1
+applications: a0cb84e8
 back: 2a598048
 disband: 5538cb38
 folder: 13420d13
@@ -6,6 +8,7 @@ no_matching_items: 9b52fcf0
 open_file_location: ad864d7a
 pin: d37563d8
 pin_to_dock: fa65fe38
+power_menu: 435fc864
 query.all: 75afe364
 query.apps: 53d91aac
 query.files: 5b76247c
