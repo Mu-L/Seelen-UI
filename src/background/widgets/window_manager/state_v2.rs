@@ -4,15 +4,17 @@ use std::{
 };
 
 use seelen_core::{
+    handlers::SeelenEvent,
     rect::Rect,
     state::{
-        twm::{TwmNodeKind, TwmPlugin, TwmStackPolicy},
-        TwmGlobalRuntimeTree, TwmRuntimeTree, WindowLocation, WorkspaceId,
+        twm::{TwmNodeKind, TwmPlugin, TwmReservation, TwmStackPolicy},
+        NodeId, TwmGlobalRuntimeTree, TwmRuntimeTree, WindowLocation, WorkspaceId,
     },
 };
 use windows::Win32::UI::WindowsAndMessaging::SW_FORCEMINIMIZE;
 
 use crate::{
+    app::emit_to_webviews,
     error::{Result, ResultLogExt},
     event_manager,
     state::application::FULL_STATE,
@@ -34,10 +36,17 @@ pub static WM_STATE: LazyLock<Arc<TracedMutex<TwmState>>> = LazyLock::new(|| {
     }))
 });
 
+pub struct PendingReservation {
+    pub workspace_id: WorkspaceId,
+    pub node_id: NodeId,
+    pub side: TwmReservation,
+}
+
 #[derive(Default)]
 pub struct TwmState {
     pub state: TwmGlobalRuntimeTree,
     pub monocle: HashMap<WorkspaceId, bool>,
+    pub pending_reservation: Option<PendingReservation>,
 }
 
 #[derive(Debug, Clone)]
@@ -80,6 +89,7 @@ impl TwmState {
     pub fn process_vd_event(&mut self, event: &VirtualDesktopEvent) -> Result<()> {
         match event {
             VirtualDesktopEvent::DesktopChanged { .. } => {
+                self.cancel_reservation();
                 Self::send(TwmStateEvent::Changed);
             }
             VirtualDesktopEvent::WindowAdded { window, desktop } => {
@@ -176,7 +186,84 @@ impl TwmState {
         tree.add_to_floating(window.address());
     }
 
+    pub fn reserve(&mut self, side: TwmReservation) {
+        let foreground = Window::get_foregrounded();
+        if !self.is_tiled(&foreground) {
+            return;
+        }
+
+        let window_id = foreground.address();
+        for (ws_id, tree) in &self.state.workspaces {
+            if let Some(node_id) = tree.node_of_window(&window_id) {
+                self.pending_reservation = Some(PendingReservation {
+                    workspace_id: ws_id.clone(),
+                    node_id,
+                    side,
+                });
+                emit_to_webviews(SeelenEvent::WMSetReservation, Some(side));
+                return;
+            }
+        }
+    }
+
+    pub fn cancel_reservation(&mut self) {
+        self.pending_reservation = None;
+        emit_to_webviews(SeelenEvent::WMSetReservation, None::<TwmReservation>);
+    }
+
+    fn apply_reservation(
+        &mut self,
+        window: &Window,
+        workspace_id: &WorkspaceId,
+        node_id: NodeId,
+        side: TwmReservation,
+    ) {
+        match side {
+            TwmReservation::Float => {
+                self.add_to_floating(window, workspace_id);
+                set_rect_to_float_initial_size(window, &window.monitor()).log_error();
+            }
+            TwmReservation::Stack => {
+                let tree = self.get_or_insert_tree_mut(workspace_id);
+                if let Some(node) = tree.nodes.get_mut(&node_id) {
+                    if node.kind != TwmNodeKind::Stack {
+                        node.kind = TwmNodeKind::Stack;
+                        node.stack_policy = TwmStackPolicy::Manual;
+                    }
+                    node.windows.push(window.address());
+                    node.active_window = Some(window.address());
+                    tree.window_map
+                        .insert(window.address(), WindowLocation::Tiled(node_id));
+                } else {
+                    let residual = tree.add_to_tiled(window.address());
+                    for w in residual {
+                        tree.add_to_floating(w);
+                    }
+                }
+            }
+            side => {
+                let tree = self.get_or_insert_tree_mut(workspace_id);
+                let placed = tree.split_node_for_reservation(node_id, side, window.address());
+                if !placed {
+                    let residual = tree.add_to_tiled(window.address());
+                    for w in residual {
+                        tree.add_to_floating(w);
+                    }
+                }
+            }
+        }
+    }
+
     pub fn add_to_layout(&mut self, window: &Window, workspace_id: &WorkspaceId) {
+        if let Some(reservation) = self.pending_reservation.take() {
+            emit_to_webviews(SeelenEvent::WMSetReservation, None::<TwmReservation>);
+            if &reservation.workspace_id == workspace_id {
+                self.apply_reservation(window, workspace_id, reservation.node_id, reservation.side);
+                return;
+            }
+            // workspace mismatch: reservation discarded, fall through to normal layout
+        }
+
         let tree = self.get_or_insert_tree_mut(workspace_id);
 
         if Self::try_add_to_layout_categorized(window, tree) {

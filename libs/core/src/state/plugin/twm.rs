@@ -84,6 +84,19 @@ pub enum TwmStackPolicy {
     Auto,
 }
 
+// ============== WmReservation ==============
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
+#[ts(repr(enum = name))]
+pub enum TwmReservation {
+    Left,
+    Right,
+    Top,
+    Bottom,
+    Stack,
+    Float,
+}
+
 // ============== TwmCondition ==============
 
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]

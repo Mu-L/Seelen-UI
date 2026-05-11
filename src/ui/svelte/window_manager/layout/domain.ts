@@ -1,22 +1,13 @@
-import type { TwmRuntimeNode, TwmRuntimeTree } from "@seelen-ui/lib/types";
+import { TwmReservation } from "@seelen-ui/lib/types";
+import type { IconName } from "libs/ui/icons";
 
-export { TwmNodeKind } from "@seelen-ui/lib/types";
-
-export enum Reservation {
-  Left = "Left",
-  Right = "Right",
-  Top = "Top",
-  Bottom = "Bottom",
-  Stack = "Stack",
-  Float = "Float",
-}
-
-export enum Sizing {
-  Increase = "Increase",
-  Decrease = "Decrease",
-}
-
-export type Node = TwmRuntimeNode;
-export type Tree = TwmRuntimeTree;
+export const ReservationIcon: Record<TwmReservation, IconName> = {
+  [TwmReservation.Left]: "TbBoxAlignLeft",
+  [TwmReservation.Right]: "TbBoxAlignRight",
+  [TwmReservation.Top]: "TbBoxAlignTop",
+  [TwmReservation.Bottom]: "TbBoxAlignBottom",
+  [TwmReservation.Stack]: "TbStack",
+  [TwmReservation.Float]: "TbBoxMargin",
+};
 
 export const TREE_CONTEXT_KEY = "wm-tree";

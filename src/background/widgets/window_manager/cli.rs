@@ -1,4 +1,7 @@
+use slu_ipc::commands::AllowedReservations;
 pub use slu_ipc::commands::{Axis, NodeSiblingSide, Sizing, StepWay, WindowManagerCli, WmCommand};
+
+use seelen_core::state::twm::TwmReservation;
 
 use crate::error::Result;
 use crate::state::application::FULL_STATE;
@@ -10,6 +13,17 @@ use crate::widgets::window_manager::state_v2::{
 use crate::windows_api::monitor::Monitor;
 use crate::windows_api::window::Window;
 use crate::windows_api::MonitorEnumerator;
+
+fn to_wm_reservation(side: AllowedReservations) -> TwmReservation {
+    match side {
+        AllowedReservations::Left => TwmReservation::Left,
+        AllowedReservations::Right => TwmReservation::Right,
+        AllowedReservations::Top => TwmReservation::Top,
+        AllowedReservations::Bottom => TwmReservation::Bottom,
+        AllowedReservations::Stack => TwmReservation::Stack,
+        AllowedReservations::Float => TwmReservation::Float,
+    }
+}
 
 pub fn process(cmd: WindowManagerCli) -> Result<()> {
     process_wm_command(cmd.subcommand)
@@ -57,11 +71,11 @@ fn process_wm_command(cmd: WmCommand) -> Result<()> {
                 .lock()
                 .update_size(&foreground, Axis::Vertical, percentage, false)?;
         }
-        WmCommand::Reserve { .. } => {
-            // self.reserve(side)?;
+        WmCommand::Reserve { side } => {
+            WM_STATE.lock().reserve(to_wm_reservation(side));
         }
         WmCommand::CancelReservation => {
-            // self.discard_reservation()?;
+            WM_STATE.lock().cancel_reservation();
         }
         WmCommand::ResetWorkspaceSize => {
             let window_id = foreground.address();

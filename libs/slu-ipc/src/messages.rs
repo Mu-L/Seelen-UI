@@ -37,7 +37,6 @@ impl IpcResponse {
 // ==============================================
 
 #[derive(Debug, Serialize, Deserialize)]
-#[serde(untagged)]
 pub enum AppMessage {
     /// Raw command line messages
     Cli(Vec<String>),

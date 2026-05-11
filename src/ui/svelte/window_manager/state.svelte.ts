@@ -1,5 +1,5 @@
 import { invoke, SeelenCommand, SeelenEvent, Settings, subscribe } from "@seelen-ui/lib";
-import type { FocusedApp, TwmRuntimeTree, WindowManagerSettings } from "@seelen-ui/lib/types";
+import type { FocusedApp, TwmReservation, TwmRuntimeTree, WindowManagerSettings } from "@seelen-ui/lib/types";
 
 import { lazyRune } from "libs/ui/svelte/utils/LazyRune.svelte.ts";
 
@@ -11,6 +11,11 @@ subscribe(SeelenEvent.VirtualDesktopsChanged, workspaces.setByPayload);
 
 let interactables = lazyRune(() => invoke(SeelenCommand.GetUserAppWindows));
 subscribe(SeelenEvent.UserAppWindowsChanged, interactables.setByPayload);
+
+let reservation = $state<TwmReservation | null>(null);
+subscribe(SeelenEvent.WMSetReservation, (e) => {
+  reservation = e.payload;
+});
 
 let forceRepositioning = $state(0);
 subscribe(SeelenEvent.WMForceRetiling, () => {
@@ -76,6 +81,9 @@ class _State {
   }
   get settings() {
     return settings;
+  }
+  get reservation() {
+    return reservation;
   }
 }
 

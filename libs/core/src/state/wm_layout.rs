@@ -4,7 +4,7 @@ use crate::{
     state::{
         twm::{
             TwmCondition, TwmConditionContext, TwmNodeKind, TwmNodeLifetime, TwmPlugin,
-            TwmPluginNode, TwmStackPolicy,
+            TwmPluginNode, TwmReservation, TwmStackPolicy,
         },
         WorkspaceId,
     },
@@ -379,6 +379,89 @@ impl TwmRuntimeTree {
             }
             current_id = parent_id;
         }
+    }
+
+    /// Splits `node_id` by inserting a new intermediate Horizontal (Left/Right)
+    /// or Vertical (Top/Bottom) container, then places `new_window` in a freshly
+    /// created sibling Leaf on the requested side.
+    /// Returns `false` if `node_id` does not exist in this tree (caller falls back).
+    pub fn split_node_for_reservation(
+        &mut self,
+        node_id: NodeId,
+        side: TwmReservation,
+        new_window: WindowId,
+    ) -> bool {
+        if !self.nodes.contains_key(&node_id) {
+            return false;
+        }
+        let focused_node_id = node_id;
+        let container_kind = match side {
+            TwmReservation::Left | TwmReservation::Right => TwmNodeKind::Horizontal,
+            TwmReservation::Top | TwmReservation::Bottom => TwmNodeKind::Vertical,
+            _ => return false, // Stack / Float are handled by the caller
+        };
+
+        let new_leaf_id = self.generate_id();
+        let container_id = self.generate_id();
+
+        let grow_factor = self.nodes[&focused_node_id].grow_factor;
+        let priority = self.nodes[&focused_node_id].priority;
+        let old_parent = self.nodes[&focused_node_id].parent;
+
+        let new_leaf = TwmRuntimeNode {
+            id: new_leaf_id,
+            parent: Some(container_id),
+            children: vec![],
+            kind: TwmNodeKind::Leaf,
+            lifetime: TwmNodeLifetime::Temporal,
+            priority,
+            initial_grow_factor: 1.0,
+            condition: None,
+            max_stack_size: None,
+            stack_policy: TwmStackPolicy::Manual,
+            grow_factor: 1.0,
+            windows: vec![new_window],
+            active_window: Some(new_window),
+            rect: None,
+        };
+
+        let children = match side {
+            TwmReservation::Left | TwmReservation::Top => vec![new_leaf_id, focused_node_id],
+            _ => vec![focused_node_id, new_leaf_id],
+        };
+        let container = TwmRuntimeNode {
+            id: container_id,
+            parent: old_parent,
+            children,
+            kind: container_kind,
+            lifetime: TwmNodeLifetime::Temporal,
+            priority,
+            initial_grow_factor: grow_factor,
+            condition: None,
+            max_stack_size: None,
+            stack_policy: TwmStackPolicy::Manual,
+            grow_factor,
+            windows: vec![],
+            active_window: None,
+            rect: None,
+        };
+
+        self.nodes.get_mut(&focused_node_id).unwrap().parent = Some(container_id);
+
+        if let Some(parent_id) = old_parent {
+            let parent = self.nodes.get_mut(&parent_id).unwrap();
+            if let Some(idx) = parent.children.iter().position(|&c| c == focused_node_id) {
+                parent.children[idx] = container_id;
+            }
+        } else {
+            self.root = container_id;
+        }
+
+        self.nodes.insert(new_leaf_id, new_leaf);
+        self.nodes.insert(container_id, container);
+        self.window_map
+            .insert(new_window, WindowLocation::Tiled(new_leaf_id));
+        true
     }
 }
 

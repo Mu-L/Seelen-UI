@@ -5,6 +5,7 @@
 ### features
 
 - twm auto stack by application categories.
+- twm node splitting implementation.
 
 ### enhancements
 

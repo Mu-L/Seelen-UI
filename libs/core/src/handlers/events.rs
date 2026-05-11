@@ -77,7 +77,7 @@ slu_events_declaration! {
     ColorsChanged(UIColors) as "colors-changed",
     SystemFontsChanged(Vec<SeelenFont>) as "system::fonts-changed",
 
-    WMSetReservation as "wm::set-reservation",
+    WMSetReservation(Option<twm::TwmReservation>) as "wm::set-reservation",
     WMForceRetiling as "wm::force-retiling",
     WMTreeChanged(TwmGlobalRuntimeTree) as "wm::tree-changed",
 
