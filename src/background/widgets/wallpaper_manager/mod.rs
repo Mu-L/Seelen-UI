@@ -65,6 +65,7 @@ impl SeelenWall {
         .minimizable(false)
         .maximizable(false)
         .closable(false)
+        .focusable(false)
         .resizable(false)
         .decorations(false)
         .shadow(false)

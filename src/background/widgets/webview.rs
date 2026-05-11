@@ -71,6 +71,7 @@ impl WidgetWebview {
                 .minimizable(false)
                 .maximizable(false)
                 .closable(false)
+                .focusable(false);
         }
 
         match widget.preset {

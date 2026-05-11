@@ -22,6 +22,10 @@
 - capture window system.
 - GUI and CLI splited into different executables.
 
+### fix
+
+- stealing focus on widgets reload.
+
 ## [2.6.4]
 
 ### enhancements
