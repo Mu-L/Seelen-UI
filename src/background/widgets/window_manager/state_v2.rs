@@ -165,8 +165,10 @@ impl TwmState {
 
         node.windows.push(window.address());
         node.active_window = Some(window.address());
-        tree.window_map
-            .insert(window.address(), WindowLocation::Tiled(found_node_id));
+        tree.window_map.insert(
+            window.address(),
+            WindowLocation::Tiled(found_node_id, std::time::SystemTime::now()),
+        );
 
         true
     }
@@ -232,8 +234,10 @@ impl TwmState {
                     }
                     node.windows.push(window.address());
                     node.active_window = Some(window.address());
-                    tree.window_map
-                        .insert(window.address(), WindowLocation::Tiled(node_id));
+                    tree.window_map.insert(
+                        window.address(),
+                        WindowLocation::Tiled(node_id, std::time::SystemTime::now()),
+                    );
                 } else {
                     let residual = tree.add_to_tiled(window.address());
                     for w in residual {
@@ -469,7 +473,7 @@ impl TwmState {
         *is_monocle = !*is_monocle;
 
         let layout = if *is_monocle {
-            TwmRuntimeTree::from_plugin(&TwmPlugin::default())
+            TwmRuntimeTree::from_plugin(&TwmPlugin::monocle())
         } else {
             TwmRuntimeTree::from_plugin(&FULL_STATE.load().get_wm_layout(workspace_id))
         };

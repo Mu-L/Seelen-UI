@@ -1,17 +1,18 @@
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Default, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default, rename_all = "camelCase")]
 pub struct TwmPlugin {
-    pub structure: TwmPluginNode,
+    /// null means no tiling, only float layout
+    pub structure: Option<TwmPluginNode>,
 }
 
-impl Default for TwmPlugin {
-    fn default() -> Self {
+impl TwmPlugin {
+    pub fn monocle() -> Self {
         Self {
-            structure: TwmPluginNode {
+            structure: Some(TwmPluginNode {
                 kind: TwmNodeKind::Stack,
-                max_stack_size: None,
+                max_stack_size: None, // unlimited
                 ..Default::default()
-            },
+            }),
         }
     }
 }
@@ -105,7 +106,7 @@ pub enum TwmCondition {
     Compare {
         left: Operand,
         op: Comparator,
-        right: f64,
+        right: serde_json::Value,
     },
     And(Box<TwmCondition>, Box<TwmCondition>),
     Or(Box<TwmCondition>, Box<TwmCondition>),
@@ -117,16 +118,14 @@ pub enum TwmCondition {
 #[serde(rename_all = "kebab-case")]
 pub enum Operand {
     TilingWindows,
-    FloatingWindows,
-    TotalWindows,
+    IsReindexing,
 }
 
 impl Operand {
-    fn resolve(&self, ctx: &TwmConditionContext) -> f64 {
+    fn resolve(&self, ctx: &TwmConditionContext) -> serde_json::Value {
         match self {
-            Operand::TilingWindows => ctx.tiling_windows as f64,
-            Operand::FloatingWindows => ctx.floating_windows as f64,
-            Operand::TotalWindows => ctx.total_windows as f64,
+            Operand::TilingWindows => ctx.tiling_windows.into(),
+            Operand::IsReindexing => ctx.is_reindexing.into(),
         }
     }
 }
@@ -144,23 +143,36 @@ pub enum Comparator {
 }
 
 impl Comparator {
-    pub fn compare(&self, left: f64, right: f64) -> bool {
+    pub fn compare(&self, left: &serde_json::Value, right: &serde_json::Value) -> bool {
+        use serde_json::Value;
+
+        if let (Value::Number(l), Value::Number(r)) = (left, right) {
+            let (Some(l), Some(r)) = (l.as_f64(), r.as_f64()) else {
+                return false;
+            };
+
+            return match self {
+                Comparator::Eq => l == r,
+                Comparator::Ne => l != r,
+                Comparator::Lt => l < r,
+                Comparator::Le => l <= r,
+                Comparator::Gt => l > r,
+                Comparator::Ge => l >= r,
+            };
+        }
+
         match self {
             Comparator::Eq => left == right,
             Comparator::Ne => left != right,
-            Comparator::Lt => left < right,
-            Comparator::Le => left <= right,
-            Comparator::Gt => left > right,
-            Comparator::Ge => left >= right,
+            _ => false,
         }
     }
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Default, Clone)]
 pub struct TwmConditionContext {
     pub tiling_windows: usize,
-    pub floating_windows: usize,
-    pub total_windows: usize,
+    pub is_reindexing: bool,
 }
 
 impl TwmCondition {
@@ -168,7 +180,7 @@ impl TwmCondition {
         match self {
             TwmCondition::Compare { left, op, right } => {
                 let left = left.resolve(ctx);
-                op.compare(left, *right)
+                op.compare(&left, right)
             }
             TwmCondition::And(a, b) => a.evaluate(ctx) && b.evaluate(ctx),
             TwmCondition::Or(a, b) => a.evaluate(ctx) || b.evaluate(ctx),
