@@ -16,6 +16,7 @@
 - twm allow move windows between monitors via shortcuts.
 - add variables system on extended yaml syntax.
 - new bundled plugins/layouts for the tiling window manager.
+- allow drag/drop windows on workspaces viewer to move them to another workspace.
 
 ### refactor
 

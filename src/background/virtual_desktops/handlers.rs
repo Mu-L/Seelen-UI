@@ -62,6 +62,16 @@ pub fn rename_workspace(
 }
 
 #[tauri::command(async)]
+pub fn move_window_to_workspace(
+    hwnd: isize,
+    workspace_id: seelen_core::state::WorkspaceId,
+) -> Result<()> {
+    let manager = get_vd_manager();
+    let window = crate::windows_api::window::Window::from(hwnd);
+    manager.send_to(&window, &workspace_id)
+}
+
+#[tauri::command(async)]
 pub fn wallpaper_next() {
     super::wallpapers::WorkspaceWallpapersManager::next();
 }

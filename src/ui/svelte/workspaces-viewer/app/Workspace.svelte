@@ -4,14 +4,17 @@
   import { Icon } from "libs/ui/svelte/components/Icon";
   import { Wallpaper } from "libs/ui/svelte/components/Wallpaper";
   import { state as store } from "../state.svelte";
+  import { createDroppable } from "@dnd-kit/svelte";
 
   interface Props {
     index: number;
     workspace: DesktopWorkspace;
     active: boolean;
+    viewing: boolean;
+    onHover: () => void;
   }
 
-  let { workspace, index, active }: Props = $props();
+  let { workspace, index, active, viewing, onHover }: Props = $props();
 
   const wallpaper = $derived(store.findWallpaper(workspace.wallpaper));
 
@@ -21,9 +24,14 @@
     workspaceName = workspace.name || "";
   });
 
+  const droppable = createDroppable({
+    get id() {
+      return workspace.id;
+    },
+  });
+
   async function switchWorkspace() {
     if (active) return;
-    // hide first to allow show the change animation to the user
     await Widget.self.hide();
     await invoke(SeelenCommand.SwitchWorkspace, {
       workspaceId: workspace.id,
@@ -40,7 +48,6 @@
   async function handleNameChange() {
     const newName = workspaceName.trim();
     if (newName === (workspace.name || "")) return;
-
     try {
       await invoke(SeelenCommand.RenameWorkspace, {
         workspaceId: workspace.id,
@@ -62,10 +69,14 @@
 </script>
 
 <div
+  {@attach droppable.attach}
   class="workspace"
   class:workspace-active={active}
+  class:workspace-viewing={viewing}
+  class:workspace-drop-target={droppable.isDropTarget}
   role="button"
   tabindex="0"
+  onmouseenter={onHover}
   onclick={(e) => {
     e.stopPropagation();
     switchWorkspace();

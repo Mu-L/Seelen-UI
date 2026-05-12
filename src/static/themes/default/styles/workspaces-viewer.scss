@@ -7,8 +7,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
-    padding: 40px;
+    gap: var(--spacing-m);
+    padding: var(--spacing-2xl);
 
     .active-wallpaper {
       position: absolute;
@@ -20,85 +20,13 @@
       filter: blur(10px);
     }
 
-    .windows {
-      width: 100%;
-      flex: 1;
-
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      flex-wrap: wrap;
-      gap: 10px;
-
-      overflow-y: auto;
-      overflow-x: hidden;
-
-      .window {
-        --header-size: 40px;
-        position: relative;
-        padding-top: var(--header-size);
-
-        display: flex;
-        flex-direction: column;
-        border-radius: 10px;
-        background: var(--color-gray-100);
-        flex-shrink: 0;
-        overflow: hidden;
-        width: fit-content;
-
-        .window-header {
-          position: absolute; // avoids taking in care the size of the title for the parent size.
-          height: var(--header-size);
-          top: 0;
-          left: 0;
-          width: 100%;
-
-          display: grid;
-          grid-template-columns: 20px 1fr min-content;
-          align-items: center;
-
-          gap: 10px;
-          padding: 10px;
-          border-bottom: 1px solid var(--color-gray-300);
-
-          .window-title {
-            font-weight: 600;
-            font-size: 0.9rem;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-          }
-        }
-
-        .window-preview-container {
-          min-width: 160px;
-          min-height: 90px;
-          width: fit-content;
-          max-width: 640px;
-          max-height: 360px;
-
-          display: flex;
-          justify-content: center;
-          align-items: center;
-
-          .window-preview {
-            width: auto;
-            height: auto;
-          }
-
-          .window-no-preview {
-            width: 30px;
-          }
-        }
-      }
-    }
-
     .workspaces {
-      background: var(--color-gray-100);
+      background: var(--color-gray-50);
       border-radius: 10px;
-      padding: 20px;
+      padding: var(--spacing-m);
+
       display: flex;
-      gap: 10px;
+      gap: var(--spacing-m);
       flex-shrink: 0;
 
       width: min-content;
@@ -110,16 +38,16 @@
         position: relative;
         width: 230px;
         border-radius: 10px;
-        background: var(--color-gray-100);
+        background: var(--color-gray-75);
         box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
-        padding: 8px;
+        padding: var(--spacing-s);
         flex-shrink: 0;
 
         .workspace-header {
           display: flex;
           margin-bottom: 10px;
           align-items: center;
-          gap: 10px;
+          gap: var(--spacing-s);
 
           .workspace-name-input {
             flex: 1;
@@ -142,7 +70,7 @@
         &::before {
           content: "";
           position: absolute;
-          bottom: -4px;
+          bottom: 0;
           left: 50%;
           transform: translateX(-50%);
           width: 60%;
@@ -156,6 +84,16 @@
           &::before {
             background-color: var(--system-accent-color);
           }
+        }
+
+        &.workspace-viewing {
+          background: var(--color-gray-200);
+        }
+
+        &.workspace-drop-target {
+          outline: 2px dashed var(--system-accent-color);
+          outline-offset: 2px;
+          background: var(--color-gray-200);
         }
       }
 
@@ -171,6 +109,89 @@
         justify-content: center;
         align-items: center;
       }
+    }
+  }
+}
+
+.windows {
+  width: 100%;
+  flex: 1;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: var(--spacing-m);
+
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.window {
+  display: inline-flex;
+  flex-direction: column;
+  width: fit-content;
+
+  background: var(--color-gray-75);
+  border-radius: 10px;
+  overflow: hidden;
+
+  .window-header {
+    width: 0;
+    min-width: 100%;
+
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-s);
+
+    padding: var(--spacing-2xs) var(--spacing-xs);
+    border-bottom: 1px solid var(--color-gray-200);
+
+    figure {
+      height: 1rem;
+      width: auto;
+      aspect-ratio: 1 / 1;
+    }
+
+    .window-title {
+      flex: 1;
+      min-width: 0;
+      font-weight: 600;
+      font-size: 0.9rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+
+  &.is-dragging {
+    opacity: 0;
+  }
+
+  &.is-overlay {
+    cursor: grabbing;
+  }
+
+  .window-preview-container {
+    width: max-content;
+    max-width: 640px;
+    max-height: 360px;
+
+    .window-preview {
+      width: auto;
+      height: auto;
+    }
+
+    &:has(.window-no-preview) {
+      min-width: 160px;
+      min-height: 90px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .window-no-preview {
+      width: 30px;
     }
   }
 }

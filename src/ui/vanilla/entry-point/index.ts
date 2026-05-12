@@ -2,6 +2,7 @@
 // but was fixed on https://github.com/tauri-apps/wry/pull/1531 so now this script is used to initialize the widgets system
 
 import "@seelen-ui/lib/styles/colors.css";
+import "@seelen-ui/lib/styles/spacings.css";
 
 import "./ConsoleWrapper.ts";
 import "./MainSetup.ts";

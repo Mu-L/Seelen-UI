@@ -5,6 +5,7 @@ export enum SeelenCommand {
   CreateWorkspace = "create_workspace",
   DestroyWorkspace = "destroy_workspace",
   RenameWorkspace = "rename_workspace",
+  MoveWindowToWorkspace = "move_window_to_workspace",
   WallpaperNext = "wallpaper_next",
   WallpaperPrev = "wallpaper_prev",
   WallpaperSaveThumbnail = "wallpaper_save_thumbnail",

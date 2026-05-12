@@ -100,6 +100,7 @@ slu_commands_declaration! {
     CreateWorkspace = create_workspace(monitor_id: MonitorId) -> WorkspaceId,
     DestroyWorkspace = destroy_workspace(workspace_id: WorkspaceId),
     RenameWorkspace = rename_workspace(workspace_id: WorkspaceId, name: Option<String>),
+    MoveWindowToWorkspace = move_window_to_workspace(hwnd: isize, workspace_id: WorkspaceId),
 
     // wallpaper
     WallpaperNext = wallpaper_next(),
