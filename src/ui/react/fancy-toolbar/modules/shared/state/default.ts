@@ -10,6 +10,8 @@ export const baseItem: ToolbarItem = {
   remoteData: {},
   style: {},
   onClick: null,
+  onWheelUp: null,
+  onWheelDown: null,
 };
 
 export function restoreStateToDefault() {

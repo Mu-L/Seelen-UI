@@ -35,7 +35,7 @@ interface SortableInnerItemProps extends ItemProps {
 const isReorderDisabled = computed(() => $toolbar_state.value.isReorderDisabled);
 
 function InnerItem({ module, extraVars, nodeRef, isDragging = false }: InnerItemProps) {
-  const { id, onClick, style, remoteData = {} } = module;
+  const { id, onClick, onWheelUp, onWheelDown, style, remoteData = {} } = module;
 
   const alignY = $settings.value.position === FancyToolbarSide.Bottom ? Alignment.End : Alignment.Start;
 
@@ -66,6 +66,16 @@ function InnerItem({ module, extraVars, nodeRef, isDragging = false }: InnerItem
     [onContextMenu],
   );
 
+  const handleWheel = useCallback(
+    (e: WheelEvent) => {
+      const handler = e.deltaY < 0 ? onWheelUp : onWheelDown;
+      if (handler) {
+        EvaluateAction(handler, scope);
+      }
+    },
+    [onWheelUp, onWheelDown, scope],
+  );
+
   const itemStyle = {
     ...style,
     opacity: isDragging ? 0.3 : 1,
@@ -93,6 +103,7 @@ function InnerItem({ module, extraVars, nodeRef, isDragging = false }: InnerItem
         "ft-bar-item-clickable": onClick,
       })}
       onClick={handleClick}
+      onWheel={onWheelUp || onWheelDown ? handleWheel : undefined}
       onContextMenu={handleContextMenu}
     >
       <div className="ft-bar-item-content">

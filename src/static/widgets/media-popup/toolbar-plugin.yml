@@ -18,5 +18,13 @@ plugin:
             ? icon("IoVolumeLowOutline")
             : icon("IoVolumeOffOutline")
   tooltip: 'return [t("placeholder.volume"), ": ", (volume * 100).toFixed(0), "%"]'
-  onClickV2: |-
+  onClick: |-
     trigger("@seelen/media-popup");
+  onWheelUp: |-
+    if (defaultOutputDevice) {
+      invoke(SeelenCommand.SetVolumeLevel, { deviceId: defaultOutputDevice.id, level: Math.min(1, volume + 0.02), sessionId: null });
+    }
+  onWheelDown: |-
+    if (defaultOutputDevice) {
+      invoke(SeelenCommand.SetVolumeLevel, { deviceId: defaultOutputDevice.id, level: Math.max(0, volume - 0.02), sessionId: null });
+    }

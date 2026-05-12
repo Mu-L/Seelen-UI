@@ -26,6 +26,8 @@ pub enum ToolbarJsScope {
     Cpu,
 }
 
+type JsFunctionBody = String;
+
 #[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default, rename_all = "camelCase")]
 pub struct ToolbarItem {
@@ -34,14 +36,16 @@ pub struct ToolbarItem {
     /// List of scopes to be loaded in the item js execution scope.
     pub scopes: HashSet<ToolbarJsScope>,
     /// JS function definition for content to display in the item.
-    pub template: String,
+    pub template: JsFunctionBody,
     /// JS function definition for content to display in tooltip of the item.
-    pub tooltip: Option<String>,
+    pub tooltip: Option<JsFunctionBody>,
     /// JS function definition badge content, will be displayed over the item, useful as notifications.
-    pub badge: Option<String>,
+    pub badge: Option<JsFunctionBody>,
     /// JS function definition that will be executed when the item is clicked.
     #[serde(alias = "onClickV2")]
-    pub on_click: Option<String>,
+    pub on_click: Option<JsFunctionBody>,
+    pub on_wheel_up: Option<JsFunctionBody>,
+    pub on_wheel_down: Option<JsFunctionBody>,
     /// Styles to be added to the item. This follow the same interface of React's `style` prop.
     pub style: HashMap<String, Option<StyleValue>>,
     /// Remote data to be added to the item scope.

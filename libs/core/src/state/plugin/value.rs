@@ -17,9 +17,9 @@ pub enum PluginValue {
 #[serde(tag = "target", content = "plugin")]
 pub enum KnownPlugin {
     #[serde(rename = "@seelen/fancy-toolbar")]
-    FacyToolbar(ToolbarItem),
+    FacyToolbar(Box<ToolbarItem>),
     #[serde(rename = "@seelen/window-manager")]
-    WManager(TwmPlugin),
+    WManager(Box<TwmPlugin>),
 }
 
 #[derive(Debug, Default, Clone, Serialize, Deserialize, JsonSchema, TS)]

@@ -97,7 +97,7 @@ impl FullState {
             return base;
         };
 
-        layout.clone()
+        *layout.clone()
     }
 
     pub fn get_wm_layout_id(&self, _workspace_id: &WorkspaceId) -> PluginId {

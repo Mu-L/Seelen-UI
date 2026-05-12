@@ -185,33 +185,22 @@ function useMediaScope() {
   const defaultInputDevice = mediaInputs.find((d: any) => d.isDefaultMultimedia);
   const defaultMediaSession = mediaSessions!.find((d: any) => d.default);
 
-  const { id, volume = 0, muted: isMuted = true } = defaultOutputDevice || {};
+  const { volume = 0, muted: isMuted = true } = defaultOutputDevice || {};
 
   const { volume: inputVolume = 0, muted: inputIsMuted = true } = defaultInputDevice || {};
 
   const mediaSession = defaultMediaSession || null;
 
-  function onWheel(e: WheelEvent) {
-    const isUp = e.deltaY < 0;
-    const level = Math.max(0, Math.min(1, volume + (isUp ? 0.02 : -0.02)));
-    if (id) {
-      invoke(SeelenCommand.SetVolumeLevel, {
-        deviceId: id,
-        level,
-        sessionId: null,
-      });
-    }
-  }
-
   return {
     fetching: false,
     data: {
+      defaultOutputDevice,
+      defaultInputDevice,
       volume,
       isMuted,
       inputVolume,
       inputIsMuted,
       mediaSession,
-      onWheel,
     },
   };
 }
