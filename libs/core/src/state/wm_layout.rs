@@ -361,9 +361,21 @@ impl TwmRuntimeTree {
         match location {
             WindowLocation::Tiled(node_id, _) => {
                 let node = self.nodes.get_mut(&node_id).unwrap();
-                node.windows.retain(|w| w != window_id);
                 if node.active_window == Some(*window_id) {
-                    node.active_window = node.windows.first().copied();
+                    let next = node
+                        .windows
+                        .iter()
+                        .position(|w| w == window_id)
+                        .and_then(|i| {
+                            node.windows
+                                .get(i + 1)
+                                .or_else(|| i.checked_sub(1).and_then(|p| node.windows.get(p)))
+                        })
+                        .copied();
+                    node.windows.retain(|w| w != window_id);
+                    node.active_window = next;
+                } else {
+                    node.windows.retain(|w| w != window_id);
                 }
             }
             WindowLocation::Floating => {}
