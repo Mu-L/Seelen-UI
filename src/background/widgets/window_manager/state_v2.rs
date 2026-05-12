@@ -6,6 +6,7 @@ use std::{
 use seelen_core::{
     handlers::SeelenEvent,
     rect::Rect,
+    resource::PluginId,
     state::{
         twm::{TwmNodeKind, TwmPlugin, TwmReservation, TwmStackPolicy},
         NodeId, TwmGlobalRuntimeTree, TwmRuntimeTree, WindowLocation, WorkspaceId,
@@ -47,6 +48,7 @@ pub struct TwmState {
     pub state: TwmGlobalRuntimeTree,
     pub monocle: HashMap<WorkspaceId, bool>,
     pub pending_reservation: Option<PendingReservation>,
+    layout_cache: HashMap<WorkspaceId, PluginId>,
 }
 
 #[derive(Debug, Clone)]
@@ -78,6 +80,33 @@ impl TwmState {
         SluWorkspacesManager2::subscribe(|event| {
             WM_STATE.lock().process_vd_event(&event).log_error();
         });
+
+        let settings = FULL_STATE.load();
+        for workspace_id in self.state.workspaces.keys() {
+            self.layout_cache.insert(
+                workspace_id.clone(),
+                settings.get_wm_layout_id(workspace_id),
+            );
+        }
+    }
+
+    pub fn on_settings_changed(&mut self) {
+        let settings = FULL_STATE.load();
+        let workspace_ids: Vec<WorkspaceId> = self.state.workspaces.keys().cloned().collect();
+        for workspace_id in workspace_ids {
+            let new_id = settings.get_wm_layout_id(&workspace_id);
+            if self.layout_cache.get(&workspace_id) == Some(&new_id) {
+                continue;
+            }
+
+            self.layout_cache.insert(workspace_id.clone(), new_id);
+            if self.monocle.get(&workspace_id).copied().unwrap_or(false) {
+                continue;
+            }
+
+            let new_tree = Self::create_tree(&workspace_id);
+            self.change_layout(&workspace_id, new_tree);
+        }
     }
 
     fn create_tree(workspace_id: &WorkspaceId) -> TwmRuntimeTree {
@@ -525,12 +554,13 @@ impl TwmState {
             }
 
             for node in tree {
-                if node.kind != TwmNodeKind::Stack {
+                if !matches!(node.kind, TwmNodeKind::Leaf | TwmNodeKind::Stack) {
                     continue;
                 }
 
                 if let Some(active) = node.active_window {
                     Window::from(active).unminimize().log_error();
+
                     for w in &node.windows {
                         if *w != active {
                             Window::from(*w).show_window(SW_FORCEMINIMIZE).log_error();

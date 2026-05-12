@@ -6,6 +6,7 @@ use crate::{
     resources::RESOURCES,
     trace_lock,
     utils::constants::SEELEN_COMMON,
+    widgets::window_manager::state_v2::WM_STATE,
 };
 
 use super::FullState;
@@ -14,6 +15,7 @@ impl FullState {
     pub(super) fn emit_settings(&self) -> Result<()> {
         emit_to_webviews(SeelenEvent::StateSettingsChanged, &self.settings);
         trace_lock!(SEELEN).on_settings_change(self)?;
+        WM_STATE.lock().on_settings_changed();
         Ok(())
     }
 
