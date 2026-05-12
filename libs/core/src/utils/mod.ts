@@ -9,3 +9,5 @@ export function isSeelenUIRuntime(): boolean {
   // deno-lint-ignore no-explicit-any
   return !!(globalThis.window as any).__SLU_WIDGET;
 }
+
+export { RuntimeStyleSheet } from "./DOM.ts";

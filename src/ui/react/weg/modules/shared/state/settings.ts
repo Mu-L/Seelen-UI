@@ -1,5 +1,5 @@
 import { lazySignal } from "libs/ui/react/utils/LazySignal";
-import { invoke, SeelenCommand, Settings, Widget } from "@seelen-ui/lib";
+import { invoke, RuntimeStyleSheet, SeelenCommand, Settings, Widget } from "@seelen-ui/lib";
 import { Alignment, FancyToolbarSide, HideMode } from "@seelen-ui/lib/types";
 import { computed, effect, signal } from "@preact/signals";
 import i18n from "../../../i18n";
@@ -25,15 +25,13 @@ effect(() => {
 effect(() => {
   const settings = $settings.value;
 
-  // @deprecated on future a utility function to parse widget settings as variables will be used.
-  const styles = document.documentElement.style;
-
-  styles.setProperty("--config-margin", `${settings.margin}px`);
-  styles.setProperty("--config-padding", `${settings.padding}px`);
-
-  styles.setProperty("--config-item-size", `${settings.size}px`);
-  styles.setProperty("--config-item-zoom-size", `${settings.zoomSize}px`);
-  styles.setProperty("--config-space-between-items", `${settings.spaceBetweenItems}px`);
+  const sheet = new RuntimeStyleSheet("@config/weg");
+  sheet.addVariable("--config-margin", `${settings.margin}px`);
+  sheet.addVariable("--config-padding", `${settings.padding}px`);
+  sheet.addVariable("--config-item-size", `${settings.size}px`);
+  sheet.addVariable("--config-item-zoom-size", `${settings.zoomSize}px`);
+  sheet.addVariable("--config-space-between-items", `${settings.spaceBetweenItems}px`);
+  sheet.applyToDocument();
 });
 
 export function getDockContextMenuAlignment(position: SeelenWegSide): {

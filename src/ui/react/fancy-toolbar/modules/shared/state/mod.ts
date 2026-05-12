@@ -1,5 +1,5 @@
 import { computed, effect, signal } from "@preact/signals";
-import { invoke, SeelenCommand, Settings, Widget } from "@seelen-ui/lib";
+import { invoke, RuntimeStyleSheet, SeelenCommand, Settings, Widget } from "@seelen-ui/lib";
 import { type AppBarEdge, FancyToolbarSide, HideMode } from "@seelen-ui/lib/types";
 import { $current_monitor } from "./system";
 import i18n from "../../../i18n";
@@ -27,11 +27,12 @@ effect(() => {
   const { itemSize, margin, padding } = $settings.value;
   i18n.changeLanguage($settings.value.language || undefined);
 
-  const styles = document.documentElement.style;
-  styles.setProperty("--config-item-size", `${itemSize}px`);
-  styles.setProperty("--config-margin", `${margin}px`);
-  styles.setProperty("--config-padding", `${padding}px`);
-  styles.setProperty("--config-height", `${itemSize + padding * 2 + margin * 2}px`);
+  const sheet = new RuntimeStyleSheet("@config/fancy-toolbar");
+  sheet.addVariable("--config-item-size", `${itemSize}px`);
+  sheet.addVariable("--config-margin", `${margin}px`);
+  sheet.addVariable("--config-padding", `${padding}px`);
+  sheet.addVariable("--config-height", `${itemSize + padding * 2 + margin * 2}px`);
+  sheet.applyToDocument();
 });
 
 export const $widget_rect = computed(() => {

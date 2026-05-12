@@ -1,4 +1,4 @@
-import { invoke, SeelenCommand, SeelenEvent, Settings, subscribe } from "@seelen-ui/lib";
+import { invoke, RuntimeStyleSheet, SeelenCommand, SeelenEvent, Settings, subscribe } from "@seelen-ui/lib";
 import type { FocusedApp, TwmReservation, TwmRuntimeTree, WindowManagerSettings } from "@seelen-ui/lib/types";
 
 import { lazyRune } from "libs/ui/svelte/utils/LazyRune.svelte.ts";
@@ -44,18 +44,16 @@ Settings.onChange((s) => (settings = s.byWidget["@seelen/window-manager"]));
 
 $effect.root(() => {
   $effect(() => {
-    const styles = document.documentElement.style;
-
-    styles.setProperty("--config-padding", `${settings.workspacePadding}px`);
-    styles.setProperty("--config-containers-gap", `${settings.workspaceGap}px`);
-
-    styles.setProperty("--config-margin-top", `${settings.workspaceMargin.top}px`);
-    styles.setProperty("--config-margin-left", `${settings.workspaceMargin.left}px`);
-    styles.setProperty("--config-margin-right", `${settings.workspaceMargin.right}px`);
-    styles.setProperty("--config-margin-bottom", `${settings.workspaceMargin.bottom}px`);
-
-    styles.setProperty("--config-border-offset", `${settings.border.offset}px`);
-    styles.setProperty("--config-border-width", `${settings.border.width}px`);
+    const sheet = new RuntimeStyleSheet("@config/window-manager");
+    sheet.addVariable("--config-padding", `${settings.workspacePadding}px`);
+    sheet.addVariable("--config-containers-gap", `${settings.workspaceGap}px`);
+    sheet.addVariable("--config-margin-top", `${settings.workspaceMargin.top}px`);
+    sheet.addVariable("--config-margin-left", `${settings.workspaceMargin.left}px`);
+    sheet.addVariable("--config-margin-right", `${settings.workspaceMargin.right}px`);
+    sheet.addVariable("--config-margin-bottom", `${settings.workspaceMargin.bottom}px`);
+    sheet.addVariable("--config-border-offset", `${settings.border.offset}px`);
+    sheet.addVariable("--config-border-width", `${settings.border.width}px`);
+    sheet.applyToDocument();
   });
 });
 

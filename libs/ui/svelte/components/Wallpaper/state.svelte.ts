@@ -1,4 +1,4 @@
-import { invoke, SeelenCommand, SeelenEvent, subscribe } from "@seelen-ui/lib";
+import { invoke, RuntimeStyleSheet, SeelenCommand, SeelenEvent, subscribe } from "@seelen-ui/lib";
 import { convertFileSrc } from "@tauri-apps/api/core";
 import { lazyRune } from "../../utils";
 
@@ -14,8 +14,10 @@ let fetchingThumbnail = $state(false);
 $effect.root(() => {
   $effect(() => {
     if (player) {
-      document.documentElement.style.setProperty("--media-player-title", `"${player.title}"`);
-      document.documentElement.style.setProperty("--media-player-artist", `"${player.author}"`);
+      const sheet = new RuntimeStyleSheet("@runtime/media-player-meta");
+      sheet.addVariable("--media-player-title", `"${player.title}"`);
+      sheet.addVariable("--media-player-artist", `"${player.author}"`);
+      sheet.applyToDocument();
     }
   });
 
@@ -41,7 +43,9 @@ $effect.root(() => {
       })
       .then((data) => {
         if (currentId !== fetchId) return;
-        document.documentElement.style.setProperty("--media-player-thumbnail", `url("${data}")`);
+        const sheet = new RuntimeStyleSheet("@runtime/media-player-thumbnail");
+        sheet.addVariable("--media-player-thumbnail", `url("${data}")`);
+        sheet.applyToDocument();
       })
       .finally(() => {
         if (currentId !== fetchId) return;
