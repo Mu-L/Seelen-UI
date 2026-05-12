@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.6.5-dev]
+## [2.6.5]
 
 ### features
 
