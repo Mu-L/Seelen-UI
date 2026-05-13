@@ -331,3 +331,38 @@ pub enum Action {
 
 - Prefer quick feedback loops (`cargo check`, `npm run type-check`, `deno lint`).
 - Keep changes scoped; add tests when behavior changes.
+
+## Documentation & Custom Resources
+
+User/developer-facing docs live under `documentation/`. Always check there before asking how something works:
+
+- `FEATURES.md` — Full feature reference: every widget, setting, shortcut, and system capability
+- `resource_guidelines.md` — Shared concepts: resource IDs, YAML `!include`/`!extend`, i18n, `slu` CLI
+- `widget_guidelines.md` — How to build a custom widget
+- `theme_guidelines.md` — How to create a theme
+- `plugin_guidelines.md` — How to extend widgets via plugins
+
+The three external resource types and their required files:
+
+| Type   | Minimum files                                           |
+| ------ | ------------------------------------------------------- |
+| Widget | `metadata.yml`, `i18n/`                                 |
+| Theme  | `metadata.yml`, `styles/<widget-id>.scss`               |
+| Plugin | `metadata.yml`, payload files referenced via `!include` |
+
+All resource IDs follow `@username/resource-name`.
+
+Dev workflow with the `slu` CLI (Seelen UI must be running):
+
+```bash
+slu resource load theme ./my-theme     # live-load without bundling
+slu resource load widget ./my-widget
+slu resource unload theme ./my-theme
+slu resource bundle theme ./my-theme   # produce .yaml for marketplace
+```
+
+Built-in resources (used as reference implementations):
+
+- `src/static/widgets/` — built-in widget definitions
+- `src/static/themes/` — built-in themes
+- `src/static/plugins/` — built-in toolbar plugins

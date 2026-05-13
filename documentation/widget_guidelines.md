@@ -24,6 +24,7 @@ Read [resource_guidelines](./resource_guidelines) first for concepts shared acro
    - [InputNumber](#inputnumber)
    - [Range](#range)
    - [Color](#color)
+   - [Font](#font)
    - [Grouping Settings](#grouping-settings)
 6. [CSS — Use Global Classes, Not CSS Modules](#6-css--use-global-classes-not-css-modules)
 7. [Plugins — Extending Your Widget](#7-plugins--extending-your-widget)
@@ -270,6 +271,31 @@ A color picker. Set `allowAlpha: true` to include a transparency channel.
   label: Accent color
   defaultValue: "#6c63ff"
   allowAlpha: true
+```
+
+---
+
+### Font
+
+A font picker that lets users choose a font family installed on their system.
+
+```yaml
+- type: font
+  key: widget-font
+  label: Font
+  defaultValue: "Segoe UI"
+```
+
+The stored value is a font family name string (e.g. `"Segoe UI"`, `"JetBrains Mono"`). Apply it in your widget via CSS:
+
+```js
+document.documentElement.style.setProperty("--widget-font", settings["widget-font"]);
+```
+
+```css
+.my-widget {
+  font-family: var(--widget-font, "Segoe UI");
+}
 ```
 
 ---
