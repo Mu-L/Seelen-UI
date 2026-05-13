@@ -94,3 +94,7 @@ b {
 .ant-modal-content {
   padding: var(--spacing-m) var(--spacing-xl) !important;
 }
+
+.ant-tabs-nav {
+  padding: 0 var(--spacing-s);
+}

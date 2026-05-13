@@ -1,7 +1,7 @@
 .workspaces-viewer {
   width: 100vw;
   height: 100vh;
-  background-color: #000; // just in case wallpaper fails
+  background-color: #000c; // just in case wallpaper fails
 
   .monitor {
     display: flex;
@@ -21,7 +21,6 @@
     }
 
     .workspaces {
-      background: var(--color-gray-50);
       border-radius: 10px;
       padding: var(--spacing-m);
 
@@ -38,7 +37,6 @@
         position: relative;
         width: 230px;
         border-radius: 10px;
-        background: var(--color-gray-75);
         box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
         padding: var(--spacing-s);
         flex-shrink: 0;
@@ -87,13 +85,12 @@
         }
 
         &.workspace-viewing {
-          background: var(--color-gray-200);
+          transform: scale(1.05);
         }
 
         &.workspace-drop-target {
           outline: 2px dashed var(--system-accent-color);
           outline-offset: 2px;
-          background: var(--color-gray-200);
         }
       }
 
@@ -102,7 +99,6 @@
         flex-shrink: 0;
 
         border-radius: 8px;
-        background: var(--color-gray-100);
         box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
 
         display: flex;
@@ -132,7 +128,6 @@
   flex-direction: column;
   width: fit-content;
 
-  background: var(--color-gray-75);
   border-radius: 10px;
   overflow: hidden;
 

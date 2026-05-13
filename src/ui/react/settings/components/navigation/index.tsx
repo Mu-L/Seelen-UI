@@ -18,7 +18,6 @@ export const Navigation = memo(() => {
   const [collapsed, setCollapsed] = useState(false);
 
   const activeThemes = settings.value.activeThemes;
-  const devTools = settings.value.devTools;
 
   const { t, i18n } = useTranslation();
   const location = useLocation();
@@ -50,10 +49,6 @@ export const Navigation = memo(() => {
     RoutePath.Shortcuts,
   ];
   const devGroup = [RoutePath.DevTools];
-
-  if (devTools) {
-    devGroup.push(RoutePath.IconPackEditor);
-  }
 
   return (
     <div

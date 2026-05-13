@@ -82,6 +82,13 @@ devtools:
     result_denied: ✗ Permission denied
     trigger: Simulate
     widget_id_placeholder: '@author/widget-name'
+  color_palette: Color Palette
+  color_palette_note: >-
+    These colors automatically adapt to light/dark mode — each shade is
+    contrast-relative to the current background, not a fixed value. Use them
+    instead of hardcoded colors to get automatic theme support.
+  tools: Tools
+  icons: Cached Icons
   unstable_optimizations: Unstable Optimizations
   unstable_optimizations_description: >-
     Enable experimental Chromium flags that reduce RAM usage.
@@ -159,7 +166,6 @@ header:
     extras: Extras
     general: General
     home: Home
-    icon_pack_editor: Cached Icons
     iconpack: Icon Packs
     monitors: Monitors
     plugin: Plugins

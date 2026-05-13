@@ -11,7 +11,6 @@ import { Shortcuts } from "./modules/shortcuts/infrastructure.tsx";
 import { Layout } from "./components/layout/index.tsx";
 import { RoutePath } from "./components/navigation/routes.tsx";
 import { Home } from "./modules/Home/index.tsx";
-import { IconPackEditorView } from "./modules/IconPackEditor/index.tsx";
 import { ThemeView } from "./modules/resources/Theme/View.tsx";
 import { SingleWallpaperView } from "./modules/resources/Wallpapers/View.tsx";
 import { WidgetView } from "./modules/resources/Widget/View.tsx";
@@ -28,7 +27,6 @@ export function Routing() {
         <Route path={RoutePath.SettingsByApplication} Component={AppsConfiguration} />
         <Route path={RoutePath.Extras} Component={Information} />
         <Route path={RoutePath.DevTools} Component={DeveloperTools} />
-        <Route path={RoutePath.IconPackEditor} Component={IconPackEditorView} />
         <Route path="widget" Component={WidgetView} />
         <Route path="theme" Component={ThemeView} />
         <Route path="wallpaper" Component={SingleWallpaperView} />

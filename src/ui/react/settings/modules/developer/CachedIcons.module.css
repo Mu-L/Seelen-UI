@@ -10,12 +10,13 @@
     gap: var(--spacing-2xs);
 
     .iconBox {
-      width: 128px;
-      height: 128px;
-      border-radius: 20px;
-      padding: var(--spacing-l);
+      width: 64px;
+      height: 64px;
+      border-radius: 12px;
+      padding: var(--spacing-s);
+
       background-color: #9c9c9c;
-      box-shadow: 1px 1px 1px #0005;
+      box-shadow: 1px 2px 3px #0005;
 
       img {
         object-fit: contain;

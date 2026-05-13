@@ -6,8 +6,9 @@ import { useMemo, useState } from "react";
 import { iconPacks } from "../../state/resources.ts";
 
 import { SettingsGroup, SettingsOption } from "../../components/SettingsBox/index.tsx";
-import cs from "./index.module.css";
 import { Icon as ReactIcon } from "libs/ui/react/components/Icon/index.tsx";
+
+import cs from "./CachedIcons.module.css";
 
 function resolveAsSrc(parent: string, icon: Icon): Icon {
   return {
@@ -19,7 +20,7 @@ function resolveAsSrc(parent: string, icon: Icon): Icon {
   };
 }
 
-export function IconPackEditorView() {
+export function SystemIconPackView() {
   const [filterValue, setFilterValue] = useState("");
 
   const entries = useMemo(() => {

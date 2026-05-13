@@ -29,7 +29,7 @@
 
 <div
   {@attach draggable?.attach}
-  class="window"
+  class="slu-std-surface-elevated window"
   class:is-dragging={!!draggable?.isDragging}
   class:is-dropping={!!draggable?.isDropping}
   class:is-overlay={!!overlay}
