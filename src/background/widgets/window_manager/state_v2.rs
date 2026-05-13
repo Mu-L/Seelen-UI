@@ -18,13 +18,14 @@ use crate::{
     app::emit_to_webviews,
     error::{Result, ResultLogExt},
     event_manager,
+    hook::HookManager,
     state::application::FULL_STATE,
     utils::lock_free::TracedMutex,
     virtual_desktops::{events::VirtualDesktopEvent, SluWorkspacesManager2},
     widgets::window_manager::{
         cli::{Axis, StepWay},
         handler::{schedule_window_position, set_app_windows_positions},
-        instance::WindowManagerV2,
+        WindowManagerV2,
     },
     windows_api::{monitor::Monitor, window::Window},
 };
@@ -79,6 +80,10 @@ impl TwmState {
 
         SluWorkspacesManager2::subscribe(|event| {
             WM_STATE.lock().process_vd_event(&event).log_error();
+        });
+
+        HookManager::subscribe(|(event, origin)| {
+            WindowManagerV2::process_win_event(event, origin).log_error()
         });
 
         let settings = FULL_STATE.load();

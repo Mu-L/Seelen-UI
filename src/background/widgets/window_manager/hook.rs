@@ -95,13 +95,13 @@ impl WindowManagerV2 {
         Ok(())
     }
 
-    pub fn process_win_event(event: WinEvent, window: &Window) -> Result<()> {
+    pub fn process_win_event(event: WinEvent, window: Window) -> Result<()> {
         match event {
             WinEvent::SynThrottledForegroundRectChange => {
-                Self::synthetic_foreground_location_change(window)?;
+                Self::synthetic_foreground_location_change(&window)?;
             }
             WinEvent::SystemMoveSizeEnd => {
-                Self::system_move_size_end(window)?;
+                Self::system_move_size_end(&window)?;
                 Self::force_retiling()?;
             }
             WinEvent::SystemMinimizeStart => {
@@ -111,19 +111,19 @@ impl WindowManagerV2 {
                 let should_remove = {
                     let mut state = WM_STATE.lock();
                     state
-                        .get_tree_for_window_mut(window)
+                        .get_tree_for_window_mut(&window)
                         .map(|(_, tree)| !tree.node_is_stack(&window.address()))
                         .unwrap_or(false)
                 };
                 if should_remove {
-                    WM_STATE.lock().remove(window);
+                    WM_STATE.lock().remove(&window);
                     TwmState::send(TwmStateEvent::Changed);
                 }
             }
             WinEvent::SystemMinimizeEnd => {
                 let mut state = WM_STATE.lock();
-                if !state.is_managed(window) && Self::should_be_managed(window.hwnd()) {
-                    state.add_to_layout(window, &window.workspace_id()?);
+                if !state.is_managed(&window) && Self::should_be_managed(window.hwnd()) {
+                    state.add_to_layout(&window, &window.workspace_id()?);
                     TwmState::send(TwmStateEvent::Changed);
                 }
             }

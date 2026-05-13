@@ -1,18 +1,7 @@
 use windows::Win32::{
     Foundation::{HWND, LPARAM},
-    UI::Shell::{
-        SHAppBarMessage, ABE_BOTTOM, ABE_LEFT, ABE_RIGHT, ABE_TOP, ABM_SETSTATE, ABS_ALWAYSONTOP,
-        ABS_AUTOHIDE, APPBARDATA,
-    },
+    UI::Shell::{SHAppBarMessage, ABM_SETSTATE, ABS_ALWAYSONTOP, ABS_AUTOHIDE, APPBARDATA},
 };
-
-#[allow(dead_code)]
-pub enum AppBarDataEdge {
-    Left = ABE_LEFT as isize,
-    Top = ABE_TOP as isize,
-    Right = ABE_RIGHT as isize,
-    Bottom = ABE_BOTTOM as isize,
-}
 
 /// https://learn.microsoft.com/en-us/windows/win32/shell/abm-setstate#parameters
 #[derive(Debug, Clone, Copy)]

@@ -171,6 +171,7 @@ impl Monitor {
 pub struct DisplayView(WinRTDisplayView);
 
 impl DisplayView {
+    #[allow(dead_code)]
     pub fn as_win32_view(&self) -> Result<Monitor> {
         let display_config = DisplayConfigAndModes::query_active()?;
 

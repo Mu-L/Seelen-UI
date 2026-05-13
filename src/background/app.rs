@@ -4,7 +4,6 @@ use std::sync::{
 };
 
 use parking_lot::Mutex;
-use seelen_core::system_state::MonitorId;
 use slu_ipc::messages::SvcAction;
 use tauri::{AppHandle, Emitter, Wry};
 use windows::Win32::System::TaskScheduler::{ITaskService, TaskScheduler};
@@ -12,7 +11,6 @@ use windows::Win32::System::TaskScheduler::{ITaskService, TaskScheduler};
 use seelen_core::state::shortcuts::resolve_shortcuts;
 
 use crate::{
-    app_instance::LegacyWidgetMonitorContainer,
     cli::ServicePipe,
     error::{Result, ResultLogExt},
     hook::register_win_hook,
@@ -28,7 +26,7 @@ use crate::{
     state::application::{FullState, FULL_STATE},
     trace_lock,
     utils::discord::start_discord_rpc,
-    widgets::{wallpaper_manager::SeelenWall, weg::SeelenWeg},
+    widgets::{manager::WIDGET_MANAGER, wallpaper_manager::SeelenWall, weg::SeelenWeg},
     windows_api::{
         event_window::{create_background_window, IS_INTERACTIVE_SESSION},
         Com,
@@ -63,7 +61,6 @@ where
 /** Struct should be initialized first before calling any other methods */
 #[derive(Default)]
 pub struct Seelen {
-    pub widgets_per_display: Vec<LegacyWidgetMonitorContainer>,
     pub wall: Option<SeelenWall>,
 }
 
@@ -89,9 +86,6 @@ impl Seelen {
         if let Some(wall) = &self.wall {
             wall.update_position()?;
         }
-        for instance in &mut self.widgets_per_display {
-            instance.ensure_positions()?;
-        }
         Ok(())
     }
 
@@ -113,32 +107,17 @@ impl Seelen {
             false => self.wall = None,
         }
 
-        for monitor in &mut self.widgets_per_display {
-            monitor.load_settings(state)?;
-        }
-
         self.refresh_windows_positions()?;
 
         // Re-emit user and session so streaming mode redaction takes effect immediately.
         reemit_user();
         reemit_session();
-
         Ok(())
     }
 
-    fn on_monitor_event(event: MonitorManagerEvent) {
+    fn on_monitor_event(_event: MonitorManagerEvent) {
         let mut guard = trace_lock!(SEELEN);
-        match event {
-            MonitorManagerEvent::ViewAdded(id) => {
-                log_error!(guard.add_monitor(id));
-            }
-            MonitorManagerEvent::ViewsChanged => {
-                log_error!(guard.refresh_windows_positions());
-            }
-            MonitorManagerEvent::ViewRemoved(id) => {
-                log_error!(guard.remove_monitor(&id));
-            }
-        }
+        log_error!(guard.refresh_windows_positions());
     }
 
     fn on_system_settings_change(event: SystemSettingsEvent) {
@@ -160,13 +139,8 @@ impl Seelen {
         if state.is_wall_enabled() {
             self.add_wall()?;
         }
-
-        log::trace!("Enumerating Monitors & Creating Instances");
-        for view in MonitorManager::instance().read_all_views()? {
-            self.add_monitor(view.primary_target()?.stable_id()?)?;
-        }
-
         self.refresh_windows_positions()?;
+        WIDGET_MANAGER.reconcile()?;
 
         create_background_window()?;
         register_win_hook()?;
@@ -185,21 +159,6 @@ impl Seelen {
     /// Stop and release all resources
     pub fn stop(&self) {
         SEELEN_IS_RUNNING.store(false, std::sync::atomic::Ordering::SeqCst);
-    }
-
-    fn add_monitor(&mut self, monitor_id: MonitorId) -> Result<()> {
-        let state = FULL_STATE.load();
-        self.widgets_per_display
-            .push(LegacyWidgetMonitorContainer::new(monitor_id, &state)?);
-        self.refresh_windows_positions()?;
-        Ok(())
-    }
-
-    fn remove_monitor(&mut self, id: &MonitorId) -> Result<()> {
-        self.widgets_per_display
-            .retain(|m| &m.view_primary_target_id != id);
-        self.refresh_windows_positions()?;
-        Ok(())
     }
 
     pub fn is_auto_start_enabled() -> Result<bool> {

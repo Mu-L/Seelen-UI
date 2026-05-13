@@ -209,18 +209,6 @@ impl MonitorManager {
         Ok(())
     }
 
-    pub fn get_display_view_for_target(&self, target_id: &MonitorId) -> Result<DisplayView> {
-        let state = self.display_manager.TryReadCurrentStateForAllTargets()?;
-        let state = state.State()?;
-
-        for target in self.display_manager.GetCurrentTargets()? {
-            if target.StableMonitorId()?.to_string_lossy() == target_id.0 {
-                return Ok(state.GetViewForTarget(&target)?.into());
-            }
-        }
-        Err("Can not find display view for target".into())
-    }
-
     pub fn get_cached_ids(&self) -> Vec<MonitorId> {
         self.state_views.keys()
     }

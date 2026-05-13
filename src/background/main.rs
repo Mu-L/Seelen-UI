@@ -3,7 +3,6 @@
 #![feature(never_type)]
 
 mod app;
-mod app_instance;
 mod backups;
 mod cli;
 mod error;

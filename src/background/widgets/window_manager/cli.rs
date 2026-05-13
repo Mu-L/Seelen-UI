@@ -5,7 +5,6 @@ use seelen_core::state::twm::TwmReservation;
 
 use crate::error::Result;
 use crate::state::application::FULL_STATE;
-use crate::trace_lock;
 use crate::virtual_desktops::SluWorkspacesManager2;
 use crate::widgets::window_manager::state_v2::{
     set_rect_to_float_initial_size, TwmState, TwmStateEvent, WM_STATE,
@@ -42,17 +41,8 @@ fn process_wm_command(cmd: WmCommand) -> Result<()> {
             });
             FULL_STATE.load().write_settings()?;
         }
-        WmCommand::Debug => {
-            #[cfg(debug_assertions)]
-            {
-                let guard = trace_lock!(crate::app::SEELEN);
-                for instance in &guard.widgets_per_display {
-                    if let Some(wm) = &instance.wm {
-                        wm.window.open_devtools();
-                    }
-                }
-            }
-        }
+        WmCommand::Debug => {}
+
         WmCommand::Width { action } => {
             let percentage = match action {
                 Sizing::Increase => FULL_STATE.load().settings.by_widget.wm.resize_delta,

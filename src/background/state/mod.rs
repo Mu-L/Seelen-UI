@@ -34,25 +34,8 @@ impl FullState {
         self.is_widget_enabled(&WidgetId::known_weg())
     }
 
-    #[allow(dead_code)]
-    pub fn is_bar_enabled(&self) -> bool {
-        self.is_widget_enabled(&WidgetId::known_toolbar())
-    }
-
-    pub fn is_window_manager_enabled(&self) -> bool {
-        self.is_widget_enabled(&WidgetId::known_wm())
-    }
-
-    pub fn is_weg_enabled_on_monitor(&self, monitor_id: &MonitorId) -> bool {
-        self.is_widget_enable_on_monitor(&WidgetId::known_weg(), monitor_id)
-    }
-
-    pub fn is_bar_enabled_on_monitor(&self, monitor_id: &MonitorId) -> bool {
-        self.is_widget_enable_on_monitor(&WidgetId::known_toolbar(), monitor_id)
-    }
-
-    pub fn is_window_manager_enabled_on_monitor(&self, monitor_id: &MonitorId) -> bool {
-        self.is_widget_enable_on_monitor(&WidgetId::known_wm(), monitor_id)
+    pub fn is_wall_enabled(&self) -> bool {
+        self.is_widget_enabled(&WidgetId::known_wall())
     }
 
     pub fn get_widget_instances_ids(&self, widget_id: &WidgetId) -> Vec<Uuid> {
@@ -64,10 +47,6 @@ impl FullState {
                 .map_or_else(Default::default, |i| i.keys().cloned().collect()),
             None => Vec::new(),
         }
-    }
-
-    pub fn is_wall_enabled(&self) -> bool {
-        self.is_widget_enabled(&WidgetId::known_wall())
     }
 
     pub fn get_wm_layout(&self, workspace_id: &WorkspaceId) -> TwmPlugin {

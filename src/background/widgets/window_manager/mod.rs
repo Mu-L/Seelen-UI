@@ -1,11 +1,11 @@
 pub mod cli;
 pub mod handler;
 pub mod hook;
-pub mod instance;
 pub mod state_v2;
 
-use instance::WindowManagerV2;
 use seelen_core::{handlers::SeelenEvent, state::AppExtraFlag};
+
+pub struct WindowManagerV2;
 use windows::Win32::{
     Foundation::HWND,
     UI::WindowsAndMessaging::{WS_EX_TOPMOST, WS_SIZEBOX},

@@ -27,7 +27,7 @@ use crate::{
     state::application::FULL_STATE,
     trace_lock,
     utils::spawn_named_thread,
-    widgets::{weg::SeelenWeg, window_manager::instance::WindowManagerV2},
+    widgets::weg::SeelenWeg,
     windows_api::{
         event_window::{
             BgWindowProc, HSHELL_FULLSCREEN_ENTER, HSHELL_FULLSCREEN_EXIT, IS_INTERACTIVE_SESSION,
@@ -161,12 +161,6 @@ impl HookManager {
                     origin.as_focused_app_information(),
                 );
             }
-        }
-
-        let app_state = FULL_STATE.load();
-
-        if app_state.is_window_manager_enabled() {
-            log_error!(WindowManagerV2::process_win_event(event, &origin), event);
         }
 
         {
