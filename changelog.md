@@ -2,6 +2,10 @@
 
 ## [2.6.6-dev]
 
+### fix
+
+- creating widgets for turnned off monitors.
+
 ## [2.6.5]
 
 ### features

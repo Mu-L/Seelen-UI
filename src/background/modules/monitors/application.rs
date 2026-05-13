@@ -50,6 +50,9 @@ impl MonitorManager {
         let mut state_views = HashMap::new();
         for view in state.Views()? {
             let view = DisplayView::from(view);
+            if !view.is_active()? {
+                continue;
+            }
             state_views.insert(view.primary_target()?.stable_id()?, view);
         }
 
@@ -178,6 +181,9 @@ impl MonitorManager {
         let mut current_views = HashMap::new();
         for view in current_state.Views()? {
             let view = DisplayView::from(view);
+            if !view.is_active().unwrap_or(false) {
+                continue;
+            }
             let id = match view.primary_target().and_then(|t| t.stable_id()) {
                 Ok(id) => id,
                 Err(_) => continue,

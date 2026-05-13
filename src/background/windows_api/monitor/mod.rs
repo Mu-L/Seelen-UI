@@ -212,6 +212,11 @@ impl DisplayView {
         Err("Win32 Monitor not found for winrt view".into())
     }
 
+    /// Returns true if the primary target of this view reports a connected monitor.
+    pub fn is_active(&self) -> windows_core::Result<bool> {
+        self.0.Paths()?.GetAt(0)?.Target()?.IsConnected()
+    }
+
     pub fn primary_target(&self) -> Result<MonitorTarget> {
         Ok(self.0.Paths()?.GetAt(0)?.Target()?.into())
     }
