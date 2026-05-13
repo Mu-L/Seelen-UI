@@ -1,3 +1,4 @@
+import { effect } from "@preact/signals";
 import { invoke, SeelenCommand, SeelenEvent, subscribe, Widget } from "@seelen-ui/lib";
 import { lazyRune } from "libs/ui/svelte/utils/LazyRune.svelte.ts";
 
@@ -125,8 +126,8 @@ widget.onTrigger((payload) => {
   }
 });
 
-widget.window.onFocusChanged(({ payload }) => {
-  if (payload) {
+effect(() => {
+  if (focusedWinId.value === widget.windowId) {
     invoke(SeelenCommand.GetKeyState, { key: "Alt" }).then((isPressing) => {
       if (!isPressing) {
         window.dispatchEvent(new KeyboardEvent("keyup", { key: "Alt" }));

@@ -92,7 +92,7 @@
 </script>
 
 <div
-  class="notification"
+  class="notification slu-std-surface-elevated"
   role="button"
   tabindex="0"
   onclick={handleNotificationClick}

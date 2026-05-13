@@ -14,7 +14,6 @@
   justify-content: center;
   flex-wrap: wrap;
 
-  background-color: var(--color-gray-300);
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
   border-radius: 1rem;
   padding: 1rem;
@@ -29,8 +28,8 @@
     overflow: hidden;
     width: fit-content;
     border-radius: 10px;
-    background: var(--color-gray-100);
     width: 260px;
+    box-shadow: 1px 2px 4px 0px rgba(0, 0, 0, 0.2);
 
     &:focus {
       outline: 3px solid var(--system-accent-color) !important;
@@ -48,7 +47,6 @@
 
       gap: 0.5rem;
       padding: 0.5rem;
-      border-bottom: 1px solid var(--color-gray-300);
 
       .task-title {
         font-weight: 600;

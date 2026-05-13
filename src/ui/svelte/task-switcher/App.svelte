@@ -17,7 +17,7 @@
   }}
   onkeypress={() => {}}
 >
-  <div class="task-switcher">
+  <div class="task-switcher slu-std-surface">
     {#each globalState.windows as window, index (window.hwnd)}
       <TaskItem task={window} {index} />
     {/each}

@@ -5,6 +5,7 @@
 ### fix
 
 - creating widgets for turnned off monitors.
+- task switcher first trigger not working correctly.
 
 ## [2.6.5]
 
