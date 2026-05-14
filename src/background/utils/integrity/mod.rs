@@ -19,6 +19,14 @@ use crate::{
     windows_api::{string_utils::WindowsString, WindowsApi},
 };
 
+#[derive(Debug)]
+pub enum IntegrityError {
+    WebviewRuntimeNotInstalled,
+    WebviewRuntimeOutdated,
+    BundleIntegrityFailed,
+    WebviewOptimalStateFailed,
+}
+
 /// Prints information about the computer runtime context to help debugging.
 #[rustfmt::skip]
 pub fn print_initial_information() {

@@ -15,7 +15,7 @@ use crate::{
     resources::RESOURCES,
     session::infrastructure::reemit_session,
     state::application::{FullState, FULL_STATE},
-    utils::discord::start_discord_rpc,
+    utils::{discord::start_discord_rpc, CRONOMETER},
     widgets::{manager::WIDGET_MANAGER, weg::SeelenWeg},
     windows_api::{
         event_window::{create_background_window, IS_INTERACTIVE_SESSION},
@@ -76,8 +76,28 @@ impl Seelen {
         Ok(())
     }
 
-    pub fn start() -> Result<()> {
+    pub async fn start() -> Result<()> {
         Migrations::run()?;
+
+        // RESOURCES and FULL_STATE settings have no mutual dependency at init time;
+        // load them in parallel then run the RESOURCES-dependent FULL_STATE steps.
+        std::thread::scope(|s| {
+            s.spawn(|| {
+                let _ = &*RESOURCES;
+                CRONOMETER.record("RESOURCES");
+            });
+            s.spawn(|| {
+                let _ = FULL_STATE.load();
+                CRONOMETER.record("FULL_STATE");
+            });
+        });
+        CRONOMETER.record("Settings & Resources Load");
+
+        FULL_STATE.rcu(|state| {
+            let mut state = state.cloned();
+            state.complete_initialization();
+            state
+        });
 
         let state = FULL_STATE.load();
         rust_i18n::set_locale(state.locale());
@@ -96,6 +116,7 @@ impl Seelen {
         let widget_refs: Vec<_> = widgets.iter().map(|w| w.as_ref()).collect();
         let resolved = resolve_shortcuts(&state.settings, &widget_refs);
         ServicePipe::request(SvcAction::SetShortcuts(resolved))?;
+
         SEELEN_IS_RUNNING.store(true, std::sync::atomic::Ordering::SeqCst);
         Ok(())
     }

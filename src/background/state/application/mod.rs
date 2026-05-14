@@ -216,8 +216,7 @@ impl FullState {
             match res {
                 Ok(settings) => {
                     self.settings = settings;
-                    self.migration_v2_5_0().log_error();
-                    self.sanitize_wallpaper_collections();
+                    // RESOURCES-dependent steps moved to complete_initialization()
                 }
                 Err(e) => {
                     log::error!("Failed to read settings: {e}");
@@ -232,6 +231,14 @@ impl FullState {
                 Err(e) => log::error!("Error loading bundled app configs: {e}"),
             }
         }
+    }
+
+    /// Run RESOURCES-dependent initialization steps.
+    /// Call this after both FULL_STATE and RESOURCES are initialized so the two can
+    /// be loaded in parallel.
+    pub fn complete_initialization(&mut self) {
+        self.migration_v2_5_0().log_error();
+        self.sanitize_wallpaper_collections();
     }
 
     fn show_corrupted_state_to_user(path: &Path) {

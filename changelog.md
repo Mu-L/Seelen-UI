@@ -2,6 +2,10 @@
 
 ## [2.6.6-dev]
 
+### enhancements
+
+- app startup time reduced.
+
 ### fix
 
 - creating widgets for turnned off monitors.

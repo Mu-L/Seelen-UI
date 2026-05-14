@@ -3,15 +3,27 @@ use std::path::Path;
 use slu_utils::checksums::CheckSums;
 use walkdir::WalkDir;
 
-use crate::{app::get_app_handle, error::Result};
+use crate::error::Result;
 
 use tauri::Manager;
 use tauri_plugin_dialog::{DialogExt, MessageDialogKind};
 
+use super::IntegrityError;
+
 /// Public key for minisign verification (same as updater)
 const MINISIGN_PUBLIC_KEY: &str = "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDQ4QjU1RUI0NEM0NzBERUIKUldUckRVZE10RjYxU0lpaERvdklYL05DVlg0Sk9EVngvaEgzZjMvU1NNemJTZXZ1K0dNVXU3ZkQK";
 
-pub fn ensure_bundle_files_integrity(app: &tauri::AppHandle) -> Result<()> {
+pub async fn ensure_bundle_files_integrity(
+    app: &tauri::AppHandle,
+) -> std::result::Result<(), IntegrityError> {
+    if let Err(e) = try_ensure_bundle_files_integrity(app).await {
+        log::error!("Bundle integrity check failed: {e:?}");
+        return Err(IntegrityError::BundleIntegrityFailed);
+    }
+    Ok(())
+}
+
+async fn try_ensure_bundle_files_integrity(app: &tauri::AppHandle) -> Result<()> {
     log::trace!("Validating bundle files integrity");
 
     let install_dir = app.path().resource_dir()?;
@@ -21,34 +33,23 @@ pub fn ensure_bundle_files_integrity(app: &tauri::AppHandle) -> Result<()> {
     let signature_path = install_dir.join("SHA256SUMS.sig");
 
     if !signature_path.exists() {
-        show_integrity_dialog();
         return Err("Signature file not found".into());
     }
 
     if !checksums_path.exists() {
-        show_integrity_dialog();
         return Err("Checksums file not found".into());
     }
 
     // Skip signature validation in development mode
     if !tauri::is_dev() {
-        if let Err(err) =
-            verify_external_signature(&checksums_path, &signature_path, MINISIGN_PUBLIC_KEY)
-        {
-            show_integrity_dialog();
-            return Err(err);
-        }
+        verify_external_signature(&checksums_path, &signature_path, MINISIGN_PUBLIC_KEY)?;
     }
-
-    if let Err(err) = validate_directory_checksums(&static_path, &checksums_path) {
-        show_integrity_dialog();
-        return Err(err);
-    }
+    validate_directory_checksums(&static_path, &checksums_path).await?;
 
     Ok(())
 }
 
-fn validate_directory_checksums(base_path: &Path, checksums_path: &Path) -> Result<()> {
+async fn validate_directory_checksums(base_path: &Path, checksums_path: &Path) -> Result<()> {
     log::trace!("Validating checksums for {}", base_path.display());
 
     let checksums_content = std::fs::read(checksums_path)?;
@@ -95,10 +96,8 @@ fn verify_external_signature(file: &Path, signature_file: &Path, key_base64: &st
     Ok(())
 }
 
-/// Shows an error dialog for integrity validation failures
-fn show_integrity_dialog() {
-    get_app_handle()
-        .dialog()
+pub fn show_bundle_integrity_dialog(app: &tauri::AppHandle) {
+    app.dialog()
         .message(t!("runtime.files_integrity"))
         .title(t!("runtime.files_integrity_title"))
         .kind(MessageDialogKind::Error)

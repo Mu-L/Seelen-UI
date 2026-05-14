@@ -86,12 +86,27 @@ impl WidgetManager {
 
         // lazy creation of webviews to reduce startup time
         std::thread::spawn(|| {
-            WIDGET_MANAGER.deployments.for_each(|(_, deployment)| {
+            fn reconcile(deployment: &WidgetDeployment) {
                 deployment.reconcile();
-
                 if !deployment.definition.lazy && !GAME_MODE_ACTIVE.load(Ordering::Acquire) {
                     deployment.start_all_webviews();
                 }
+            }
+
+            // More visual widgets load first
+            for priority in [
+                WidgetId::known_wall(),
+                WidgetId::known_toolbar(),
+                WidgetId::known_weg(),
+            ] {
+                WIDGET_MANAGER.deployments.get(&priority, |deployment| {
+                    reconcile(deployment);
+                });
+            }
+
+            // All other widgets
+            WIDGET_MANAGER.deployments.for_each(|(_, deployment)| {
+                reconcile(deployment);
             });
         });
 

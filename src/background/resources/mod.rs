@@ -8,6 +8,8 @@ use std::{
     sync::{Arc, LazyLock},
 };
 
+use rayon::iter::{IntoParallelIterator, IntoParallelRefIterator, ParallelIterator};
+
 use seelen_core::{
     resource::{IconPackId, PluginId, ResourceKind, SluResource, ThemeId, WallpaperId, WidgetId},
     state::{IconPack, Plugin, Theme, Wallpaper, Widget},
@@ -40,13 +42,15 @@ pub struct ResourceManager {
 
 impl ResourceManager {
     fn initialize(&self) {
-        std::thread::scope(|s| {
-            s.spawn(|| self.load_all_of_type(ResourceKind::Theme).log_error());
-            s.spawn(|| self.load_all_of_type(ResourceKind::Plugin).log_error());
-            s.spawn(|| self.load_all_of_type(ResourceKind::Widget).log_error());
-            s.spawn(|| self.load_all_of_type(ResourceKind::Wallpaper).log_error());
-            s.spawn(|| self.load_all_of_type(ResourceKind::IconPack).log_error());
-        });
+        [
+            ResourceKind::Theme,
+            ResourceKind::Plugin,
+            ResourceKind::Widget,
+            ResourceKind::Wallpaper,
+            ResourceKind::IconPack,
+        ]
+        .into_par_iter()
+        .for_each(|kind| self.load_all_of_type(kind).log_error());
     }
 
     pub fn load(&self, kind: &ResourceKind, path: &Path) -> Result<()> {
@@ -233,14 +237,18 @@ impl ResourceManager {
         let entries = Self::get_entries_for_type(&kind)?;
         self.unload_all(&kind);
 
-        for entry in entries.into_iter().flatten().flatten() {
-            match self.load(&kind, &entry.path()) {
-                Ok(_) => {}
-                Err(e) => {
-                    log::error!("Failed to load {kind:?}, error: {e}");
-                }
+        let paths: Vec<_> = entries
+            .into_iter()
+            .flatten()
+            .flatten()
+            .map(|e| e.path())
+            .collect();
+
+        paths.par_iter().for_each(|path| {
+            if let Err(e) = self.load(&kind, path) {
+                log::error!("Failed to load {kind:?}, error: {e}");
             }
-        }
+        });
 
         if kind == ResourceKind::IconPack {
             // try load system icon pack

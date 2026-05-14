@@ -126,32 +126,6 @@ macro_rules! trace_lock {
     }};
 }
 
-pub static PERFORMANCE_HELPER: LazyLock<Mutex<PerformanceHelper>> = LazyLock::new(|| {
-    Mutex::new(PerformanceHelper {
-        time: HashMap::new(),
-    })
-});
-
-pub struct PerformanceHelper {
-    time: HashMap<String, Instant>,
-}
-
-impl PerformanceHelper {
-    pub fn start(&mut self, name: &str) {
-        log::debug!("{name} start");
-        self.time.insert(name.to_string(), Instant::now());
-    }
-
-    pub fn elapsed(&self, name: &str) -> Duration {
-        self.time.get(name).unwrap().elapsed()
-    }
-
-    pub fn end(&mut self, name: &str) {
-        log::debug!("{} end in: {:.2}s", name, self.elapsed(name).as_secs_f64());
-        self.time.remove(name);
-    }
-}
-
 /// Useful when spawning threads that will allocate a loop or some other blocking operation
 pub fn spawn_named_thread<F, T>(id: &str, cb: F) -> std::thread::JoinHandle<T>
 where
@@ -223,4 +197,18 @@ pub fn get_parts_of_inline_command(cmd: &str) -> (String, Option<String>) {
     let program = parts.next().unwrap_or_default().trim().to_owned();
     let args = cmd.trim_start_matches(&program).trim().to_owned();
     (program, if args.is_empty() { None } else { Some(args) })
+}
+
+pub static CRONOMETER: LazyLock<Cronometer> = LazyLock::new(|| Cronometer(Instant::now()));
+
+pub struct Cronometer(pub Instant);
+
+impl Cronometer {
+    pub fn elapsed(&self) -> Duration {
+        self.0.elapsed()
+    }
+
+    pub fn record(&self, name: &str) {
+        log::debug!("{} took: {:?}", name, self.elapsed());
+    }
 }

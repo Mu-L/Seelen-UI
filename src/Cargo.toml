@@ -50,6 +50,7 @@ itertools = { workspace = true }
 clap = { workspace = true, features = ["derive", "string"] }
 os_info = { workspace = true }
 crossbeam-channel = { workspace = true }
+rayon = { workspace = true }
 regex = { workspace = true }
 phf = { workspace = true }
 sysinfo = { workspace = true }

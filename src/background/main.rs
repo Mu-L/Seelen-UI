@@ -37,10 +37,14 @@ use slu_ipc::messages::SvcAction;
 use tauri_plugins::register_plugins;
 use utils::{
     integrity::{is_already_running, print_initial_information, restart_as_appx, warn_if_elevated},
-    is_running_as_appx, was_installed_using_msix, PERFORMANCE_HELPER,
+    is_running_as_appx, was_installed_using_msix,
 };
 
-use crate::{app::get_app_handle, error::ResultLogExt, utils::constants::SEELEN_COMMON};
+use crate::{
+    app::get_app_handle,
+    error::ResultLogExt,
+    utils::{constants::SEELEN_COMMON, CRONOMETER},
+};
 
 static APP_HANDLE: OnceLock<tauri::AppHandle<tauri::Wry>> = OnceLock::new();
 static TOKIO_RUNTIME_HANDLE: OnceLock<tokio::runtime::Handle> = OnceLock::new();
@@ -86,7 +90,8 @@ async fn main() {
         .expect("Failed to set runtime handle");
 
     rust_i18n::set_locale(&seelen_core::state::Settings::get_system_language());
-    trace_lock!(PERFORMANCE_HELPER).start("setup");
+
+    let _ = CRONOMETER;
     let mut app_builder = tauri::Builder::default();
     app_builder = register_plugins(app_builder);
     app_builder = register_invoke_handler(app_builder);
@@ -99,13 +104,13 @@ async fn main() {
     let app = app_builder
         .setup(|app| {
             APP_HANDLE.set(app.handle().to_owned()).unwrap();
-
             tokio::spawn(async move {
                 let handle = get_app_handle();
                 if let Err(err) = setup(handle).await {
                     log::error!("Error while setting up: {err:?}");
                     handle.exit(1);
                 }
+                CRONOMETER.record("setup");
             });
             Ok(())
         })
@@ -119,19 +124,40 @@ async fn main() {
 
 async fn setup(app_handle: &tauri::AppHandle<tauri::Wry>) -> Result<()> {
     print_initial_information();
+    CRONOMETER.record("print_initial_information");
     create_main_folders()?;
-    utils::integrity::validate_webview_runtime_is_installed(app_handle)?;
-    utils::integrity::ensure_bundle_files_integrity(app_handle)?;
+    CRONOMETER.record("create_main_folders");
 
     SelfPipe::start_listener()?;
     if !ServicePipe::is_running() {
         ServicePipe::start_service().await?;
     }
+    CRONOMETER.record("IPC");
 
-    utils::integrity::check_for_webview_optimal_state().await?;
+    if let Err(err) = tokio::try_join!(
+        utils::integrity::validate_webview_runtime(),
+        utils::integrity::ensure_bundle_files_integrity(app_handle),
+        utils::integrity::check_for_webview_optimal_state(),
+    ) {
+        match err {
+            utils::integrity::IntegrityError::WebviewRuntimeNotInstalled => {
+                utils::integrity::show_not_installed_dialog(app_handle)?;
+            }
+            utils::integrity::IntegrityError::WebviewRuntimeOutdated => {
+                utils::integrity::show_outdated_dialog(app_handle)?;
+            }
+            utils::integrity::IntegrityError::BundleIntegrityFailed => {
+                utils::integrity::show_bundle_integrity_dialog(app_handle);
+            }
+            utils::integrity::IntegrityError::WebviewOptimalStateFailed => {}
+        }
+        return Err(format!("Integrity check failed: {err:?}").into());
+    }
+    CRONOMETER.record("integrity");
 
-    Seelen::start()?;
-    trace_lock!(PERFORMANCE_HELPER).end("setup");
+    Seelen::start().await?;
+    CRONOMETER.record("start");
+
     warn_if_elevated(app_handle);
     telemetry::start_telemetry();
     backups::infrastructure::start_backup_sync();

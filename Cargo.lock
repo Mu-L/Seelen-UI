@@ -4897,6 +4897,7 @@ dependencies = [
  "positioning",
  "quick-xml",
  "rand 0.9.4",
+ "rayon",
  "regex",
  "reqwest 0.12.28",
  "rust-i18n",
