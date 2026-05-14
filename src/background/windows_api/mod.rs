@@ -114,7 +114,6 @@ use windows::{
             },
         },
     },
-    UI::ViewManagement::UISettings,
 };
 
 use crate::{
@@ -176,10 +175,6 @@ impl WindowsApi {
         unsafe { GetDpiForMonitor(hmonitor, MDT_EFFECTIVE_DPI, &mut dpi_x, &mut _dpi_y)? };
         // 96 is the default DPI value on Windows
         Ok(dpi_x as f64 / 96_f64)
-    }
-
-    pub fn get_text_scale_factor() -> Result<f64> {
-        Ok(UISettings::new()?.TextScaleFactor()?)
     }
 
     /// Behaviour is undefined if an invalid HWND is given

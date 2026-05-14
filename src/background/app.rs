@@ -1,9 +1,5 @@
-use std::sync::{
-    atomic::{AtomicBool, Ordering},
-    Arc, LazyLock,
-};
+use std::sync::atomic::{AtomicBool, Ordering};
 
-use parking_lot::Mutex;
 use slu_ipc::messages::SvcAction;
 use tauri::{AppHandle, Emitter, Wry};
 use windows::Win32::System::TaskScheduler::{ITaskService, TaskScheduler};
@@ -14,28 +10,19 @@ use crate::{
     cli::ServicePipe,
     error::{Result, ResultLogExt},
     hook::register_win_hook,
-    log_error,
     migrations::Migrations,
-    modules::{
-        monitors::{MonitorManager, MonitorManagerEvent},
-        system_settings::application::{SystemSettings, SystemSettingsEvent},
-        user::infrastructure::reemit_user,
-    },
+    modules::user::infrastructure::reemit_user,
     resources::RESOURCES,
     session::infrastructure::reemit_session,
     state::application::{FullState, FULL_STATE},
-    trace_lock,
     utils::discord::start_discord_rpc,
-    widgets::{manager::WIDGET_MANAGER, wallpaper_manager::SeelenWall, weg::SeelenWeg},
+    widgets::{manager::WIDGET_MANAGER, weg::SeelenWeg},
     windows_api::{
         event_window::{create_background_window, IS_INTERACTIVE_SESSION},
         Com,
     },
     APP_HANDLE,
 };
-
-pub static SEELEN: LazyLock<Arc<Mutex<Seelen>>> =
-    LazyLock::new(|| Arc::new(Mutex::new(Seelen::default())));
 
 static SEELEN_IS_RUNNING: AtomicBool = AtomicBool::new(false);
 
@@ -59,10 +46,7 @@ where
 }
 
 /** Struct should be initialized first before calling any other methods */
-#[derive(Default)]
-pub struct Seelen {
-    pub wall: Option<SeelenWall>,
-}
+pub struct Seelen {}
 
 /* ============== Getters ============== */
 impl Seelen {
@@ -73,23 +57,7 @@ impl Seelen {
 
 /* ============== Methods ============== */
 impl Seelen {
-    fn add_wall(&mut self) -> Result<()> {
-        if self.wall.is_none() {
-            let wall = SeelenWall::new()?;
-            log_error!(wall.update_position());
-            self.wall = Some(wall)
-        }
-        Ok(())
-    }
-
-    fn refresh_windows_positions(&mut self) -> Result<()> {
-        if let Some(wall) = &self.wall {
-            wall.update_position()?;
-        }
-        Ok(())
-    }
-
-    pub fn on_settings_change(&mut self, state: &FullState) -> Result<()> {
+    pub fn on_settings_change(state: &FullState) -> Result<()> {
         rust_i18n::set_locale(state.locale());
         let widgets = RESOURCES.widgets();
         let widget_refs: Vec<_> = widgets.iter().map(|w| w.as_ref()).collect();
@@ -102,31 +70,13 @@ impl Seelen {
             SeelenWeg::restore_native_taskbar()?;
         }
 
-        match state.is_wall_enabled() {
-            true => self.add_wall()?,
-            false => self.wall = None,
-        }
-
-        self.refresh_windows_positions()?;
-
         // Re-emit user and session so streaming mode redaction takes effect immediately.
         reemit_user();
         reemit_session();
         Ok(())
     }
 
-    fn on_monitor_event(_event: MonitorManagerEvent) {
-        let mut guard = trace_lock!(SEELEN);
-        log_error!(guard.refresh_windows_positions());
-    }
-
-    fn on_system_settings_change(event: SystemSettingsEvent) {
-        if event == SystemSettingsEvent::TextScaleChanged {
-            log_error!(trace_lock!(SEELEN).refresh_windows_positions());
-        }
-    }
-
-    pub fn start(&mut self) -> Result<()> {
+    pub fn start() -> Result<()> {
         Migrations::run()?;
 
         let state = FULL_STATE.load();
@@ -136,16 +86,10 @@ impl Seelen {
             SeelenWeg::hide_native_taskbar();
         }
 
-        if state.is_wall_enabled() {
-            self.add_wall()?;
-        }
-        self.refresh_windows_positions()?;
         WIDGET_MANAGER.reconcile()?;
 
         create_background_window()?;
         register_win_hook()?;
-        MonitorManager::subscribe(Self::on_monitor_event);
-        SystemSettings::subscribe(Self::on_system_settings_change);
 
         start_discord_rpc()?;
         let widgets = RESOURCES.widgets();
@@ -157,7 +101,7 @@ impl Seelen {
     }
 
     /// Stop and release all resources
-    pub fn stop(&self) {
+    pub fn stop() {
         SEELEN_IS_RUNNING.store(false, std::sync::atomic::Ordering::SeqCst);
     }
 

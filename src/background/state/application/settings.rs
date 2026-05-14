@@ -1,10 +1,9 @@
 use seelen_core::{handlers::SeelenEvent, state::Settings};
 
 use crate::{
-    app::{emit_to_webviews, SEELEN},
+    app::{emit_to_webviews, Seelen},
     error::{Result, ResultLogExt},
     resources::RESOURCES,
-    trace_lock,
     utils::constants::SEELEN_COMMON,
     widgets::{manager::WIDGET_MANAGER, window_manager::state_v2::WM_STATE},
 };
@@ -14,7 +13,7 @@ use super::FullState;
 impl FullState {
     pub(super) fn emit_settings(&self) -> Result<()> {
         emit_to_webviews(SeelenEvent::StateSettingsChanged, &self.settings);
-        trace_lock!(SEELEN).on_settings_change(self)?;
+        Seelen::on_settings_change(self)?;
         WIDGET_MANAGER.reconcile().log_error();
         WM_STATE.lock().on_settings_changed();
         Ok(())

@@ -33,10 +33,6 @@ impl FullState {
         self.is_widget_enabled(&WidgetId::known_weg())
     }
 
-    pub fn is_wall_enabled(&self) -> bool {
-        self.is_widget_enabled(&WidgetId::known_wall())
-    }
-
     pub fn get_widget_instances_ids(&self, widget_id: &WidgetId) -> Vec<Uuid> {
         let config = self.settings.by_widget.others.get(widget_id);
         match config {

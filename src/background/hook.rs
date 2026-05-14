@@ -21,11 +21,10 @@ use windows::Win32::{
 };
 
 use crate::{
-    app::{emit_to_webviews, Seelen, SEELEN},
+    app::{emit_to_webviews, Seelen},
     error::{Result, ResultLogExt},
     event_manager, log_error,
     state::application::FULL_STATE,
-    trace_lock,
     utils::spawn_named_thread,
     widgets::weg::SeelenWeg,
     windows_api::{
@@ -162,13 +161,6 @@ impl HookManager {
                 );
             }
         }
-
-        {
-            let mut seelen = trace_lock!(SEELEN);
-            if let Some(wall) = &mut seelen.wall {
-                log_error!(wall.process_win_event(event, &origin), event);
-            }
-        };
     }
 }
 

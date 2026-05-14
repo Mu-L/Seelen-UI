@@ -190,6 +190,10 @@ impl SystemSettings {
         Ok(())
     }
 
+    pub fn get_text_scale_factor(&self) -> Result<f64> {
+        Ok(self.settings.TextScaleFactor()?)
+    }
+
     pub fn set_accent_color(color: seelen_core::system_state::Color) -> Result<()> {
         use windows::Win32::{
             Foundation::{LPARAM, WPARAM},

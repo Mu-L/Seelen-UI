@@ -14,6 +14,7 @@ use windows::{
 use crate::{
     error::{Result, ResultLogExt},
     event_manager,
+    modules::system_settings::application::{SystemSettings, SystemSettingsEvent},
     utils::lock_free::SyncHashMap,
     windows_api::{event_window::subscribe_to_background_window, monitor::DisplayView},
 };
@@ -101,6 +102,13 @@ impl MonitorManager {
             .ok();
 
         self.display_manager.Start()?;
+        SystemSettings::subscribe(|event| {
+            if event == SystemSettingsEvent::TextScaleChanged {
+                log::debug!("Text scale changed, re-emitting ViewsChanged");
+                Self::send(MonitorManagerEvent::ViewsChanged);
+            }
+        });
+
         subscribe_to_background_window(|event, _w_param, _l_param| {
             if event == WM_DISPLAYCHANGE {
                 log::debug!("Displays changed");

@@ -2,7 +2,8 @@ id: "@seelen/wallpaper-manager"
 icon: PiWallDuotone
 metadata:
   displayName: !extend i18n/display_name.yml
-loader: Legacy
+loader: Internal
+preset: Desktop
 instances: Single
 noMemoryLeakWorkaround: true
 shortcuts:

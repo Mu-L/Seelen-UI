@@ -141,3 +141,10 @@ class State {
 }
 
 export const gState = new State();
+
+$effect.root(() => {
+  $effect(() => {
+    monitors.value;
+    invoke(SeelenCommand.SetAsWallpaper);
+  });
+});

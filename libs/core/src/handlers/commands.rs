@@ -106,6 +106,7 @@ slu_commands_declaration! {
     WallpaperNext = wallpaper_next(),
     WallpaperPrev = wallpaper_prev(),
     WallpaperSaveThumbnail = wallpaper_save_thumbnail(wallpaper_id: ResourceId, thumbnail_bytes: Vec<u8>),
+    SetAsWallpaper = set_as_wallpaper(),
 
     // Logging
     LogFromWebview = log_from_webview(level: u8, message: String, location: String),

@@ -5,8 +5,11 @@ import { loadTranslations } from "./i18n/index.ts";
 
 import "@seelen-ui/lib/styles/reset.css";
 
-await Widget.getCurrent().init();
 await loadTranslations();
+
+await Widget.self.init({ saveAndRestoreLastRect: false });
+await Widget.self.window.setResizable(false);
+await Widget.self.window.setIgnoreCursorEvents(true);
 
 const root = document.getElementById("root")!;
 mount(App, { target: root });
