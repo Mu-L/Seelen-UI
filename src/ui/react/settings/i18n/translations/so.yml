@@ -72,18 +72,27 @@ close: Xirid
 delete: Tirtirid
 devtools:
   app_folders: Faylka app
+  color_palette: Palette midabka
+  color_palette_note: >-
+    Midabadani waxay si toos ah ula qabsadaan iftiinka/qaabka mugdiga - hadh
+    kastaa wuu ka duwan yahay-xilliga hadda jira, maaha qiime go'an. Isticmaal
+    halkii aad ka isticmaali lahayd midabyo adag si aad u hesho taageerada
+    mawduuca tooska ah.
   custom_config_file: Xamuul faylka caadiga ah ee config
   data_folder: Faylka xogta
   enable: U oggolow qalabka horumarinta
+  icons: Astaamaha kaydsan
   install_folder: Xeerka rakibaadda
   load: Xammuul
   settings_file: Faylka Dejinta
+  shared_components: Qaybaha caadiga ah ee SLU
   simulate_perm:
     label: Isku day Codsiga Ogolaanshaha Widget
     result_allowed: Ogolaanshaha waa la bixiyay
     result_denied: Ogolaanshaha waa la diiday
     trigger: Isku day
     widget_id_placeholder: '@author/widget-name'
+  tools: Qalabka
   unstable_optimizations: Hagaajinta Aan degganayn
   unstable_optimizations_description: >-
     Daar calaamadaha Chromium ee tijaabada ah ee dhimaya isticmaalka RAM.
@@ -166,7 +175,6 @@ header:
     extras: Ka duwan daro
     general: Guud
     home: Guri
-    icon_pack_editor: Calaamadaha lagu dhejiyay
     iconpack: Xirmooyinka icon
     monitors: Kormeerayaasha
     plugin: Pluins

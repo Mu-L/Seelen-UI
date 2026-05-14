@@ -67,18 +67,24 @@ close: 閉じる
 delete: 消去
 devtools:
   app_folders: アプリのフォルダー
+  color_palette: カラーパレット
+  color_palette_note: >-
+    これらの色は明/暗モードに自動的に適応します。各色合いは固定値ではなく、現在の背景とのコントラストに関係します。テーマの自動サポートを取得するには、ハードコードされた色の代わりにこれらを使用します。
   custom_config_file: カスタム構成ファイルをロードする
   data_folder: データのフォルダー
   enable: 開発者ツールを有効にする
+  icons: キャッシュされたアイコン
   install_folder: アプリのフォルダー
   load: ロード
   settings_file: 設定ファイル
+  shared_components: SLU標準コンポーネント
   simulate_perm:
     label: ウィジェットの許可リクエストをシミュレートする
     result_allowed: ✓ 許可の付与
     result_denied: ✗ 許可が拒否されました
     trigger: シミュレートする
     widget_id_placeholder: '@作成者/ウィジェット名'
+  tools: ツール
   unstable_optimizations: 不安定な最適化
   unstable_optimizations_description: |-
     RAM の使用量を削減する実験的な Chromium フラグを有効にします。
@@ -147,7 +153,6 @@ header:
     extras: エクストラ
     general: 全般
     home: ホーム
-    icon_pack_editor: キャッシュされたアイコン
     iconpack: アイコンパック
     monitors: モニター
     plugin: プラグイン

@@ -71,18 +71,26 @@ close: Zavřít
 delete: Vymazat
 devtools:
   app_folders: Složky aplikací
+  color_palette: Paleta barev
+  color_palette_note: >-
+    Tyto barvy se automaticky přizpůsobí režimu světla/tmy – každý odstín je
+    kontrastní vzhledem k aktuálnímu pozadí, nikoli pevnou hodnotou. Použijte je
+    místo pevně zakódovaných barev, abyste získali automatickou podporu motivu.
   custom_config_file: Načíst vlastní konfigurační soubor
   data_folder: Datová složka
   enable: Povolit vývojové nástroje
+  icons: Ikony uložené v mezipaměti
   install_folder: Instalační složka
   load: Načíst
   settings_file: Nastavení souboru
+  shared_components: Standardní komponenty SLU
   simulate_perm:
     label: Simulovat žádost o povolení widgetu
     result_allowed: ✓ Povolení uděleno
     result_denied: ✗ Povolení odepřeno
     trigger: Simulovat
     widget_id_placeholder: '@autor/název-widgetu'
+  tools: Nástroje
   unstable_optimizations: Nestabilní optimalizace
   unstable_optimizations_description: >-
     Povolit experimentální příznaky prohlížeče Chromium, které snižují využití
@@ -161,7 +169,6 @@ header:
     extras: Doplňky
     general: Všeobecné
     home: Domov
-    icon_pack_editor: Ikony v mezipaměti
     iconpack: Balíčky ikon
     monitors: Monitory
     plugin: Zásuvné moduly

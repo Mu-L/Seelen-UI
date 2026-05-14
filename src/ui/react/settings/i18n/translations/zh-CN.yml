@@ -64,18 +64,23 @@ close: 关闭
 delete: 删除
 devtools:
   app_folders: 应用文件夹
+  color_palette: 调色板
+  color_palette_note: 这些颜色自动适应明/暗模式 - 每种颜色都是相对于当前背景的对比度，而不是固定值。 使用它们而不是硬编码颜色来获得自动主题支持。
   custom_config_file: 加载自定义配置文件
   data_folder: 数据文件夹
   enable: 启用开发者工具
+  icons: 缓存图标
   install_folder: 安装文件夹
   load: 加载
   settings_file: 设置文件
+  shared_components: SLU 标准组件
   simulate_perm:
     label: 模拟Widget权限请求
     result_allowed: ✓ 已获得许可
     result_denied: ✗ 权限被拒绝
     trigger: 模拟
     widget_id_placeholder: '@作者/小部件名称'
+  tools: 工具
   unstable_optimizations: 不稳定的优化
   unstable_optimizations_description: |-
     启用可减少 RAM 使用的实验性 Chromium 标志。 
@@ -135,7 +140,6 @@ header:
     extras: 附加功能
     general: 通用设置
     home: 首页
-    icon_pack_editor: 缓存图标
     iconpack: 图标包
     monitors: 显示器
     plugin: 插件

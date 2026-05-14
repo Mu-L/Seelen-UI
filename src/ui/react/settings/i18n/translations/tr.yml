@@ -71,18 +71,26 @@ close: Kapat
 delete: Sil
 devtools:
   app_folders: Uygulama Klasörleri
+  color_palette: Renk Paleti
+  color_palette_note: >-
+    Bu renkler otomatik olarak açık/koyu moduna uyum sağlar; her renk tonu sabit
+    bir değer değil, mevcut arka plana göre kontrasta bağlıdır. Otomatik tema
+    desteği almak için sabit kodlanmış renkler yerine bunları kullanın.
   custom_config_file: Özel Yapılandırma Dosyası Yükle
   data_folder: Veri Klasörü
   enable: Geliştirici Araçlarını Etkinleştir
+  icons: Önbelleğe Alınmış Simgeler
   install_folder: Kurulum Klasörü
   load: Yükle
   settings_file: Ayarlar Dosyası
+  shared_components: SLU Standart Bileşenleri
   simulate_perm:
     label: Widget İzin İsteğini Simüle Et
     result_allowed: ✓ İzin verildi
     result_denied: ✗ İzin reddedildi
     trigger: Benzetmek
     widget_id_placeholder: '@yazar/widget-adı'
+  tools: Aletler
   unstable_optimizations: Kararsız Optimizasyonlar
   unstable_optimizations_description: >-
     RAM kullanımını azaltan deneysel Chromium işaretlerini etkinleştirin. 
@@ -161,7 +169,6 @@ header:
     extras: Ekstralar
     general: Genel
     home: Ana Sayfa
-    icon_pack_editor: Önbelleğe Alınmış Simgeler
     iconpack: Simge Paketleri
     monitors: Monitörler
     plugin: Eklentiler

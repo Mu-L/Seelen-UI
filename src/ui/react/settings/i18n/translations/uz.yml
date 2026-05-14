@@ -71,18 +71,27 @@ close: Yaqin
 delete: O'chirmoq
 devtools:
   app_folders: Ilova papkalari
+  color_palette: Ranglar palitrasi
+  color_palette_note: >-
+    Bu ranglar avtomatik ravishda yorug'lik/qorong'i rejimga moslashadi - har
+    bir soya sobit qiymatga emas, balki joriy fonga qarama-qarshidir. Mavzuni
+    avtomatik qo'llab-quvvatlash uchun qattiq kodlangan ranglar o'rniga ulardan
+    foydalaning.
   custom_config_file: Custom Config faylini yuklang
   data_folder: Ma'lumotlar papkasi
   enable: Ishlab chiqaruvchi vositalarni yoqish
+  icons: Keshlangan piktogrammalar
   install_folder: O'rnatish papkasini o'rnatish
   load: Yuklamoq
   settings_file: Sozlamalar fayli
+  shared_components: SLU standart komponentlari
   simulate_perm:
     label: Vidjetga ruxsat so‘rovini simulyatsiya qilish
     result_allowed: ✓ Ruxsat berilgan
     result_denied: ✗ Ruxsat rad etildi
     trigger: Simulyatsiya qilish
     widget_id_placeholder: '@muallif/vidjet nomi'
+  tools: Asboblar
   unstable_optimizations: Barqaror optimallashtirish
   unstable_optimizations_description: >-
     RAM sarfini kamaytiradigan eksperimental Chromium bayroqlarini yoqing. 
@@ -165,7 +174,6 @@ header:
     extras: Ekstraza
     general: Umumiy
     home: Uy
-    icon_pack_editor: Keshlangan piktogrammalar
     iconpack: Ikonka paketlari
     monitors: Monitorlar
     plugin: Plaginlar

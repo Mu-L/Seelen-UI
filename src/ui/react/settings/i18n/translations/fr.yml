@@ -71,18 +71,27 @@ close: Fermer
 delete: Supprimer
 devtools:
   app_folders: Dossiers de Seelen UI
+  color_palette: Palette de couleurs
+  color_palette_note: >-
+    Ces couleurs s'adaptent automatiquement au mode clair/sombre : chaque nuance
+    est un contraste relatif à l'arrière-plan actuel, et non une valeur fixe.
+    Utilisez-les à la place des couleurs codées en dur pour obtenir une prise en
+    charge automatique des thèmes.
   custom_config_file: Charger un fichier de configuration personnalisé
   data_folder: Dossier des données de l'application
   enable: Activer les outils de développement
+  icons: Icônes mises en cache
   install_folder: Dossier d'installation
   load: Charger
   settings_file: Fichier de paramètres
+  shared_components: Composants standards SLU
   simulate_perm:
     label: Simuler une demande d'autorisation de widget
     result_allowed: ✓ Autorisation accordée
     result_denied: ✗ Autorisation refusée
     trigger: Simuler
     widget_id_placeholder: '@auteur/nom-widget'
+  tools: Outils
   unstable_optimizations: Optimisations instables
   unstable_optimizations_description: "Activez les indicateurs Chromium expérimentaux qui réduisent l’utilisation de la RAM.\nAttention\_: si un widget plante, tous les widgets partageant le même chargeur planteront ensemble."
 discord_banner:
@@ -162,7 +171,6 @@ header:
     extras: Extras
     general: Général
     home: Accueil
-    icon_pack_editor: Icônes en cache
     iconpack: Packs d'icônes
     monitors: Moniteurs
     plugin: Plugins

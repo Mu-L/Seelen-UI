@@ -69,18 +69,26 @@ close: ປິດ
 delete: ລຶບ
 devtools:
   app_folders: ໂຟນເດີ App
+  color_palette: ສີ Palette
+  color_palette_note: >-
+    ສີເຫຼົ່ານີ້ປັບຕົວເຂົ້າກັບໂໝດແສງສະຫວ່າງ/ມືດໂດຍອັດຕະໂນມັດ —
+    ແຕ່ລະຮົ່ມແມ່ນກົງກັນຂ້າມກັບພື້ນຫຼັງປັດຈຸບັນ, ບໍ່ແມ່ນຄ່າຄົງທີ່. ໃຊ້ພວກມັນແທນສີ
+    hardcoded ເພື່ອໄດ້ຮັບການສະຫນັບສະຫນູນຮູບແບບອັດຕະໂນມັດ.
   custom_config_file: ໂຫຼດໄຟລ໌ການຕັ້ງຄ່າແບບກຳນົດເອງ
   data_folder: ແຟ້ມຂໍ້ມູນ
   enable: ເປີດໃຊ້ເຄື່ອງມືນັກພັດທະນາ
+  icons: ໄອຄອນທີ່ຈັດເກັບໄວ້
   install_folder: ໂຟນເດີການຕິດຕັ້ງ
   load: ໂຫຼດ
   settings_file: ໄຟລ໌ການຕັ້ງຄ່າ
+  shared_components: ອົງປະກອບມາດຕະຖານ SLU
   simulate_perm:
     label: ຈໍາລອງການຮ້ອງຂໍການອະນຸຍາດ Widget
     result_allowed: ✓​ການ​ອະ​ນຸ​ຍາດ​ໃຫ້​
     result_denied: ✗ ການ​ອະ​ນຸ​ຍາດ​ຖືກ​ປະ​ຕິ​ເສດ​
     trigger: ຈຳລອງ
     widget_id_placeholder: '@author/widget-name'
+  tools: ເຄື່ອງມື
   unstable_optimizations: ການເພີ່ມປະສິດທິພາບທີ່ບໍ່ສະຖຽນ
   unstable_optimizations_description: >-
     ເປີດໃຊ້ທຸງ Chromium ທົດລອງທີ່ຫຼຸດການໃຊ້ RAM.
@@ -158,7 +166,6 @@ header:
     extras: ພິເສດ
     general: ທົ່ວໄປ
     home: ບ້ານ
-    icon_pack_editor: ຮູບສັນຍາລັກຂອງຖານ
     iconpack: icon ຊອງ
     monitors: ຈໍພາບ
     plugin: Plugins

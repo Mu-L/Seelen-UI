@@ -71,18 +71,26 @@ close: Tancar -se
 delete: Esborrar
 devtools:
   app_folders: Carpetes d'aplicacions
+  color_palette: Paleta de colors
+  color_palette_note: >-
+    Aquests colors s'adapten automàticament al mode clar/fosc: cada to és el
+    contrast relatiu al fons actual, no un valor fix. Utilitzeu-los en lloc de
+    colors codificats per obtenir suport automàtic de temes.
   custom_config_file: Carregueu el fitxer de configuració personalitzada
   data_folder: Carpeta de dades
   enable: Activa les eines de desenvolupadors
+  icons: Icones en memòria cau
   install_folder: Carpeta d'instal·lació
   load: Carregar
   settings_file: Arxiu de configuració
+  shared_components: Components estàndard de la SLU
   simulate_perm:
     label: Simula la sol·licitud de permís de widget
     result_allowed: ✓ Autorització concedida
     result_denied: ✗ Permís denegat
     trigger: Simular
     widget_id_placeholder: '@autor/nom-widget'
+  tools: Eines
   unstable_optimizations: Optimitzacions inestables
   unstable_optimizations_description: >-
     Activa les marques experimentals de Chromium que redueixen l'ús de RAM.
@@ -166,7 +174,6 @@ header:
     extras: Extres
     general: General
     home: Casa
-    icon_pack_editor: Icones en memòria cau
     iconpack: Paquets d’icones
     monitors: Monitors
     plugin: Tapins

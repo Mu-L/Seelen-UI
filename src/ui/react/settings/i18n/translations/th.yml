@@ -68,18 +68,26 @@ close: ปิด
 delete: ลบ
 devtools:
   app_folders: โฟลเดอร์แอพ
+  color_palette: จานสี
+  color_palette_note: >-
+    สีเหล่านี้จะปรับให้เข้ากับโหมดสว่าง/มืดโดยอัตโนมัติ
+    โดยแต่ละเฉดสีจะมีความเปรียบต่างโดยสัมพันธ์กับพื้นหลังปัจจุบัน ไม่ใช่ค่าคงที่
+    ใช้สีเหล่านี้แทนสีฮาร์ดโค้ดเพื่อรับการสนับสนุนธีมอัตโนมัติ
   custom_config_file: โหลดไฟล์กำหนดค่าที่กำหนดเอง
   data_folder: โฟลเดอร์ข้อมูล
   enable: เปิดใช้งานเครื่องมือนักพัฒนาซอฟต์แวร์
+  icons: ไอคอนแคช
   install_folder: โฟลเดอร์การติดตั้ง
   load: โหลด
   settings_file: ไฟล์การตั้งค่า
+  shared_components: ส่วนประกอบมาตรฐาน SLU
   simulate_perm:
     label: จำลองคำขออนุญาตวิดเจ็ต
     result_allowed: ✓ ได้รับอนุญาตแล้ว
     result_denied: ✗ การอนุญาตถูกปฏิเสธ
     trigger: จำลอง
     widget_id_placeholder: '@author/widget-name'
+  tools: เครื่องมือ
   unstable_optimizations: การเพิ่มประสิทธิภาพที่ไม่เสถียร
   unstable_optimizations_description: >-
     เปิดใช้งานการตั้งค่าสถานะ Chromium รุ่นทดลองที่ลดการใช้ RAM 
@@ -157,7 +165,6 @@ header:
     extras: ความพิเศษ
     general: ทั่วไป
     home: บ้าน
-    icon_pack_editor: ไอคอนแคช
     iconpack: ไอคอนแพ็ค
     monitors: จอภาพ
     plugin: ปลั๊กอิน

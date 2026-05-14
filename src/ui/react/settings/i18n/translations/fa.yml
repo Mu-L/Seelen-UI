@@ -71,18 +71,26 @@ close: نزدیک
 delete: حذف
 devtools:
   app_folders: پوشه های برنامه
+  color_palette: پالت رنگ
+  color_palette_note: >-
+    این رنگ‌ها به‌طور خودکار با حالت روشن/تاریک سازگار می‌شوند - هر سایه نسبت به
+    پس‌زمینه فعلی کنتراست دارد، نه یک مقدار ثابت. از آنها به جای رنگ های کدگذاری
+    شده برای دریافت پشتیبانی خودکار تم استفاده کنید.
   custom_config_file: بارگیری پرونده پیکربندی سفارشی
   data_folder: پوشه داده ها
   enable: ابزارهای توسعه دهنده را فعال کنید
+  icons: نمادهای ذخیره شده در حافظه پنهان
   install_folder: پوشه نصب
   load: بار
   settings_file: پرونده تنظیمات
+  shared_components: اجزای استاندارد SLU
   simulate_perm:
     label: درخواست مجوز ویجت را شبیه سازی کنید
     result_allowed: ✓ مجوز داده شده است
     result_denied: ✗ اجازه داده نشد
     trigger: شبیه سازی کنید
     widget_id_placeholder: '@author/widget-name'
+  tools: ابزار
   unstable_optimizations: بهینه سازی های ناپایدار
   unstable_optimizations_description: >-
     پرچم‌های آزمایشی Chromium را فعال کنید که مصرف RAM را کاهش می‌دهد.
@@ -162,7 +170,6 @@ header:
     extras: اضافی
     general: عمومی
     home: خانه
-    icon_pack_editor: نمادهای ذخیره شده
     iconpack: بسته های نماد
     monitors: مانیتور
     plugin: پلاگین

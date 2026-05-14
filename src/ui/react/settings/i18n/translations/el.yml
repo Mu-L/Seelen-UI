@@ -72,18 +72,27 @@ close: Κοντά
 delete: Διαγράφω
 devtools:
   app_folders: Φακέλους εφαρμογών
+  color_palette: Παλέτα χρωμάτων
+  color_palette_note: >-
+    Αυτά τα χρώματα προσαρμόζονται αυτόματα στη λειτουργία φωτός/σκούρου — κάθε
+    απόχρωση έχει αντίθεση με το τρέχον φόντο και όχι σταθερή τιμή.
+    Χρησιμοποιήστε τα αντί για χρώματα με σκληρό κώδικα για να λάβετε αυτόματη
+    υποστήριξη θεμάτων.
   custom_config_file: Φόρτωση προσαρμοσμένου αρχείου ρυθμίσεων
   data_folder: Φάκελος δεδομένων
   enable: Ενεργοποίηση εργαλείων προγραμματιστή
+  icons: Αποθηκευμένα εικονίδια
   install_folder: Φάκελος εγκατάστασης
   load: Φορτώνω
   settings_file: Αρχείο ρυθμίσεων
+  shared_components: Πρότυπα εξαρτήματα SLU
   simulate_perm:
     label: Προσομοίωση αιτήματος άδειας γραφικού στοιχείου
     result_allowed: ✓ Χορηγήθηκε άδεια
     result_denied: ✗ Δεν επιτρέπεται η άδεια
     trigger: Προσποιούμαι
     widget_id_placeholder: '@συγγραφέας/όνομα γραφικού στοιχείου'
+  tools: Εργαλεία
   unstable_optimizations: Ασταθή Βελτιστοποιήσεις
   unstable_optimizations_description: >-
     Ενεργοποιήστε πειραματικές σημαίες Chromium που μειώνουν τη χρήση RAM.
@@ -165,7 +174,6 @@ header:
     extras: Πρόσθετα
     general: Γενικός
     home: Σπίτι
-    icon_pack_editor: Αποθηκευμένα εικονίδια
     iconpack: Πακέτα εικονιδίων
     monitors: Παρακολουθεί
     plugin: Plugins

@@ -71,18 +71,27 @@ close: Zamknij
 delete: Usuń
 devtools:
   app_folders: Foldery aplikacji
+  color_palette: Paleta kolorów
+  color_palette_note: >-
+    Kolory te automatycznie dostosowują się do trybu jasny/ciemny — każdy odcień
+    zależy od kontrastu bieżącego tła, a nie od stałej wartości. Używaj ich
+    zamiast zakodowanych na stałe kolorów, aby uzyskać automatyczną obsługę
+    motywów.
   custom_config_file: Załaduj niestandardowy plik konfiguracyjny
   data_folder: Folder danych
   enable: Włącz narzędzia programistów
+  icons: Ikony w pamięci podręcznej
   install_folder: Folder instalacyjny
   load: Obciążenie
   settings_file: Plik ustawień
+  shared_components: Standardowe komponenty SLU
   simulate_perm:
     label: Symuluj żądanie pozwolenia na widget
     result_allowed: ✓ Zezwolenie udzielone
     result_denied: ✗ Odmowa pozwolenia
     trigger: Symulować
     widget_id_placeholder: '@autor/nazwa-widgetu'
+  tools: Narzędzia
   unstable_optimizations: Niestabilne optymalizacje
   unstable_optimizations_description: >-
     Włącz eksperymentalne flagi Chromium, które zmniejszają użycie pamięci RAM.
@@ -166,7 +175,6 @@ header:
     extras: Dodatki
     general: Ogólne
     home: Strona główna
-    icon_pack_editor: Ikony w pamięci podręcznej
     iconpack: Pakiety ikon
     monitors: Ekrany
     plugin: Wtyczki

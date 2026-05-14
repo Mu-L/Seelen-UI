@@ -71,18 +71,26 @@ close: بند کریں
 delete: حذف کریں
 devtools:
   app_folders: ایپ فولڈرز
+  color_palette: کلر پیلیٹ
+  color_palette_note: >-
+    یہ رنگ خود بخود لائٹ/ڈارک موڈ میں ڈھل جاتے ہیں — ہر شیڈ موجودہ پس منظر کے
+    برعکس ہے، ایک مقررہ قدر نہیں۔ خودکار تھیم سپورٹ حاصل کرنے کے لیے ہارڈ کوڈ
+    والے رنگوں کے بجائے ان کا استعمال کریں۔
   custom_config_file: کسٹم کنفیگ فائل لوڈ کریں
   data_folder: ڈیٹا فولڈر
   enable: ڈویلپر ٹولز کو فعال کریں
+  icons: کیشڈ آئیکنز
   install_folder: انسٹالیشن فولڈر
   load: لوڈ
   settings_file: سیٹنگ فاعل
+  shared_components: SLU معیاری اجزاء
   simulate_perm:
     label: ویجیٹ کی اجازت کی درخواست کی تقلید کریں۔
     result_allowed: ✓ اجازت دی گئی۔
     result_denied: ✗ اجازت مسترد کر دی گئی۔
     trigger: نقل کرنا
     widget_id_placeholder: '@author/widget-name'
+  tools: اوزار
   unstable_optimizations: غیر مستحکم اصلاح
   unstable_optimizations_description: >-
     تجرباتی Chromium جھنڈوں کو فعال کریں جو RAM کے استعمال کو کم کرتے ہیں۔ 
@@ -161,7 +169,6 @@ header:
     extras: ایکسٹرا
     general: جنرل
     home: گھر
-    icon_pack_editor: کیشڈ شبیہیں
     iconpack: آئیکن پیک
     monitors: مانیٹر
     plugin: پلگ ان

@@ -71,18 +71,26 @@ close: దగ్గరగా
 delete: తొలగించు
 devtools:
   app_folders: యాప్ ఫోల్డర్‌లు
+  color_palette: రంగుల పాలెట్
+  color_palette_note: >-
+    ఈ రంగులు స్వయంచాలకంగా కాంతి/డార్క్ మోడ్‌కు అనుగుణంగా ఉంటాయి - ప్రతి షేడ్
+    ప్రస్తుత నేపథ్యానికి విరుద్ధంగా ఉంటుంది, స్థిర విలువ కాదు. స్వయంచాలక థీమ్
+    మద్దతు పొందడానికి హార్డ్‌కోడెడ్ రంగులకు బదులుగా వాటిని ఉపయోగించండి.
   custom_config_file: కస్టమ్ కాన్ఫిగర్ ఫైల్‌ను లోడ్ చేయండి
   data_folder: డేటా ఫోల్డర్
   enable: డెవలపర్ సాధనాలను ప్రారంభించండి
+  icons: కాష్ చేసిన చిహ్నాలు
   install_folder: ఇన్‌స్టాలేషన్ ఫోల్డర్
   load: లోడ్ చేయండి
   settings_file: సెట్టింగుల ఫైల్
+  shared_components: SLU ప్రామాణిక భాగాలు
   simulate_perm:
     label: విడ్జెట్ అనుమతి అభ్యర్థనను అనుకరించండి
     result_allowed: ✓ అనుమతి మంజూరు చేయబడింది
     result_denied: ✗ అనుమతి నిరాకరించబడింది
     trigger: అనుకరించు
     widget_id_placeholder: '@రచయిత/విడ్జెట్-పేరు'
+  tools: ఉపకరణాలు
   unstable_optimizations: అస్థిర ఆప్టిమైజేషన్లు
   unstable_optimizations_description: >-
     RAM వినియోగాన్ని తగ్గించే ప్రయోగాత్మక Chromium ఫ్లాగ్‌లను ప్రారంభించండి. 
@@ -162,7 +170,6 @@ header:
     extras: ఎక్స్‌ట్రాలు
     general: జనరల్
     home: హోమ్
-    icon_pack_editor: కాష్ చేసిన చిహ్నాలు
     iconpack: ఐకాన్ ప్యాక్‌లు
     monitors: మానిటర్లు
     plugin: ప్లగిన్లు

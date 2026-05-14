@@ -71,18 +71,26 @@ close: બંધ
 delete: કાઢી નાખો
 devtools:
   app_folders: એપ્લિકેશન ફોલ્ડર્સ
+  color_palette: કલર પેલેટ
+  color_palette_note: >-
+    આ રંગો આપમેળે પ્રકાશ/શ્યામ મોડમાં અનુકૂલન કરે છે — દરેક શેડ વર્તમાન
+    પૃષ્ઠભૂમિ સાથે વિપરીત-સાપેક્ષ છે, નિશ્ચિત મૂલ્ય નથી. સ્વચાલિત થીમ સપોર્ટ
+    મેળવવા માટે હાર્ડકોડેડ રંગોને બદલે તેનો ઉપયોગ કરો.
   custom_config_file: કસ્ટમ રૂપરેખા ફાઇલ લોડ કરો
   data_folder: ડેટા ફોલ્ડર
   enable: વિકાસકર્તા સાધનો સક્ષમ કરો
+  icons: કેશ્ડ ચિહ્નો
   install_folder: ઇન્સ્ટોલેશન ફોલ્ડર
   load: લોડ
   settings_file: સેટિંગ્સ ફાઇલ
+  shared_components: SLU પ્રમાણભૂત ઘટકો
   simulate_perm:
     label: વિજેટ પરવાનગી વિનંતીનું અનુકરણ કરો
     result_allowed: ✓ પરવાનગી આપવામાં આવી
     result_denied: ✗ પરવાનગી નકારી
     trigger: અનુકરણ કરો
     widget_id_placeholder: '@author/widget-name'
+  tools: સાધનો
   unstable_optimizations: અસ્થિર ઑપ્ટિમાઇઝેશન
   unstable_optimizations_description: >-
     પ્રાયોગિક Chromium ફ્લેગ્સ સક્ષમ કરો જે RAM નો ઉપયોગ ઘટાડે છે.
@@ -160,7 +168,6 @@ header:
     extras: વધારાની રકમ
     general: જનરલ
     home: ઘર
-    icon_pack_editor: કેશ ચિહ્નો
     iconpack: ચિહ્ન
     monitors: મોનિટર
     plugin: તૃણ

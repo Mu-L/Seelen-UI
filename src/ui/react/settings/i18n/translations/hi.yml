@@ -71,18 +71,27 @@ close: बंद करना
 delete: मिटाना
 devtools:
   app_folders: ऐप फ़ोल्डर्स
+  color_palette: रंगो की पटिया
+  color_palette_note: >-
+    ये रंग स्वचालित रूप से प्रकाश/अंधेरे मोड के अनुकूल हो जाते हैं - प्रत्येक
+    शेड वर्तमान पृष्ठभूमि के विपरीत-सापेक्ष होता है, कोई निश्चित मान नहीं।
+    स्वचालित थीम समर्थन प्राप्त करने के लिए हार्डकोडेड रंगों के बजाय उनका उपयोग
+    करें।
   custom_config_file: कस्टम कॉन्फ़िगर फ़ाइल लोड करें
   data_folder: डेटा फ़ोल्डर
   enable: डेवलपर टूल सक्षम करें
+  icons: कैश्ड चिह्न
   install_folder: स्थापना फ़ोल्डर
   load: भार
   settings_file: सेटिंग संचिका
+  shared_components: एसएलयू मानक घटक
   simulate_perm:
     label: विजेट अनुमति अनुरोध का अनुकरण करें
     result_allowed: ✓ अनुमति दी गई
     result_denied: ✗ अनुमति अस्वीकृत
     trigger: अनुकरण
     widget_id_placeholder: '@लेखक/विजेट-नाम'
+  tools: औजार
   unstable_optimizations: अस्थिर अनुकूलन
   unstable_optimizations_description: >-
     प्रयोगात्मक क्रोमियम फ़्लैग सक्षम करें जो RAM उपयोग को कम करते हैं।
@@ -165,7 +174,6 @@ header:
     extras: अतिरिक्त
     general: सामान्य
     home: घर
-    icon_pack_editor: कैश्ड आइकन
     iconpack: आइकन पैक
     monitors: पर नज़र रखता है
     plugin: प्लग-इन

@@ -71,18 +71,26 @@ close: Затворити
 delete: Избрисати
 devtools:
   app_folders: Мапе за апликације
+  color_palette: Палета боја
+  color_palette_note: >-
+    Ове боје се аутоматски прилагођавају режиму светло/тамно — свака нијанса је
+    контрастна у односу на тренутну позадину, а не фиксну вредност. Користите их
+    уместо чврсто кодираних боја да бисте добили аутоматску подршку за тему.
   custom_config_file: Учитајте прилагођену конфигуријску датотеку
   data_folder: Мапа података
   enable: Омогућите алате за програмере
+  icons: Кеширане иконе
   install_folder: Инсталациона мапа
   load: Оптеретити
   settings_file: Подешавања
+  shared_components: СЛУ стандардне компоненте
   simulate_perm:
     label: Симулирајте захтев за дозволу за виџет
     result_allowed: ✓ Дозвола је дата
     result_denied: ✗ Дозвола одбијена
     trigger: Симулирајте
     widget_id_placeholder: '@аутхор/видгет-наме'
+  tools: Алати
   unstable_optimizations: Нестабилне оптимизације
   unstable_optimizations_description: >-
     Омогућите експерименталне Цхромиум ознаке које смањују употребу РАМ-а. 
@@ -162,7 +170,6 @@ header:
     extras: Додаци
     general: Генерал
     home: Дом
-    icon_pack_editor: Кеширане иконе
     iconpack: Паковање икона
     monitors: Монитори
     plugin: Додаци

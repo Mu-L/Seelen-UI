@@ -70,18 +70,26 @@ close: Sulgur
 delete: Kustutama
 devtools:
   app_folders: Rakenduse kaustad
+  color_palette: Värvipalett
+  color_palette_note: >-
+    Need värvid kohanduvad automaatselt heleda/tumeda režiimiga – iga varjund on
+    kontrasti suhtes praeguse taustaga, mitte fikseeritud väärtus. Automaatse
+    teematoe saamiseks kasutage neid kodeeritud värvide asemel.
   custom_config_file: Laadige kohandatud konfiguratsioonifail
   data_folder: Andmekaust
   enable: Luba arendaja tööriistad
+  icons: Vahemällu salvestatud ikoonid
   install_folder: Installi kaust
   load: Laadima
   settings_file: Seadete fail
+  shared_components: SLU standardkomponendid
   simulate_perm:
     label: Simuleeri vidina loa taotlust
     result_allowed: ✓ Luba antud
     result_denied: ✗ Luba ei antud
     trigger: Simuleerida
     widget_id_placeholder: '@autor/vidina nimi'
+  tools: Tööriistad
   unstable_optimizations: Ebastabiilsed optimeerimised
   unstable_optimizations_description: >-
     Lubage eksperimentaalsed Chromiumi lipud, mis vähendavad RAM-i kasutamist.
@@ -159,7 +167,6 @@ header:
     extras: Lisad
     general: Üld-
     home: Kodu
-    icon_pack_editor: Vaikimisi salvestatud ikoonid
     iconpack: Ikoonipaketid
     monitors: Monitorid
     plugin: Plugins

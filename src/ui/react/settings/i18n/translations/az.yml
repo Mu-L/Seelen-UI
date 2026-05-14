@@ -70,18 +70,26 @@ close: Yaxın
 delete: Silmək
 devtools:
   app_folders: Tətbiq qovluqları
+  color_palette: Rəng Palitrası
+  color_palette_note: >-
+    Bu rənglər avtomatik olaraq işıq/qaranlıq rejiminə uyğunlaşır — hər bir
+    kölgə sabit dəyər deyil, cari fonla kontrast-nisbidir. Avtomatik mövzu
+    dəstəyi əldə etmək üçün sərt kodlu rənglər əvəzinə onlardan istifadə edin.
   custom_config_file: Xüsusi konfiqurasiya faylını yükləyin
   data_folder: Məlumat qovluğu
   enable: Developer alətlərini aktivləşdirin
+  icons: Keşlənmiş Nişanlar
   install_folder: Quraşdırma qovluğu
   load: Yükləmək
   settings_file: Parametrlər faylı
+  shared_components: SLU Standart Komponentləri
   simulate_perm:
     label: Widget İcazə Sorğunu simulyasiya edin
     result_allowed: ✓ İcazə verildi
     result_denied: ✗ İcazə rədd edildi
     trigger: Simulyasiya edin
     widget_id_placeholder: '@author/widget-name'
+  tools: Alətlər
   unstable_optimizations: Qeyri-sabit optimallaşdırmalar
   unstable_optimizations_description: >-
     RAM istifadəsini azaldan eksperimental Chromium bayraqlarını aktiv edin.
@@ -160,7 +168,6 @@ header:
     extras: Əlavələr
     general: General
     home: Evdə
-    icon_pack_editor: Keşişli nişanlar
     iconpack: Icon paketləri
     monitors: Monitorlar
     plugin: Plaginlər

@@ -70,18 +70,27 @@ close: Karibu
 delete: Futa
 devtools:
   app_folders: Folda za programu
+  color_palette: Palette ya rangi
+  color_palette_note: >-
+    Rangi hizi hubadilika kiotomatiki kwa modi ya mwanga/giza — kila kivuli
+    kinalinganishwa na mandharinyuma ya sasa, si thamani isiyobadilika. Zitumie
+    badala ya rangi zenye msimbo ngumu ili kupata usaidizi wa mandhari
+    kiotomatiki.
   custom_config_file: Pakia faili ya usanidi wa kawaida
   data_folder: Folda ya data
   enable: Wezesha zana za msanidi programu
+  icons: Aikoni Zilizohifadhiwa
   install_folder: Folda ya usanikishaji
   load: Mzigo
   settings_file: Faili ya mipangilio
+  shared_components: Vipengele vya kawaida vya SLU
   simulate_perm:
     label: Iga Ombi la Ruhusa ya Wijeti
     result_allowed: ✓ Ruhusa imetolewa
     result_denied: ✗ Ruhusa imekataliwa
     trigger: Iga
     widget_id_placeholder: '@mwandishi/wijeti-jina'
+  tools: Zana
   unstable_optimizations: Uboreshaji Usio thabiti
   unstable_optimizations_description: >-
     Washa alama za majaribio za Chromium ambazo hupunguza matumizi ya RAM. 
@@ -159,7 +168,6 @@ header:
     extras: Ziada
     general: Mkuu
     home: Nyumbani
-    icon_pack_editor: Icons zilizowekwa
     iconpack: Pakiti za ikoni
     monitors: Wachunguzi
     plugin: Programu -jalizi

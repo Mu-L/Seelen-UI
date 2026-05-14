@@ -7,6 +7,7 @@ import { SettingsGroup, SettingsOption } from "../../components/SettingsBox/inde
 import { ColorPalette } from "./ColorPalette.tsx";
 import { DevToolsSettings } from "./DevToolsSettings.tsx";
 import { SystemIconPackView } from "./CachedIcons.tsx";
+import { SharedComponents } from "./SharedComponents.tsx";
 import { getWegConfig, patchWegConfig } from "../seelenweg/application.ts";
 
 export function DeveloperTools() {
@@ -55,6 +56,11 @@ export function DeveloperTools() {
               key: "colors",
               label: t("devtools.color_palette"),
               children: <ColorPalette />,
+            },
+            {
+              key: "shared_components",
+              label: t("devtools.shared_components"),
+              children: <SharedComponents />,
             },
             {
               key: "icon_pack",

@@ -71,18 +71,26 @@ close: Viċin
 delete: Ħassar
 devtools:
   app_folders: Folders tal-app
+  color_palette: Paletta tal-Kulur
+  color_palette_note: >-
+    Dawn il-kuluri jadattaw awtomatikament għall-modalità tad-dawl/dlam — kull
+    dell huwa kuntrast relattiv għall-isfond kurrenti, mhux valur fiss. Użahom
+    minflok kuluri hardcoded biex tikseb appoġġ awtomatiku tat-tema.
   custom_config_file: Tagħbija Fajl tal-Konfigurazzjoni Custom
   data_folder: Folder tad-dejta
   enable: Ippermetti għodod għall-iżviluppaturi
+  icons: Ikoni Cached
   install_folder: Folder tal-installazzjoni
   load: Tagħbija
   settings_file: Settings Fajl
+  shared_components: Komponenti Standard SLU
   simulate_perm:
     label: Issimula Talba ta' Permess għal Widget
     result_allowed: ✓ Permess mogħti
     result_denied: ✗ Permess miċħud
     trigger: Issimula
     widget_id_placeholder: '@ awtur/widget-isem'
+  tools: Għodda
   unstable_optimizations: Ottimizzazzjonijiet instabbli
   unstable_optimizations_description: >-
     Ippermetti bnadar sperimentali tal-Kromju li jnaqqsu l-użu tar-RAM.
@@ -165,7 +173,6 @@ header:
     extras: Ekstras
     general: Ġenerali
     home: Id-dar
-    icon_pack_editor: Ikoni cache
     iconpack: Pakketti tal-ikona
     monitors: Monitors
     plugin: Plugins

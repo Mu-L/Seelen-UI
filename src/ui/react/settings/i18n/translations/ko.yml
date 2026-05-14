@@ -68,18 +68,25 @@ close: 닫기
 delete: 삭제
 devtools:
   app_folders: 앱 폴더
+  color_palette: 컬러 팔레트
+  color_palette_note: >-
+    이러한 색상은 밝은/어두운 모드에 자동으로 적용됩니다. 각 음영은 고정된 값이 아니라 현재 배경을 기준으로 대비됩니다. 자동 테마 지원을
+    받으려면 하드코딩된 색상 대신 이를 사용하십시오.
   custom_config_file: 사용자 정의 구성 파일 로드
   data_folder: 데이터 폴더
   enable: 개발자 도구 활성화
+  icons: 캐시된 아이콘
   install_folder: 설치 폴더
   load: 로드
   settings_file: 설정 파일
+  shared_components: SLU 표준 구성요소
   simulate_perm:
     label: 위젯 권한 요청 시뮬레이션
     result_allowed: ✓ 권한이 부여되었습니다
     result_denied: ✗ 권한이 거부되었습니다
     trigger: 시뮬레이션
     widget_id_placeholder: '@작성자/위젯 이름'
+  tools: 도구
   unstable_optimizations: 불안정한 최적화
   unstable_optimizations_description: |-
     RAM 사용량을 줄이는 실험적인 Chromium 플래그를 활성화합니다.
@@ -147,7 +154,6 @@ header:
     extras: 추가 정보
     general: 일반
     home: 홈
-    icon_pack_editor: 캐시된 아이콘
     iconpack: 아이콘 팩
     monitors: 모니터
     plugin: 플러그인

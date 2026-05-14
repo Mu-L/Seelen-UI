@@ -71,18 +71,27 @@ close: Zoumaachen
 delete: Läschen
 devtools:
   app_folders: App Classeure
+  color_palette: Faarf Palette
+  color_palette_note: >-
+    Dës Faarwen adaptéieren sech automatesch un de Liicht / donkel Modus - all
+    Schiet ass Kontrast-relativ zum aktuellen Hannergrond, net e fixe Wäert.
+    Benotzt se amplaz vun hardcoded Faarwen fir automatesch Thema Ënnerstëtzung
+    ze kréien.
   custom_config_file: Luede personaliséiert Konfiguratiounsdatei
   data_folder: Etabond Dossier
   enable: Aktivéiert Entwéckler Tools
+  icons: Cache Ikonen
   install_folder: Installatioun Dossier
   load: Lueden
   settings_file: Settytout-Datei
+  shared_components: SLU Standard Komponente
   simulate_perm:
     label: Simulatioun Widget Erlaabnis Ufro
     result_allowed: ✓ Erlaabnis gëtt
     result_denied: ✗ Erlaabnis refuséiert
     trigger: Simuléieren
     widget_id_placeholder: '@auteur/widget-name'
+  tools: Tools
   unstable_optimizations: Onbestänneg Optimisatiounen
   unstable_optimizations_description: >-
     Aktivéiert experimentell Chromium Fändelen déi d'RAM Benotzung reduzéieren.
@@ -161,7 +170,6 @@ header:
     extras: Extras
     general: Generol
     home: Doheem
-    icon_pack_editor: Cacked Symboler
     iconpack: ICON Tass
     monitors: Iwwerschwannegkeeten
     plugin: Plugins

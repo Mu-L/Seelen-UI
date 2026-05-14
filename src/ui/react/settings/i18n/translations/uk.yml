@@ -71,18 +71,27 @@ close: Закрити
 delete: Видалити
 devtools:
   app_folders: Папки додатків
+  color_palette: Палітра кольорів
+  color_palette_note: >-
+    Ці кольори автоматично адаптуються до світлого/темного режиму — кожен
+    відтінок є контрастним відносно поточного фону, а не є фіксованим значенням.
+    Використовуйте їх замість жорстко закодованих кольорів, щоб отримати
+    автоматичну підтримку теми.
   custom_config_file: Імпортувати файл конфігурації
   data_folder: Папка даних
   enable: Увімкнути інструменти розробника
+  icons: Кешовані значки
   install_folder: Папка встановлення
   load: Відкрити
   settings_file: Файл налаштувань
+  shared_components: Стандартні компоненти SLU
   simulate_perm:
     label: Симуляція запиту на дозвіл віджета
     result_allowed: ✓ Дозвіл надано
     result_denied: ✗ У дозволі відмовлено
     trigger: Симулювати
     widget_id_placeholder: '@author/назва-віджета'
+  tools: Інструменти
   unstable_optimizations: Нестабільні оптимізації
   unstable_optimizations_description: >-
     Увімкніть експериментальні позначки Chromium, які зменшують використання
@@ -162,7 +171,6 @@ header:
     extras: Додатково
     general: Загальні налаштування
     home: Домашня сторінка
-    icon_pack_editor: Кешовані іконки
     iconpack: Пакети іконок
     monitors: Монітори
     plugin: Плагіни

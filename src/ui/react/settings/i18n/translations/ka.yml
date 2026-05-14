@@ -71,18 +71,27 @@ close: ახლო
 delete: წაშლა
 devtools:
   app_folders: აპლიკაციის საქაღალდეები
+  color_palette: ფერის პალიტრა
+  color_palette_note: >-
+    ეს ფერები ავტომატურად ადაპტირდება ღია/მუქ რეჟიმთან - თითოეული ჩრდილი
+    კონტრასტულია მიმდინარე ფონთან და არა ფიქსირებული მნიშვნელობა. გამოიყენეთ
+    ისინი მყარი კოდირებული ფერების ნაცვლად, თემის ავტომატური მხარდაჭერის
+    მისაღებად.
   custom_config_file: ჩატვირთეთ პერსონალური კონფიგურაციის ფაილი
   data_folder: მონაცემთა საქაღალდე
   enable: ჩართეთ დეველოპერის ინსტრუმენტები
+  icons: ქეშირებული ხატები
   install_folder: ინსტალაციის საქაღალდე
   load: დატვირთვა
   settings_file: პარამეტრების ფაილი
+  shared_components: SLU სტანდარტული კომპონენტები
   simulate_perm:
     label: ვიჯეტის ნებართვის მოთხოვნის სიმულაცია
     result_allowed: ✓ გაცემულია ნებართვა
     result_denied: ✗ ნებართვა უარყოფილია
     trigger: სიმულაცია
     widget_id_placeholder: '@author/widget-name'
+  tools: ხელსაწყოები
   unstable_optimizations: არასტაბილური ოპტიმიზაცია
   unstable_optimizations_description: >-
     ჩართეთ ექსპერიმენტული Chromium დროშები, რომლებიც ამცირებს RAM-ის
@@ -163,7 +172,6 @@ header:
     extras: ზედმეტი
     general: გენერალი
     home: სახლი
-    icon_pack_editor: დაცული ხატები
     iconpack: ხატის პაკეტები
     monitors: მონიტორები
     plugin: ამხებო

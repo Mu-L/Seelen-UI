@@ -69,18 +69,26 @@ close: يغلق
 delete: حذف
 devtools:
   app_folders: مجلدات التطبيق
+  color_palette: لوحة الألوان
+  color_palette_note: >-
+    تتكيف هذه الألوان تلقائيًا مع الوضع الفاتح/الداكن — كل ظل يكون متباينًا
+    بالنسبة للخلفية الحالية، وليس قيمة ثابتة. استخدمها بدلاً من الألوان المضمنة
+    للحصول على دعم تلقائي للموضوع.
   custom_config_file: تحميل ملف الأعدادات المخصص
   data_folder: مجلد البيانات
   enable: تفعيل أدوات المطور
+  icons: الرموز المخزنة مؤقتا
   install_folder: مجلد التثبيت
   load: تحميل
   settings_file: ملف الإعدادات
+  shared_components: المكونات القياسية SLU
   simulate_perm:
     label: محاكاة طلب إذن القطعة
     result_allowed: ✓ تم منح الإذن
     result_denied: ✗ تم رفض الإذن
     trigger: محاكاة
     widget_id_placeholder: '@author/اسم القطعة'
+  tools: أدوات
   unstable_optimizations: تحسينات غير مستقرة
   unstable_optimizations_description: >-
     تمكين علامات Chromium التجريبية التي تقلل من استخدام ذاكرة الوصول العشوائي.
@@ -157,7 +165,6 @@ header:
     extras: الإضافات
     general: عام
     home: المنزل
-    icon_pack_editor: الأيقونات المخزنة مؤقتاً
     iconpack: حزم الأيقونات
     monitors: الشاشات
     plugin: المكونات الإضافية

@@ -71,18 +71,27 @@ close: Սերտ
 delete: Ջնջել
 devtools:
   app_folders: Ծրագրի թղթապանակներ
+  color_palette: Գունավոր գունապնակ
+  color_palette_note: >-
+    Այս գույներն ավտոմատ կերպով հարմարվում են բաց/մութ ռեժիմին. յուրաքանչյուր
+    երանգ հակադրություն է ընթացիկ ֆոնին, այլ ոչ թե ֆիքսված արժեք: Օգտագործեք
+    դրանք կոշտ կոդավորված գույների փոխարեն՝ թեմայի ավտոմատ աջակցություն ստանալու
+    համար:
   custom_config_file: Բեռնեք պատվերով կազմաձեւման ֆայլը
   data_folder: Տվյալների պանակ
   enable: Միացնել մշակողի գործիքները
+  icons: Քեշավորված Սրբապատկերներ
   install_folder: Տեղադրման պանակ
   load: Բեռ
   settings_file: Կարգավորումներ ֆայլ
+  shared_components: SLU ստանդարտ բաղադրիչներ
   simulate_perm:
     label: Վիդջեթի թույլտվության հայտի նմանակում
     result_allowed: ✓ Տրված է թույլտվություն
     result_denied: ✗ Թույլտվությունը մերժված է
     trigger: Մոդելավորել
     widget_id_placeholder: '@author/widget-name'
+  tools: Գործիքներ
   unstable_optimizations: Անկայուն օպտիմիզացումներ
   unstable_optimizations_description: >-
     Միացնել փորձնական Chromium դրոշները, որոնք նվազեցնում են RAM-ի օգտագործումը:
@@ -164,7 +173,6 @@ header:
     extras: Լրացուցիչ նյութեր
     general: Ընդհանուր
     home: Տուն
-    icon_pack_editor: Պահված սրբապատկերներ
     iconpack: Սրբապատկերներ
     monitors: Մոնիտորներ
     plugin: Plugins

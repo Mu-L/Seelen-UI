@@ -70,18 +70,26 @@ close: Đóng
 delete: Xóa bỏ
 devtools:
   app_folders: Thư mục ứng dụng
+  color_palette: Bảng màu
+  color_palette_note: >-
+    Những màu này tự động thích ứng với chế độ sáng/tối — mỗi sắc thái có độ
+    tương phản tương ứng với nền hiện tại chứ không phải một giá trị cố định. Sử
+    dụng chúng thay vì màu được mã hóa cứng để nhận được hỗ trợ chủ đề tự động.
   custom_config_file: Tải tệp cấu hình tùy chỉnh
   data_folder: Thư mục dữ liệu
   enable: Kích hoạt các công cụ nhà phát triển
+  icons: Biểu tượng được lưu trong bộ nhớ đệm
   install_folder: Thư mục cài đặt
   load: Trọng tải
   settings_file: Cài đặt tập tin
+  shared_components: Thành phần tiêu chuẩn SLU
   simulate_perm:
     label: Mô phỏng yêu cầu cấp phép widget
     result_allowed: ✓ Đã được cấp phép
     result_denied: ✗ Quyền bị từ chối
     trigger: mô phỏng
     widget_id_placeholder: '@tác giả/tên widget'
+  tools: Công cụ
   unstable_optimizations: Tối ưu hóa không ổn định
   unstable_optimizations_description: >-
     Bật cờ Chrome thử nghiệm để giảm mức sử dụng RAM. 
@@ -161,7 +169,6 @@ header:
     extras: Bổ sung
     general: Tổng quan
     home: Trang chủ
-    icon_pack_editor: Biểu tượng bộ nhớ cache
     iconpack: Gói biểu tượng
     monitors: Màn hình
     plugin: Plugin

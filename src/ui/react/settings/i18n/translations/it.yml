@@ -71,18 +71,27 @@ close: Chiudi
 delete: Elimina
 devtools:
   app_folders: Cartelle App
+  color_palette: Tavolozza dei colori
+  color_palette_note: >-
+    Questi colori si adattano automaticamente alla modalità chiaro/scuro: ogni
+    tonalità è relativa al contrasto dello sfondo corrente, non a un valore
+    fisso. Usali al posto dei colori codificati per ottenere il supporto
+    automatico del tema.
   custom_config_file: Carica File di Config Personalizzato
   data_folder: Cartella Dati
   enable: Abilita Strumenti Sviluppatore
+  icons: Icone memorizzate nella cache
   install_folder: Cartella di Installazione
   load: Carica
   settings_file: File delle Impostazioni
+  shared_components: Componenti standard SLU
   simulate_perm:
     label: Simulare la richiesta di autorizzazione del widget
     result_allowed: ✓ Autorizzazione concessa
     result_denied: ✗ Autorizzazione negata
     trigger: Simulare
     widget_id_placeholder: '@autore/nome-widget'
+  tools: Utensili
   unstable_optimizations: Ottimizzazioni instabili
   unstable_optimizations_description: >-
     Abilita i flag sperimentali di Chromium che riducono l'utilizzo della RAM.
@@ -166,7 +175,6 @@ header:
     extras: Extra
     general: Generale
     home: Home
-    icon_pack_editor: Icone in cache
     iconpack: Pacchetti di icone
     monitors: Monitor
     plugin: Plugin

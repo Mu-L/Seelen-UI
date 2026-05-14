@@ -69,18 +69,25 @@ close: ገጠመ
 delete: ሰርዝ
 devtools:
   app_folders: የመተግበሪያ አቃፊዎች
+  color_palette: የቀለም ቤተ-ስዕል
+  color_palette_note: >-
+    እነዚህ ቀለሞች በራስ-ሰር ከብርሃን/ጨለማ ሁነታ ጋር ይላመዳሉ - እያንዳንዱ ጥላ ከአሁኑ ዳራ ጋር ንፅፅር ነው እንጂ
+    ቋሚ እሴት አይደለም። ራስ-ሰር ጭብጥ ድጋፍን ለማግኘት ከደረቅ ኮድ ይልቅ ይጠቀሙባቸው።
   custom_config_file: ብጁ ውቅያ ፋይልን ይጫኑ
   data_folder: የውሂብ አቃፊ
   enable: የገንቢ መሳሪያዎችን ያንቁ
+  icons: የተሸጎጡ አዶዎች
   install_folder: የመጫን አቃፊ
   load: ጭነት
   settings_file: የቅንብሮች ፋይል
+  shared_components: SLU መደበኛ ክፍሎች
   simulate_perm:
     label: የመግብር ፍቃድ ጥያቄን አስመስለው
     result_allowed: ✓ ፍቃድ ተሰጥቷል።
     result_denied: ✗ ፍቃድ ተከልክሏል።
     trigger: አስመስለው
     widget_id_placeholder: '@ደራሲ/መግብር-ስም'
+  tools: መሳሪያዎች
   unstable_optimizations: ያልተረጋጉ ማሻሻያዎች
   unstable_optimizations_description: |-
     የ RAM አጠቃቀምን የሚቀንሱ የሙከራ Chromium ባንዲራዎችን ያንቁ።
@@ -154,7 +161,6 @@ header:
     extras: ተጨማሪዎች
     general: አጠቃላይ
     home: ቤት
-    icon_pack_editor: የተሸጡ አዶዎች
     iconpack: አዶዎች ፓኬጆች
     monitors: ተቆጣጣሪዎች
     plugin: ተሰኪዎች

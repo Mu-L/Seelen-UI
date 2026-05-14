@@ -71,18 +71,26 @@ close: Fechar
 delete: Excluir
 devtools:
   app_folders: Pastas de Aplicativos
+  color_palette: Paleta de cores
+  color_palette_note: >-
+    Essas cores se adaptam automaticamente ao modo claro/escuro – cada
+    tonalidade tem um contraste relativo ao fundo atual, e não um valor fixo.
+    Use-as em vez de cores codificadas para obter suporte automático ao tema.
   custom_config_file: Carregar Arquivo de Configuração Personalizado
   data_folder: Pasta de Dados
   enable: Ativar Ferramentas de Desenvolvedor
+  icons: Ícones em cache
   install_folder: Pasta de Instalação
   load: Carregar
   settings_file: Arquivo de Configurações
+  shared_components: Componentes padrão SLU
   simulate_perm:
     label: Simular solicitação de permissão de widget
     result_allowed: ✓ Permissão concedida
     result_denied: ✗ Permissão negada
     trigger: Simular
     widget_id_placeholder: '@autor/nome do widget'
+  tools: Ferramentas
   unstable_optimizations: Otimizações instáveis
   unstable_optimizations_description: >-
     Ative sinalizadores experimentais do Chromium que reduzem o uso de RAM.
@@ -162,7 +170,6 @@ header:
     extras: Extras
     general: Geral
     home: Início
-    icon_pack_editor: Ícones em cache
     iconpack: Pacotes de Ícones
     monitors: Monitores
     plugin: Plugins

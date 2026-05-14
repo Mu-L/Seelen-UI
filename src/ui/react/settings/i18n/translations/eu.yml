@@ -71,18 +71,26 @@ close: Hurbileko
 delete: Ezabatu
 devtools:
   app_folders: Aplikazio karpetak
+  color_palette: Kolore Paleta
+  color_palette_note: >-
+    Kolore hauek automatikoki egokitzen dira argi/ilun modura - tonu bakoitza
+    uneko atzeko planoarekiko kontrastea da, ez balio finko bat. Erabili itzazu
+    kolore gogorren ordez gaien laguntza automatikoa lortzeko.
   custom_config_file: Kargatu Config fitxategi pertsonalizatua
   data_folder: Datu karpeta
   enable: Gaitu garatzaileen tresnak
+  icons: Cachean gordetako ikonoak
   install_folder: Instalazio karpeta
   load: Zamatu
   settings_file: Ezarpenak fitxategia
+  shared_components: SLUren osagai estandarrak
   simulate_perm:
     label: Simulatu widget-aren baimen-eskaera
     result_allowed: ✓ Emandako baimena
     result_denied: ✗ Baimena ukatuta
     trigger: Simulatu
     widget_id_placeholder: '@egilea/widget-izena'
+  tools: Tresnak
   unstable_optimizations: Optimizazio ezegonkorrak
   unstable_optimizations_description: >-
     Gaitu RAM erabilera murrizten duten Chromium bandera esperimentalak.
@@ -162,7 +170,6 @@ header:
     extras: Aput
     general: Jeneral
     home: Etxe
-    icon_pack_editor: Ikono katxeak
     iconpack: Ikono paketeak
     monitors: Monitore
     plugin: Plakins

@@ -70,18 +70,27 @@ close: Ойр дөхөм
 delete: Эдгээх
 devtools:
   app_folders: Апп хавтас
+  color_palette: Өнгөт палитр
+  color_palette_note: >-
+    Эдгээр өнгө нь гэрэл/харанхуй горимд автоматаар дасан зохицдог - сүүдэр бүр
+    нь тогтсон утга биш, одоогийн дэвсгэртэй харьцуулахад ялгаатай байдаг.
+    Автомат загварын дэмжлэг авахын тулд хатуу кодлогдсон өнгөний оронд
+    тэдгээрийг ашигла.
   custom_config_file: Custom Compigh файлыг ачаалах
   data_folder: Д код хавтас
   enable: Хөгжүүлэгч хэрэгслийг идэвхжүүлэх
+  icons: Кэшлэгдсэн дүрсүүд
   install_folder: Суулгалах хүрээ
   load: Ачих
   settings_file: Тохиргооын нэр
+  shared_components: SLU стандарт бүрэлдэхүүн хэсгүүд
   simulate_perm:
     label: Виджетийн зөвшөөрлийн хүсэлтийг дуурайлган хийх
     result_allowed: ✓ Зөвшөөрөл олгосон
     result_denied: ✗ Зөвшөөрөл татгалзсан
     trigger: Дуурайх
     widget_id_placeholder: '@зохиогч/виджетийн нэр'
+  tools: Багаж хэрэгсэл
   unstable_optimizations: Тогтворгүй оновчлолууд
   unstable_optimizations_description: >-
     RAM ашиглалтыг бууруулдаг туршилтын Chromium дарцагуудыг идэвхжүүлнэ үү.
@@ -162,7 +171,6 @@ header:
     extras: Мөр өгөх
     general: Жанжин
     home: Гэр
-    icon_pack_editor: Кэшлэсэн дүрсүүд
     iconpack: Icon багц
     monitors: Хэлэлт авагч
     plugin: Гарын үсэг

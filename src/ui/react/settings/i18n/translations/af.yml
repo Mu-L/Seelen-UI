@@ -71,18 +71,27 @@ close: Dig
 delete: Verwyder
 devtools:
   app_folders: APP -vouers
+  color_palette: Kleurpalet
+  color_palette_note: >-
+    Hierdie kleure pas outomaties aan by die lig/donker-modus - elke skakering
+    is kontras-relatief tot die huidige agtergrond, nie 'n vaste waarde nie.
+    Gebruik dit in plaas van hardgekodeerde kleure om outomatiese
+    temaondersteuning te kry.
   custom_config_file: Laai Custom Config -lêer
   data_folder: Datapap
   enable: Aktiveer ontwikkelaarsgereedskap
+  icons: Gekas ikone
   install_folder: Installasie -lêergids
   load: Vrag
   settings_file: Instellingslêer
+  shared_components: SLU Standaardkomponente
   simulate_perm:
     label: Simuleer Widget Toestemming Versoek
     result_allowed: ✓ Toestemming verleen
     result_denied: ✗ Toestemming geweier
     trigger: Simuleer
     widget_id_placeholder: '@outeur/legstuknaam'
+  tools: Gereedskap
   unstable_optimizations: Onstabiele optimalisering
   unstable_optimizations_description: >-
     Aktiveer eksperimentele Chromium-vlae wat RAM-gebruik verminder.
@@ -160,7 +169,6 @@ header:
     extras: Ekstra's
     general: Generaal
     home: Tuiste
-    icon_pack_editor: Cache -ikone
     iconpack: Ikoonpakkies
     monitors: Monitors
     plugin: Plugins

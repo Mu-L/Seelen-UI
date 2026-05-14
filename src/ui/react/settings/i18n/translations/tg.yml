@@ -71,18 +71,27 @@ close: Наздик
 delete: Нест
 devtools:
   app_folders: Папкаҳои барнома
+  color_palette: Палитраи ранг
+  color_palette_note: >-
+    Ин рангҳо ба таври худкор ба реҷаи рӯшноӣ/торик мутобиқ мешаванд - ҳар як
+    соя нисбат ба заминаи ҷорӣ муқоиса мекунад, на арзиши собит. Барои ба даст
+    овардани дастгирии худкори мавзӯъ, онҳоро ба ҷои рангҳои сахт кодшуда
+    истифода баред.
   custom_config_file: Файли танзимоти танзими фармоишӣ
   data_folder: Папкаи додаҳо
   enable: Воситаҳои таҳиягарро фаъол кунед
+  icons: Нишонаҳои кэшшуда
   install_folder: Феҳристи насб
   load: Сарборӣ
   settings_file: Файлҳои танзимот
+  shared_components: Унсурҳои стандартии SLU
   simulate_perm:
     label: Дархости иҷозати виджетро тақлид кунед
     result_allowed: ✓ Иҷозат дода шудааст
     result_denied: ✗ Иҷозат рад карда шуд
     trigger: Тақлид кардан
     widget_id_placeholder: '@author/widget-name'
+  tools: Воситаҳо
   unstable_optimizations: Оптимизатсияи ноустувор
   unstable_optimizations_description: >-
     Парчамҳои таҷрибавии Chromium-ро фаъол созед, ки истифодаи RAM-ро кам
@@ -164,7 +173,6 @@ header:
     extras: Иловаҳо
     general: Генерал
     home: Хона
-    icon_pack_editor: Нишони кэш
     iconpack: ICon бастаҳои
     monitors: Мониторҳо
     plugin: Плагинҳо

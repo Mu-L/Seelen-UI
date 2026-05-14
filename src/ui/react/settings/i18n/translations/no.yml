@@ -71,18 +71,26 @@ close: Lukke
 delete: Slett
 devtools:
   app_folders: App -mapper
+  color_palette: Fargepalett
+  color_palette_note: >-
+    Disse fargene tilpasser seg automatisk til lys/mørke-modus - hver nyanse er
+    kontrast-relativt til gjeldende bakgrunn, ikke en fast verdi. Bruk dem i
+    stedet for hardkodede farger for å få automatisk temastøtte.
   custom_config_file: Last inn tilpasset konfigurasjonsfil
   data_folder: Datamappen
   enable: Aktiver utviklerverktøy
+  icons: Bufret ikoner
   install_folder: Installasjonsmappe
   load: Laste
   settings_file: Innstillingsfilen
+  shared_components: SLU standardkomponenter
   simulate_perm:
     label: Simuler forespørsel om widgettillatelse
     result_allowed: ✓ Tillatelse gitt
     result_denied: ✗ Tillatelse nektet
     trigger: Simuler
     widget_id_placeholder: '@forfatter/widgetnavn'
+  tools: Verktøy
   unstable_optimizations: Ustabile optimaliseringer
   unstable_optimizations_description: >-
     Aktiver eksperimentelle Chromium-flagg som reduserer RAM-bruken.
@@ -161,7 +169,6 @@ header:
     extras: Ekstrautstyr
     general: Generell
     home: Hjem
-    icon_pack_editor: Bufrede ikoner
     iconpack: Ikonpakker
     monitors: Skjermer
     plugin: Plugins

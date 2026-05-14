@@ -71,18 +71,26 @@ close: Lähellä
 delete: Poistaa
 devtools:
   app_folders: Sovelluskansiot
+  color_palette: Väripaletti
+  color_palette_note: >-
+    Nämä värit mukautuvat automaattisesti vaaleaan/tummaan tilaan – jokainen
+    sävy on kontrastisuhteessa nykyiseen taustaan, ei kiinteään arvoon. Käytä
+    niitä kovakoodattujen värien sijaan saadaksesi automaattisen teematuen.
   custom_config_file: Lataa mukautettu konfigurointitiedosto
   data_folder: Tietokansio
   enable: Ota kehittäjätyökalut käyttöön
+  icons: Välimuistissa olevat kuvakkeet
   install_folder: Asennuskansio
   load: Ladata
   settings_file: Asetustiedosto
+  shared_components: SLU:n vakiokomponentit
   simulate_perm:
     label: Simuloi widgetin lupapyyntö
     result_allowed: ✓ Lupa myönnetty
     result_denied: ✗ Lupa evätty
     trigger: Simuloida
     widget_id_placeholder: '@author/widgetin nimi'
+  tools: Työkalut
   unstable_optimizations: Epävakaat optimoinnit
   unstable_optimizations_description: >-
     Ota käyttöön kokeelliset Chromium-merkit, jotka vähentävät RAM-muistin
@@ -164,7 +172,6 @@ header:
     extras: Lisävarusteet
     general: Yleinen
     home: Kotiin
-    icon_pack_editor: Välimuistissa olevat kuvakkeet
     iconpack: Kuvakepaketit
     monitors: Näytöt
     plugin: Liitännäiset

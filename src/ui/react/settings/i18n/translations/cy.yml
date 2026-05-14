@@ -71,18 +71,26 @@ close: Chaewch
 delete: Croeswn
 devtools:
   app_folders: Ffolderau app
+  color_palette: Palet Lliw
+  color_palette_note: >-
+    Mae'r lliwiau hyn yn addasu'n awtomatig i'r modd golau/tywyll - mae pob
+    arlliw yn gyferbyniol i'r cefndir presennol, nid gwerth sefydlog.
+    Defnyddiwch nhw yn lle lliwiau cod caled i gael cefnogaeth thema awtomatig.
   custom_config_file: Llwythwch ffeil ffurfweddu arfer
   data_folder: Ffolder data
   enable: Galluogi Offer Datblygwr
+  icons: Eiconau Cached
   install_folder: Ffolder gosod
   load: Lwythet
   settings_file: Ffeil Gosodiadau
+  shared_components: Cydrannau Safonol SLU
   simulate_perm:
     label: Efelychu Cais Caniatâd Widget
     result_allowed: ✓ Rhoddwyd caniatâd
     result_denied: ✗ Gwrthodwyd caniatâd
     trigger: Efelychu
     widget_id_placeholder: '@author/widget-name'
+  tools: Offer
   unstable_optimizations: Optimizations Ansefydlog
   unstable_optimizations_description: >-
     Galluogi fflagiau Chromium arbrofol sy'n lleihau'r defnydd o RAM.
@@ -160,7 +168,6 @@ header:
     extras: Hetiau
     general: Gyffredinol
     home: Nghartrefi
-    icon_pack_editor: Eiconau wedi'u storio
     iconpack: Pecynnau eicon
     monitors: Monitorau
     plugin: Ategion

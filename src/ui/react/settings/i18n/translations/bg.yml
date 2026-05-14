@@ -71,18 +71,27 @@ close: Затворете
 delete: Изтрий
 devtools:
   app_folders: Папки на приложения
+  color_palette: Цветова палитра
+  color_palette_note: >-
+    Тези цветове автоматично се адаптират към светъл/тъмен режим — всеки нюанс е
+    контрастен спрямо текущия фон, а не фиксирана стойност. Използвайте ги
+    вместо твърдо кодирани цветове, за да получите автоматична поддръжка на
+    теми.
   custom_config_file: Заредете персонализиран конфигурационен файл
   data_folder: Папка с данни
   enable: Активирайте инструментите за разработчици
+  icons: Кеширани икони
   install_folder: Инсталационна папка
   load: Зареждане
   settings_file: Файл за настройки
+  shared_components: SLU Стандартни компоненти
   simulate_perm:
     label: Искане за разрешение за симулиране на Widget
     result_allowed: ✓ Предоставено разрешение
     result_denied: ✗ Разрешението е отказано
     trigger: Симулирайте
     widget_id_placeholder: '@автор/име-на-притурка'
+  tools: Инструменти
   unstable_optimizations: Нестабилни оптимизации
   unstable_optimizations_description: >-
     Активирайте експериментални флагове на Chromium, които намаляват
@@ -164,7 +173,6 @@ header:
     extras: Екстри
     general: Общ
     home: Начало
-    icon_pack_editor: Икони в кеша
     iconpack: Пакети с икони
     monitors: Монитори
     plugin: Плъгини

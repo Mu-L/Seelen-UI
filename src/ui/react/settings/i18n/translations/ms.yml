@@ -71,18 +71,27 @@ close: Tutup
 delete: Padam
 devtools:
   app_folders: Folder App
+  color_palette: Palet Warna
+  color_palette_note: >-
+    Warna ini secara automatik menyesuaikan diri dengan mod terang/gelap —
+    setiap rona adalah kontras-relatif kepada latar belakang semasa, bukan nilai
+    tetap. Gunakannya dan bukannya warna berkod keras untuk mendapatkan sokongan
+    tema automatik.
   custom_config_file: Muatkan fail konfigurasi tersuai
   data_folder: Folder Data
   enable: Dayakan alat pemaju
+  icons: Ikon Cache
   install_folder: Folder pemasangan
   load: Beban
   settings_file: Fail tetapan
+  shared_components: Komponen Standard SLU
   simulate_perm:
     label: Simulasikan Permintaan Kebenaran Widget
     result_allowed: ✓ Kebenaran diberikan
     result_denied: ✗ Kebenaran ditolak
     trigger: Simulasikan
     widget_id_placeholder: '@nama pengarang/widget'
+  tools: Alatan
   unstable_optimizations: Pengoptimuman Tidak Stabil
   unstable_optimizations_description: >-
     Dayakan bendera Chromium percubaan yang mengurangkan penggunaan RAM.
@@ -161,7 +170,6 @@ header:
     extras: Tambahan
     general: Umum
     home: Rumah
-    icon_pack_editor: Ikon cache
     iconpack: Pek ikon
     monitors: Monitor
     plugin: Plugin

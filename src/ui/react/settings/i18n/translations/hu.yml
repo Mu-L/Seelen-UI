@@ -70,18 +70,27 @@ close: Közeli
 delete: Töröl
 devtools:
   app_folders: App mappák
+  color_palette: Színpaletta
+  color_palette_note: >-
+    Ezek a színek automatikusan alkalmazkodnak a világos/sötét módhoz – minden
+    árnyalat az aktuális háttérhez képest kontrasztos, nem rögzített érték.
+    Használja ezeket a kódolt színek helyett az automatikus tématámogatás
+    eléréséhez.
   custom_config_file: Töltse be az egyéni konfigurációs fájlt
   data_folder: Adatmappa
   enable: Engedélyezze a fejlesztői eszközöket
+  icons: Gyorsítótárazott ikonok
   install_folder: Telepítési mappa
   load: Betöltés
   settings_file: Beállítási fájl
+  shared_components: SLU szabványos komponensek
   simulate_perm:
     label: Szimulálja a Widget engedélykérését
     result_allowed: ✓ Engedély megadva
     result_denied: ✗ Engedély megtagadva
     trigger: Szimulál
     widget_id_placeholder: '@author/widget-name'
+  tools: Eszközök
   unstable_optimizations: Instabil optimalizálás
   unstable_optimizations_description: >-
     Engedélyezze a kísérleti Chromium-jelzőket, amelyek csökkentik a
@@ -166,7 +175,6 @@ header:
     extras: Extrák
     general: Tábornok
     home: Otthon
-    icon_pack_editor: Cache-olt ikonok
     iconpack: Ikon csomagok
     monitors: Monitorok
     plugin: Plugins

@@ -70,18 +70,26 @@ close: بندول
 delete: حذف کول
 devtools:
   app_folders: د ایپ فولډرونه
+  color_palette: رنګ پالټ
+  color_palette_note: >-
+    دا رنګونه په اوتومات ډول د رڼا / تیاره حالت سره سمون لري - هر سیوري د اوسني
+    شالید سره متضاد دی، نه یو ثابت ارزښت. د هارډ کوډ شوي رنګونو پرځای یې د
+    اتوماتیک موضوع ملاتړ ترلاسه کولو لپاره وکاروئ.
   custom_config_file: د دودیز ترتیب فایل پورته کړئ
   data_folder: د معلوماتو فولډر
   enable: د پراختیا کونکي وسیلې فعال کړئ
+  icons: کیش شوي شبیه
   install_folder: لګول فولډر
   load: بار
   settings_file: د امستنې دوتنه
+  shared_components: د SLU معیاري اجزا
   simulate_perm:
     label: د ویجټ اجازې غوښتنه سمول
     result_allowed: ✓ اجازه ورکړل شوه
     result_denied: ✗ اجازه رد شوه
     trigger: سمول
     widget_id_placeholder: '@author/widget-name'
+  tools: وسیلې
   unstable_optimizations: بې ثباته اصلاح کول
   unstable_optimizations_description: >-
     تجربوي کرومیم بیرغونه فعال کړئ چې د RAM کارول کموي.
@@ -159,7 +167,6 @@ header:
     extras: اضافي
     general: عمومي
     home: کور
-    icon_pack_editor: د
     iconpack: آیکون کڅوړه
     monitors: څارونکي
     plugin: فلګونه

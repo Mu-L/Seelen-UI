@@ -47,7 +47,7 @@ await completeTranslationsFor("src/ui/react/fancy-toolbar/i18n/translations");
 await completeTranslationsFor("src/ui/react/weg/i18n/translations");
 await completeTranslationsFor("src/ui/react/settings/i18n/translations");
 
-await completeTranslationsFor("src/ui/svelte/wallpaper_manager/i18n/translations");
+await completeTranslationsFor("src/ui/svelte/wallpaper-manager/i18n/translations");
 await completeTranslationsFor("src/ui/svelte/power-menu/i18n/translations");
 await completeTranslationsFor("src/ui/svelte/bluetooth-popup/i18n/translations");
 await completeTranslationsFor("src/ui/svelte/network-popup/i18n/translations");

@@ -71,18 +71,26 @@ close: বন্ধ
 delete: মুছে ফেলা
 devtools:
   app_folders: অ্যাপ্লিকেশন ফোল্ডার
+  color_palette: কালার প্যালেট
+  color_palette_note: >-
+    এই রঙগুলি স্বয়ংক্রিয়ভাবে হালকা/অন্ধকার মোডে খাপ খাইয়ে নেয় — প্রতিটি
+    ছায়া বর্তমান পটভূমির সাথে বৈপরীত্য-সম্পর্কিত, একটি নির্দিষ্ট মান নয়।
+    স্বয়ংক্রিয় থিম সমর্থন পেতে হার্ডকোডেড রঙের পরিবর্তে এগুলি ব্যবহার করুন।
   custom_config_file: কাস্টম কনফিগার ফাইল লোড করুন
   data_folder: ডেটা ফোল্ডার
   enable: বিকাশকারী সরঞ্জাম সক্ষম করুন
+  icons: ক্যাশে আইকন
   install_folder: ইনস্টলেশন ফোল্ডার
   load: বোঝা
   settings_file: সেটিংস ফাইল
+  shared_components: SLU স্ট্যান্ডার্ড উপাদান
   simulate_perm:
     label: উইজেট অনুমতি অনুরোধ অনুকরণ
     result_allowed: ✓ অনুমতি দেওয়া হয়েছে
     result_denied: ✗ অনুমতি অস্বীকৃত
     trigger: অনুকরণ
     widget_id_placeholder: '@লেখক/উইজেট-নাম'
+  tools: টুলস
   unstable_optimizations: অস্থির অপ্টিমাইজেশান
   unstable_optimizations_description: >-
     পরীক্ষামূলক ক্রোমিয়াম পতাকাগুলি সক্ষম করে যা RAM ব্যবহার হ্রাস করে৷
@@ -164,7 +172,6 @@ header:
     extras: অতিরিক্ত
     general: সাধারণ
     home: বাড়ি
-    icon_pack_editor: ক্যাশেড আইকন
     iconpack: আইকন প্যাকস
     monitors: মনিটর
     plugin: প্লাগইন

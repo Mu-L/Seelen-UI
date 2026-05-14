@@ -67,18 +67,26 @@ close: ਨੇੜੇ
 delete: ਮਿਟਾਓ
 devtools:
   app_folders: ਐਪ ਫੋਲਡਰ
+  color_palette: ਰੰਗ ਪੈਲੇਟ
+  color_palette_note: >-
+    ਇਹ ਰੰਗ ਆਟੋਮੈਟਿਕ ਹੀ ਲਾਈਟ/ਡਾਰਕ ਮੋਡ ਦੇ ਅਨੁਕੂਲ ਹੋ ਜਾਂਦੇ ਹਨ — ਹਰੇਕ ਸ਼ੇਡ ਮੌਜੂਦਾ
+    ਬੈਕਗ੍ਰਾਉਂਡ ਦੇ ਉਲਟ ਹੈ, ਇੱਕ ਨਿਸ਼ਚਿਤ ਮੁੱਲ ਨਹੀਂ। ਆਟੋਮੈਟਿਕ ਥੀਮ ਸਹਾਇਤਾ ਪ੍ਰਾਪਤ ਕਰਨ
+    ਲਈ ਹਾਰਡਕੋਡ ਕੀਤੇ ਰੰਗਾਂ ਦੀ ਬਜਾਏ ਉਹਨਾਂ ਦੀ ਵਰਤੋਂ ਕਰੋ।
   custom_config_file: ਕਸਟਮ ਕੌਂਫਿਗ ਫਾਈਲ ਲੋਡ ਕਰੋ
   data_folder: ਡਾਟਾ ਫੋਲਡਰ
   enable: ਡਿਵੈਲਪਰ ਟੂਲਸ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ
+  icons: ਕੈਸ਼ ਕੀਤੇ ਆਈਕਾਨ
   install_folder: ਇੰਸਟਾਲੇਸ਼ਨ ਫੋਲਡਰ
   load: ਲੋਡ ਕਰੋ
   settings_file: ਸੈਟਿੰਗਜ਼ ਫਾਈਲ
+  shared_components: SLU ਸਟੈਂਡਰਡ ਕੰਪੋਨੈਂਟਸ
   simulate_perm:
     label: ਵਿਜੇਟ ਅਨੁਮਤੀ ਬੇਨਤੀ ਦੀ ਨਕਲ ਕਰੋ
     result_allowed: ✓ ਇਜਾਜ਼ਤ ਦਿੱਤੀ ਗਈ
     result_denied: ✗ ਇਜਾਜ਼ਤ ਅਸਵੀਕਾਰ ਕੀਤੀ ਗਈ
     trigger: ਸਿਮੂਲੇਟ
     widget_id_placeholder: '@author/widget-name'
+  tools: ਸੰਦ
   unstable_optimizations: ਅਸਥਿਰ ਓਪਟੀਮਾਈਜੇਸ਼ਨ
   unstable_optimizations_description: >-
     ਪ੍ਰਯੋਗਾਤਮਕ Chromium ਫਲੈਗ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ ਜੋ RAM ਦੀ ਵਰਤੋਂ ਨੂੰ ਘਟਾਉਂਦੇ ਹਨ।
@@ -157,7 +165,6 @@ header:
     extras: ਵਾਧੂ
     general: ਜਨਰਲ
     home: ਘਰ
-    icon_pack_editor: ਕੈਸ਼ਡ ਆਈਕਾਨ
     iconpack: ਆਈਕਾਨ ਪੈਕ
     monitors: ਨਿਗਰਾਨੀ ਕਰਦਾ ਹੈ
     plugin: ਪਲੱਗਇਨ

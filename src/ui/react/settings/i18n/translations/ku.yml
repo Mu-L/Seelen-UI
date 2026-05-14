@@ -69,18 +69,26 @@ close: Nêzîkî
 delete: Lûleêkirin
 devtools:
   app_folders: Pelên App
+  color_palette: Paleta Rengê
+  color_palette_note: >-
+    Van rengan bixweber bi moda ronahiyê/tarî ve diguhezin - her reng bi
+    paşxaneya heyî re têkildar e, ne nirxek sabît e. Wan li şûna rengên
+    hişk-kodkirî bikar bînin da ku desteka mijara otomatîk bistînin.
   custom_config_file: Pelê Config-ê ya xwerû barkirin
   data_folder: Peldanka daneyê
   enable: Amûrên Pêşdebir çalak bikin
+  icons: Îkonên Cached
   install_folder: Peldanka sazkirinê
   load: Dawetkirin
   settings_file: Pelê Mîhengan
+  shared_components: Pêkhateyên Standard SLU
   simulate_perm:
     label: Daxwaza Destûra Widgetê simule bikin
     result_allowed: ✓ Destûr hat dayîn
     result_denied: ✗ Destûr red kirin
     trigger: Simulate
     widget_id_placeholder: '@author/widget-name'
+  tools: Amûrên
   unstable_optimizations: Optimîzasyonên nestable
   unstable_optimizations_description: >-
     Alên Chromium-ê yên ceribandinê yên ku karanîna RAM-ê kêm dikin çalak bike.
@@ -160,7 +168,6 @@ header:
     extras: Ekstras
     general: Giştî
     home: Xane
-    icon_pack_editor: Îkonên cached
     iconpack: Packon icon
     monitors: Çavdêr
     plugin: Pêçanin

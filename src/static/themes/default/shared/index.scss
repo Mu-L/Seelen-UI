@@ -53,7 +53,7 @@
 }
 
 // Standard for popover
-body:has(.slu-std-popover) {
+body:has(> div > .slu-std-popover) {
   background-color: transparent;
   overflow: hidden;
 

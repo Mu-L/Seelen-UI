@@ -71,18 +71,26 @@ close: Nära
 delete: Radera
 devtools:
   app_folders: Appmappar
+  color_palette: Färgpalett
+  color_palette_note: >-
+    Dessa färger anpassar sig automatiskt till ljus/mörkt läge - varje nyans är
+    kontrast-relativt den aktuella bakgrunden, inte ett fast värde. Använd dem
+    istället för hårdkodade färger för att få automatiskt temastöd.
   custom_config_file: Ladda anpassad konfigurationsfil
   data_folder: Datarmapp
   enable: Aktivera utvecklarverktyg
+  icons: Cachade ikoner
   install_folder: Installationsmapp
   load: Ladda
   settings_file: Inställningsfil
+  shared_components: SLU Standardkomponenter
   simulate_perm:
     label: Simulera widgettillståndsbegäran
     result_allowed: ✓ Tillstånd beviljat
     result_denied: ✗ Tillstånd nekad
     trigger: Simulera
     widget_id_placeholder: '@författare/widget-namn'
+  tools: Verktyg
   unstable_optimizations: Instabila optimeringar
   unstable_optimizations_description: >-
     Aktivera experimentella Chromium-flaggor som minskar RAM-användningen. 
@@ -161,7 +169,6 @@ header:
     extras: Extramaterial
     general: Allmän
     home: Hem
-    icon_pack_editor: Cachade ikoner
     iconpack: Ikonpaket
     monitors: Monitorer
     plugin: Plugins

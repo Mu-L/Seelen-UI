@@ -71,18 +71,27 @@ close: Zatvoriť
 delete: Vymazať
 devtools:
   app_folders: Priečinky
+  color_palette: Paleta farieb
+  color_palette_note: >-
+    Tieto farby sa automaticky prispôsobujú svetlému/tmavému režimu – každý
+    odtieň je kontrastný vzhľadom k aktuálnemu pozadiu, nie je pevnou hodnotou.
+    Použite ich namiesto pevne zakódovaných farieb, aby ste získali automatickú
+    podporu tém.
   custom_config_file: Načítať vlastný konfiguračný súbor
   data_folder: Priečinok
   enable: Povoľte vývojárskym nástrojom
+  icons: Ikony vo vyrovnávacej pamäti
   install_folder: Inštalačný priečinok
   load: Naložiť
   settings_file: Nastavovací súbor
+  shared_components: Štandardné komponenty SLU
   simulate_perm:
     label: Simulovať žiadosť o povolenie miniaplikácie
     result_allowed: ✓ Povolenie udelené
     result_denied: ✗ Povolenie zamietnuté
     trigger: Simulovať
     widget_id_placeholder: '@autor/názov-widgetu'
+  tools: Nástroje
   unstable_optimizations: Nestabilné optimalizácie
   unstable_optimizations_description: >-
     Povoliť experimentálne príznaky prehliadača Chromium, ktoré znižujú využitie
@@ -161,7 +170,6 @@ header:
     extras: Dodatky
     general: Všeobecný
     home: Domov
-    icon_pack_editor: Ikony v medzipamäti
     iconpack: Balíky ikon
     monitors: Monitorovať
     plugin: Zásuvné moduly

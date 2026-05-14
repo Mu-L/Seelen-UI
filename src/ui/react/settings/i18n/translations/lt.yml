@@ -71,18 +71,27 @@ close: Uždaryti
 delete: Ištrinti
 devtools:
   app_folders: Programos aplankai
+  color_palette: Spalvų paletė
+  color_palette_note: >-
+    Šios spalvos automatiškai prisitaiko prie šviesaus / tamsaus režimo –
+    kiekvienas atspalvis yra kontrastas, palyginti su esamu fonu, o ne fiksuota
+    vertė. Naudokite jas vietoj užkoduotų spalvų, kad gautumėte automatinį temos
+    palaikymą.
   custom_config_file: Įkelkite pasirinktinį konfigūracijos failą
   data_folder: Duomenų aplankas
   enable: Įgalinkite kūrėjo įrankius
+  icons: Talpykloje saugomos piktogramos
   install_folder: Diegimo aplankas
   load: Įkelti
   settings_file: Nustatymų failas
+  shared_components: SLU standartiniai komponentai
   simulate_perm:
     label: Imituoti valdiklio leidimo užklausą
     result_allowed: ✓ Leidimas suteiktas
     result_denied: ✗ Leidimas atmestas
     trigger: Imituoti
     widget_id_placeholder: '@autorius/valdiklio pavadinimas'
+  tools: Įrankiai
   unstable_optimizations: Nestabilios optimizacijos
   unstable_optimizations_description: >-
     Įgalinkite eksperimentines „Chromium“ žymas, kurios sumažina RAM naudojimą.
@@ -162,7 +171,6 @@ header:
     extras: Priedai
     general: Bendrasis
     home: Namai
-    icon_pack_editor: Ikonos talpyklose
     iconpack: Ikonų paketai
     monitors: Monitoriai
     plugin: Įskiepiai

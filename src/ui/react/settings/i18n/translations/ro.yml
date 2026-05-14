@@ -71,18 +71,27 @@ close: Aproape
 delete: Șterge
 devtools:
   app_folders: Foldere de aplicații
+  color_palette: Paleta de culori
+  color_palette_note: >-
+    Aceste culori se adaptează automat la modul de lumină/întuneric — fiecare
+    nuanță este raportată la contrastul cu fundalul curent, nu o valoare fixă.
+    Folosiți-le în loc de culorile codificate pentru a obține suport automat
+    pentru teme.
   custom_config_file: Încărcați fișierul de configurare personalizat
   data_folder: Folder de date
   enable: Activați instrumentele pentru dezvoltatori
+  icons: Pictograme stocate în cache
   install_folder: Folder de instalare
   load: Sarcină
   settings_file: Fișier de setări
+  shared_components: Componente standard SLU
   simulate_perm:
     label: Simulați cererea de permisiune pentru widget
     result_allowed: ✓ Permisiune acordată
     result_denied: ✗ Permisiune refuzată
     trigger: Simula
     widget_id_placeholder: '@autor/nume-widget'
+  tools: Instrumente
   unstable_optimizations: Optimizări instabile
   unstable_optimizations_description: >-
     Activați semnalizatoarele Chromium experimentale care reduc utilizarea RAM.
@@ -164,7 +173,6 @@ header:
     extras: Extras
     general: General
     home: Acasă
-    icon_pack_editor: Icoane în cache
     iconpack: Pachete de pictograme
     monitors: Monitoare
     plugin: Plugin-uri

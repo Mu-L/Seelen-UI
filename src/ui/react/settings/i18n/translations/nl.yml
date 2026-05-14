@@ -71,18 +71,27 @@ close: Sluiten
 delete: Verwijderen
 devtools:
   app_folders: App -mappen
+  color_palette: Kleurenpalet
+  color_palette_note: >-
+    Deze kleuren passen zich automatisch aan de licht/donker-modus aan: elke
+    tint is contrastrijk ten opzichte van de huidige achtergrond en heeft geen
+    vaste waarde. Gebruik ze in plaats van hardgecodeerde kleuren om
+    automatische thema-ondersteuning te krijgen.
   custom_config_file: Laad het aangepaste configuratiebestand
   data_folder: Gegevensmap
   enable: Schakel ontwikkelaarstools in
+  icons: Gecachte pictogrammen
   install_folder: Installatiemap
   load: Laden
   settings_file: Instellingenbestand
+  shared_components: SLU-standaardcomponenten
   simulate_perm:
     label: Simuleer het verzoek om widgettoestemming
     result_allowed: ✓ Toestemming verleend
     result_denied: ✗ Toestemming geweigerd
     trigger: Simuleren
     widget_id_placeholder: '@auteur/widgetnaam'
+  tools: Hulpmiddelen
   unstable_optimizations: Onstabiele optimalisaties
   unstable_optimizations_description: >-
     Schakel experimentele Chromium-vlaggen in die het RAM-gebruik verminderen.
@@ -162,7 +171,6 @@ header:
     extras: Extra's
     general: Algemeen
     home: Thuis
-    icon_pack_editor: Gecachte pictogrammen
     iconpack: Pictogrammenpakketten
     monitors: Monitors
     plugin: Plugins

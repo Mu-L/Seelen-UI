@@ -73,18 +73,27 @@ close: Malapit
 delete: Tanggalin
 devtools:
   app_folders: Mga folder ng app
+  color_palette: Palette ng Kulay
+  color_palette_note: >-
+    Ang mga kulay na ito ay awtomatikong umaangkop sa light/dark mode — bawat
+    shade ay contrast-relative sa kasalukuyang background, hindi isang fixed
+    value. Gamitin ang mga ito sa halip na mga hardcoded na kulay para makakuha
+    ng awtomatikong suporta sa tema.
   custom_config_file: I -load ang pasadyang config file
   data_folder: Folder ng data
   enable: Paganahin ang mga tool ng developer
+  icons: Mga Naka-cache na Icon
   install_folder: Folder ng pag -install
   load: Mag -load
   settings_file: File ng mga setting
+  shared_components: Mga Pamantayang Bahagi ng SLU
   simulate_perm:
     label: Gayahin ang Kahilingan ng Pahintulot sa Widget
     result_allowed: ✓ Ipinagkaloob ang pahintulot
     result_denied: ✗ Tinanggihan ang pahintulot
     trigger: Gayahin
     widget_id_placeholder: '@author/widget-name'
+  tools: Mga gamit
   unstable_optimizations: Mga Hindi Matatag na Optimization
   unstable_optimizations_description: >-
     I-enable ang pang-eksperimentong mga flag ng Chromium na nagpapababa sa
@@ -169,7 +178,6 @@ header:
     extras: Extras
     general: Pangkalahatan
     home: Home
-    icon_pack_editor: Mga icon na naka -cache
     iconpack: Icon pack
     monitors: Monitor
     plugin: Plugins

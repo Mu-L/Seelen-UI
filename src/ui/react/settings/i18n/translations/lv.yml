@@ -71,18 +71,26 @@ close: Tuvs
 delete: Dzēst
 devtools:
   app_folders: Lietotņu mapes
+  color_palette: Krāsu palete
+  color_palette_note: >-
+    Šīs krāsas automātiski pielāgojas gaišajam/tumšajam režīmam — katrs tonis ir
+    kontrasts attiecībā pret pašreizējo fonu, nevis fiksēta vērtība. Izmantojiet
+    tās kodētu krāsu vietā, lai iegūtu automātisku motīvu atbalstu.
   custom_config_file: Ielādēt pielāgotu konfigurācijas failu
   data_folder: Datu mape
   enable: Iespējot izstrādātāju rīkus
+  icons: Kešatmiņā saglabātās ikonas
   install_folder: Instalēšanas mape
   load: Slodze
   settings_file: Iestatīšanas fails
+  shared_components: SLU standarta komponenti
   simulate_perm:
     label: Simulēt logrīka atļaujas pieprasījumu
     result_allowed: ✓ Atļauja piešķirta
     result_denied: ✗ Atļauja liegta
     trigger: Simulēt
     widget_id_placeholder: '@autors/logrīka nosaukums'
+  tools: Rīki
   unstable_optimizations: Nestabila optimizācija
   unstable_optimizations_description: >-
     Iespējojiet eksperimentālos Chromium karogus, kas samazina RAM lietojumu.
@@ -162,7 +170,6 @@ header:
     extras: Papildaprīkojums
     general: Ģenerāldirektors
     home: Mājas
-    icon_pack_editor: Ikonas kešatmiņā
     iconpack: Ikonu paketes
     monitors: Monitori
     plugin: Spraudņi

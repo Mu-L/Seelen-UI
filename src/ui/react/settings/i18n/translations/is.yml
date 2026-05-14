@@ -71,18 +71,26 @@ close: Lokaðu
 delete: Eyða
 devtools:
   app_folders: App möppur
+  color_palette: Litapalletta
+  color_palette_note: >-
+    Þessir litir laga sig sjálfkrafa að ljósum/dökkum stillingum - hver
+    litbrigði er andstæða miðað við núverandi bakgrunn, ekki fast gildi. Notaðu
+    þá í stað harðkóðaða lita til að fá sjálfvirkan þemastuðning.
   custom_config_file: Hlaða sérsniðna config skrá
   data_folder: Gagnamappa
   enable: Virkja verktaki verktaki
+  icons: Tákn í skyndiminni
   install_folder: Uppsetningarmöppu
   load: Hlaða
   settings_file: Stillingarskrá
+  shared_components: SLU staðalbúnaður
   simulate_perm:
     label: Líktu eftir beiðni um leyfi fyrir græju
     result_allowed: ✓ Leyfi veitt
     result_denied: ✗ Leyfi hafnað
     trigger: Herma eftir
     widget_id_placeholder: '@höfundur/nafn búnaðar'
+  tools: Verkfæri
   unstable_optimizations: Óstöðugar hagræðingar
   unstable_optimizations_description: >-
     Virkjaðu tilrauna Chromium fána sem draga úr vinnsluminni notkun.
@@ -160,7 +168,6 @@ header:
     extras: Aukahlutir
     general: Almennt
     home: Heim
-    icon_pack_editor: Skyndimennd tákn
     iconpack: Táknpakkar
     monitors: Fylgist með
     plugin: Viðbætur

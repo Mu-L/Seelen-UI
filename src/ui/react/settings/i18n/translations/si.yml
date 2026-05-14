@@ -70,18 +70,26 @@ close: වසන්න
 delete: මකන්න
 devtools:
   app_folders: යෙදුම් ෆෝල්ඩර
+  color_palette: වර්ණ පුවරුව
+  color_palette_note: >-
+    මෙම වර්ණ ස්වයංක්‍රීයව ආලෝකය/අඳුරු ප්‍රකාරයට අනුවර්තනය වේ - සෑම සෙවනක්ම
+    වත්මන් පසුබිමට ප්‍රතිවිරුද්ධ-සාපේක්ෂයි, ස්ථාවර අගයක් නොවේ. ස්වයංක්‍රීය තේමා
+    සහය ලබා ගැනීමට දෘඪ කේත වර්ණ වෙනුවට ඒවා භාවිතා කරන්න.
   custom_config_file: අභිරුචි වින්‍යාස ගොනුව පූරණය කරන්න
   data_folder: දත්ත ෆෝල්ඩරය
   enable: සංවර්ධක මෙවලම් සබල කරන්න
+  icons: හැඹිලිගත අයිකන
   install_folder: ස්ථාපන ෆෝල්ඩරය
   load: පැටවීම
   settings_file: සැකසුම් ගොනුව
+  shared_components: SLU සම්මත සංරචක
   simulate_perm:
     label: විජට් අවසර ඉල්ලීම අනුකරණය කරන්න
     result_allowed: ✓ අවසරය ලබා දී ඇත
     result_denied: ✗ අවසරය ප්‍රතික්ෂේප විය
     trigger: අනුකරණය කරන්න
     widget_id_placeholder: '@author/widget-name'
+  tools: මෙවලම්
   unstable_optimizations: අස්ථායී ප්‍රශස්තකරණය
   unstable_optimizations_description: >-
     RAM භාවිතය අඩු කරන පර්යේෂණාත්මක Chromium ධජ සබල කරන්න.
@@ -161,7 +169,6 @@ header:
     extras: අමතර
     general: ජනරාල්
     home: මුල් පිටුව
-    icon_pack_editor: හැඹිලි අයිකන
     iconpack: අයිකන ඇසුරුම්
     monitors: නිරීක්ෂකයින්
     plugin: ප්ලගීන

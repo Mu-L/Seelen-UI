@@ -71,18 +71,27 @@ close: घनिष्ट
 delete: मेटाउन
 devtools:
   app_folders: निल्डर
+  color_palette: रङ प्यालेट
+  color_palette_note: >-
+    यी रङहरू प्रकाश/गाढा मोडमा स्वतः अनुकूल हुन्छन् — प्रत्येक छाया हालको
+    पृष्ठभूमिसँग कन्ट्रास्ट-सापेक्ष हुन्छ, निश्चित मान होइन। स्वचालित विषयवस्तु
+    समर्थन प्राप्त गर्न हार्डकोड गरिएका रङहरूको सट्टा तिनीहरूलाई प्रयोग
+    गर्नुहोस्।
   custom_config_file: कस्टम कन्फिगरि फाईल लोड गर्नुहोस्
   data_folder: डेटा फोल्डर
   enable: विकासकर्ता उपकरणहरू सक्षम गर्नुहोस्
+  icons: क्यास गरिएका आइकनहरू
   install_folder: स्थापना फोल्डर
   load: बोभ्क
   settings_file: सेटिंग्स फाइल
+  shared_components: SLU मानक कम्पोनेन्टहरू
   simulate_perm:
     label: विजेट अनुमति अनुरोध सिमुलेट
     result_allowed: ✓ अनुमति दिइएको छ
     result_denied: ✗ अनुमति अस्वीकार गरियो
     trigger: अनुकरण गर्नुहोस्
     widget_id_placeholder: '@author/widget-name'
+  tools: उपकरणहरू
   unstable_optimizations: अस्थिर अप्टिमाइजेसनहरू
   unstable_optimizations_description: >-
     प्रयोगात्मक क्रोमियम फ्ल्यागहरू सक्षम गर्नुहोस् जसले RAM को प्रयोग घटाउँछ।
@@ -163,7 +172,6 @@ header:
     extras: अतिरिक्त
     general: जर्नेल
     home: घर
-    icon_pack_editor: Comed आईकनहरू
     iconpack: आइकन प्याक
     monitors: मोनिटरहरू
     plugin: निशम्न

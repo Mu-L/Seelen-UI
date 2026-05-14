@@ -71,18 +71,27 @@ close: Schließen
 delete: Löschen
 devtools:
   app_folders: Anwendungsordner
+  color_palette: Farbpalette
+  color_palette_note: >-
+    Diese Farben passen sich automatisch an den Hell-/Dunkelmodus an – jeder
+    Farbton ist kontrastreich zum aktuellen Hintergrund und kein fester Wert.
+    Verwenden Sie sie anstelle von fest codierten Farben, um automatische
+    Designunterstützung zu erhalten.
   custom_config_file: Benutzerdefinierte Konfigurationsdatei laden
   data_folder: Datenordner
   enable: Entwicklerwerkzeuge aktivieren
+  icons: Zwischengespeicherte Symbole
   install_folder: Installationsordner
   load: Laden
   settings_file: Einstellungsdatei
+  shared_components: SLU-Standardkomponenten
   simulate_perm:
     label: Widget-Berechtigungsanfrage simulieren
     result_allowed: ✓ Erlaubnis erteilt
     result_denied: ✗ Erlaubnis verweigert
     trigger: Simulieren
     widget_id_placeholder: '@Autor/Widget-Name'
+  tools: Werkzeuge
   unstable_optimizations: Instabile Optimierungen
   unstable_optimizations_description: >-
     Aktivieren Sie experimentelle Chromium-Flags, die die RAM-Nutzung
@@ -167,7 +176,6 @@ header:
     extras: Extras
     general: Allgemein
     home: Home
-    icon_pack_editor: Zwischengespeicherte Icons
     iconpack: Icon Packs
     monitors: Monitore
     plugin: Plugins

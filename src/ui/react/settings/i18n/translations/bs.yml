@@ -71,18 +71,27 @@ close: Zatvoriti
 delete: Izbrisati
 devtools:
   app_folders: App Mape
+  color_palette: Paleta boja
+  color_palette_note: >-
+    Ove boje se automatski prilagođavaju načinu rada svijetlo/tamno — svaka
+    nijansa je kontrastna u odnosu na trenutnu pozadinu, a ne fiksnu vrijednost.
+    Koristite ih umjesto tvrdo kodiranih boja da dobijete automatsku podršku za
+    teme.
   custom_config_file: Učitajte prilagođenu datoteku config config
   data_folder: Mapa podataka
   enable: Omogućite alate za programere
+  icons: Keširane ikone
   install_folder: Instalacijska mapa
   load: Opteretiti
   settings_file: Datoteka postavki
+  shared_components: SLU standardne komponente
   simulate_perm:
     label: Simulirajte zahtjev za dozvolu za widget
     result_allowed: ✓ Dozvola data
     result_denied: ✗ Dozvola odbijena
     trigger: Simuliraj
     widget_id_placeholder: '@autor/ime-widgeta'
+  tools: Alati
   unstable_optimizations: Nestabilne optimizacije
   unstable_optimizations_description: >-
     Omogućite eksperimentalne Chromium zastavice koje smanjuju korištenje RAM-a.
@@ -160,7 +169,6 @@ header:
     extras: Dodaci
     general: Opći
     home: Dom
-    icon_pack_editor: Keširane ikone
     iconpack: Paketa ikona
     monitors: Monitori
     plugin: Dodaci

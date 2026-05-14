@@ -66,18 +66,23 @@ close: 關閉
 delete: 刪除
 devtools:
   app_folders: 應用文件夾
+  color_palette: 調色盤
+  color_palette_note: 這些顏色自動適應明/暗模式 - 每種顏色都是相對於當前背景的對比度，而不是固定值。 使用它們而不是硬編碼顏色來獲得自動主題支援。
   custom_config_file: 加載自定義設定文件
   data_folder: 數據文件夾
   enable: 啟用開發人員工具
+  icons: 快取圖示
   install_folder: 安裝文件夾
   load: 載入
   settings_file: 設定文件
+  shared_components: SLU 標準元件
   simulate_perm:
     label: 模擬Widget權限請求
     result_allowed: ✓ 已取得許可
     result_denied: ✗ 權限被拒絕
     trigger: 模擬
     widget_id_placeholder: '@作者/小工具名稱'
+  tools: 工具
   unstable_optimizations: 不穩定的最佳化
   unstable_optimizations_description: |-
     啟用可減少 RAM 使用的實驗性 Chromium 標誌。 
@@ -98,7 +103,9 @@ extras:
   streaming_mode: 串流模式
   streaming_mode_description: 用佔位符取代敏感資訊（例如電子郵件），以在錄製或螢幕截圖期間保護隱私。
   version: 版本
-  version_fixed: 應用程式和 WebView2 runtime 版本已修復。這意味著應用程序將不會接收更新，並且 WebView2 runtime 也不會隨 Windows 更新自動更新。
+  version_fixed: >-
+    應用程式和 WebView2 runtime 版本已修復。這意味著應用程序將不會接收更新，並且 WebView2 runtime 也不會隨
+    Windows 更新自動更新。
 general:
   accent_color: 主色調
   date_format: 日期格式
@@ -137,7 +144,6 @@ header:
     extras: 附加功能
     general: 一般設定
     home: 首頁
-    icon_pack_editor: icon包編輯器
     iconpack: icon包
     monitors: 顯示器
     plugin: 擴充功能
