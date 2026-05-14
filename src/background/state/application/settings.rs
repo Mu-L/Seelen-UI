@@ -34,7 +34,7 @@ impl FullState {
     }
 
     /// Resources id changed for remote/downloaded resources.
-    fn migration_v2_5_0(&mut self) -> Result<()> {
+    pub(super) fn migration_v2_5_0(&mut self) -> Result<()> {
         RESOURCES.themes.scan(|new_id, theme| {
             let Some(remote) = &theme.metadata.internal.remote else {
                 return;

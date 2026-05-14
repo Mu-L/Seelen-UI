@@ -6,6 +6,7 @@ use seelen_core::{
     Rect,
 };
 
+use slu_ipc::{messages::SvcAction, ServiceIpc};
 use tauri::{Builder, WebviewWindow, Wry};
 use tauri_plugin_shell::ShellExt;
 use windows::Win32::{
@@ -22,7 +23,10 @@ use crate::{
         icon_extractor::{request_icon_extraction_from_file, request_icon_extraction_from_umid},
         pwsh::PwshScript,
     },
-    widgets::permissions::{request_widget_permission, WidgetPerm},
+    widgets::{
+        permissions::{request_widget_permission, WidgetPerm},
+        popups::shortcut_registering::REG_SHORTCUT_DATA,
+    },
     windows_api::{
         hdc::DeviceContext, string_utils::WindowsString, window::Window, AppBarData, WindowsApi,
     },
@@ -208,10 +212,23 @@ fn unregister_app_bar(webview: tauri::WebviewWindow) -> Result<()> {
     Ok(())
 }
 
+#[tauri::command(async)]
+async fn request_to_user_input_shortcut(
+    window: WebviewWindow,
+    callback_event: String,
+) -> Result<()> {
+    ServiceIpc::send(SvcAction::StartShortcutRegistration).await?;
+
+    let mut data = REG_SHORTCUT_DATA.lock();
+    data.response_view_label = Some(window.label().to_string());
+    data.response_event = Some(callback_event);
+    Ok(())
+}
+
 pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
-    use crate::cli::*;
     use crate::state::infrastructure::*;
     use crate::virtual_desktops::handlers::*;
+
     use crate::widgets::permissions::*;
     use crate::widgets::popups::handlers::*;
     use crate::widgets::weg::handler::*;
@@ -219,6 +236,9 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
     use crate::widgets::*;
 
     use crate::backups::infrastructure::*;
+    use crate::resources::commands::*;
+    use crate::session::infrastructure::*;
+
     use crate::modules::apps::infrastructure::*;
     use crate::modules::clipboard::infrastructure::*;
     use crate::modules::focus_assist::infrastructure::*;
@@ -240,9 +260,6 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
     use crate::modules::system_tray::infrastructure::*;
     use crate::modules::trash_bin::infrastructure::*;
     use crate::modules::user::infrastructure::*;
-    use crate::session::infrastructure::*;
-
-    use crate::resources::commands::*;
 
     app_builder.invoke_handler(command_handler_list!())
 }

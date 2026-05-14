@@ -1,9 +1,8 @@
 use windows::Win32::Foundation::HWND;
 
-use crate::{
-    error::Result, state::domain::AppConfig, utils::constants::SEELEN_COMMON,
-    windows_api::window::Window,
-};
+use seelen_core::state::{AppConfig, AppsConfigurationList};
+
+use crate::{error::Result, utils::constants::SEELEN_COMMON, windows_api::window::Window};
 
 use super::FullState;
 
@@ -25,10 +24,9 @@ impl FullState {
         Ok(self.settings_by_app.search(&title, &class, &exe, &path))
     }
 
-    fn _load_bundled_settings_by_app(&mut self) -> Result<()> {
+    pub(super) fn load_bundled_settings_by_app() -> Result<AppsConfigurationList> {
         let apps_templates_path = SEELEN_COMMON.bundled_app_configs_path();
-
-        self.settings_by_app.clear();
+        let mut configs = AppsConfigurationList::default();
 
         for entry in apps_templates_path.read_dir()?.flatten() {
             let content = std::fs::read_to_string(entry.path())?;
@@ -36,16 +34,10 @@ impl FullState {
             for app in apps.iter_mut() {
                 app.is_bundled = true;
             }
-            self.settings_by_app.extend(apps);
+            configs.extend(apps);
         }
 
-        self.settings_by_app.prepare();
-        Ok(())
-    }
-
-    pub(super) fn load_bundled_settings_by_app(&mut self) {
-        if let Err(e) = self._load_bundled_settings_by_app() {
-            log::error!("Error loading settings by app: {e}");
-        }
+        configs.prepare();
+        Ok(configs)
     }
 }

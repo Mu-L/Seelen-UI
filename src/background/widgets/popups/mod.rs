@@ -15,6 +15,7 @@ use uuid::Uuid;
 use crate::{
     app::get_app_handle,
     error::Result,
+    state::application::FULL_STATE,
     widgets::{webview::WebviewArgs, WidgetWebviewLabel},
 };
 
@@ -40,7 +41,12 @@ impl PopupsManager {
     pub fn create(&mut self, config: SluPopupConfig) -> Result<Uuid> {
         let popup_id = Uuid::new_v4();
         let label = WidgetWebviewLabel::new(&WidgetId::known_popup(), None, Some(&popup_id));
-        let args = WebviewArgs::default();
+
+        let state = FULL_STATE.load();
+        let args = WebviewArgs::create(
+            state.settings.hardware_acceleration,
+            state.settings.unstable_optimizations,
+        );
 
         let manager = get_app_handle();
         let window = WebviewWindowBuilder::new(

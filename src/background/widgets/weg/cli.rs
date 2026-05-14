@@ -10,7 +10,7 @@ use windows::Win32::UI::WindowsAndMessaging::SW_MINIMIZE;
 use crate::{
     error::Result,
     modules::apps::application::USER_APPS_MANAGER,
-    state::application::FULL_STATE,
+    state::application::WEG_ITEMS_MANAGER,
     windows_api::{window::Window, WindowsApi},
 };
 
@@ -55,8 +55,7 @@ fn get_windows_for_item<'a>(
 pub fn process(cmd: WegCli) -> Result<()> {
     #[allow(irrefutable_let_patterns)]
     if let WegCommand::ForegroundOrRunApp { index } = cmd.subcommand {
-        let state = FULL_STATE.load();
-        let weg_items = &state.weg_items;
+        let weg_items = WEG_ITEMS_MANAGER.get();
 
         let all_items: Vec<&WegItem> = weg_items
             .left

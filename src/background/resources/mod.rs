@@ -40,11 +40,13 @@ pub struct ResourceManager {
 
 impl ResourceManager {
     fn initialize(&self) {
-        self.load_all_of_type(ResourceKind::Theme).log_error();
-        self.load_all_of_type(ResourceKind::Plugin).log_error();
-        self.load_all_of_type(ResourceKind::Widget).log_error();
-        self.load_all_of_type(ResourceKind::Wallpaper).log_error();
-        self.load_all_of_type(ResourceKind::IconPack).log_error();
+        std::thread::scope(|s| {
+            s.spawn(|| self.load_all_of_type(ResourceKind::Theme).log_error());
+            s.spawn(|| self.load_all_of_type(ResourceKind::Plugin).log_error());
+            s.spawn(|| self.load_all_of_type(ResourceKind::Widget).log_error());
+            s.spawn(|| self.load_all_of_type(ResourceKind::Wallpaper).log_error());
+            s.spawn(|| self.load_all_of_type(ResourceKind::IconPack).log_error());
+        });
     }
 
     pub fn load(&self, kind: &ResourceKind, path: &Path) -> Result<()> {

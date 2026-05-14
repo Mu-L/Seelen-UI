@@ -29,7 +29,7 @@ i18n!("background/i18n", fallback = "en");
 use std::sync::{atomic::AtomicBool, OnceLock};
 
 use app::{Seelen, SEELEN};
-use cli::{application::handle_console_client, SelfPipe, ServicePipe};
+use cli::{handle_console_client, SelfPipe, ServicePipe};
 use error::Result;
 use exposed::register_invoke_handler;
 use logger::SeelenLogger;

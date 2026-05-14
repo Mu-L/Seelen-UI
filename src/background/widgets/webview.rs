@@ -289,16 +289,6 @@ impl WebviewArgs {
     }
 }
 
-impl Default for WebviewArgs {
-    fn default() -> Self {
-        let state = FULL_STATE.load();
-        Self::create(
-            state.settings.hardware_acceleration,
-            state.settings.unstable_optimizations,
-        )
-    }
-}
-
 impl std::fmt::Display for WebviewArgs {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "{}", self.args.join(" "))

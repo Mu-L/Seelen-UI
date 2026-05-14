@@ -1,3 +1,5 @@
+mod icons_downloader;
+
 use std::{
     ffi::OsStr,
     path::{Path, PathBuf},
@@ -16,11 +18,12 @@ use uuid::Uuid;
 
 use crate::{
     app::emit_to_webviews,
+    cli::uri::icons_downloader::download_remote_icons,
     error::Result,
     get_tokio_handle, log_error,
     resources::RESOURCES,
     session::application::SessionManager,
-    state::application::{download_remote_icons, FULL_STATE},
+    state::application::FULL_STATE,
     utils::{constants::SEELEN_COMMON, date_based_hex_id},
     widgets::popups::POPUPS_MANAGER,
 };
@@ -199,7 +202,7 @@ fn update_popup_to_added_resource(popup_id: &Uuid, resource: &Resource) -> Resul
     pupups_manager.update(popup_id, config)?;
 
     let used_id = ResourceId::Remote(resource.id);
-    let kind = resource.kind.clone();
+    let kind = resource.kind;
 
     let popup_id = *popup_id;
     let display_name = {

@@ -82,7 +82,7 @@ impl ResourceText {
 
 // =============================================================================
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
 #[ts(repr(enum = name))]
 pub enum ResourceKind {
     Theme,

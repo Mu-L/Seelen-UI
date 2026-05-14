@@ -586,27 +586,49 @@ impl Settings {
     pub fn load(path: impl AsRef<Path>) -> Result<Self> {
         let path = path.as_ref();
 
-        let mut settings: Self = {
-            let file = File::open(path)?;
-            file.lock_shared()?;
-            serde_json::from_reader(&file)?
-        };
+        let stem = path
+            .file_stem()
+            .map(|s| s.to_string_lossy().into_owned())
+            .unwrap_or_default();
+        let parent = path.parent().unwrap_or(path);
 
-        // Load shortcuts from sibling file if it exists
-        if let (Some(parent), Some(stem)) = (path.parent(), path.file_stem()) {
-            let path = parent.join(format!("{}_shortcuts.json", stem.to_string_lossy()));
-            if path.exists() {
-                let file = File::open(&path)?;
-                file.lock_shared()?;
-                settings.shortcuts = serde_json::from_reader(&file)?;
-            }
+        let shortcuts_path = parent.join(format!("{stem}_shortcuts.json"));
+        let by_app_path = parent.join(format!("{stem}_by_app.yml"));
 
-            let path = parent.join(format!("{}_by_app.yml", stem.to_string_lossy()));
-            if path.exists() {
-                let file = File::open(&path)?;
+        let (main, shortcuts, by_app) = std::thread::scope(|s| {
+            let main = s.spawn(|| -> Result<Self> {
+                let file = File::open(path)?;
                 file.lock_shared()?;
-                settings.by_app = serde_yaml::from_reader(&file)?;
-            }
+                Ok(serde_json::from_reader(&file)?)
+            });
+
+            let shortcuts = s.spawn(|| -> Result<Option<SluShortcutsSettings>> {
+                if !shortcuts_path.exists() {
+                    return Ok(None);
+                }
+                let file = File::open(&shortcuts_path)?;
+                file.lock_shared()?;
+                Ok(Some(serde_json::from_reader(&file)?))
+            });
+
+            let by_app = s.spawn(|| -> Result<Option<AppsConfigurationList>> {
+                if !by_app_path.exists() {
+                    return Ok(None);
+                }
+                let file = File::open(&by_app_path)?;
+                file.lock_shared()?;
+                Ok(Some(serde_yaml::from_reader(&file)?))
+            });
+
+            (main.join(), shortcuts.join(), by_app.join())
+        });
+
+        let mut settings = main.map_err(|_| "settings thread panicked")??;
+        if let Some(s) = shortcuts.map_err(|_| "shortcuts thread panicked")?? {
+            settings.shortcuts = s;
+        }
+        if let Some(b) = by_app.map_err(|_| "by_app thread panicked")?? {
+            settings.by_app = b;
         }
 
         settings.migrate()?;

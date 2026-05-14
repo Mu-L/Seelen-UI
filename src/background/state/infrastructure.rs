@@ -2,8 +2,8 @@ use std::path::PathBuf;
 
 use itertools::Itertools;
 use seelen_core::state::{
-    by_monitor::MonitorConfiguration, by_wallpaper::WallpaperInstanceSettings, IconPackEntry,
-    PerformanceMode, Wallpaper, WegItems,
+    by_monitor::MonitorConfiguration, by_wallpaper::WallpaperInstanceSettings, AppConfig,
+    IconPackEntry, PerformanceMode, Settings, ToolbarState, Wallpaper, WegItems,
 };
 use tauri_plugin_dialog::DialogExt;
 
@@ -16,41 +16,26 @@ use crate::{
     windows_api::WindowsApi,
 };
 
-use super::{
-    application::FULL_STATE,
-    domain::{AppConfig, Settings, ToolbarState},
-};
+use super::application::{FULL_STATE, TOOLBAR_ITEMS_MANAGER, WEG_ITEMS_MANAGER};
 
 #[tauri::command(async)]
 pub fn state_get_toolbar_items() -> ToolbarState {
-    FULL_STATE.load().toolbar_items.clone()
+    TOOLBAR_ITEMS_MANAGER.get()
 }
 
 #[tauri::command(async)]
-pub fn state_write_toolbar_items(mut items: ToolbarState) -> Result<()> {
-    items.sanitize();
-    FULL_STATE.rcu(|state| {
-        let mut state = state.cloned();
-        state.toolbar_items = items.clone();
-        state
-    });
-    FULL_STATE.load().write_toolbar_items(&items)
+pub fn state_write_toolbar_items(items: ToolbarState) -> Result<()> {
+    TOOLBAR_ITEMS_MANAGER.write(items)
 }
 
 #[tauri::command(async)]
 pub fn state_get_weg_items() -> WegItems {
-    FULL_STATE.load().weg_items.clone()
+    WEG_ITEMS_MANAGER.get()
 }
 
 #[tauri::command(async)]
-pub fn state_write_weg_items(mut items: WegItems) -> Result<()> {
-    items.sanitize();
-    FULL_STATE.rcu(|state| {
-        let mut state = state.cloned();
-        state.weg_items = items.clone();
-        state
-    });
-    FULL_STATE.load().write_weg_items(&items)
+pub fn state_write_weg_items(items: WegItems) -> Result<()> {
+    WEG_ITEMS_MANAGER.write(items)
 }
 
 #[tauri::command(async)]

@@ -3,7 +3,7 @@ use tauri::webview_version;
 use tauri_plugin_dialog::{DialogExt, MessageDialogButtons, MessageDialogKind};
 use tauri_plugin_shell::ShellExt;
 
-use crate::{app::get_app_handle, error::Result, widgets::webview::WebviewArgs};
+use crate::{app::get_app_handle, error::Result};
 
 pub fn validate_webview_runtime_is_installed(app: &tauri::AppHandle) -> Result<()> {
     let error = match webview_version() {
@@ -51,16 +51,12 @@ pub async fn check_for_webview_optimal_state() -> Result<()> {
 
     std::thread::spawn(|| {
         let label = base64::engine::general_purpose::URL_SAFE_NO_PAD.encode("@seelen/integrity");
-        let args = WebviewArgs::default();
-
         let window = tauri::WebviewWindowBuilder::new(
             get_app_handle(),
             &label,
             tauri::WebviewUrl::App("vanilla/integrity/index.html".into()),
         )
         .visible(false)
-        .data_directory(args.data_directory())
-        .additional_browser_args(&args.to_string())
         .build()?;
         window.hwnd()?; // build could not fail so we check for the handle.
         window.destroy()?; // close the fake window

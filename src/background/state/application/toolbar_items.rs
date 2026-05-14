@@ -1,78 +1,91 @@
-use std::collections::HashSet;
+use std::{collections::HashSet, sync::LazyLock};
 
+use parking_lot::Mutex;
 use seelen_core::{
     resource::WidgetId,
     state::{ToolbarItem, ToolbarItem2, ToolbarJsScope, ToolbarState},
 };
 
 use crate::{
-    error::Result,
+    error::{Result, ResultLogExt},
     utils::{atomic_write_file, constants::SEELEN_COMMON},
 };
 
-use super::FullState;
+pub static TOOLBAR_ITEMS_MANAGER: LazyLock<ToolbarItemsManager> = LazyLock::new(|| {
+    let manager = ToolbarItemsManager {
+        items: Mutex::new(ToolbarState::default()),
+    };
+    manager.load().log_error();
+    manager
+});
 
-impl FullState {
-    pub fn initial_toolbar_items() -> ToolbarState {
-        ToolbarState {
-            left: vec![
-                ToolbarItem2::Plugin("@seelen/tb-user-menu".into()),
-                ToolbarItem2::Inline(Box::new(ToolbarItem {
-                    template: "return \"|\"".into(),
-                    ..Default::default()
-                })),
-                ToolbarItem2::Plugin("@default/focused-app".into()),
-                ToolbarItem2::Inline(Box::new(ToolbarItem {
-                    scopes: HashSet::from([ToolbarJsScope::FocusedApp]),
-                    template: "return focusedApp.title ? \"-\" : \"\"".into(),
-                    ..Default::default()
-                })),
-                ToolbarItem2::Plugin("@default/focused-app-title".into()),
-            ],
-            center: vec![ToolbarItem2::Plugin("@seelen/tb-calendar-popup".into())],
-            right: vec![
-                ToolbarItem2::Plugin("@seelen/tb-system-tray".into()),
-                ToolbarItem2::Plugin("@seelen/tb-keyboard-selector".into()),
-                ToolbarItem2::Plugin("@seelen/tb-bluetooth-popup".into()),
-                ToolbarItem2::Plugin("@seelen/tb-network-popup".into()),
-                ToolbarItem2::Plugin("@seelen/tb-media-popup".into()),
-                ToolbarItem2::Plugin("@default/power".into()),
-                ToolbarItem2::Plugin("@seelen/tb-notifications".into()),
-                ToolbarItem2::Plugin("@seelen/tb-quick-settings".into()),
-            ],
-            ..Default::default()
-        }
+pub struct ToolbarItemsManager {
+    items: Mutex<ToolbarState>,
+}
+
+impl ToolbarItemsManager {
+    pub fn get(&self) -> ToolbarState {
+        self.items.lock().clone()
     }
 
-    fn _read_toolbar_items(&mut self) -> Result<()> {
+    pub fn write(&self, mut items: ToolbarState) -> Result<()> {
+        items.sanitize();
         let path = SEELEN_COMMON
             .widget_data_dir(&WidgetId::known_toolbar())
             .join("state.yml");
-
-        if path.exists() {
-            self.toolbar_items = serde_yaml::from_str(&std::fs::read_to_string(path)?)?;
-            self.toolbar_items.sanitize();
-        } else {
-            self.toolbar_items = Self::initial_toolbar_items();
-            self.toolbar_items.sanitize();
-            self.write_toolbar_items(&self.toolbar_items)?;
-        }
+        atomic_write_file(&path, serde_yaml::to_string(&items)?.as_bytes())?;
+        *self.items.lock() = items;
         Ok(())
     }
 
-    pub(super) fn read_toolbar_items(&mut self) {
-        if let Err(err) = self._read_toolbar_items() {
-            log::error!("Failed to read toolbar items: {err}");
-            Self::show_corrupted_state_to_user(
-                &SEELEN_COMMON.widget_data_dir(&WidgetId::known_toolbar()),
-            );
-        }
-    }
-
-    pub fn write_toolbar_items(&self, items: &ToolbarState) -> Result<()> {
+    pub fn load(&self) -> Result<()> {
         let path = SEELEN_COMMON
             .widget_data_dir(&WidgetId::known_toolbar())
             .join("state.yml");
-        atomic_write_file(&path, serde_yaml::to_string(items)?.as_bytes())
+
+        let items = if path.exists() {
+            let mut items: ToolbarState = serde_yaml::from_str(&std::fs::read_to_string(&path)?)?;
+            items.sanitize();
+            items
+        } else {
+            let mut items = initial_items();
+            items.sanitize();
+            atomic_write_file(&path, serde_yaml::to_string(&items)?.as_bytes())?;
+            items
+        };
+
+        *self.items.lock() = items;
+        Ok(())
+    }
+}
+
+fn initial_items() -> ToolbarState {
+    ToolbarState {
+        left: vec![
+            ToolbarItem2::Plugin("@seelen/tb-user-menu".into()),
+            ToolbarItem2::Inline(Box::new(ToolbarItem {
+                template: "return \"|\"".into(),
+                ..Default::default()
+            })),
+            ToolbarItem2::Plugin("@default/focused-app".into()),
+            ToolbarItem2::Inline(Box::new(ToolbarItem {
+                scopes: HashSet::from([ToolbarJsScope::FocusedApp]),
+                template: "return focusedApp.title ? \"-\" : \"\"".into(),
+                ..Default::default()
+            })),
+            ToolbarItem2::Plugin("@default/focused-app-title".into()),
+        ],
+        center: vec![ToolbarItem2::Plugin("@seelen/tb-calendar-popup".into())],
+        right: vec![
+            ToolbarItem2::Plugin("@seelen/tb-system-tray".into()),
+            ToolbarItem2::Plugin("@seelen/tb-keyboard-selector".into()),
+            ToolbarItem2::Plugin("@seelen/tb-bluetooth-popup".into()),
+            ToolbarItem2::Plugin("@seelen/tb-network-popup".into()),
+            ToolbarItem2::Plugin("@seelen/tb-media-popup".into()),
+            ToolbarItem2::Plugin("@default/power".into()),
+            ToolbarItem2::Plugin("@seelen/tb-notifications".into()),
+            ToolbarItem2::Plugin("@seelen/tb-quick-settings".into()),
+        ],
+        ..Default::default()
     }
 }

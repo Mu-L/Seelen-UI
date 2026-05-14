@@ -1,14 +1,13 @@
 mod apps_config;
-mod icons;
 pub mod performance;
 mod settings;
 mod toolbar_items;
 mod weg_items;
 
-pub use icons::download_remote_icons;
+pub use toolbar_items::TOOLBAR_ITEMS_MANAGER;
+pub use weg_items::WEG_ITEMS_MANAGER;
 
 use arc_swap::ArcSwap;
-use lazy_static::lazy_static;
 use notify_debouncer_full::{
     new_debouncer,
     notify::{ReadDirectoryChangesWatcher, RecursiveMode, Watcher},
@@ -16,28 +15,29 @@ use notify_debouncer_full::{
 };
 use seelen_core::{
     resource::ResourceKind,
-    state::{AppsConfigurationList, CssStyles, SluPopupConfig, SluPopupContent, WegItems},
+    state::{AppsConfigurationList, CssStyles, Settings, SluPopupConfig, SluPopupContent},
 };
 use std::{
     collections::HashSet,
     path::{Path, PathBuf},
-    sync::Arc,
+    sync::{Arc, LazyLock},
     time::Duration,
 };
 
 use crate::{
-    error::Result, log_error, resources::RESOURCES, utils::constants::SEELEN_COMMON,
+    error::{Result, ResultLogExt},
+    log_error,
+    resources::RESOURCES,
+    utils::constants::SEELEN_COMMON,
     widgets::popups::POPUPS_MANAGER,
 };
 
-use super::domain::{Settings, ToolbarState};
-
-lazy_static! {
-    pub static ref FULL_STATE: Arc<ArcSwap<FullState>> = Arc::new(ArcSwap::from_pointee({
+pub static FULL_STATE: LazyLock<Arc<ArcSwap<FullState>>> = LazyLock::new(|| {
+    Arc::new(ArcSwap::from_pointee({
         log::trace!("Creating new State Manager");
         FullState::new().expect("Failed to create State Manager")
-    }));
-}
+    }))
+});
 
 #[derive(Debug, Clone)]
 pub struct FullState {
@@ -45,8 +45,6 @@ pub struct FullState {
     // ======== data ========
     pub settings: Settings,
     pub settings_by_app: AppsConfigurationList,
-    pub weg_items: WegItems,
-    pub toolbar_items: ToolbarState,
 }
 
 unsafe impl Sync for FullState {}
@@ -58,8 +56,6 @@ impl FullState {
             // ======== data ========
             settings: Settings::default(),
             settings_by_app: AppsConfigurationList::default(),
-            weg_items: Self::initial_weg_items(),
-            toolbar_items: Self::initial_toolbar_items(),
         };
         manager.load_all();
         manager.start_listeners()?;
@@ -203,19 +199,39 @@ impl FullState {
         Ok(())
     }
 
-    /// We log each step on this cuz for some reason a deadlock is happening somewhere.
     fn load_all(&mut self) {
-        log::trace!("Initial load: settings");
-        self.read_settings();
+        let settings_path = SEELEN_COMMON.settings_path();
 
-        log::trace!("Initial load: bundled settings by app");
-        self.load_bundled_settings_by_app();
+        let (settings_res, bundled_res) = std::thread::scope(|s| {
+            let settings = s.spawn(|| {
+                settings_path
+                    .exists()
+                    .then(|| Settings::load(settings_path))
+            });
+            let bundled = s.spawn(Self::load_bundled_settings_by_app);
+            (settings.join(), bundled.join())
+        });
 
-        log::trace!("Initial load: weg items");
-        self.read_weg_items();
+        if let Ok(Some(res)) = settings_res {
+            match res {
+                Ok(settings) => {
+                    self.settings = settings;
+                    self.migration_v2_5_0().log_error();
+                    self.sanitize_wallpaper_collections();
+                }
+                Err(e) => {
+                    log::error!("Failed to read settings: {e}");
+                    Self::show_corrupted_state_to_user(SEELEN_COMMON.settings_path());
+                }
+            }
+        }
 
-        log::trace!("Initial load: toolbar items");
-        self.read_toolbar_items();
+        if let Ok(res) = bundled_res {
+            match res {
+                Ok(apps) => self.settings_by_app = apps,
+                Err(e) => log::error!("Error loading bundled app configs: {e}"),
+            }
+        }
     }
 
     fn show_corrupted_state_to_user(path: &Path) {
