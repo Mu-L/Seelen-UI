@@ -81,6 +81,7 @@ export enum SeelenCommand {
   SetVolumeLevel = "set_volume_level",
   MediaToggleMute = "media_toggle_mute",
   MediaSetDefaultDevice = "media_set_default_device",
+  GetMediaWaveform = "get_media_waveform",
   GetAllMonitorsBrightness = "get_all_monitors_brightness",
   SetMonitorBrightness = "set_monitor_brightness",
   GetPowerStatus = "get_power_status",

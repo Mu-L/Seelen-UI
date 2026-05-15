@@ -2,6 +2,10 @@
 
 ## [2.6.6-dev]
 
+### features
+
+- expose api to get audio wave form and frequencies.
+
 ### enhancements
 
 - app startup time reduced.

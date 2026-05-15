@@ -207,6 +207,7 @@ slu_commands_declaration! {
     SetVolumeLevel = set_volume_level(device_id: String, session_id: Option<String>, level: f32),
     MediaToggleMute = media_toggle_mute(device_id: String, session_id: Option<String>),
     MediaSetDefaultDevice = media_set_default_device(id: String, role: String),
+    GetMediaWaveform = get_media_waveform() -> AudioWaveform,
 
     // Brightness - Multi-monitor support
     GetAllMonitorsBrightness = get_all_monitors_brightness() -> Vec<MonitorBrightness>,

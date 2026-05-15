@@ -64,6 +64,7 @@ slu_events_declaration! {
     MediaDevices([Vec<MediaDevice>; 2]) as "media::devices",
     MediaInputs(Vec<MediaDevice>) as "media-inputs",
     MediaOutputs(Vec<MediaDevice>) as "media-outputs",
+    MediaWaveform(AudioWaveform) as "media::waveform",
 
     NetworkDefaultLocalIp(String) as "network-default-local-ip",
     NetworkAdapters(Vec<NetworkAdapter>) as "network-adapters",

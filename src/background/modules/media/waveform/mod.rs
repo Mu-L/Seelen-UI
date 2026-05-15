@@ -2,4 +2,4 @@ mod application;
 mod domain;
 pub mod infrastructure;
 
-pub use application::{DevicesEvent, DevicesManager};
+pub use application::WaveformManager;

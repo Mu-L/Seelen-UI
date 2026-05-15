@@ -68,3 +68,12 @@ pub struct MediaDevice {
     pub volume: f32,
     pub muted: bool,
 }
+
+#[derive(Debug, Clone, Serialize, TS)]
+#[serde(rename_all = "camelCase")]
+pub struct AudioWaveform {
+    /// Mono PCM samples from the ring buffer (2048 values), each in [-1.0, 1.0].
+    pub samples: Vec<f32>,
+    /// FFT magnitude bins (128 values) in dBFS. Typical range: [-120.0, 0.0].
+    pub frequencies: Vec<f32>,
+}
