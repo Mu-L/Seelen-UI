@@ -6,8 +6,6 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { NavLink, useLocation, useSearchParams } from "react-router";
 
-import { shortcutsError } from "../../modules/shortcuts/application.ts";
-
 import { RouteExtraInfo } from "./ExtraInfo.tsx";
 import { UpdateButton } from "./UpdateButton.tsx";
 import cs from "./index.module.css";
@@ -85,7 +83,7 @@ export const Header = () => {
           style={{ minWidth: 60 }}
           type="primary"
           danger={!hasChanges.value}
-          disabled={hasChanges.value && shortcutsError.value.size > 0}
+          disabled={hasChanges.value}
           onClick={SaveOrQuit}
         >
           {hasChanges.value ? saveBtnLabel : t("close")}

@@ -42,11 +42,27 @@ pub fn set_registering_shortcut(shortcut: Option<Vec<String>>) -> Result<()> {
     let mut reg = REG_SHORTCUT_DATA.lock();
     reg.shortcut = shortcut.clone();
 
-    let Some(shortcut) = shortcut else {
+    let Some(mut shortcut) = shortcut else {
         reg.emit_state_to_requester();
         reg.cancel_shortcut_registering();
         return Ok(());
     };
+
+    // the library allows differences between keys, but we simplify things for users
+    for key in &mut shortcut {
+        if key == "LShift" || key == "RShift" {
+            *key = "Shift".to_string();
+        }
+        if key == "LControl" || key == "RControl" {
+            *key = "Ctrl".to_string();
+        }
+        if key == "LMenu" || key == "RMenu" {
+            *key = "Alt".to_string();
+        }
+        if key == "LWin" || key == "RWin" {
+            *key = "Win".to_string();
+        }
+    }
 
     let popup_config = get_popup_config(&shortcut);
 
