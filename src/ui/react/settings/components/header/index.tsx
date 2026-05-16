@@ -83,7 +83,6 @@ export const Header = () => {
           style={{ minWidth: 60 }}
           type="primary"
           danger={!hasChanges.value}
-          disabled={hasChanges.value}
           onClick={SaveOrQuit}
         >
           {hasChanges.value ? saveBtnLabel : t("close")}
