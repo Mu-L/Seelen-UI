@@ -27,7 +27,7 @@
 }
 
 .taskbar {
-  background-color: oklch(from var(--color-gray-50) l c h / 0.6);
+  background-color: oklch(from var(--slu-std-bg-color) l c h / 0.6);
   border-radius: 15px;
 
   > .weg-items-container {
@@ -104,10 +104,10 @@
   max-width: var(--max-item-size);
   height: var(--config-item-size);
 
-  box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.5);
+  background-color: var(--slu-std-bg-light-color);
+  box-shadow: var(--shadow-s);
   border-radius: var(--border-radius);
 
-  background-color: var(--color-gray-75);
   transition: background-color 0.2s ease-out;
 
   &:hover {
@@ -265,7 +265,8 @@
 .weg-item-preview-container {
   padding: 10px;
   border-radius: 10px;
-  background-color: var(--color-gray-75);
+  background-color: var(--slu-std-bg-color);
+  box-shadow: var(--shadow-m);
 
   .weg-item-display-name {
     white-space: nowrap;

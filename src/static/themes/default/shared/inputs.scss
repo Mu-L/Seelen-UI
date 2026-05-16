@@ -162,9 +162,9 @@ input[type="checkbox"][data-skin="switch"] {
 ::picker(select) {
   appearance: base-select;
   border: none;
-  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: var(--shadow-s);
   border-radius: 10px;
-  background-color: var(--color-gray-50);
+  background-color: var(--slu-std-bg-light-color);
   padding: 0.25em;
 }
 

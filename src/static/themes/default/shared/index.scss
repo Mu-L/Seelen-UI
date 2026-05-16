@@ -13,6 +13,10 @@
 @import "./buttons.scss";
 
 :root {
+  --slu-std-bg-dark-color: light-dark(var(--color-gray-75), var(--color-gray-25));
+  --slu-std-bg-color: var(--color-gray-50);
+  --slu-std-bg-light-color: light-dark(var(--color-gray-25), var(--color-gray-75));
+
   --slu-std-ui-color: light-dark(var(--system-accent-dark-color), var(--system-accent-light-color));
   --slu-std-ui-hover-color: light-dark(
     var(--system-accent-darker-color),
@@ -66,13 +70,14 @@ body:has(> div > .slu-std-popover) {
 }
 
 .slu-std-surface {
-  background-color: var(--color-gray-50);
+  background-color: var(--slu-std-bg-color);
   color: var(--color-gray-900);
 }
 
 .slu-std-surface-elevated {
-  background-color: var(--color-gray-75);
+  background-color: var(--slu-std-bg-light-color);
   color: var(--color-gray-900);
+  box-shadow: var(--shadow-s);
 }
 
 .slu-std-popover {
@@ -87,6 +92,6 @@ body:has(> div > .slu-std-popover) {
   color: var(--color-gray-900);
   border-radius: 10px;
 
-  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: var(--shadow-m);
   font-size: 0.8rem;
 }

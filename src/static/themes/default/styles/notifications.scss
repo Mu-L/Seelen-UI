@@ -46,7 +46,7 @@
 
 .notification {
   border-radius: 12px;
-  box-shadow: #32325d40 0px 2px 5px -1px, #0000004d 0px 1px 3px -1px;
+  box-shadow: var(--shadow-s);
   padding: 10px;
   transition: scale 0.1s ease-in-out;
 

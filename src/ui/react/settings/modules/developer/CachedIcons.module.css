@@ -16,7 +16,7 @@
       padding: var(--spacing-s);
 
       background-color: #9c9c9c;
-      box-shadow: 1px 2px 3px #0005;
+      box-shadow: var(--shadow-s);
 
       img {
         object-fit: contain;

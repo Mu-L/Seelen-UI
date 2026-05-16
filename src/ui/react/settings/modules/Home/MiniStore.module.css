@@ -33,7 +33,7 @@
   .resource {
     background-color: var(--color-gray-50);
     overflow-wrap: anywhere;
-    box-shadow: 2px 2px 10px 1px #0005;
+    box-shadow: var(--shadow-s);
     border-radius: 8px;
 
     > img {
