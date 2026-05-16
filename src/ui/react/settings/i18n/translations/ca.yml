@@ -242,7 +242,10 @@ session:
   upgrade_to: Actualitza a
 shortcuts:
   disabled_tooltip: El giny i les seves dreceres estan desactivats
-  duplicate_error: Aquesta drecera està duplicada
+  duplicate_error: S'han detectat dreceres conflictives
+  duplicate_error_hint: >-
+    Algunes dreceres s'assignen a diverses accions. Desactiveu un dels widgets
+    en conflicte o reassigneu l'enllaç de tecles duplicats per resoldre'ls.
   enable: Activa el sistema integrat de dreceres
   enable_tooltip: >-
     Desactiveu si implementareu el vostre propi sistema de dreceres mitjançant

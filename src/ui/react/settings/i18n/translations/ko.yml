@@ -216,7 +216,8 @@ session:
   upgrade_to: 업그레이드
 shortcuts:
   disabled_tooltip: 위젯과 해당 바로가기가 비활성화되었습니다.
-  duplicate_error: 이 바로가기가 중복되었습니다.
+  duplicate_error: 충돌하는 바로가기가 감지되었습니다.
+  duplicate_error_hint: 일부 단축키는 여러 작업에 할당됩니다. 충돌하는 위젯 중 하나를 비활성화하거나 중복 키 바인딩을 다시 할당하여 문제를 해결하세요.
   enable: 내장 단축키 시스템을 활성화하십시오
   enable_tooltip: Seelen UI 클라이언트를 사용하여 자신의 바로 가기 시스템을 구현하는 경우 비활성화하십시오.
   labels:

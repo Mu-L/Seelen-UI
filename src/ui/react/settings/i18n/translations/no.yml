@@ -235,7 +235,11 @@ session:
   upgrade_to: Oppgrader til
 shortcuts:
   disabled_tooltip: Widgeten og dens snarveier er deaktivert
-  duplicate_error: Denne snarveien er duplisert
+  duplicate_error: Motstridende snarveier oppdaget
+  duplicate_error_hint: >-
+    Noen snarveier er tilordnet flere handlinger. Deaktiver en av de
+    motstridende widgetene eller tilordne duplikatnøkkelbindingen på nytt for å
+    løse.
   enable: Aktiver innebygd snarveisystem
   enable_tooltip: >-
     Deaktiver om du implementerer ditt eget snarveisystem ved hjelp av Seelen UI

@@ -58,6 +58,13 @@ service:
     ah u shaqeeyo.
   not_running_ok: Bilow adeegga
 shortcut:
+  conflicts:
+    body: >-
+      Jidadka gaagaaban qaarkood ayaa loo qoondeeyay falal badan, fadlan dib u
+      habee.
+    dismiss: Eryi
+    review: Dib u eegis
+    title: Isku dhacyada Gaaban ee la ogaaday
   register:
     placeholder: Riix wixii isku darka furaha ah
     title: Diiwaangelinta gaagaaban cusub

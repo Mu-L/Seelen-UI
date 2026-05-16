@@ -238,7 +238,11 @@ session:
   upgrade_to: Päivitä
 shortcuts:
   disabled_tooltip: Widget ja sen pikakuvakkeet on poistettu käytöstä
-  duplicate_error: Tämä pikanäppäin on kopioitu
+  duplicate_error: Ristiriitaiset pikanäppäimet havaittu
+  duplicate_error_hint: >-
+    Jotkut pikanäppäimet on määritetty useille toiminnoille. Poista jokin
+    ristiriitaisista widgeteistä käytöstä tai määritä kaksoisavaimen sidos
+    uudelleen ratkaistaksesi.
   enable: Ota sisäänrakennettu pikakuvausjärjestelmä
   enable_tooltip: >-
     Poista käytöstä, jos otat käyttöön omat pikakuvausjärjestelmäsi Seelen UI

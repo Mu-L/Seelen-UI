@@ -235,7 +235,10 @@ session:
   upgrade_to: Uppgradera till
 shortcuts:
   disabled_tooltip: Widgeten och dess genvägar är inaktiverade
-  duplicate_error: Den här genvägen är duplicerad
+  duplicate_error: Motstridiga genvägar har upptäckts
+  duplicate_error_hint: >-
+    Vissa genvägar är tilldelade flera åtgärder. Inaktivera en av de motstridiga
+    widgetarna eller omtilldela den dubbla nyckelbindningen för att lösa.
   enable: Aktivera inbyggda genvägssystem
   enable_tooltip: >-
     Inaktivera om du kommer att implementera ditt eget genvägssystem med Seelen

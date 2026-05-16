@@ -243,7 +243,11 @@ session:
   upgrade_to: U cusboonaysii
 shortcuts:
   disabled_tooltip: Qalabka widget-ka iyo jid-gooyooyinkiisu waa naafo
-  duplicate_error: Jidka gaaban waa la koobiyay
+  duplicate_error: Dariiqyada gaaban ee iska hor imanaya waa la ogaaday
+  duplicate_error_hint: >-
+    Jidadka gaaban qaarkood ayaa loo qoondeeyay falal badan. Dami mid ka mid ah
+    widgets-yada is khilaafaya ama dib u habee xidhitaanka furaha nuqulka ah si
+    loo xalliyo.
   enable: U fududee nidaamka qaab dhismeedka gaagaaban
   enable_tooltip: >-
     Disable Haddii aad hirgelin doontid nidaamkaaga gaagaaban ee aad adigu iska

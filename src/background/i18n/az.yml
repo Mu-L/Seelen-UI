@@ -58,6 +58,13 @@ service:
     asılılıq/köməkçidir.
   not_running_ok: Xidmətə başlayın
 shortcut:
+  conflicts:
+    body: >-
+      Bəzi qısayollar çoxlu əməliyyatlara təyin edilib, lütfən, onları yenidən
+      təyin edin.
+    dismiss: Rədd et
+    review: Baxış
+    title: Qısayol Münaqişələri Aşkarlandı
   register:
     placeholder: Hər hansı bir açar birləşməsini basın
     title: Yeni qısa yol qeydiyyatı

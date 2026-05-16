@@ -56,6 +56,11 @@ service:
     behar bezala funtziona dezan.
   not_running_ok: Hasi zerbitzua
 shortcut:
+  conflicts:
+    body: Lasterbide batzuk hainbat ekintzari esleitzen zaizkie, esleitu berriro.
+    dismiss: Baztertu
+    review: Berrikuspena
+    title: Lasterbideen gatazkak hauteman dira
   register:
     placeholder: Sakatu edozein tekla konbinazio
     title: Lasterbide berria erregistratzea

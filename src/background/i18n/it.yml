@@ -57,6 +57,11 @@ service:
     funzionamento dell'app.
   not_running_ok: Avvia il servizio
 shortcut:
+  conflicts:
+    body: Alcune scorciatoie sono assegnate a più azioni, riassegnale.
+    dismiss: Congedare
+    review: Revisione
+    title: Rilevati conflitti di scorciatoie
   register:
     placeholder: Premere qualsiasi combinazione di tasti
     title: Registrazione di nuovi collegamenti

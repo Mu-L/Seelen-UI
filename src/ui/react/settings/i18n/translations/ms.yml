@@ -236,7 +236,11 @@ session:
   upgrade_to: Naik taraf kepada
 shortcuts:
   disabled_tooltip: Widget dan pintasannya dilumpuhkan
-  duplicate_error: Pintasan ini diduplikasi
+  duplicate_error: Pintasan bercanggah dikesan
+  duplicate_error_hint: >-
+    Beberapa pintasan diperuntukkan kepada berbilang tindakan. Lumpuhkan salah
+    satu widget yang bercanggah atau tetapkan semula pengikatan kunci pendua
+    untuk diselesaikan.
   enable: Dayakan sistem pintasan terbina dalam
   enable_tooltip: >-
     Lumpuhkan jika anda akan melaksanakan sistem pintasan anda sendiri

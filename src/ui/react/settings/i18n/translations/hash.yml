@@ -176,7 +176,8 @@ session.sign_in: 61bab070
 session.sign_in_hint: 522915f4
 session.upgrade_to: a7c602f4
 shortcuts.disabled_tooltip: 41a74d3c
-shortcuts.duplicate_error: ecbcd85c
+shortcuts.duplicate_error: b4825e4
+shortcuts.duplicate_error_hint: 8893e45a
 shortcuts.enable: b9186534
 shortcuts.enable_tooltip: e67062fc
 shortcuts.labels.create_new_workspace: 6ce4b948

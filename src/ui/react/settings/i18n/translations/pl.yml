@@ -241,7 +241,11 @@ session:
   upgrade_to: Uaktualnij do
 shortcuts:
   disabled_tooltip: Widżet i jego skróty są wyłączone
-  duplicate_error: Ten skrót jest zduplikowany
+  duplicate_error: Wykryto sprzeczne skróty
+  duplicate_error_hint: >-
+    Niektóre skróty są przypisane do wielu akcji. Wyłącz jeden z widżetów
+    powodujących konflikt lub ponownie przypisz zduplikowane powiązanie
+    klawiszy, aby rozwiązać problem.
   enable: Włącz wbudowany system skrótów
   enable_tooltip: >-
     Wyłącz, jeśli zaimplementujesz własny system skrótów za pomocą klienta

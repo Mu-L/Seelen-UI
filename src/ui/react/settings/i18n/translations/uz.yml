@@ -240,7 +240,11 @@ session:
   upgrade_to: ga yangilang
 shortcuts:
   disabled_tooltip: Vidjet va uning yorliqlari o'chirilgan
-  duplicate_error: Bu yorliq takrorlanadi
+  duplicate_error: Qarama-qarshi yorliqlar aniqlandi
+  duplicate_error_hint: >-
+    Ba'zi yorliqlar bir nechta harakatlar uchun tayinlangan. Qarama-qarshi
+    vidjetlardan birini o'chiring yoki hal qilish uchun takroriy kalit
+    bog'lashni qayta tayinlang.
   enable: Ichki yorliqlar tizimini yoqing
   enable_tooltip: >-
     Seelen Ui mijozidan foydalanib o'zingizning yorliq tizimingizni amalga

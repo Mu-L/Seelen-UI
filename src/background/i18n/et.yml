@@ -50,6 +50,11 @@ service:
     tööks sõltuvus/abimees.
   not_running_ok: Käivitage teenus
 shortcut:
+  conflicts:
+    body: Mõned otseteed on määratud mitmele toimingule, määrake need uuesti.
+    dismiss: Loobu
+    review: Ülevaade
+    title: Otseteede konfliktid on tuvastatud
   register:
     placeholder: Vajutage mis tahes võtmekombinatsiooni
     title: Uue otsetee registreerimine

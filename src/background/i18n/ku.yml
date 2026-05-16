@@ -50,6 +50,13 @@ service:
     pêwendiyek / arîkarek e.
   not_running_ok: Xizmetê dest pê bikin
 shortcut:
+  conflicts:
+    body: >-
+      Hin kurtebir ji gelek çalakiyan re têne destnîşan kirin, ji kerema xwe wan
+      ji nû ve destnîşan bikin.
+    dismiss: Berdan
+    review: Axaftin
+    title: Pevçûnên Kurtebirê Hatin Tesbîtkirin
   register:
     placeholder: Her kombînasyona kilîtiyê çap bikin
     title: Kurteya nû qeyd bikin

@@ -53,6 +53,13 @@ service:
     fungere skikkelig.
   not_running_ok: Start tjenesten
 shortcut:
+  conflicts:
+    body: >-
+      Noen snarveier er tilordnet flere handlinger, vennligst tilordne dem på
+      nytt.
+    dismiss: Avskjedige
+    review: Gjennomgå
+    title: Snarveiskonflikter oppdaget
   register:
     placeholder: Trykk på enhver tastekombinasjon
     title: Registrering av ny snarvei

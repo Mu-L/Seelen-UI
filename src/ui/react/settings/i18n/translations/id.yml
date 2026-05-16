@@ -239,7 +239,11 @@ session:
   upgrade_to: Tingkatkan ke
 shortcuts:
   disabled_tooltip: Widget dan pintasannya dinonaktifkan
-  duplicate_error: Pintasan ini diduplikasi
+  duplicate_error: Pintasan yang bertentangan terdeteksi
+  duplicate_error_hint: >-
+    Beberapa pintasan ditetapkan ke beberapa tindakan. Nonaktifkan salah satu
+    widget yang bertentangan atau tetapkan ulang pengikatan kunci duplikat untuk
+    menyelesaikannya.
   enable: Aktifkan sistem pintasan bawaan
   enable_tooltip: >-
     Nonaktifkan jika Anda akan mengimplementasikan sistem pintasan Anda sendiri

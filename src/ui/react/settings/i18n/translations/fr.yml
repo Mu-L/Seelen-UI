@@ -239,7 +239,10 @@ session:
   upgrade_to: Mettre à niveau vers
 shortcuts:
   disabled_tooltip: Le widget et ses raccourcis sont désactivés
-  duplicate_error: Ce raccourci est dupliqué
+  duplicate_error: Raccourcis conflictuels détectés
+  duplicate_error_hint: >-
+    Certains raccourcis sont affectés à plusieurs actions. Désactivez l'un des
+    widgets en conflit ou réaffectez la liaison de clé en double à résoudre.
   enable: Activer le système de raccourcis intégrés
   enable_tooltip: >-
     Désactiver si vous implémentez votre propre système de raccourcis à l'aide

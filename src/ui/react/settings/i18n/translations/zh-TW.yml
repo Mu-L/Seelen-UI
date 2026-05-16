@@ -206,7 +206,8 @@ session:
   upgrade_to: 升級至
 shortcuts:
   disabled_tooltip: 小工具及其快捷鍵已停用
-  duplicate_error: 該快捷鍵重複
+  duplicate_error: 偵測到衝突的捷徑
+  duplicate_error_hint: 有些快捷鍵被指派給多個操作。 禁用衝突的小部件之一或重新分配重複的鍵綁定來解決。
   enable: 使用內建快捷鍵
   enable_tooltip: 禁用您使用SEELEN UI客戶端實現自己的快捷方式系統
   labels:

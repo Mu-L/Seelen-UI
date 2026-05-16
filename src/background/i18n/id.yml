@@ -53,6 +53,11 @@ service:
     berfungsi dengan baik.
   not_running_ok: Mulai layanan
 shortcut:
+  conflicts:
+    body: Beberapa pintasan ditetapkan ke beberapa tindakan, harap tetapkan ulang.
+    dismiss: Membubarkan
+    review: Tinjauan
+    title: Konflik Pintasan Terdeteksi
   register:
     placeholder: Tekan Kombinasi Kunci apa pun
     title: Mendaftarkan jalan pintas baru

@@ -239,7 +239,11 @@ session:
   upgrade_to: Frissítés erre
 shortcuts:
   disabled_tooltip: A widget és parancsikonjai le vannak tiltva
-  duplicate_error: Ez a parancsikon megkettőződik
+  duplicate_error: Ütköző parancsikonok észlelve
+  duplicate_error_hint: >-
+    Néhány parancsikon több művelethez van hozzárendelve. Tiltsa le az ütköző
+    eszközprimitívek egyikét, vagy rendelje hozzá újra az ismétlődő
+    kulcs-összerendelést a megoldáshoz.
   enable: Engedélyezze a beépített parancsikonok rendszerét
   enable_tooltip: >-
     Tiltsa le, ha a Seelen UI kliens segítségével megvalósítja saját

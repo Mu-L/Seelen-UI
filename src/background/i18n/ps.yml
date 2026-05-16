@@ -48,6 +48,11 @@ service:
     کونکی دی.
   not_running_ok: خدمت پیل کړئ
 shortcut:
+  conflicts:
+    body: ځینې ​​شارټ کټونه د ډیرو کړنو لپاره ټاکل شوي، مهرباني وکړئ دوی بیا وټاکئ.
+    dismiss: ګوښه کول
+    review: بیاکتنه
+    title: شارټ کټ شخړې کشف شوې
   register:
     placeholder: په هر کلي ترکیب فشار ورکړئ
     title: د نوي لنډلارې ثبت کول

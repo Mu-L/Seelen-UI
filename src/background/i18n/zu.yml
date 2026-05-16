@@ -56,6 +56,11 @@ service:
     lusebenze kahle.
   not_running_ok: Qala isevisi
 shortcut:
+  conflicts:
+    body: Ezinye izinqamuleli zinikezwe izenzo eziningi, sicela uzinikeze kabusha.
+    dismiss: Cashisa
+    review: Buyekeza
+    title: Kutholwe Ukungqubuzana Kwesinqamuleli
   register:
     placeholder: Cindezela noma iyiphi inhlanganisela yokhiye
     title: Ukubhalisa isinqamuleli esisha

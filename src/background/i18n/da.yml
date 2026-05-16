@@ -53,6 +53,11 @@ service:
     fungerer korrekt.
   not_running_ok: Start service
 shortcut:
+  conflicts:
+    body: Nogle genveje er tildelt flere handlinger. Tildel dem venligst.
+    dismiss: Afskedige
+    review: Gennemgå
+    title: Genvejskonflikter fundet
   register:
     placeholder: Tryk på enhver nøglekombination
     title: Registrering af ny genvej

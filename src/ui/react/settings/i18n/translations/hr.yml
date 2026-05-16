@@ -239,7 +239,10 @@ session:
   upgrade_to: Nadogradite na
 shortcuts:
   disabled_tooltip: Widget i njegovi prečaci su onemogućeni
-  duplicate_error: Ovaj prečac je dupliciran
+  duplicate_error: Otkriveni su sukobljeni prečaci
+  duplicate_error_hint: >-
+    Neki prečaci dodijeljeni su više radnji. Onemogućite jedan od sukobljenih
+    widgeta ili ponovno dodijelite duplikat povezivanja tipki za rješavanje.
   enable: Omogući ugrađeni sustav prečaca
   enable_tooltip: >-
     Onemogući ako ćete implementirati vlastiti sustav prečaca pomoću klijenta

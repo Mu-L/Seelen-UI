@@ -242,7 +242,11 @@ session:
   upgrade_to: Actualizar a
 shortcuts:
   disabled_tooltip: El widget y sus atajos están deshabilitados.
-  duplicate_error: Este atajo está duplicado.
+  duplicate_error: Atajos conflictivos detectados
+  duplicate_error_hint: >-
+    Algunos atajos están asignados a múltiples acciones. Deshabilite uno de los
+    widgets en conflicto o reasigne la combinación de teclas duplicada para
+    resolverlo.
   enable: Habilitar el sistema de accesos directos integrados
   enable_tooltip: >-
     Deshabilite si implementa su propio sistema de atajos utilizando el cliente

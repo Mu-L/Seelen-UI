@@ -57,6 +57,13 @@ service:
     bağımlılık/yardımcıdır.
   not_running_ok: Hizmeti başlat
 shortcut:
+  conflicts:
+    body: >-
+      Bazı kısayollar birden fazla eyleme atanmıştır; lütfen bunları yeniden
+      atayın.
+    dismiss: Azletmek
+    review: Gözden geçirmek
+    title: Kısayol Çakışmaları Algılandı
   register:
     placeholder: Herhangi bir tuş kombinasyonuna basın
     title: Yeni kısayol kaydetme

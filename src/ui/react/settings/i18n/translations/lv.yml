@@ -234,7 +234,11 @@ session:
   upgrade_to: Jaunināt uz
 shortcuts:
   disabled_tooltip: Logrīks un tā īsceļi ir atspējoti
-  duplicate_error: Šī saīsne ir dublēta
+  duplicate_error: Atklāti konfliktējoši īsinājumtaustiņi
+  duplicate_error_hint: >-
+    Daži īsinājumtaustiņi ir piešķirti vairākām darbībām. Atspējojiet vienu no
+    konfliktējošajiem logrīkiem vai atkārtoti piešķiriet dublikāta atslēgas
+    saistīšanu, lai to atrisinātu.
   enable: Iespējot iebūvēto saīsņu sistēmu
   enable_tooltip: >-
     Atspējot, ja jūs ieviesīsit savu saīsņu sistēmu, izmantojot Seelen UI

@@ -237,7 +237,10 @@ session:
   upgrade_to: Upgradovat na
 shortcuts:
   disabled_tooltip: Widget a jeho zkratky jsou zakázány
-  duplicate_error: Tato zkratka je duplicitní
+  duplicate_error: Byly zjištěny konfliktní zkratky
+  duplicate_error_hint: >-
+    Některé zkratky jsou přiřazeny více akcím. Zakažte jeden z konfliktních
+    widgetů nebo znovu přiřaďte duplicitní klíčovou vazbu k vyřešení.
   enable: Povolení vestavěného systému zkratek
   enable_tooltip: >-
     Zakázat, pokud budete implementovat vlastní systém zkratek pomocí klienta

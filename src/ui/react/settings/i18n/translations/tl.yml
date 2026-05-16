@@ -246,7 +246,11 @@ session:
   upgrade_to: Mag-upgrade sa
 shortcuts:
   disabled_tooltip: Ang widget at ang mga shortcut nito ay hindi pinagana
-  duplicate_error: Ang shortcut na ito ay nadoble
+  duplicate_error: May nakitang mga salungat na shortcut
+  duplicate_error_hint: >-
+    Ang ilang mga shortcut ay itinalaga sa maraming pagkilos. Huwag paganahin
+    ang isa sa mga magkasalungat na widget o muling italaga ang duplicate na key
+    binding upang malutas.
   enable: Paganahin ang built-in na mga shortcut system
   enable_tooltip: >-
     Huwag paganahin kung ipatutupad mo ang iyong sariling sistema ng mga

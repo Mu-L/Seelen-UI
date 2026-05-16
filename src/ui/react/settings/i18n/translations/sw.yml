@@ -232,7 +232,10 @@ session:
   upgrade_to: Boresha hadi
 shortcuts:
   disabled_tooltip: Wijeti na njia zake za mkato zimezimwa
-  duplicate_error: Njia hii ya mkato imerudiwa
+  duplicate_error: Njia za mkato zinazokinzana zimegunduliwa
+  duplicate_error_hint: >-
+    Baadhi ya njia za mkato zimekabidhiwa kwa vitendo vingi. Zima mojawapo ya
+    wijeti zinazokinzana au kabidhi upya ufunguo unaorudiwa ili kutatua.
   enable: Wezesha mfumo wa mkato uliojengwa ndani
   enable_tooltip: >-
     Lemaza ikiwa utatumia mfumo wako wa njia za mkato kwa kutumia mteja wa

@@ -55,6 +55,11 @@ service:
     funcionar corretamente.
   not_running_ok: Iniciar serviço
 shortcut:
+  conflicts:
+    body: Alguns atalhos são atribuídos a múltiplas ações. Por favor, reatribua-os.
+    dismiss: Liberar
+    review: Análise
+    title: Conflitos de atalho detectados
   register:
     placeholder: Pressione qualquer combinação de tecla
     title: Registrando um novo atalho

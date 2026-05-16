@@ -234,7 +234,11 @@ session:
   upgrade_to: Upgrade op
 shortcuts:
   disabled_tooltip: De Widget a seng Ofkiirzungen sinn behënnert
-  duplicate_error: Dës Ofkiirzung gëtt duplizéiert
+  duplicate_error: Konflikt Ofkiirzungen entdeckt
+  duplicate_error_hint: >-
+    E puer Ofkiirzungen ginn op verschidde Aktiounen zougewisen. Desaktivéiere
+    ee vun de konfliktende Widgets oder nei zouzeweisen déi duplizéiert
+    Schlësselverbindung fir ze léisen.
   enable: Aktivéiert agebaut-in Shortcuts System
   enable_tooltip: >-
     Desaktivéiere wann Dir Ären eegene Ofkierzungsystem implementéiert, mat dem

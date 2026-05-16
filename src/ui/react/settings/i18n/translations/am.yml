@@ -223,7 +223,10 @@ session:
   upgrade_to: አሻሽል ወደ
 shortcuts:
   disabled_tooltip: መግብር እና አቋራጮቹ ተሰናክለዋል።
-  duplicate_error: ይህ አቋራጭ የተባዛ ነው።
+  duplicate_error: የሚጋጩ አቋራጮች ተገኝተዋል
+  duplicate_error_hint: >-
+    አንዳንድ አቋራጮች ለብዙ ድርጊቶች ተመድበዋል። ከተጋጩ መግብሮች ውስጥ አንዱን ያሰናክሉ ወይም ለመፍታት የተባዛውን ቁልፍ
+    ማሰሪያ ይመድቡ።
   enable: አብሮገነብ አቋራጭ አቋራጭ ስርዓት
   enable_tooltip: የእራስዎን አቋራጮችን ስርዓት የሚተገበሩበትን የእራስዎን አቋራጮዎች ስርዓት የሚተገበሩ ከሆነ ያሰናክሉ
   labels:

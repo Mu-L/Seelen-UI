@@ -233,7 +233,10 @@ session:
   upgrade_to: Uuenda versioonile
 shortcuts:
   disabled_tooltip: Vidin ja selle otseteed on keelatud
-  duplicate_error: See otsetee on dubleeritud
+  duplicate_error: Tuvastati vastuolulised otseteed
+  duplicate_error_hint: >-
+    Mõned otseteed on määratud mitmele toimingule. Keelake üks konfliktsetest
+    vidinatest või määrake lahendamiseks uuesti duplikaatvõtme sidumine.
   enable: Luba sisseehitatud otseteede süsteem
   enable_tooltip: >-
     Keelake, kui rakendate oma otseteede süsteemi, kasutades seeneni

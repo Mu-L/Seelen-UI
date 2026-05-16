@@ -53,6 +53,11 @@ service:
     aplicativo funcionar corretamente.
   not_running_ok: Start Service
 shortcut:
+  conflicts:
+    body: Alguns atalhos são atribuídos a múltiplas ações. Por favor, reatribua-os.
+    dismiss: Dispensar
+    review: Revisão
+    title: Conflitos de atalho detetados
   register:
     placeholder: Pressione qualquer combinação de tecla
     title: Registrando um novo atalho

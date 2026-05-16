@@ -234,7 +234,11 @@ session:
   upgrade_to: Uwchraddio i
 shortcuts:
   disabled_tooltip: Mae'r teclyn a'i lwybrau byr wedi'u hanalluogi
-  duplicate_error: Mae'r llwybr byr hwn yn cael ei ddyblygu
+  duplicate_error: Wedi canfod llwybrau byr gwrthgyferbyniol
+  duplicate_error_hint: >-
+    Mae rhai llwybrau byr yn cael eu neilltuo i gamau gweithredu lluosog.
+    Analluoga un o'r teclynnau sy'n gwrthdaro neu ailbennu'r rhwymiad allwedd
+    dyblyg i'w ddatrys.
   enable: Galluogi system llwybrau byr adeiledig
   enable_tooltip: >-
     Analluoga os byddwch chi'n gweithredu'ch system llwybrau byr eich hun gan

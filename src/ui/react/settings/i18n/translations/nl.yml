@@ -235,7 +235,11 @@ session:
   upgrade_to: Upgrade naar
 shortcuts:
   disabled_tooltip: De widget en de snelkoppelingen zijn uitgeschakeld
-  duplicate_error: Deze snelkoppeling is gedupliceerd
+  duplicate_error: Conflicterende snelkoppelingen gedetecteerd
+  duplicate_error_hint: >-
+    Sommige snelkoppelingen zijn aan meerdere acties toegewezen. Schakel een van
+    de conflicterende widgets uit of wijs de dubbele sleutelbinding opnieuw toe
+    om het probleem op te lossen.
   enable: Schakel ingebouwd snelkoppelsysteem in
   enable_tooltip: >-
     Schakel uit of u uw eigen snelkoppelsysteem implementeert met behulp van de

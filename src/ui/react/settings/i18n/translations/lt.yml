@@ -237,7 +237,11 @@ session:
   upgrade_to: Atnaujinkite į
 shortcuts:
   disabled_tooltip: Valdiklis ir jo spartieji klavišai išjungti
-  duplicate_error: Šis spartusis klavišas pasikartoja
+  duplicate_error: Aptikti prieštaraujantys spartieji klavišai
+  duplicate_error_hint: >-
+    Kai kurie spartieji klavišai priskiriami keliems veiksmams. Išjunkite vieną
+    iš nesuderinamų valdiklių arba iš naujo priskirkite pasikartojantį rakto
+    susiejimą, kad išspręstumėte.
   enable: Įgalinti įmontuotą nuorodų sistemą
   enable_tooltip: Išjunkite, jei įdiegsite savo nuorodų sistemą naudodami „Seelen UI“ klientą
   labels:

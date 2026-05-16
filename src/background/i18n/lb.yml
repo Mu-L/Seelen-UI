@@ -53,6 +53,13 @@ service:
     richteg ze schaffen.
   not_running_ok: Start Service
 shortcut:
+  conflicts:
+    body: >-
+      E puer Ofkierzungen gi fir verschidde Aktiounen zougewisen, w.e.g.
+      neizeweisen.
+    dismiss: Entlooss
+    review: Iwwerpréiwung
+    title: Ofkierzung Konflikter entdeckt
   register:
     placeholder: Press all Tastekombinatioun
     title: Registréiert nei Ofkiirzung

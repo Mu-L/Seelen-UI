@@ -39,6 +39,11 @@ service:
   not_running_description: Seelen UI サービス (slu-service) は、アプリが適切に動作するための依存関係/ヘルパーです。
   not_running_ok: サービスを開始する
 shortcut:
+  conflicts:
+    body: 一部のショートカットは複数のアクションに割り当てられています。再割り当てしてください。
+    dismiss: 却下する
+    review: レビュー
+    title: ショートカットの競合が検出されました
   register:
     placeholder: キーを押してください...
     title: ショートカットキーの登録

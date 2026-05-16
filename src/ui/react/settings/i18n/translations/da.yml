@@ -234,7 +234,10 @@ session:
   upgrade_to: Opgrader til
 shortcuts:
   disabled_tooltip: Widgetten og dens genveje er deaktiveret
-  duplicate_error: Denne genvej er duplikeret
+  duplicate_error: Der er fundet modstridende genveje
+  duplicate_error_hint: >-
+    Nogle genveje er tildelt flere handlinger. Deaktiver en af ​​de modstridende
+    widgets eller gentildel den dubletnøglebinding for at løse.
   enable: Aktivér det indbyggede genvejssystem
   enable_tooltip: >-
     Deaktiver, hvis du vil implementere dit eget genvejssystem ved hjælp af

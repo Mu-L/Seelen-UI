@@ -59,6 +59,11 @@ service:
     prawidłowe działanie aplikacji.
   not_running_ok: Uruchom usługę
 shortcut:
+  conflicts:
+    body: Niektóre skróty są przypisane do wielu działań. Przypisz je ponownie.
+    dismiss: Odrzucać
+    review: Recenzja
+    title: Wykryto konflikty skrótów
   register:
     placeholder: Naciśnij dowolną kombinację klawiszy
     title: Rejestracja nowego skrótu

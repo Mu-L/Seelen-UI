@@ -244,7 +244,11 @@ session:
   upgrade_to: Upgrade auf
 shortcuts:
   disabled_tooltip: Das Widget und seine Verknüpfungen sind deaktiviert
-  duplicate_error: Diese Verknüpfung ist dupliziert
+  duplicate_error: Widersprüchliche Verknüpfungen erkannt
+  duplicate_error_hint: >-
+    Einige Tastenkombinationen sind mehreren Aktionen zugeordnet. Deaktivieren
+    Sie eines der widersprüchlichen Widgets oder weisen Sie die doppelte
+    Schlüsselbindung neu zu, um sie aufzulösen.
   enable: Aktivieren Sie ein integriertes Verknüpfungssystem
   enable_tooltip: >-
     Deaktivieren Sie, wenn Sie Ihr eigenes Verknüpfungssystem mit dem Seelen UI

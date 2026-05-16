@@ -42,6 +42,11 @@ service:
   not_running_description: تعتبر خدمة Seelen UI (خدمة slu) بمثابة تبعية/مساعد للتطبيق للعمل بشكل صحيح.
   not_running_ok: ابدأ الخدمة
 shortcut:
+  conflicts:
+    body: تم تعيين بعض الاختصارات لإجراءات متعددة، يرجى إعادة تعيينها.
+    dismiss: رفض
+    review: مراجعة
+    title: تم اكتشاف تعارضات في الاختصارات
   register:
     placeholder: اضغط على أي مجموعة مفاتيح
     title: تسجيل اختصار جديد

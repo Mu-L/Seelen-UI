@@ -55,6 +55,13 @@ service:
     funcioni correctament.
   not_running_ok: Iniciar servei
 shortcut:
+  conflicts:
+    body: >-
+      Algunes dreceres s'assignen a diverses accions, si us plau,
+      reassigneu-les.
+    dismiss: Descartar
+    review: Revisió
+    title: S'han detectat conflictes de dreceres
   register:
     placeholder: Premeu qualsevol combinació de tecles
     title: Registre de nou drecera

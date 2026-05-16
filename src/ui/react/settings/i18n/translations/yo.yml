@@ -230,7 +230,10 @@ session:
   upgrade_to: Igbesoke si
 shortcuts:
   disabled_tooltip: Ẹrọ ailorukọ ati awọn ọna abuja rẹ jẹ alaabo
-  duplicate_error: Ọna abuja yii jẹ pidánpidán
+  duplicate_error: Awọn ọna abuja rogbodiyan ti ri
+  duplicate_error_hint: >-
+    Diẹ ninu awọn ọna abuja jẹ sọtọ si awọn iṣe lọpọlọpọ. Pa ọkan ninu awọn ẹrọ
+    ailorukọ rogbodiyan tabi tun ṣeto abuda bọtini ẹda-iwe lati yanju.
   enable: Mu ṣiṣẹ eto awọn ọna abuja
   enable_tooltip: Muu Ti o ba yoo ṣe eto awọn ọna ọna abuja tirẹ nipa lilo alajọṣepọ UI
   labels:

@@ -239,7 +239,11 @@ session:
   upgrade_to: Taġġorna għal
 shortcuts:
   disabled_tooltip: Il-widget u s-shortcuts tiegħu huma diżattivati
-  duplicate_error: Din is-shortcut hija duplikata
+  duplicate_error: Instabu shortcuts konfliġġenti
+  duplicate_error_hint: >-
+    Xi shortcuts huma assenjati għal azzjonijiet multipli. Itfi wieħed
+    mill-widgets konfliġġenti jew tassenja mill-ġdid l-irbit taċ-ċavetta
+    duplikat biex issolvi.
   enable: Ippermetti s-sistema shortcuts inkorporati
   enable_tooltip: >-
     Itfi jekk timplimentax is-sistema shortcuts tiegħek stess billi tuża

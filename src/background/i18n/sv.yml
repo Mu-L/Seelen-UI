@@ -51,6 +51,11 @@ service:
     fungera korrekt.
   not_running_ok: Starta service
 shortcut:
+  conflicts:
+    body: Vissa genvägar är tilldelade flera åtgärder, vänligen tilldela dem igen.
+    dismiss: Avfärda
+    review: Recension
+    title: Genvägskonflikter upptäckt
   register:
     placeholder: Tryck på alla tangentkombinationer
     title: Registrera ny genväg

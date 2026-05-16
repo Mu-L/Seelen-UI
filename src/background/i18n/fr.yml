@@ -56,6 +56,13 @@ service:
     l'application de fonctionner correctement.
   not_running_ok: Démarrer le service
 shortcut:
+  conflicts:
+    body: >-
+      Certains raccourcis sont attribués à plusieurs actions, veuillez les
+      réaffecter.
+    dismiss: Rejeter
+    review: Revoir
+    title: Conflits de raccourcis détectés
   register:
     placeholder: Appuyez sur n'importe quelle combinaison de touches
     title: Enregistrement de nouveaux raccourcis

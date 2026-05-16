@@ -238,7 +238,11 @@ session:
   upgrade_to: Inovovať na
 shortcuts:
   disabled_tooltip: Miniaplikácia a jej skratky sú vypnuté
-  duplicate_error: Táto skratka je duplikovaná
+  duplicate_error: Boli zistené konfliktné skratky
+  duplicate_error_hint: >-
+    Niektoré skratky sú priradené k viacerým akciám. Zakážte jeden z
+    konfliktných miniaplikácií alebo znova priraďte duplicitné viazanie kľúčov,
+    ktoré chcete vyriešiť.
   enable: Povoliť vstavaný systém skratiek
   enable_tooltip: >-
     Zakážte, ak budete implementovať svoj vlastný systém skratiek pomocou

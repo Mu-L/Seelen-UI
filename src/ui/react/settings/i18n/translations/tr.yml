@@ -235,7 +235,11 @@ session:
   upgrade_to: 'Şuna yükselt:'
 shortcuts:
   disabled_tooltip: Widget ve kısayolları devre dışı bırakıldı
-  duplicate_error: Bu kısayol kopyalandı
+  duplicate_error: Çakışan kısayollar algılandı
+  duplicate_error_hint: >-
+    Bazı kısayollar birden fazla eyleme atanır. Çakışan widget'lardan birini
+    devre dışı bırakın veya çözümlemek için yinelenen anahtar bağlamayı yeniden
+    atayın.
   enable: Dahili kısayol sistemini etkinleştirin
   enable_tooltip: >-
     Seelen UI istemcisini kullanarak kendi kısayol sisteminizi uygulayacaksanız

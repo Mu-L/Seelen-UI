@@ -234,7 +234,11 @@ session:
   upgrade_to: '-ə yüksəldin'
 shortcuts:
   disabled_tooltip: Vidcet və onun qısa yolları deaktiv edilib
-  duplicate_error: Bu qısayol dublikatdır
+  duplicate_error: Ziddiyyətli qısayollar aşkar edildi
+  duplicate_error_hint: >-
+    Bəzi qısayollar çoxlu hərəkətlərə təyin edilir. Ziddiyyətli vidcetlərdən
+    birini söndürün və ya həll etmək üçün dublikat açar bağlamasını yenidən
+    təyin edin.
   enable: Quraşdırılmış qısa yol sistemini aktivləşdirin
   enable_tooltip: >-
     Seelen UI müştərisindən istifadə edərək öz qısa yol sisteminizi həyata

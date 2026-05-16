@@ -60,6 +60,13 @@ service:
     correct te laten werken.
   not_running_ok: Dienst starten
 shortcut:
+  conflicts:
+    body: >-
+      Sommige snelkoppelingen zijn aan meerdere acties toegewezen. Wijs deze
+      opnieuw toe.
+    dismiss: Afwijzen
+    review: Beoordeling
+    title: Snelkoppelingsconflicten gedetecteerd
   register:
     placeholder: Druk op een sleutelcombinatie
     title: Nieuwe snelkoppeling registreren

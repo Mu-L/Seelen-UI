@@ -236,7 +236,10 @@ session:
   upgrade_to: Atualizar para
 shortcuts:
   disabled_tooltip: O widget e seus atalhos estão desativados
-  duplicate_error: Este atalho está duplicado
+  duplicate_error: Atalhos conflitantes detectados
+  duplicate_error_hint: >-
+    Alguns atalhos são atribuídos a múltiplas ações. Desative um dos widgets
+    conflitantes ou reatribua a ligação de chave duplicada para resolver.
   enable: Habilitar o sistema de atalhos embutidos
   enable_tooltip: >-
     Desative se você implementar seu próprio sistema de atalhos usando o Seelen

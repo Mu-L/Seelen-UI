@@ -235,7 +235,10 @@ session:
   upgrade_to: Nâng cấp lên
 shortcuts:
   disabled_tooltip: Tiện ích và các phím tắt của nó đã bị tắt
-  duplicate_error: Phím tắt này bị trùng lặp
+  duplicate_error: Đã phát hiện thấy các phím tắt xung đột
+  duplicate_error_hint: >-
+    Một số phím tắt được gán cho nhiều hành động. Vô hiệu hóa một trong các tiện
+    ích xung đột hoặc gán lại liên kết khóa trùng lặp để giải quyết.
   enable: Bật hệ thống phím tắt tích hợp
   enable_tooltip: >-
     Tắt nếu bạn sẽ triển khai hệ thống phím tắt của riêng mình bằng cách sử dụng

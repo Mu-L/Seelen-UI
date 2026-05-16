@@ -232,7 +232,10 @@ session:
   upgrade_to: Uppfærðu í
 shortcuts:
   disabled_tooltip: Græjan og flýtivísar hennar eru óvirk
-  duplicate_error: Þessi flýtileið er afrituð
+  duplicate_error: Misvísandi flýtileiðir fundust
+  duplicate_error_hint: >-
+    Sumum flýtileiðum er úthlutað mörgum aðgerðum. Slökktu á einni af græjunum
+    sem stangast á eða endurúthlutaðu tvítekinni lyklabindingu til að leysa.
   enable: Virkja innbyggt flýtileiðkerfi
   enable_tooltip: >-
     Slökktu á ef þú munt innleiða þitt eigið flýtileiðkerfi með Seelen UI

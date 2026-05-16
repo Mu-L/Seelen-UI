@@ -52,6 +52,13 @@ service:
     darbotos pareizi.
   not_running_ok: Sāciet pakalpojumu
 shortcut:
+  conflicts:
+    body: >-
+      Daži īsinājumtaustiņi ir piešķirti vairākām darbībām, lūdzu, piešķiriet
+      tos atkārtoti.
+    dismiss: Atlaist
+    review: Pārskats
+    title: Atklāti saīsnes konflikti
   register:
     placeholder: Nospiediet jebkuru atslēgu kombināciju
     title: Reģistrējot jaunu saīsni

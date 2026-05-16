@@ -58,6 +58,11 @@ service:
     aplicación funcione correctamente.
   not_running_ok: Iniciar servicio
 shortcut:
+  conflicts:
+    body: Algunos atajos están asignados a múltiples acciones; reasígnalos.
+    dismiss: Despedir
+    review: Revisar
+    title: Conflictos de acceso directo detectados
   register:
     placeholder: Presione cualquier combinación de teclas
     title: Registrando un nuevo atajo

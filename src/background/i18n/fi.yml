@@ -54,6 +54,13 @@ service:
     sovellus toimii oikein.
   not_running_ok: Aloita palvelu
 shortcut:
+  conflicts:
+    body: >-
+      Jotkut pikanäppäimet on määritetty useille toiminnoille, määritä ne
+      uudelleen.
+    dismiss: Hylkää
+    review: Arvostelu
+    title: Pikanäppäinristiriidat havaittu
   register:
     placeholder: Paina mitä tahansa näppäinyhdistelmää
     title: Uuden pikakuvakkeen rekisteröinti

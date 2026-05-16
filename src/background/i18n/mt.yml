@@ -54,6 +54,13 @@ service:
     sew.
   not_running_ok: Ibda s-servizz
 shortcut:
+  conflicts:
+    body: >-
+      Xi shortcuts huma assenjati għal azzjonijiet multipli, jekk jogħġbok
+      assenjahom mill-ġdid.
+    dismiss: Tkeċċi
+    review: Reviżjoni
+    title: Kunflitti ta' Shortcut Individwati
   register:
     placeholder: Agħfas kwalunkwe kombinazzjoni taċ-ċavetta
     title: Tirreġistra shortcut ġdid

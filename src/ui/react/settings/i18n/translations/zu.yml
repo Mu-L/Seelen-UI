@@ -240,7 +240,11 @@ session:
   upgrade_to: Thuthukela ku
 shortcuts:
   disabled_tooltip: Iwijethi kanye nezinqamuleli zayo kukhutshaziwe
-  duplicate_error: Lesi sinqamuleli siyimpinda
+  duplicate_error: Kutholwe izinqamuleli ezishayisanayo
+  duplicate_error_hint: >-
+    Ezinye izinqamuleli zabelwe izenzo eziningi. Khubaza eyodwa yamawijethi
+    angqubuzanayo noma yabela kabusha ukhiye oyimpinda obophezelayo ukuze
+    uxazulule.
   enable: Nika amandla uhlelo lwezinqamuleli ezakhelwe ngaphakathi
   enable_tooltip: >-
     Khubaza uma uzosebenzisa uhlelo lwakho lwezinqamuleli usebenzisa iklayenti

@@ -239,7 +239,11 @@ session:
   upgrade_to: Upgrade la
 shortcuts:
   disabled_tooltip: Widgetul și comenzile rapide ale acestuia sunt dezactivate
-  duplicate_error: Această comandă rapidă este duplicată
+  duplicate_error: S-au detectat comenzi rapide conflictuale
+  duplicate_error_hint: >-
+    Unele comenzi rapide sunt atribuite mai multor acțiuni. Dezactivați unul
+    dintre widget-urile aflate în conflict sau reatribuiți legarea tastelor
+    duplicate pentru rezolvare.
   enable: Activați sistemul de comenzi rapide încorporate
   enable_tooltip: >-
     Dezactivați dacă veți implementa propriul sistem de comenzi rapide folosind

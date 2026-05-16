@@ -55,6 +55,11 @@ service:
     funkcioniranje aplikacije.
   not_running_ok: Pokreni servis
 shortcut:
+  conflicts:
+    body: Neke prečice su dodijeljene višestrukim radnjama, dodijelite ih ponovo.
+    dismiss: Odbaci
+    review: Pregled
+    title: Otkriveni sukobi prečica
   register:
     placeholder: Pritisnite bilo koju kombinaciju tipki
     title: Registriranje nove prečice

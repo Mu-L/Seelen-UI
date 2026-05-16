@@ -53,6 +53,13 @@ service:
     kazi vizuri.
   not_running_ok: Anza huduma
 shortcut:
+  conflicts:
+    body: >-
+      Baadhi ya njia za mkato zimekabidhiwa kwa vitendo vingi, tafadhali
+      zikabidhi upya.
+    dismiss: Ondoa
+    review: Kagua
+    title: Migogoro ya Njia ya mkato Imegunduliwa
   register:
     placeholder: Bonyeza mchanganyiko wowote muhimu
     title: Kusajili njia ya mkato mpya

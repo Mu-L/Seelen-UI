@@ -52,6 +52,13 @@ service:
     alkalmazás megfelelő működéséhez.
   not_running_ok: Indítsa el a szolgáltatást
 shortcut:
+  conflicts:
+    body: >-
+      Egyes parancsikonok több művelethez vannak hozzárendelve, kérjük, rendelje
+      újra őket.
+    dismiss: Elvetés
+    review: Tekintse át
+    title: Parancsikon-ütközések észlelve
   register:
     placeholder: Nyomja meg a gomb kombinációját
     title: Új parancsikon regisztrálása

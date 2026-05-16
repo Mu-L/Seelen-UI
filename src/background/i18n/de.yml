@@ -58,6 +58,13 @@ service:
     ordnungsgemäße Funktion der App.
   not_running_ok: Dienst starten
 shortcut:
+  conflicts:
+    body: >-
+      Einige Verknüpfungen sind mehreren Aktionen zugeordnet. Bitte weisen Sie
+      sie neu zu.
+    dismiss: Zurückweisen
+    review: Rezension
+    title: Verknüpfungskonflikte erkannt
   register:
     placeholder: Drücken Sie eine beliebige Tastenkombination
     title: Registrierung einer neuen Verknüpfung

@@ -53,6 +53,11 @@ service:
     aplikace.
   not_running_ok: Spusťte službu
 shortcut:
+  conflicts:
+    body: Některé zkratky jsou přiřazeny více akcím, změňte jejich přiřazení.
+    dismiss: Propustit
+    review: Recenze
+    title: Zjištěny konflikty zkratek
   register:
     placeholder: Stiskněte libovolnou kombinaci klíčů
     title: Registrace nové zkratky

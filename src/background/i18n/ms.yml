@@ -54,6 +54,13 @@ service:
     untuk apl berfungsi dengan betul.
   not_running_ok: Mulakan perkhidmatan
 shortcut:
+  conflicts:
+    body: >-
+      Beberapa pintasan diperuntukkan kepada berbilang tindakan, sila tetapkan
+      semula.
+    dismiss: Tolak
+    review: Semakan
+    title: Konflik Pintasan Dikesan
   register:
     placeholder: Tekan sebarang gabungan kekunci
     title: Mendaftarkan pintasan baru

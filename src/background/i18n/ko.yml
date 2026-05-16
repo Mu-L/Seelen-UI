@@ -39,6 +39,11 @@ service:
   not_running_description: Seelen UI 서비스(slu-service)는 앱이 제대로 작동하기 위한 종속성/도우미입니다.
   not_running_ok: 서비스 시작
 shortcut:
+  conflicts:
+    body: 일부 단축키는 여러 작업에 할당되어 있습니다. 다시 할당하세요.
+    dismiss: 해고하다
+    review: 검토
+    title: 바로가기 충돌이 감지되었습니다.
   register:
     placeholder: 주요 조합을 누릅니다
     title: 새로운 바로 가기 등록

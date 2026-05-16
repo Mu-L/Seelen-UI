@@ -56,6 +56,11 @@ service:
     aplikacije.
   not_running_ok: Pokrenite uslugu
 shortcut:
+  conflicts:
+    body: Neki prečaci dodijeljeni su višestrukim radnjama, ponovno ih dodijelite.
+    dismiss: Odbaciti
+    review: Pregled
+    title: Otkriveni sukobi prečaca
   register:
     placeholder: Pritisnite bilo koju kombinaciju tipki
     title: Registriranje novog prečaca

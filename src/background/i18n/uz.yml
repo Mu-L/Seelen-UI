@@ -56,6 +56,11 @@ service:
     qaramlik/yordamchi hisoblanadi.
   not_running_ok: Xizmatni ishga tushirish
 shortcut:
+  conflicts:
+    body: Ayrim yorliqlar bir nechta amallarga tayinlangan, ularni qayta tayinlang.
+    dismiss: Rad etish
+    review: Ko‘rib chiqish
+    title: Yorliq ziddiyati aniqlandi
   register:
     placeholder: Har qanday tugmachani bosing
     title: Yangi yorliqni ro'yxatdan o'tkazish

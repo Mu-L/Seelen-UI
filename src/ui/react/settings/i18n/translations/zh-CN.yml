@@ -202,7 +202,8 @@ session:
   upgrade_to: 升级至
 shortcuts:
   disabled_tooltip: 小部件及其快捷方式被禁用
-  duplicate_error: 该快捷键重复
+  duplicate_error: 检测到冲突的快捷方式
+  duplicate_error_hint: 有些快捷键被分配给多个操作。禁用冲突的小部件之一或重新分配重复的键绑定来解决。
   enable: 启用内置快捷键系统
   enable_tooltip: 如果您使用 Seelen UI 客户端实现自己的快捷键系统，那么请禁用此项。
   labels:

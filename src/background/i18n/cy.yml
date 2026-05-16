@@ -53,6 +53,13 @@ service:
     weithio'n iawn.
   not_running_ok: Dechrau gwasanaeth
 shortcut:
+  conflicts:
+    body: >-
+      Mae rhai llwybrau byr wedi'u neilltuo i gamau gweithredu lluosog, a
+      fyddech cystal â'u hailbennu.
+    dismiss: Diystyru
+    review: Adolygu
+    title: Wedi Canfod Gwrthdaro Llwybr Byr
   register:
     placeholder: Pwyswch unrhyw gyfuniad allweddol
     title: Cofrestru llwybr byr newydd

@@ -236,7 +236,11 @@ session:
   upgrade_to: Upgrade to
 shortcuts:
   disabled_tooltip: Widget û kurtebirên wê neçalak in
-  duplicate_error: Ev kurtebir hatiye dubarekirin
+  duplicate_error: Kurtebirên nakok hatin dîtin
+  duplicate_error_hint: >-
+    Hin kurtebir ji gelek çalakiyan re têne destnîşan kirin. Yek ji widgetên
+    nakok neçalak bike an ji bo çareserkirinê girêdana mifteya ducar ji nû ve
+    tayîn bike.
   enable: Pergala kurtefîlmên çêkirî çalak bikin
   enable_tooltip: >-
     Heke hûn ê pergala kurteya xwe bi karanîna muwekîlê Seelen UI bikar bînin

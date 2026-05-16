@@ -55,6 +55,13 @@ service:
     aplicația să funcționeze corect.
   not_running_ok: Începeți serviciul
 shortcut:
+  conflicts:
+    body: >-
+      Unele comenzi rapide sunt atribuite mai multor acțiuni, vă rugăm să le
+      reatribuiți.
+    dismiss: Respingeți
+    review: Recenzie
+    title: S-au detectat conflicte de comenzi rapide
   register:
     placeholder: Apăsați orice combinație de taste
     title: Înregistrarea unei noi comenzi rapide

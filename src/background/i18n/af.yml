@@ -54,6 +54,13 @@ service:
     om behoorlik te werk.
   not_running_ok: Begin diens
 shortcut:
+  conflicts:
+    body: >-
+      Sommige kortpaaie word aan veelvuldige handelinge toegewys, herken hulle
+      asseblief.
+    dismiss: Verwerp
+    review: Hersien
+    title: Kortpadkonflikte bespeur
   register:
     placeholder: Druk op enige sleutelkombinasie
     title: Nuwe kortpad registreer

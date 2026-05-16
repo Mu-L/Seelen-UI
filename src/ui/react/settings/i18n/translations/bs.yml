@@ -233,7 +233,11 @@ session:
   upgrade_to: Nadogradite na
 shortcuts:
   disabled_tooltip: Vidžet i njegove prečice su onemogućeni
-  duplicate_error: Ova prečica je duplirana
+  duplicate_error: Otkrivene su konfliktne prečice
+  duplicate_error_hint: >-
+    Neke prečice su dodijeljene višestrukim radnjama. Onemogućite jedan od
+    konfliktnih vidžeta ili ponovo dodijelite duplicirano povezivanje ključa za
+    rješavanje.
   enable: Omogući ugrađene sistem prečaca
   enable_tooltip: >-
     Onemogućite ako ćete implementirati vlastite sustav prečaca pomoću klijenta

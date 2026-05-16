@@ -57,6 +57,11 @@ service:
     aplikácie.
   not_running_ok: Spustite službu
 shortcut:
+  conflicts:
+    body: Niektoré skratky sú priradené k viacerým akciám, zmeňte ich priradenie.
+    dismiss: Odmietnuť
+    review: recenzia
+    title: Zistené konflikty skratiek
   register:
     placeholder: Stlačte ľubovoľnú kombináciu klávesov
     title: Registrácia novej skratky

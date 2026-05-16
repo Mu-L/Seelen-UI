@@ -46,6 +46,11 @@ service:
     daradara.
   not_running_ok: Bẹrẹ iṣẹ
 shortcut:
+  conflicts:
+    body: Diẹ ninu awọn ọna abuja ni a yan si awọn iṣe lọpọlọpọ, jọwọ tun wọn sọtọ.
+    dismiss: Yọọ kuro
+    review: Atunwo
+    title: Awari Awọn Rogbodiyan Ọna abuja
   register:
     placeholder: Tẹ eyikeyi apapo bọtini
     title: Sisọ ọrọ abuja tuntun

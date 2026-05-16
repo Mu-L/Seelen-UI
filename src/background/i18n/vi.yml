@@ -54,6 +54,11 @@ service:
     thuộc/trợ giúp để ứng dụng hoạt động bình thường.
   not_running_ok: Bắt đầu dịch vụ
 shortcut:
+  conflicts:
+    body: Một số phím tắt được gán cho nhiều hành động, vui lòng gán lại chúng.
+    dismiss: Miễn nhiệm
+    review: Ôn tập
+    title: Đã phát hiện xung đột phím tắt
   register:
     placeholder: Nhấn bất kỳ kết hợp khóa nào
     title: Đăng ký phím tắt mới

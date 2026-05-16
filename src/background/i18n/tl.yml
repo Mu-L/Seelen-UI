@@ -59,6 +59,13 @@ service:
     nang maayos ang app.
   not_running_ok: Simulan ang serbisyo
 shortcut:
+  conflicts:
+    body: >-
+      Ang ilang mga shortcut ay itinalaga sa maraming pagkilos, mangyaring
+      muling italaga ang mga ito.
+    dismiss: I-dismiss
+    review: Balik-aral
+    title: May Natukoy na Mga Salungatan sa Shortcut
   register:
     placeholder: Pindutin ang anumang key na kumbinasyon
     title: Pagrehistro ng Bagong Shortcut
