@@ -1,4 +1,4 @@
-use std::sync::atomic::{AtomicBool, Ordering};
+use std::sync::atomic::Ordering;
 
 use slu_ipc::messages::SvcAction;
 use tauri::{AppHandle, Emitter, Wry};
@@ -14,18 +14,18 @@ use crate::{
     modules::user::infrastructure::reemit_user,
     resources::RESOURCES,
     session::infrastructure::reemit_session,
-    state::application::{FullState, FULL_STATE},
+    state::application::{initialize_user_resources_watcher, AppSettings, FULL_STATE},
     utils::{discord::start_discord_rpc, CRONOMETER},
-    widgets::popups::shortcut_conflicts::show_shortcut_conflict_popup,
-    widgets::{manager::WIDGET_MANAGER, weg::SeelenWeg},
+    widgets::{
+        manager::WIDGET_MANAGER, popups::shortcut_conflicts::show_shortcut_conflict_popup,
+        weg::SeelenWeg,
+    },
     windows_api::{
         event_window::{create_background_window, IS_INTERACTIVE_SESSION},
         Com,
     },
     APP_HANDLE,
 };
-
-static SEELEN_IS_RUNNING: AtomicBool = AtomicBool::new(false);
 
 /// Tauri app handle
 pub fn get_app_handle<'a>() -> &'a AppHandle<Wry> {
@@ -46,19 +46,55 @@ where
     get_app_handle().emit(event, payload).log_error();
 }
 
-/** Struct should be initialized first before calling any other methods */
-pub struct Seelen {}
-
-/* ============== Getters ============== */
-impl Seelen {
-    pub fn is_running() -> bool {
-        SEELEN_IS_RUNNING.load(std::sync::atomic::Ordering::Acquire)
-    }
-}
+pub struct SeelenUI {}
 
 /* ============== Methods ============== */
-impl Seelen {
-    pub fn on_settings_change(state: &FullState) -> Result<()> {
+impl SeelenUI {
+    pub async fn start() -> Result<()> {
+        Migrations::run()?;
+
+        // RESOURCES and FULL_STATE settings have no mutual dependency at init time;
+        // load them in parallel then run the RESOURCES-dependent FULL_STATE steps.
+        std::thread::scope(|s| {
+            s.spawn(|| {
+                let _ = &*RESOURCES;
+                CRONOMETER.record("RESOURCES");
+            });
+            s.spawn(|| {
+                let _ = FULL_STATE.load();
+                CRONOMETER.record("FULL_STATE");
+            });
+        });
+        CRONOMETER.record("Settings & Resources Load");
+
+        FULL_STATE.rcu(|state| {
+            let mut state = state.cloned();
+            state.complete_initialization(&RESOURCES);
+            state
+        });
+
+        let state = FULL_STATE.load();
+        rust_i18n::set_locale(state.locale());
+
+        if state.is_weg_enabled() {
+            SeelenWeg::hide_native_taskbar();
+        }
+
+        WIDGET_MANAGER.reconcile()?;
+
+        create_background_window()?;
+        register_win_hook()?;
+        start_discord_rpc()?;
+        initialize_user_resources_watcher()?;
+
+        let widgets = RESOURCES.widgets();
+        let widget_refs: Vec<_> = widgets.iter().map(|w| w.as_ref()).collect();
+        let (resolved, _) = resolve_shortcuts(&state.settings, &widget_refs);
+        ServicePipe::request(SvcAction::SetShortcuts(resolved))?;
+        Ok(())
+    }
+
+    pub fn on_settings_change(state: &AppSettings) -> Result<()> {
         rust_i18n::set_locale(state.locale());
 
         let widgets = RESOURCES.widgets();
@@ -79,56 +115,6 @@ impl Seelen {
         reemit_user();
         reemit_session();
         Ok(())
-    }
-
-    pub async fn start() -> Result<()> {
-        Migrations::run()?;
-
-        // RESOURCES and FULL_STATE settings have no mutual dependency at init time;
-        // load them in parallel then run the RESOURCES-dependent FULL_STATE steps.
-        std::thread::scope(|s| {
-            s.spawn(|| {
-                let _ = &*RESOURCES;
-                CRONOMETER.record("RESOURCES");
-            });
-            s.spawn(|| {
-                let _ = FULL_STATE.load();
-                CRONOMETER.record("FULL_STATE");
-            });
-        });
-        CRONOMETER.record("Settings & Resources Load");
-
-        FULL_STATE.rcu(|state| {
-            let mut state = state.cloned();
-            state.complete_initialization();
-            state
-        });
-
-        let state = FULL_STATE.load();
-        rust_i18n::set_locale(state.locale());
-
-        if state.is_weg_enabled() {
-            SeelenWeg::hide_native_taskbar();
-        }
-
-        WIDGET_MANAGER.reconcile()?;
-
-        create_background_window()?;
-        register_win_hook()?;
-
-        start_discord_rpc()?;
-        let widgets = RESOURCES.widgets();
-        let widget_refs: Vec<_> = widgets.iter().map(|w| w.as_ref()).collect();
-        let (resolved, _) = resolve_shortcuts(&state.settings, &widget_refs);
-        ServicePipe::request(SvcAction::SetShortcuts(resolved))?;
-
-        SEELEN_IS_RUNNING.store(true, std::sync::atomic::Ordering::SeqCst);
-        Ok(())
-    }
-
-    /// Stop and release all resources
-    pub fn stop() {
-        SEELEN_IS_RUNNING.store(false, std::sync::atomic::Ordering::SeqCst);
     }
 
     pub fn is_auto_start_enabled() -> Result<bool> {

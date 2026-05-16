@@ -23,7 +23,6 @@ use windows::{
     },
 };
 
-use crate::state::application::FULL_STATE;
 use crate::virtual_desktops::SluWorkspacesManager2;
 use crate::{
     cli::ServicePipe,
@@ -236,9 +235,7 @@ impl Window {
     }
 
     pub fn slu_category(&self) -> Option<String> {
-        FULL_STATE
-            .load()
-            .get_app_config_by_window(self.hwnd())
+        self.get_app_config()
             .ok()?
             .and_then(|config| config.category.clone())
     }

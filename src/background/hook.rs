@@ -21,7 +21,7 @@ use windows::Win32::{
 };
 
 use crate::{
-    app::{emit_to_webviews, Seelen},
+    app::emit_to_webviews,
     error::{Result, ResultLogExt},
     event_manager, log_error,
     state::application::FULL_STATE,
@@ -56,7 +56,7 @@ impl HookManager {
         _id_event_thread: u32,
         _dwms_event_time: u32,
     ) {
-        if id_object != OBJID_WINDOW.0 || !Seelen::is_running() {
+        if id_object != OBJID_WINDOW.0 {
             return;
         }
 

@@ -1,40 +1,48 @@
-use seelen_core::{handlers::SeelenEvent, state::Settings};
+use std::path::Path;
 
-use crate::{
-    app::{emit_to_webviews, Seelen},
-    error::{Result, ResultLogExt},
-    resources::RESOURCES,
-    utils::constants::SEELEN_COMMON,
-    widgets::{manager::WIDGET_MANAGER, window_manager::state_v2::WM_STATE},
+use seelen_core::{
+    handlers::SeelenEvent,
+    state::{CssStyles, Settings, SluPopupConfig, SluPopupContent},
 };
 
-use super::FullState;
+use crate::{
+    app::{emit_to_webviews, SeelenUI},
+    error::{Result, ResultLogExt},
+    resources::ResourceManager,
+    utils::constants::SEELEN_COMMON,
+    widgets::{
+        manager::WIDGET_MANAGER, popups::POPUPS_MANAGER, window_manager::state_v2::WM_STATE,
+    },
+};
 
-impl FullState {
+use super::AppSettings;
+
+impl AppSettings {
     pub(super) fn emit_settings(&self) -> Result<()> {
         emit_to_webviews(SeelenEvent::StateSettingsChanged, &self.settings);
-        Seelen::on_settings_change(self)?;
+        SeelenUI::on_settings_change(self)?;
         WIDGET_MANAGER.reconcile().log_error();
         WM_STATE.lock().on_settings_changed();
         Ok(())
     }
 
-    fn _read_settings(&mut self) -> Result<()> {
+    pub(super) fn read_settings() -> Settings {
         let path = SEELEN_COMMON.settings_path();
         if path.exists() {
-            self.settings = Settings::load(path)?;
-            self.migration_v2_5_0()?;
-            self.sanitize_wallpaper_collections();
+            match Settings::load(path) {
+                Ok(settings) => return settings,
+                Err(err) => {
+                    log::error!("Failed to read settings: {err}");
+                    show_corrupted_state_to_user(SEELEN_COMMON.settings_path());
+                }
+            }
         }
-        // If the file doesn't exist yet, keep the in-memory defaults.
-        // Writing defaults at startup would give the file a fresh mtime and
-        // cause cloud-backup reconciliation to upload defaults over a real backup.
-        Ok(())
+        Settings::default()
     }
 
     /// Resources id changed for remote/downloaded resources.
-    pub(super) fn migration_v2_5_0(&mut self) -> Result<()> {
-        RESOURCES.themes.scan(|new_id, theme| {
+    pub(super) fn migration_v2_5_0(&mut self, resources: &ResourceManager) -> Result<()> {
+        resources.themes.scan(|new_id, theme| {
             let Some(remote) = &theme.metadata.internal.remote else {
                 return;
             };
@@ -55,7 +63,7 @@ impl FullState {
             }
         });
 
-        RESOURCES.wallpapers.scan(|new_id, wallpaper| {
+        resources.wallpapers.scan(|new_id, wallpaper| {
             let Some(remote) = &wallpaper.metadata.internal.remote else {
                 return;
             };
@@ -78,7 +86,7 @@ impl FullState {
             }
         });
 
-        RESOURCES.widgets.scan(|k, v| {
+        resources.widgets.scan(|k, v| {
             let Some(remote) = &v.metadata.internal.remote else {
                 return;
             };
@@ -103,13 +111,13 @@ impl FullState {
     }
 
     /// Sanitize wallpaper collections to remove non-existent wallpaper IDs
-    pub(super) fn sanitize_wallpaper_collections(&mut self) -> bool {
+    pub(super) fn sanitize_wallpaper_collections(&mut self, resources: &ResourceManager) -> bool {
         let mut changed = false;
         for collection in &mut self.settings.wallpaper_collections {
             let original_len = collection.wallpapers.len();
             collection
                 .wallpapers
-                .retain(|wallpaper_id| RESOURCES.wallpapers.contains(wallpaper_id));
+                .retain(|wallpaper_id| resources.wallpapers.contains(wallpaper_id));
             if collection.wallpapers.len() != original_len {
                 changed = true;
             }
@@ -117,15 +125,48 @@ impl FullState {
         changed
     }
 
-    pub(super) fn read_settings(&mut self) {
-        if let Err(err) = self._read_settings() {
-            log::error!("Failed to read settings: {err}");
-            Self::show_corrupted_state_to_user(SEELEN_COMMON.settings_path());
-        }
-    }
-
     pub fn write_settings(&self) -> Result<()> {
         self.settings.save(SEELEN_COMMON.settings_path())?;
+        self.emit_settings()?;
         Ok(())
     }
+}
+
+fn show_corrupted_state_to_user(path: &Path) {
+    let path = path.to_path_buf();
+    std::thread::spawn(move || {
+        let mut manager = POPUPS_MANAGER.lock();
+        let config = SluPopupConfig {
+            title: vec![SluPopupContent::Group {
+                items: vec![
+                    SluPopupContent::Icon {
+                        name: "BiSolidError".to_string(),
+                        styles: Some(
+                            CssStyles::new()
+                                .add("color", "var(--color-red-800)")
+                                .add("height", "1.2rem"),
+                        ),
+                    },
+                    SluPopupContent::Text {
+                        value: t!("runtime.corrupted_data").to_string(),
+                        styles: None,
+                    },
+                ],
+                styles: Some(CssStyles::new().add("alignItems", "center")),
+            }],
+            content: vec![
+                SluPopupContent::Text {
+                    value: t!("runtime.corrupted_file").to_string(),
+                    styles: None,
+                },
+                SluPopupContent::Text {
+                    value: format!("{}: {:?}", t!("runtime.corrupted_file_path"), path),
+                    styles: None,
+                },
+            ],
+            ..Default::default()
+        };
+
+        manager.create(config).log_error();
+    });
 }

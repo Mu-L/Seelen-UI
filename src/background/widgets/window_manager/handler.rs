@@ -82,7 +82,7 @@ pub fn set_app_windows_positions(positions: HashMap<isize, Rect>) -> Result<()> 
     let state = FULL_STATE.load();
     let perf_mode = PERFORMANCE_MODE.load();
     let place_animated =
-        state.settings.by_widget.wm.animations.enabled && **perf_mode == PerformanceMode::Disabled;
+        state.settings.by_widget.wm.animations.enabled && perf_mode == PerformanceMode::Disabled;
 
     // Update node.rect for tiled windows based on the computed layout positions.
     {

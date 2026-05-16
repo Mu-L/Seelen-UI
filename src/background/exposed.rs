@@ -15,7 +15,7 @@ use windows::Win32::{
 };
 
 use crate::{
-    app::{get_app_handle, Seelen},
+    app::{get_app_handle, SeelenUI},
     error::Result,
     utils::{
         self,
@@ -109,12 +109,12 @@ pub fn get_user_envs() -> HashMap<String, String> {
 
 #[tauri::command(async)]
 async fn set_auto_start(enabled: bool) -> Result<()> {
-    Seelen::set_auto_start(enabled)
+    SeelenUI::set_auto_start(enabled)
 }
 
 #[tauri::command(async)]
 async fn get_auto_start_status() -> Result<bool> {
-    Seelen::is_auto_start_enabled()
+    SeelenUI::is_auto_start_enabled()
 }
 
 // used to request icon extraction

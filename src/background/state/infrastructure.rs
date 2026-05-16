@@ -1,6 +1,5 @@
 use std::path::PathBuf;
 
-use itertools::Itertools;
 use seelen_core::state::{
     by_monitor::MonitorConfiguration, by_wallpaper::WallpaperInstanceSettings, AppConfig,
     IconPackEntry, PerformanceMode, Settings, ToolbarState, Wallpaper, WegItems,
@@ -11,7 +10,7 @@ use crate::{
     app::get_app_handle,
     error::Result,
     log_error,
-    state::application::performance::PERFORMANCE_MODE,
+    state::application::{performance::PERFORMANCE_MODE, BUNDLED_SETTINGS_BY_APP},
     utils::{constants::SEELEN_COMMON, date_based_hex_id},
     windows_api::WindowsApi,
 };
@@ -79,12 +78,7 @@ pub fn state_write_settings(mut settings: Settings) -> Result<()> {
 
 #[tauri::command(async)]
 pub fn state_get_settings_by_app() -> Vec<AppConfig> {
-    FULL_STATE
-        .load()
-        .settings_by_app
-        .iter()
-        .cloned()
-        .collect_vec()
+    BUNDLED_SETTINGS_BY_APP.iter().cloned().collect()
 }
 
 #[tauri::command(async)]
@@ -125,5 +119,5 @@ pub fn state_add_icon_to_custom_icon_pack(_icon: IconPackEntry) -> Result<()> {
 
 #[tauri::command(async)]
 pub fn state_get_performance_mode() -> PerformanceMode {
-    **PERFORMANCE_MODE.load()
+    PERFORMANCE_MODE.load()
 }

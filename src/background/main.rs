@@ -28,7 +28,7 @@ i18n!("background/i18n", fallback = "en");
 
 use std::sync::{atomic::AtomicBool, OnceLock};
 
-use app::Seelen;
+use app::SeelenUI;
 use cli::{handle_console_client, SelfPipe, ServicePipe};
 use error::Result;
 use exposed::register_invoke_handler;
@@ -155,7 +155,7 @@ async fn setup(app_handle: &tauri::AppHandle<tauri::Wry>) -> Result<()> {
     }
     CRONOMETER.record("integrity");
 
-    Seelen::start().await?;
+    SeelenUI::start().await?;
     CRONOMETER.record("start");
 
     warn_if_elevated(app_handle);
@@ -198,9 +198,6 @@ fn app_callback(_: &tauri::AppHandle<tauri::Wry>, event: tauri::RunEvent) {
         },
         tauri::RunEvent::Exit => {
             log::info!("───────────────────── Exiting Seelen UI ─────────────────────");
-            if Seelen::is_running() {
-                Seelen::stop();
-            }
         }
         _ => {}
     }

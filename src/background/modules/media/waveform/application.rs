@@ -216,7 +216,7 @@ fn run_capture_loop(latest: Arc<Mutex<AudioWaveform>>, stop_flag: Arc<AtomicBool
         }
 
         // In Extreme performance mode, skip capture and FFT to save CPU.
-        if **PERFORMANCE_MODE.load() == PerformanceMode::Extreme {
+        if PERFORMANCE_MODE.load() == PerformanceMode::Extreme {
             drain_silently(&session);
             std::thread::sleep(emit_interval * 4);
             continue;

@@ -14,7 +14,6 @@ use windows::Win32::{
 use crate::{
     app::emit_to_webviews,
     error::Result,
-    state::application::FULL_STATE,
     windows_api::{window::Window, WindowsApi},
 };
 
@@ -25,7 +24,7 @@ impl WindowManagerV2 {
             return false;
         }
 
-        if let Ok(Some(config)) = FULL_STATE.load().get_app_config_by_window(hwnd) {
+        if let Ok(Some(config)) = window.get_app_config() {
             if config.options.contains(&AppExtraFlag::VdPinned) {
                 return false;
             }

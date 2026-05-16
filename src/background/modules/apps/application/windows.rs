@@ -8,7 +8,6 @@ use windows::Win32::UI::WindowsAndMessaging::{
 use crate::{
     hook::HookManager,
     modules::apps::application::{UserAppWinEvent, UserAppsManager, USER_APPS_MANAGER},
-    state::application::FULL_STATE,
     utils::spawn_named_thread,
     windows_api::{
         event_window::IS_INTERACTIVE_SESSION,
@@ -215,8 +214,7 @@ pub fn is_interactable_window(window: &Window) -> bool {
         Err(_) => *window, // window is not a frame
     };
 
-    let guard = FULL_STATE.load();
-    match guard.get_app_config_by_window(to_validate.hwnd()) {
+    match to_validate.get_app_config() {
         Ok(Some(config)) => {
             if config.options.contains(&AppExtraFlag::NoInteractive) {
                 return false;

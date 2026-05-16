@@ -722,3 +722,24 @@ pub enum PerformanceMode {
     /// Disables all the animations.
     Extreme,
 }
+
+impl From<u8> for PerformanceMode {
+    fn from(value: u8) -> Self {
+        match value {
+            0 => PerformanceMode::Disabled,
+            1 => PerformanceMode::Minimal,
+            2 => PerformanceMode::Extreme,
+            _ => PerformanceMode::Disabled,
+        }
+    }
+}
+
+impl From<PerformanceMode> for u8 {
+    fn from(value: PerformanceMode) -> Self {
+        match value {
+            PerformanceMode::Disabled => 0,
+            PerformanceMode::Minimal => 1,
+            PerformanceMode::Extreme => 2,
+        }
+    }
+}

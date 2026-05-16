@@ -1,7 +1,7 @@
 pub mod application;
 pub mod infrastructure;
 
-use application::FullState;
+use application::AppSettings;
 use seelen_core::{
     resource::{PluginId, WidgetId},
     state::{
@@ -15,7 +15,7 @@ use uuid::Uuid;
 
 use crate::resources::RESOURCES;
 
-impl FullState {
+impl AppSettings {
     pub fn is_widget_enabled(&self, widget_id: &WidgetId) -> bool {
         self.settings.is_widget_enabled(widget_id)
     }

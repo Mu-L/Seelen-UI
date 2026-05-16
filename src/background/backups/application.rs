@@ -4,7 +4,8 @@ use seelen_core::{state::SettingsBackup, system_state::BackupStatus};
 use serde::{Deserialize, Serialize};
 
 use crate::{
-    session::application::SessionManager, state::application::FULL_STATE,
+    session::application::SessionManager,
+    state::application::{AppSettings, FULL_STATE},
     utils::constants::SEELEN_COMMON,
 };
 
@@ -173,9 +174,8 @@ fn download_and_apply(data: serde_json::Value) -> crate::error::Result<()> {
         return Ok(());
     }
 
-    // Saving to disk triggers the existing file-watcher →
-    // FULL_STATE reload → StateSettingsChanged emitted to frontend.
-    settings.save(SEELEN_COMMON.settings_path())?;
+    FULL_STATE.store(std::sync::Arc::new(AppSettings { settings }));
+    FULL_STATE.load().write_settings()?;
     log::info!("Cloud backup downloaded and applied to local settings");
     Ok(())
 }
