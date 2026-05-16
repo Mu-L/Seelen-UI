@@ -1,5 +1,6 @@
 pub mod cli;
 pub mod handlers;
+pub mod shortcut_conflicts;
 pub mod shortcut_registering;
 
 use std::{collections::HashMap, sync::LazyLock};

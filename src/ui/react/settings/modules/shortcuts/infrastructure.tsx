@@ -2,38 +2,28 @@ import { invoke, SeelenCommand, Widget } from "@seelen-ui/lib";
 import { Icon } from "libs/ui/react/components/Icon/index.tsx";
 import { Button, Input, Switch, Tooltip } from "antd";
 import { useTranslation } from "react-i18next";
-import { useEffect } from "react";
 
 import {
-  getShortcutGroups,
   getShortcutsConfig,
   resetShortcuts,
   setShortcutsEnabled,
   type ShortcutEntry,
+  shortcutGroups,
   shortcutsError,
   updateShortcut,
-  validateShortcuts,
 } from "./application.ts";
 
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../components/SettingsBox/index.tsx";
+import { Note } from "../../components/Note/index.tsx";
 import { ResourceText } from "libs/ui/react/components/ResourceText/index.tsx";
 import { isWidgetEnabled } from "../resources/Widget/application.ts";
 import Compact from "antd/es/space/Compact";
 
 export function Shortcuts() {
   const { enabled } = getShortcutsConfig();
-  const groups = getShortcutGroups();
+  const groups = shortcutGroups.value;
 
   const { t } = useTranslation();
-
-  const allEntries = [
-    ...Array.from(groups.byWidget.values()).flatMap((g) => g.entries),
-    ...Object.values(groups.system).flat(),
-  ];
-
-  useEffect(() => {
-    validateShortcuts(allEntries);
-  }, [JSON.stringify(allEntries.map((e) => e.keys))]);
 
   function mapEntry(entry: ShortcutEntry) {
     return <Shortcut key={entry.id} entry={entry} onChanged={(keys) => updateShortcut(entry, keys)} />;
@@ -41,6 +31,13 @@ export function Shortcuts() {
 
   return (
     <>
+      {shortcutsError.value.size > 0 && (
+        <Note type="error">
+          <b>{t("shortcuts.duplicate_error")}:</b>
+          {t("shortcuts.duplicate_error_hint")}
+        </Note>
+      )}
+
       <SettingsGroup>
         <SettingsOption
           label={t("shortcuts.enable")}

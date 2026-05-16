@@ -16,6 +16,7 @@ use crate::{
     session::infrastructure::reemit_session,
     state::application::{FullState, FULL_STATE},
     utils::{discord::start_discord_rpc, CRONOMETER},
+    widgets::popups::shortcut_conflicts::show_shortcut_conflict_popup,
     widgets::{manager::WIDGET_MANAGER, weg::SeelenWeg},
     windows_api::{
         event_window::{create_background_window, IS_INTERACTIVE_SESSION},
@@ -59,9 +60,13 @@ impl Seelen {
 impl Seelen {
     pub fn on_settings_change(state: &FullState) -> Result<()> {
         rust_i18n::set_locale(state.locale());
+
         let widgets = RESOURCES.widgets();
         let widget_refs: Vec<_> = widgets.iter().map(|w| w.as_ref()).collect();
-        let resolved = resolve_shortcuts(&state.settings, &widget_refs);
+        let (resolved, has_conflicts) = resolve_shortcuts(&state.settings, &widget_refs);
+        if has_conflicts {
+            show_shortcut_conflict_popup().log_error();
+        }
         ServicePipe::request(SvcAction::SetShortcuts(resolved))?;
 
         if state.is_weg_enabled() {
@@ -114,7 +119,7 @@ impl Seelen {
         start_discord_rpc()?;
         let widgets = RESOURCES.widgets();
         let widget_refs: Vec<_> = widgets.iter().map(|w| w.as_ref()).collect();
-        let resolved = resolve_shortcuts(&state.settings, &widget_refs);
+        let (resolved, _) = resolve_shortcuts(&state.settings, &widget_refs);
         ServicePipe::request(SvcAction::SetShortcuts(resolved))?;
 
         SEELEN_IS_RUNNING.store(true, std::sync::atomic::Ordering::SeqCst);

@@ -76,15 +76,17 @@ body {
     justify-content: center;
     gap: 4px;
     padding: 0 8px;
-    background-color: var(--system-accent-color);
-    color: var(--color-fixed-white);
+
     border-radius: 6px;
     transition: background-color 0.2s ease-in-out;
     font-size: 0.9rem;
     line-height: 1.2em;
 
+    background-color: var(--slu-std-ui-color);
+    color: var(--color-gray-900);
+
     &:hover {
-      filter: brightness(1.1);
+      background-color: var(--slu-std-ui-hover-color);
     }
   }
 }

@@ -230,8 +230,9 @@ session:
   sign_in_hint: Your browser will open so you can sign in securely.
   upgrade_to: Upgrade to
 shortcuts:
+  duplicate_error: Conflicting shortcuts detected
+  duplicate_error_hint: Some shortcuts are assigned to multiple actions. Disable one of the conflicting widgets or reassign the duplicate key binding to resolve.
   disabled_tooltip: The widget and its shortcuts are disabled
-  duplicate_error: This shortcut is duplicated
   enable: Enable built-in shortcuts system
   enable_tooltip: >-
     Disable if you will implement your own shortcuts system using the Seelen UI

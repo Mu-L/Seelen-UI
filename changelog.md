@@ -9,6 +9,7 @@
 ### enhancements
 
 - app startup time reduced.
+- show shortcuts conflics dialog on new widget addition.
 
 ### fix
 

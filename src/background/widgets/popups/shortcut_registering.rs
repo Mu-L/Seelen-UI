@@ -126,11 +126,7 @@ fn get_popup_config(shortcut: &[String]) -> SluPopupConfig {
                     styles: None,
                 }],
                 on_click: "exit".to_string(),
-                styles: Some(
-                    CssStyles::new()
-                        .add("backgroundColor", "var(--color-red-700)")
-                        .add("color", "var(--color-white)"),
-                ),
+                styles: None,
             },
             SluPopupContent::Button {
                 inner: vec![SluPopupContent::Text {

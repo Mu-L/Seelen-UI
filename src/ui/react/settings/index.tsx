@@ -26,9 +26,13 @@ await window.center();
 await Widget.self.init();
 await Widget.self.show();
 
-Widget.self.onTrigger(() => {
+Widget.self.onTrigger((payload) => {
   window.unminimize();
   window.setFocus();
+  const route = payload.customArgs?.["route"] as string | undefined;
+  if (route) {
+    globalThis.location.hash = route;
+  }
 });
 
 await loadTranslations();

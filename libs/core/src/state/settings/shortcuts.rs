@@ -181,11 +181,15 @@ use super::Settings;
 /// Resolves all shortcut declarations (widget-declared + system-hardcoded) against
 /// user-configured overrides, respecting widget enabled state.
 ///
-/// Returns a flat list of `ResolvedShortcut` ready to be sent to the service.
-/// Returns an empty `Vec` if `settings.shortcuts.enabled` is false.
-pub fn resolve_shortcuts(settings: &Settings, widgets: &[&Widget]) -> Vec<ResolvedShortcut> {
+/// Returns a flat list of `ResolvedShortcut` ready to be sent to the service, and a
+/// boolean that is `true` when at least two entries share the same key combination.
+/// Returns an empty `Vec` (and `false`) if `settings.shortcuts.enabled` is false.
+pub fn resolve_shortcuts(
+    settings: &Settings,
+    widgets: &[&Widget],
+) -> (Vec<ResolvedShortcut>, bool) {
     if !settings.shortcuts.enabled {
-        return vec![];
+        return (vec![], false);
     }
 
     let mut resolved = Vec::new();
@@ -245,5 +249,20 @@ pub fn resolve_shortcuts(settings: &Settings, widgets: &[&Widget]) -> Vec<Resolv
         });
     }
 
-    resolved
+    // Detect duplicate key combinations across all resolved entries.
+    let has_conflicts = {
+        use std::collections::HashSet;
+        let mut seen = HashSet::new();
+        resolved.iter().any(|r| {
+            let normalized = r
+                .keys
+                .iter()
+                .map(|k| k.to_lowercase())
+                .collect::<Vec<_>>()
+                .join("+");
+            !seen.insert(normalized)
+        })
+    };
+
+    (resolved, has_conflicts)
 }

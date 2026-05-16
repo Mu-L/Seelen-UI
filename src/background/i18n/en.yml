@@ -50,6 +50,11 @@ service:
     properly.
   not_running_ok: Start service
 shortcut:
+  conflicts:
+    body: A newly added widget has shortcuts that conflict with existing ones.
+    dismiss: Dismiss
+    review: Review in Settings
+    title: Shortcut Conflicts Detected
   register:
     placeholder: Press any key combination
     title: Registering new shortcut

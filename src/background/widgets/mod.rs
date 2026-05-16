@@ -187,6 +187,12 @@ pub fn show_settings() -> Result<()> {
     trigger_widget(WidgetTriggerPayload::new("@seelen/settings".into()))
 }
 
+pub fn show_settings_at(route: &str) -> Result<()> {
+    let mut payload = WidgetTriggerPayload::new("@seelen/settings".into());
+    payload.add_custom_arg("route", route);
+    trigger_widget(payload)
+}
+
 #[tauri::command(async)]
 pub fn show_start_menu() -> Result<()> {
     let guard = FULL_STATE.load();

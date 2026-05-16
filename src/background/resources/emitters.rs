@@ -8,8 +8,13 @@ use seelen_core::{
 use slu_ipc::messages::SvcAction;
 
 use crate::{
-    app::emit_to_webviews, cli::ServicePipe, error::Result, session::application::SessionManager,
-    state::application::FULL_STATE, widgets::manager::WIDGET_MANAGER,
+    app::emit_to_webviews,
+    cli::ServicePipe,
+    error::{Result, ResultLogExt},
+    session::application::SessionManager,
+    state::application::FULL_STATE,
+    widgets::manager::WIDGET_MANAGER,
+    widgets::popups::shortcut_conflicts::show_shortcut_conflict_popup,
 };
 
 use super::ResourceManager;
@@ -91,7 +96,10 @@ impl ResourceManager {
 
         let state = FULL_STATE.load();
         let widget_refs: Vec<_> = widgets.iter().map(|w| w.as_ref()).collect();
-        let resolved = resolve_shortcuts(&state.settings, &widget_refs);
+        let (resolved, has_conflicts) = resolve_shortcuts(&state.settings, &widget_refs);
+        if has_conflicts {
+            show_shortcut_conflict_popup().log_error();
+        }
         ServicePipe::request(SvcAction::SetShortcuts(resolved))?;
         Ok(())
     }

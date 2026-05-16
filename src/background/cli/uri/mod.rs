@@ -413,7 +413,7 @@ fn error_popup_config(err: &str) -> SluPopupConfig {
                     name: "BiSolidError".to_string(),
                     styles: Some(
                         CssStyles::new()
-                            .add("color", "var(--color-red-800)")
+                            .add("color", "var(--color-red-600)")
                             .add("height", "1.2rem"),
                     ),
                 },

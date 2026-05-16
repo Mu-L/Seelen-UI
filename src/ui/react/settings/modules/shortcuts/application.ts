@@ -1,5 +1,5 @@
 import type { ResourceText, SluShortcutsSettings, Widget, WidgetShortcutDeclaration } from "@seelen-ui/lib/types";
-import { signal } from "@preact/signals";
+import { computed } from "@preact/signals";
 import { settings } from "../../state/mod";
 import { lazySignal } from "libs/ui/react/utils/LazySignal";
 import { invoke, SeelenCommand } from "@seelen-ui/lib";
@@ -7,7 +7,6 @@ import type { WidgetId } from "@seelen-ui/lib/types";
 import { cloneDeep } from "lodash";
 import { widgets } from "../../state/resources";
 
-export const shortcutsError = signal<Set<string>>(new Set());
 export const systemShortcuts = lazySignal(() => invoke(SeelenCommand.StateGetSystemShortcuts));
 await systemShortcuts.init();
 
@@ -92,22 +91,6 @@ export function resetShortcuts() {
   };
 }
 
-export function validateShortcuts(entries: ShortcutEntry[]) {
-  const errors = new Set<string>();
-  const seen = new Map<string, string>();
-  for (const entry of entries) {
-    if (entry.readonly || entry.keys.length === 0) continue;
-    const key = entry.keys.join("+").toLowerCase();
-    if (seen.has(key)) {
-      errors.add(seen.get(key)!);
-      errors.add(entry.id);
-    } else {
-      seen.set(key, entry.id);
-    }
-  }
-  shortcutsError.value = errors;
-}
-
 // ─── Grouped entries for the UI ──────────────────────────────────────────────
 
 export interface ShortcutGroups {
@@ -121,7 +104,7 @@ export interface ShortcutGroups {
   };
 }
 
-export function getShortcutGroups(): ShortcutGroups {
+export const shortcutGroups = computed((): ShortcutGroups => {
   const byWidget = new Map<WidgetId, { widget: Widget; entries: ShortcutEntry[] }>();
 
   for (const widget of widgets.value) {
@@ -167,4 +150,29 @@ export function getShortcutGroups(): ShortcutGroups {
   };
 
   return { byWidget, system };
-}
+});
+
+export const shortcutsError = computed(() => {
+  const errors = new Set<string>();
+  const seen = new Map<string, string>();
+
+  const groups = shortcutGroups.value;
+  const allEntries = [
+    ...Array.from(groups.byWidget.values()).flatMap((g) => g.entries),
+    ...Object.values(groups.system).flat(),
+  ];
+
+  for (const entry of allEntries) {
+    if (entry.keys.length === 0) continue;
+
+    const key = entry.keys.join("+").toLowerCase();
+    if (seen.has(key)) {
+      errors.add(seen.get(key)!);
+      errors.add(entry.id);
+    } else {
+      seen.set(key, entry.id);
+    }
+  }
+
+  return errors;
+});
