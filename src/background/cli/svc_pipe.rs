@@ -12,7 +12,7 @@ use crate::{
     app::get_app_handle,
     error::Result,
     get_tokio_handle,
-    utils::{pwsh::PwshScript, was_installed_using_msix},
+    utils::was_installed_using_msix,
     windows_api::{Com, WindowsApi},
 };
 
@@ -43,7 +43,7 @@ impl ServicePipe {
         Ok(service_path)
     }
 
-    fn start_service_task() -> Result<()> {
+    fn try_start_from_task_scheduler() -> Result<()> {
         Com::run_with_context(|| unsafe {
             let task_service: ITaskService = Com::create_instance(&TaskScheduler)?;
             task_service.Connect(
@@ -77,21 +77,18 @@ impl ServicePipe {
     // the service should be running since installer will start it or startup task scheduler
     // so if the service is not running, we need to start it (common on msix setup)
     pub async fn start_service() -> Result<()> {
-        let Err(err) = Self::start_service_task() else {
+        let Err(err) = Self::try_start_from_task_scheduler() else {
             return Ok(());
         };
 
         log::debug!("Can not start service via task scheduler: {err}");
 
-        let script = PwshScript::new(format!(
-            "Start-Process '{}' -Verb runAs",
-            Self::service_path()?.display()
-        ))
-        .inline_command()
-        .elevated();
+        let service_path = Self::service_path()?;
+        let result =
+            WindowsApi::execute(service_path.to_string_lossy().to_string(), None, None, true);
 
-        let result = script.execute().await;
         if let Err(err) = result {
+            log::error!("First attempt to start service failed: {err}");
             let try_again = get_app_handle()
                 .dialog()
                 .message(t!("service.not_running_description"))
@@ -101,8 +98,9 @@ impl ServicePipe {
                     t!("service.not_running_ok").to_string(),
                 ))
                 .blocking_show();
+
             if try_again {
-                script.execute().await?;
+                WindowsApi::execute(service_path.to_string_lossy().to_string(), None, None, true)?;
             }
             return Err(err);
         }

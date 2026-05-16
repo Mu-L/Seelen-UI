@@ -47,12 +47,6 @@ impl PwshScript {
         self
     }
 
-    /// ignored if `mode` is other than `PwshExecutionMode::ScriptFile`
-    pub fn elevated(mut self) -> Self {
-        self.elevated = true;
-        self
-    }
-
     fn build_args(&self, script_path_str: &str) -> Vec<String> {
         match &self.mode {
             PwshExecutionMode::ScriptFile(args) => {
