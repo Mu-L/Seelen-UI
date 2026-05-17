@@ -15,6 +15,7 @@
 
 - creating widgets for turnned off monitors.
 - task switcher first trigger not working correctly.
+- dock stucked after minimizing some app via click.
 
 ## [2.6.5]
 
