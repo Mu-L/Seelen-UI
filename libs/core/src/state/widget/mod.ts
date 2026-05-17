@@ -21,7 +21,7 @@ import type { InitWidgetOptions, ReadyWidgetOptions, WidgetInformation } from ".
 import { disableAnimationsOnPerformanceMode } from "./performance.ts";
 import { getCurrentWebview, type Webview } from "@tauri-apps/api/webview";
 import { getCurrentWindow, type Window } from "@tauri-apps/api/window";
-import { subscribe } from "../../../mod.ts";
+import { subscribe } from "../../handlers/mod.ts";
 
 interface WidgetInternalState {
   hwnd: number;
