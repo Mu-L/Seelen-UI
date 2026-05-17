@@ -5096,7 +5096,6 @@ dependencies = [
  "futures",
  "image",
  "itertools 0.14.0",
- "lazy_static",
  "log",
  "notify-debouncer-full",
  "open",
