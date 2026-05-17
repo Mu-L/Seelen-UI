@@ -64,7 +64,6 @@ webp = { workspace = true }
 arc-swap = { workspace = true }
 notify-debouncer-full = { workspace = true }
 encoding_rs = { workspace = true }
-evalexpr = { workspace = true }
 quick-xml = { workspace = true, features = ["serialize", "encoding"] }
 backtrace = { workspace = true }
 owo-colors = { workspace = true }

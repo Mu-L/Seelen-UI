@@ -56,7 +56,6 @@ define_app_errors!(
     Reqwest(tauri_plugin_http::reqwest::Error);
     Updater(tauri_plugin_updater::Error);
     WinScreenshot(win_screenshot::capture::WSError);
-    EvalExpr(evalexpr::EvalexprError);
     TryFromSliceError(std::array::TryFromSliceError);
     ParseIntError(std::num::ParseIntError);
     Translator(translators::Error);
